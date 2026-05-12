@@ -262,7 +262,6 @@ if(BUILD_MASTER)
         ${IMGUI_SOURCES}
         ${MDNS_SOURCES}
     )
-
     if (WIN32)
         message(STATUS "Default WIN32 Build Master")
 
