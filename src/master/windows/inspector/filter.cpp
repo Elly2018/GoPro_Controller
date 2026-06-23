@@ -12,6 +12,7 @@ bool InspectorWindow::conditional_filter(const std::shared_ptr<GlobalState>& sta
     int32_t antif = state->try_get_setting_int32_by_id(ANTI_FLICKER_V2_ID);
     int32_t videolen = state->try_get_setting_int32_by_id(VIDEO_LENS_ID);
     int32_t photo_out = state->try_get_setting_int32_by_id(PHOTO_OUTPUT_ID);
+    int32_t iso_auto = state->try_get_setting_int32_by_id(ISO_AUTO_ID);
     
     int32_t profile_id = PROFILES_VALUE[profile];
     int32_t res_id = VIDEO_RESOLUTION_VALUE[res];
@@ -19,6 +20,9 @@ bool InspectorWindow::conditional_filter(const std::shared_ptr<GlobalState>& sta
     int32_t fps_id = FRAMES_PER_SECOND_VALUE[fps];
     int32_t videolen_id = VIDEO_LENS_VALUE[videolen];
     int32_t photo_out_id = PHOTO_OUTPUT_VALUE[photo_out];
+    int32_t iso_auto_id = ISO_AUTO_VALUE[iso_auto];
+
+    bool isMission1 = mymodel == MODEL_MISSION;
 
     if(setting_id == SHUTTER_SPEED_VIDEO_ID){
         if(profile_id == 1 || profile_id == 101) return false; // HDR
@@ -49,8 +53,13 @@ bool InspectorWindow::conditional_filter(const std::shared_ptr<GlobalState>& sta
         if(photo_out_id == 2) return false;
     }
     else if(setting_id == ISO_MAX_VIDEO_ID){
-        if(profile_id == 1 || profile_id == 101) { // HDR
-            return false;
+        if(isMission1){
+            if(iso_auto_id == 0) return false; // Auto
+        }
+        else{
+            if(profile_id == 1 || profile_id == 101) { // HDR
+                return false;
+            }
         }
     }
     else if(setting_id == ISO_MIN_VIDEO_ID){
@@ -84,6 +93,7 @@ bool InspectorWindow::conditional_filter_option(const std::shared_ptr<GlobalStat
     int32_t antif = state->try_get_setting_int32_by_id(ANTI_FLICKER_V2_ID);
     int32_t videolen = state->try_get_setting_int32_by_id(VIDEO_LENS_ID);
     int32_t hlg = state->try_get_setting_int32_by_id(HLG_ID);
+    int32_t iso_auto = state->try_get_setting_int32_by_id(ISO_AUTO_ID);
     
     int32_t profile_id = PROFILES_VALUE[profile];
     int32_t res_id = VIDEO_RESOLUTION_VALUE[res];
@@ -91,39 +101,104 @@ bool InspectorWindow::conditional_filter_option(const std::shared_ptr<GlobalStat
     int32_t fps_id = FRAMES_PER_SECOND_VALUE[fps];
     int32_t videolen_id = VIDEO_LENS_VALUE[videolen];
     int32_t hlg_id = HLG_VALUE[hlg];
+    int32_t iso_auto_id = ISO_AUTO_VALUE[iso_auto];
+
+    bool isMission1 = mymodel == MODEL_MISSION;
 
     if(setting_id == VIDEO_RESOLUTION_ID){
         int32_t value_id = VIDEO_RESOLUTION_VALUE[value_index];
         if(preset == 0){
             if(profile_id == 0){ // Standard
                 if(aspect_id == 0){ // "4:3"
-                    if(value_id != 6) return false;
+                    if(isMission1){
+                        if(fps_id == 18){ // 480
+                            // 1440 4:3, 4K 4:3
+                            if(value_id != 44 && value_id != 112) return false;
+                        }
+                        else if(fps_id == 0){ // 240
+                            // 1440 4:3, 4K 4:3
+                            if(value_id != 44 && value_id != 112) return false;
+                        }
+                        else if(fps_id == 1){ // 120
+                            // 1440 4:3, 4K 4:3
+                            if(value_id != 44 && value_id != 112) return false;
+                        }
+                        else if(fps_id == 5){ // 60
+                            // 1440 4:3, 4K 4:3
+                            if(value_id != 44 && value_id != 112) return false;
+                        }
+                        else if(fps_id == 8){ // 30
+                            // 1440 4:3, 4K 4:3, 8K 4:3
+                            if(value_id != 44 && value_id != 112 && value_id != 40) return false;
+                        }
+                        else if(fps_id == 10){ // 24
+                            // 1440 4:3, 4K 4:3, 8K 4:3
+                            if(value_id != 44 && value_id != 112 && value_id != 40) return false;
+                        }
+                    }else{
+                        // 2.7K 4:3
+                        if(value_id != 6) return false;
+                    }
                 }
                 else if(aspect_id == 1){ // "16:9"
-                    if(fps_id == 0){ // 240
-                        // 2.7K, 1080
-                        if(value_id != 4 && value_id != 9) return false;
-                    }
-                    if(fps_id == 1){ // 120
-                        // 1080, 4K
-                        if(value_id != 9 && value_id != 1) return false;
-                    }
-                    if(fps_id == 5){ // 60
-                        if(videolen_id == 9){ // Hyperview
-                            // 4K
+                    if(fps_id == 18){ // 480
+                        if(isMission1){
+                            // 1080
                             if(value_id != 1) return false;
+                        }
+                        return false;
+                    }
+                    else if(fps_id == 0){ // 240
+                        if(isMission1){
+                            // 1080, 4K
+                            if(value_id != 1 && value_id != 9) return false;
                         }else{
+                            // 2.7K, 1080
+                        if(value_id != 4 && value_id != 9) return false;
+                        }
+                    }
+                    else if(fps_id == 1){ // 120
+                        if(isMission1){
+                            // 1080, 4K
+                            if(value_id != 1 && value_id != 9) return false;
+                        }else{
+                            // 1080, 4K
+                        if(value_id != 9 && value_id != 1) return false;
+                        }
+                    }
+                    else if(fps_id == 5){ // 60
+                        if(isMission1){
+                            // 1080, 4K, 8K
+                            if(value_id != 1 && value_id != 9 && value_id != 31) return false;
+                        }
+                        else{
+                            if(videolen_id == 9){ // Hyperview
+                                // 4K
+                                if(value_id != 1) return false;
+                            }else{
+                                // 1080, 4K, 5.3K
+                                if(value_id != 9 && value_id != 1 && value_id != 100) return false;
+                            }
+                        }
+                    }
+                    else if(fps_id == 8){ // 30
+                        if(isMission1){
+                            // 1080, 4K, 8K
+                            if(value_id != 1 && value_id != 9 && value_id != 31) return false;
+                        }
+                        else{
                             // 1080, 4K, 5.3K
                             if(value_id != 9 && value_id != 1 && value_id != 100) return false;
                         }
                     }
-                    if(fps_id == 8){ // 30
-                        // 1080, 4K, 5.3K
-                        if(value_id != 9 && value_id != 1 && value_id != 100) return false;
-                    }
                     else if(fps_id == 10){ // 24
-                        // 4K, 5.3K
-                        if(value_id != 1 && value_id != 100) return false;
+                        if(isMission1){
+                            // 1080, 4K, 8K
+                            if(value_id != 1 && value_id != 9 && value_id != 31) return false;
+                        }else{
+                            // 4K, 5.3K
+                            if(value_id != 1 && value_id != 100) return false;
+                        }
                     }
                 }
                 else if(aspect_id == 3){ // "8:7"
@@ -137,8 +212,19 @@ bool InspectorWindow::conditional_filter_option(const std::shared_ptr<GlobalStat
                     }
                 }
                 else if(aspect_id == 4){ // "9:16"
-                    // 1080 9:16, 4K 9:16
-                    if(value_id != 109 && value_id != 110) return false;
+                    if(isMission1){
+                        if(fps_id == 8){ // 30
+                            // 4K 9:16, 1080 9:16
+                            if(value_id != 109 && value_id != 110) return false;
+                        }
+                        else if(fps_id == 5){ // 60
+                            // 1080 9:16
+                            if(value_id != 110) return false;
+                        }
+                    }else{
+                        // 4K 9:16, 1080 9:16
+                        if(value_id != 109 && value_id != 110) return false;
+                    }
                 }
             }
             else if(profile_id == 1 || profile_id == 101){ // HDR
@@ -414,6 +500,18 @@ bool InspectorWindow::conditional_filter_option(const std::shared_ptr<GlobalStat
         }else{
             // Standard, HDR, LOG
             if(value_id != 0 && value_id != 1 && value_id != 2) return false;
+        }
+    }
+    else if(setting_id == ISO_MAX_VIDEO_ID){
+        int32_t value_id = ISO_MAX_VIDEO_VALUE[value_index];
+        if(isMission1){
+            if(iso_auto_id == 1) { // Const
+                // All const value and minus Auto
+                if(value_id == 9 || value_id >= 100) return false;
+            }
+            else if(iso_auto_id == 2) { // Range
+                if(value_id <= 100) return false;
+            }
         }
     }
     return true;

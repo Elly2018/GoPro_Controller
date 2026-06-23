@@ -99,7 +99,8 @@ void InspectorWindow::reset_status_order(){
 int32_t InspectorWindow::_get_current_model(json hwinfo){
     if(hwinfo["model_name"].is_string()){
         std::string model_name = hwinfo["model_name"].get<std::string>();
-        if(model_name == "MAX 2") return MODEL_MAX2;
+        if(model_name == "MISSION 1 PRO") return MODEL_MISSION;
+        else if(model_name == "MAX 2") return MODEL_MAX2;
         else if(model_name == "HERO13 Black") return MODEL_13;
         else if(model_name == "HERO12 Black") return MODEL_12;
         else if(model_name == "HERO11 Black") return MODEL_11_BLACK;

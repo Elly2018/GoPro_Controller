@@ -16,9 +16,12 @@
 #define MODEL_13 (32)
 /** GoPro Model MAX2 ID */
 #define MODEL_MAX2 (64)
+/** GoPro Model mission 1 ID */
+#define MODEL_MISSION (128)
 
 /** Two model 11 includes */
 #define MODEL_11S (MODEL_11|MODEL_11_BLACK)
+#define MODEL_MISSION_ALL (MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12|MODEL_11_BLACK|MODEL_11|MODEL_10|MODEL_9)
 /** Fron Max2 to all the versions below includes */
 #define MODEL_MAX2_ALL (MODEL_MAX2|MODEL_13|MODEL_12|MODEL_11_BLACK|MODEL_11|MODEL_10|MODEL_9)
 /** Fron 13 to all the versions below includes */

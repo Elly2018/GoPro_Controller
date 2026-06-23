@@ -1,8 +1,10 @@
 #include "../camera_list.h"
+#include "../inspector.h"
 
 void CameraListWindow::draw_group_state(const CameraInfo& c){
     json status = json::object();
     json setting = json::object();
+    int32_t model_enum = InspectorWindow::_get_current_model(c.hw);
     int32_t preset = 0;
     master->getStatusFromCamera(c, status);
     master->getSettingsFromCamera(c, setting);
@@ -219,19 +221,37 @@ void CameraListWindow::draw_group_state(const CameraInfo& c){
                         shutter_speed = "S: " + shutter_speed;
                     }
                 }
-                if(setting[std::to_string(ISO_MIN_ID)].is_number() && setting[std::to_string(ISO_MAX_ID)].is_number()){
-                    int32_t iso_min = setting[std::to_string(ISO_MIN_ID)].get<int32_t>();
-                    int32_t iso_max = setting[std::to_string(ISO_MAX_ID)].get<int32_t>();
-                    std::string iso_min_text = "ISO MIN";
-                    std::string iso_max_text = "ISO MAX";
-                    if(preset == 0){
-                        iso_min_text = ISO_MIN_VIDEO_STRING[iso_min];
-                        iso_max_text = ISO_MAX_VIDEO_STRING[iso_max];
-                    }else{
-                        iso_min_text = ISO_MIN_PHOTO_STRING[iso_min];
-                        iso_max_text = ISO_MAX_PHOTO_STRING[iso_max];
+                if(model_enum == MODEL_MISSION) {
+                    if(setting[std::to_string(ISO_AUTO_ID)].is_number() && setting[std::to_string(ISO_MAX_ID)].is_number()){
+                        int32_t iso_auto = setting[std::to_string(ISO_AUTO_ID)].get<int32_t>();
+                        int32_t iso_max = setting[std::to_string(ISO_MAX_ID)].get<int32_t>();
+                        std::string iso_max_text = "ISO MAX";
+                        if(iso_auto == 0){
+                            iso_max_text = "AUTO";
+                        }else{
+                        if(preset == 0){
+                            iso_max_text = ISO_MAX_VIDEO_STRING[iso_max];
+                        }else{
+                            iso_max_text = ISO_MAX_PHOTO_STRING[iso_max];
+                        }
                     }
-                    iso_setting = "I: " + iso_min_text + " " + iso_max_text;
+                    iso_setting = "I: " + iso_max_text;
+                }
+                }else{
+                    if(setting[std::to_string(ISO_MIN_ID)].is_number() && setting[std::to_string(ISO_MAX_ID)].is_number()){
+                        int32_t iso_min = setting[std::to_string(ISO_MIN_ID)].get<int32_t>();
+                        int32_t iso_max = setting[std::to_string(ISO_MAX_ID)].get<int32_t>();
+                        std::string iso_min_text = "ISO MIN";
+                        std::string iso_max_text = "ISO MAX";
+                        if(preset == 0){
+                            iso_min_text = ISO_MIN_VIDEO_STRING[iso_min];
+                            iso_max_text = ISO_MAX_VIDEO_STRING[iso_max];
+                        }else{
+                            iso_min_text = ISO_MIN_PHOTO_STRING[iso_min];
+                            iso_max_text = ISO_MAX_PHOTO_STRING[iso_max];
+                        }
+                        iso_setting = "I: " + iso_min_text + " " + iso_max_text;
+                    }
                 }
                 if(setting[std::to_string(SHARPNESS_ID)].is_number()){
                     int32_t sharpness_bal = setting[std::to_string(SHARPNESS_ID)].get<int32_t>();
