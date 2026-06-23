@@ -9,9 +9,9 @@
 
 #pragma region Resolution
 #define VIDEO_RESOLUTION_ID 2
-#define VIDEO_RESOLUTION_SIZE 27
+#define VIDEO_RESOLUTION_SIZE 29
 #define VIDEO_RESOLUTION_NAME "Video Resolution"
-#define VIDEO_RESOLUTION_AVA MODEL_MAX2_ALL
+#define VIDEO_RESOLUTION_AVA MODEL_MISSION_ALL
 const static char* VIDEO_RESOLUTION_STRING[] = {
     "4K",
     "2.7K",
@@ -32,6 +32,8 @@ const static char* VIDEO_RESOLUTION_STRING[] = {
     "4K 1:1",
     "900",
     "4K SPH",
+    "8K V2",
+    "1440 V2",
     "5.3K",
     "5.3K 8:7 V2",
     "4K 8:7 V2",
@@ -61,6 +63,8 @@ const static int32_t VIDEO_RESOLUTION_VALUE[] = {
     37, // 4K 1:1
     38, // 900
     39, // 4K SPH
+    40, // 8K V2
+    44, // 1440 V2
     100,// 5.3K
     107, // 5.3K 8:7 V2
     108, // 4K 8:7 V2
@@ -68,65 +72,69 @@ const static int32_t VIDEO_RESOLUTION_VALUE[] = {
     110, // 1080 9:16 V2
     111, // 2.7K 4:3 V2
     112, // 4K 4:3 V2
-    113// 5.3K 4:3 V
+    113, // 5.3K 4:3 V
 };
 const static int32_t VIDEO_RESOLUTION_SUPPORT[] = {
-    MODEL_MAX2_ALL, // 4K
+    MODEL_MISSION_ALL, // 4K
     MODEL_13_ALL, // 2.7K
     MODEL_11_ALL, // 2.7K 4:3
     MODEL_9, // 1440
-    MODEL_MAX2_ALL, // 1080
+    MODEL_MISSION_ALL, // 1080
     MODEL_13, // 720
     MODEL_12_ALL, // 4K 4:3
-    MODEL_MAX2, // 5.6K
+    MODEL_MISSION|MODEL_MAX2, // 5.6K
     MODEL_9, // 5K
     MODEL_10, // 5K 4:3
     MODEL_11S, // 5.3K 8:7
     MODEL_11S, // 5.3K 4:3
     MODEL_11S, // 4K 8:7
-    MODEL_MAX2, // 8K
+    MODEL_MISSION|MODEL_MAX2, // 8K
     MODEL_13, // 5.3K 21:9
     MODEL_13, // 4K 21:9
     MODEL_13, // 4K 1:1
     MODEL_13, // 900
-    MODEL_MAX2, // 4K SPH
+    MODEL_MISSION|MODEL_MAX2, // 4K SPH
+    MODEL_MISSION, // 8K V2
+    MODEL_MISSION, // 1440 V2
     MODEL_13_ALL, // 5.3K
     MODEL_13|MODEL_12, // 5.3K 8:7 V2
     MODEL_13|MODEL_12, // 4K 8:7 V2
-    MODEL_MAX2|MODEL_13|MODEL_12, // 4K 9:16 V2
-    MODEL_MAX2|MODEL_13|MODEL_12, // 1080 9:16 V2
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 4K 9:16 V2
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 1080 9:16 V2
     MODEL_13|MODEL_12, // 2.7K 4:3 V2
-    MODEL_13|MODEL_12, // 4K 4:3 V2
+    MODEL_MISSION|MODEL_13|MODEL_12, // 4K 4:3 V2
     MODEL_13 // 5.3K 4:3 V
 };
 const static int32_t VIDEO_RESOLUTION_RES[][2] = {
-    {3840, 2160},
-    {2704, 1520},
-    {2704, 2028},
-    {1920, 1440},
-    {1920, 1080},
-    {1280, 720}, 
-    {3840, 2880},
-    {5568, 3128},
-    {5120, 2880},
-    {5120, 3840},
-    {5312, 4648},
-    {5312, 3984},
-    {4000, 3500},
-    {7680, 4320},
-    {5312, 2272},
-    {3840, 1645},
-    {3840, 3840},
-    {1600, 900}, 
-    {3840, 1920},
-    {5312, 2988},
-    {5312, 4648},
-    {4000, 3500},
-    {2160, 3840},
-    {1080, 1920},
-    {2704, 2028},
-    {3840, 2880},
-    {5312, 3984} 
+    {3840, 2160},  // 4K
+    {2704, 1520},  // 2.7K
+    {2704, 2028},  // 2.7K 4:3
+    {1920, 1440},  // 1440
+    {1920, 1080},  // 1080
+    {1280, 720},   // 720
+    {3840, 2880},  // 4K 4:3
+    {5568, 3128},  // 5.6K
+    {5120, 2880},  // 5K
+    {5120, 3840}, // 5K 4:3
+    {5312, 4648},  // 5.3K 8:7
+    {5312, 3984},  // 5.3K 4:3
+    {4000, 3500},  // 4K 8:7
+    {7680, 4320},  // 8K
+    {5312, 2272},  // 5.3K 21:9
+    {3840, 1645},  // 4K 21:9
+    {3840, 3840},  // 4K 1:1
+    {1600, 900},   // 900
+    {3840, 1920},  // 4K SPH
+    {7680, 4320},  // 8K V2
+    {1920, 1440},  // 1440 V2
+    {5312, 2988}, // 5.3K
+    {5312, 4648},  // 5.3K 8:7 V2
+    {4000, 3500},  // 4K 8:7 V2
+    {2160, 3840},  // 4K 9:16 V2
+    {1080, 1920},  // 1080 9:16 V2
+    {2704, 2028},  // 2.7K 4:3 V2
+    {3840, 2880}, // 4K 4:3 V2
+    {5312, 3984}, // 5.3K 4:3 V
 };
 #pragma endregion
 
@@ -134,8 +142,12 @@ const static int32_t VIDEO_RESOLUTION_RES[][2] = {
 #define FRAMES_PER_SECOND_ID 3
 #define FRAMES_PER_SECOND_SIZE 13
 #define FRAMES_PER_SECOND_NAME "Frames Per Second"
-#define FRAMES_PER_SECOND_AVA MODEL_MAX2_ALL
+#define FRAMES_PER_SECOND_AVA MODEL_MISSION_ALL
 const static char* FRAMES_PER_SECOND_STRING[] = {
+    "960.0",
+    "800.0",
+    "480.0",
+    "400.0",
     "240.0",
     "120.0",
     "100.0",
@@ -151,6 +163,10 @@ const static char* FRAMES_PER_SECOND_STRING[] = {
     "300.0",
 };
 const static int32_t FRAMES_PER_SECOND_VALUE[] = {
+    19, // 960.0
+    20, // 800.0
+    18, // 480.0
+    15, // 400.0
     0, // 240.0
     1, // 120.0
     2, // 100.0
@@ -166,15 +182,19 @@ const static int32_t FRAMES_PER_SECOND_VALUE[] = {
     17, // 300.0
 };
 const static int32_t FRAMES_PER_SECOND_SUPPORT[] = {
+    MODEL_MISSION, // 960.0
+    MODEL_MISSION, // 800.0
+    MODEL_MISSION, // 480.0
+    MODEL_MISSION, // 400.0
     MODEL_13_ALL, // 240.0
     MODEL_13_ALL, // 120.0
-    MODEL_MAX2_ALL, // 100.0
-    MODEL_MAX2, // 90.0
-    MODEL_MAX2_ALL, // 60.0
-    MODEL_MAX2_ALL, // 50.0
-    MODEL_MAX2_ALL, // 30.0
-    MODEL_MAX2_ALL, // 25.0
-    MODEL_MAX2_ALL, // 24.0
+    MODEL_MISSION_ALL, // 100.0
+    MODEL_MISSION|MODEL_MAX2, // 90.0
+    MODEL_MISSION_ALL, // 60.0
+    MODEL_MISSION_ALL, // 50.0
+    MODEL_MISSION_ALL, // 30.0
+    MODEL_MISSION_ALL, // 25.0
+    MODEL_MISSION_ALL, // 24.0
     MODEL_13_ALL, // 200.0
     MODEL_13, // 400.0
     MODEL_13, // 360.0
@@ -186,7 +206,7 @@ const static int32_t FRAMES_PER_SECOND_SUPPORT[] = {
 #define VIDEO_TIMELAPSE_RATE_ID 5
 #define VIDEO_TIMELAPSE_RATE_SIZE 12
 #define VIDEO_TIMELAPSE_RATE_NAME "Video Timelapse Rate"
-#define VIDEO_TIMELAPSE_RATE_AVA MODEL_MAX2_ALL
+#define VIDEO_TIMELAPSE_RATE_AVA MODEL_MISSION_ALL
 const static char* VIDEO_TIMELAPSE_RATE_STRING[] = {
     "0.5 Sec",
     "1 Sec",
@@ -216,18 +236,18 @@ const static int32_t VIDEO_TIMELAPSE_RATE_VALUE[] = {
     11, // 30 Sec
 };
 const static int32_t VIDEO_TIMELAPSE_RATE_SUPPORT[] = {
-    MODEL_MAX2_ALL, // 0.5 Sec
-    MODEL_MAX2_ALL, // 1 Sec
-    MODEL_MAX2_ALL, // 2 Sec
-    MODEL_MAX2_ALL, // 5 Sec
-    MODEL_MAX2_ALL, // 10 Sec
-    MODEL_MAX2_ALL, // 30 Sec
-    MODEL_MAX2_ALL, // 60 Sec
-    MODEL_MAX2_ALL, // 2 Min
-    MODEL_MAX2_ALL, // 5 Min
-    MODEL_MAX2_ALL, // 30 Min
-    MODEL_MAX2_ALL, // 60 Min
-    MODEL_MAX2|MODEL_13|MODEL_12, // 30 Sec
+    MODEL_MISSION_ALL, // 0.5 Sec
+    MODEL_MISSION_ALL, // 1 Sec
+    MODEL_MISSION_ALL, // 2 Sec
+    MODEL_MISSION_ALL, // 5 Sec
+    MODEL_MISSION_ALL, // 10 Sec
+    MODEL_MISSION_ALL, // 30 Sec
+    MODEL_MISSION_ALL, // 60 Sec
+    MODEL_MISSION_ALL, // 2 Min
+    MODEL_MISSION_ALL, // 5 Min
+    MODEL_MISSION_ALL, // 30 Min
+    MODEL_MISSION_ALL, // 60 Min
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 30 Sec
 };
 #pragma endregion
 
@@ -235,7 +255,7 @@ const static int32_t VIDEO_TIMELAPSE_RATE_SUPPORT[] = {
 #define PHOTO_TIMELAPSE_RATE_ID 30
 #define PHOTO_TIMELAPSE_RATE_SIZE 12
 #define PHOTO_TIMELAPSE_RATE_NAME "Photo Timelapse Rate"
-#define PHOTO_TIMELAPSE_RATE_AVA MODEL_MAX2_ALL&(~MODEL_11)
+#define PHOTO_TIMELAPSE_RATE_AVA MODEL_MISSION_ALL&(~MODEL_11)
 const static char* PHOTO_TIMELAPSE_RATE_STRING[] = {
     "3 Sec",
     "60 Min",
@@ -265,16 +285,16 @@ const static int32_t PHOTO_TIMELAPSE_RATE_VALUE[] = {
     110, // 0.5 Sec
 };
 const static int32_t PHOTO_TIMELAPSE_RATE_SUPPORT[] = {
-    MODEL_MAX2|MODEL_13|MODEL_12, // 3 Sec
-    MODEL_MAX2_ALL&(~MODEL_11), // 60 Min
-    MODEL_MAX2_ALL&(~MODEL_11), // 30 Min
-    MODEL_MAX2_ALL&(~MODEL_11), // 5 Min
-    MODEL_MAX2_ALL&(~MODEL_11), // 2 Min
-    MODEL_MAX2_ALL&(~MODEL_11), // 60 Sec
-    MODEL_MAX2_ALL&(~MODEL_11), // 30 Sec
-    MODEL_MAX2_ALL&(~MODEL_11), // 10 Sec
-    MODEL_MAX2_ALL&(~MODEL_11), // 5 Sec
-    MODEL_MAX2_ALL&(~MODEL_11), // 2 Sec
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 3 Sec
+    MODEL_MISSION_ALL&(~MODEL_11), // 60 Min
+    MODEL_MISSION_ALL&(~MODEL_11), // 30 Min
+    MODEL_MISSION_ALL&(~MODEL_11), // 5 Min
+    MODEL_MISSION_ALL&(~MODEL_11), // 2 Min
+    MODEL_MISSION_ALL&(~MODEL_11), // 60 Sec
+    MODEL_MISSION_ALL&(~MODEL_11), // 30 Sec
+    MODEL_MISSION_ALL&(~MODEL_11), // 10 Sec
+    MODEL_MISSION_ALL&(~MODEL_11), // 5 Sec
+    MODEL_MISSION_ALL&(~MODEL_11), // 2 Sec
     MODEL_13_ALL&(~MODEL_11), // 1 Sec
     MODEL_13_ALL&(~MODEL_11), // 0.5 Sec
 };
@@ -284,7 +304,7 @@ const static int32_t PHOTO_TIMELAPSE_RATE_SUPPORT[] = {
 #define NIGHTLAPSE_RATE_ID 32
 #define NIGHTLAPSE_RATE_SIZE 12
 #define NIGHTLAPSE_RATE_NAME "Nightlapse Rate"
-#define NIGHTLAPSE_RATE_AVA MODEL_MAX2_ALL
+#define NIGHTLAPSE_RATE_AVA MODEL_MISSION_ALL
 const static char* NIGHTLAPSE_RATE_STRING[] = {
     "4 Sec",
     "5 Sec",
@@ -314,18 +334,18 @@ const static int32_t NIGHTLAPSE_RATE_VALUE[] = {
     3601, // Auto
 };
 const static int32_t NIGHTLAPSE_RATE_SUPPORT[] = {
-    MODEL_MAX2_ALL, // 4 Sec
-    MODEL_MAX2_ALL, // 5 Sec
-    MODEL_MAX2_ALL, // 10 Sec
-    MODEL_MAX2_ALL, // 15 Sec
-    MODEL_MAX2_ALL, // 20 Sec
-    MODEL_MAX2_ALL, // 30 Sec
-    MODEL_MAX2_ALL, // 60 Sec
-    MODEL_MAX2_ALL, // 2 Min
-    MODEL_MAX2_ALL, // 5 Min
-    MODEL_MAX2_ALL, // 30 Min
-    MODEL_MAX2_ALL, // 60 Min
-    MODEL_MAX2_ALL, // Auto
+    MODEL_MISSION_ALL, // 4 Sec
+    MODEL_MISSION_ALL, // 5 Sec
+    MODEL_MISSION_ALL, // 10 Sec
+    MODEL_MISSION_ALL, // 15 Sec
+    MODEL_MISSION_ALL, // 20 Sec
+    MODEL_MISSION_ALL, // 30 Sec
+    MODEL_MISSION_ALL, // 60 Sec
+    MODEL_MISSION_ALL, // 2 Min
+    MODEL_MISSION_ALL, // 5 Min
+    MODEL_MISSION_ALL, // 30 Min
+    MODEL_MISSION_ALL, // 60 Min
+    MODEL_MISSION_ALL, // Auto
 };
 #pragma endregion
 
@@ -333,7 +353,7 @@ const static int32_t NIGHTLAPSE_RATE_SUPPORT[] = {
 #define WEBCAM_DIGITAL_LENSES_ID 43
 #define WEBCAM_DIGITAL_LENSES_SIZE 4
 #define WEBCAM_DIGITAL_LENSES_NAME "Webcam Digital Lenses"
-#define WEBCAM_DIGITAL_LENSES_AVA MODEL_MAX2_ALL
+#define WEBCAM_DIGITAL_LENSES_AVA MODEL_MISSION_ALL
 const static char* WEBCAM_DIGITAL_LENSES_STRING[] = {
     "Wide",
     "Narrow",
@@ -347,10 +367,10 @@ const static int32_t WEBCAM_DIGITAL_LENSES_VALUE[] = {
     4, // Linear
 };
 const static int32_t WEBCAM_DIGITAL_LENSES_SUPPORT[] = {
-    MODEL_MAX2_ALL, // Wide
-    MODEL_MAX2_ALL, // Narrow
-    MODEL_MAX2_ALL, // Superview
-    MODEL_MAX2_ALL, // Linear
+    MODEL_MISSION_ALL, // Wide
+    MODEL_MISSION_ALL, // Narrow
+    MODEL_MISSION_ALL, // Superview
+    MODEL_MISSION_ALL, // Linear
 };
 #pragma endregion
 
@@ -358,7 +378,7 @@ const static int32_t WEBCAM_DIGITAL_LENSES_SUPPORT[] = {
 #define AUTO_POWER_DOWN_ID 59
 #define AUTO_POWER_DOWN_SIZE 7
 #define AUTO_POWER_DOWN_NAME "Auto Power Down"
-#define AUTO_POWER_DOWN_AVA MODEL_MAX2_ALL
+#define AUTO_POWER_DOWN_AVA MODEL_MISSION_ALL
 const static char* AUTO_POWER_DOWN_STRING[] = {
     "Never",
     "1 Min",
@@ -369,9 +389,9 @@ const static char* AUTO_POWER_DOWN_STRING[] = {
     "30 Sec",
 };
 const static int32_t AUTO_POWER_DOWN_VALUE[] = {
-    MODEL_MAX2_ALL, // Never
-    MODEL_MAX2_ALL&(~(MODEL_10|MODEL_9)), // 1 Min
-    MODEL_MAX2_ALL, // 5 Min
+    MODEL_MISSION_ALL, // Never
+    MODEL_MISSION_ALL&(~(MODEL_10|MODEL_9)), // 1 Min
+    MODEL_MISSION_ALL, // 5 Min
     6, // 15 Min
     7, // 30 Min
     11, // 8 Sec
@@ -392,7 +412,7 @@ const static int32_t AUTO_POWER_DOWN_SUPPORT[] = {
 #define GPS_ID 83
 #define GPS_SIZE 2
 #define GPS_NAME "GPS"
-#define GPS_AVA MODEL_MAX2_ALL&(~(MODEL_12|MODEL_11))
+#define GPS_AVA MODEL_MISSION_ALL&(~(MODEL_12|MODEL_11))
 const static char* GPS_STRING[] = {
     "Off",
     "On"
@@ -402,8 +422,8 @@ const static int32_t GPS_VALUE[] = {
     1, // On
 };
 const static int32_t GPS_SUPPORT[] = {
-    MODEL_MAX2_ALL&(~(MODEL_12|MODEL_11)), // Off
-    MODEL_MAX2_ALL&(~(MODEL_12|MODEL_11)), // On
+    MODEL_MISSION_ALL&(~(MODEL_12|MODEL_11)), // Off
+    MODEL_MISSION_ALL&(~(MODEL_12|MODEL_11)), // On
 };
 #pragma endregion
 
@@ -453,7 +473,7 @@ const static int32_t HLG_SUPPORT[] = {
 #define LCD_BRIGHTNESS_ID 88
 #define LCD_BRIGHTNESS_SIZE 10
 #define LCD_BRIGHTNESS_NAME "LCD Brightness"
-#define LCD_BRIGHTNESS_AVA MODEL_MAX2_ALL&(~MODEL_11)
+#define LCD_BRIGHTNESS_AVA MODEL_MISSION_ALL&(~MODEL_11)
 const static char* LCD_BRIGHTNESS_STRING[] = {
     "10%",
     "20%",
@@ -479,16 +499,16 @@ const static int32_t LCD_BRIGHTNESS_VALUE[] = {
     100, // 100%
 };
 const static int32_t LCD_BRIGHTNESS_SUPPORT[] = {
-    MODEL_MAX2_ALL&(~MODEL_11), // 10%
-    MODEL_MAX2_ALL&(~MODEL_11), // 20%
-    MODEL_MAX2_ALL&(~MODEL_11), // 30%
-    MODEL_MAX2_ALL&(~MODEL_11), // 40%
-    MODEL_MAX2_ALL&(~MODEL_11), // 50%
-    MODEL_MAX2_ALL&(~MODEL_11), // 60%
-    MODEL_MAX2_ALL&(~MODEL_11), // 70%
-    MODEL_MAX2_ALL&(~MODEL_11), // 80%
-    MODEL_MAX2_ALL&(~MODEL_11), // 90%
-    MODEL_MAX2_ALL&(~MODEL_11), // 100%
+    MODEL_MISSION_ALL&(~MODEL_11), // 10%
+    MODEL_MISSION_ALL&(~MODEL_11), // 20%
+    MODEL_MISSION_ALL&(~MODEL_11), // 30%
+    MODEL_MISSION_ALL&(~MODEL_11), // 40%
+    MODEL_MISSION_ALL&(~MODEL_11), // 50%
+    MODEL_MISSION_ALL&(~MODEL_11), // 60%
+    MODEL_MISSION_ALL&(~MODEL_11), // 70%
+    MODEL_MISSION_ALL&(~MODEL_11), // 80%
+    MODEL_MISSION_ALL&(~MODEL_11), // 90%
+    MODEL_MISSION_ALL&(~MODEL_11), // 100%
 };
 #pragma endregion
 
@@ -496,7 +516,7 @@ const static int32_t LCD_BRIGHTNESS_SUPPORT[] = {
 #define LED_ID 91
 #define LED_SIZE 6
 #define LED_NAME "LED"
-#define LED_AVA MODEL_MAX2_ALL
+#define LED_AVA MODEL_MISSION_ALL
 const static char* LED_STRING[] = {
     "Off",
     "On",
@@ -516,9 +536,9 @@ const static int32_t LED_VALUE[] = {
 const static int32_t LED_SUPPORT[] = {
     MODEL_11, // Off
     MODEL_11, // On
-    MODEL_MAX2_ALL&(~MODEL_11), // All On
-    MODEL_MAX2_ALL&(~(MODEL_11|MODEL_13)), // All Off
-    MODEL_MAX2_ALL&(~(MODEL_11|MODEL_13)), // Front Off Only
+    MODEL_MISSION_ALL&(~MODEL_11), // All On
+    MODEL_MISSION_ALL&(~(MODEL_11|MODEL_13)), // All Off
+    MODEL_MISSION_ALL&(~(MODEL_11|MODEL_13)), // Front Off Only
     MODEL_13, // Back Only
 };
 #pragma endregion
@@ -527,7 +547,7 @@ const static int32_t LED_SUPPORT[] = {
 #define VIDEO_ASPECT_RATIO_ID 108
 #define VIDEO_ASPECT_RATIO_SIZE 6
 #define VIDEO_ASPECT_RATIO_NAME "Video Aspect Ratio"
-#define VIDEO_ASPECT_RATIO_AVA MODEL_MAX2|MODEL_13|MODEL_12
+#define VIDEO_ASPECT_RATIO_AVA MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12
 const static char* VIDEO_ASPECT_RATIO_STRING[] = {
     "4:3",
     "16:9",
@@ -545,10 +565,10 @@ const static int32_t VIDEO_ASPECT_RATIO_VALUE[] = {
     6, // 1:1
 };
 const static int32_t VIDEO_ASPECT_RATIO_SUPPORT[] = {
-    MODEL_MAX2|MODEL_13|MODEL_12, // 4:3
-    MODEL_MAX2|MODEL_13|MODEL_12, // 16:9
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 4:3
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 16:9
     MODEL_13|MODEL_12, // 8:7
-    MODEL_MAX2|MODEL_13|MODEL_12, // 9:16
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 9:16
     MODEL_13, // 21:9
     MODEL_13, // 1:1
 };
@@ -558,7 +578,7 @@ const static int32_t VIDEO_ASPECT_RATIO_SUPPORT[] = {
 #define VIDEO_LENS_ID 121
 #define VIDEO_LENS_SIZE 13
 #define VIDEO_LENS_NAME "Video Lens"
-#define VIDEO_LENS_AVA MODEL_MAX2_ALL
+#define VIDEO_LENS_AVA MODEL_MISSION_ALL
 const static char* VIDEO_LENS_STRING[] = {
     "Wide",
     "Narrow",
@@ -590,17 +610,17 @@ const static int32_t VIDEO_LENS_VALUE[] = {
     104, // Ultra HyperView",
 };
 const static int32_t VIDEO_LENS_SUPPORT[] = {
-    MODEL_MAX2_ALL, // Wide",
+    MODEL_MISSION_ALL, // Wide",
     MODEL_13|MODEL_10_ALL, // Narrow",
     MODEL_13_ALL, // Superview",
-    MODEL_MAX2_ALL&(~MODEL_13), // Linear",
-    MODEL_MAX2_ALL, // Max Superview",
+    MODEL_MISSION_ALL&(~MODEL_13), // Linear",
+    MODEL_MISSION_ALL, // Max Superview",
     MODEL_13_ALL, // Linear + Horizon Leveling",
     MODEL_13|MODEL_12|MODEL_11S, // HyperView",
     MODEL_13|MODEL_12|MODEL_11S, // Linear + Horizon Lock",
-    MODEL_MAX2|MODEL_12, // Max HyperView",
+    MODEL_MISSION|MODEL_MAX2|MODEL_12, // Max HyperView",
     MODEL_13, // Ultra SuperView",
-    MODEL_MAX2|MODEL_13, // Ultra Wide",
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // Ultra Wide",
     MODEL_13, // Ultra Linear",
     MODEL_13, // Ultra HyperView",
 };
@@ -610,7 +630,7 @@ const static int32_t VIDEO_LENS_SUPPORT[] = {
 #define PHOTO_LENS_ID 122
 #define PHOTO_LENS_SIZE 17
 #define PHOTO_LENS_NAME "Photo Lens"
-#define PHOTO_LENS_AVA MODEL_MAX2_ALL&(~MODEL_11)
+#define PHOTO_LENS_AVA MODEL_MISSION_ALL&(~MODEL_11)
 const static char* PHOTO_LENS_STRING[] = {
     "Wide 12 MP",
     "Linear 12 MP",
@@ -652,17 +672,17 @@ const static int32_t PHOTO_LENS_VALUE[] = {
 const static int32_t PHOTO_LENS_SUPPORT[] = {
     MODEL_13, // Wide 12 MP
     MODEL_13, // Linear 12 MP
-    MODEL_MAX2, // 9MP Wide
+    MODEL_MISSION|MODEL_MAX2, // 9MP Wide
     MODEL_10_ALL, // Narrow
     MODEL_13, // Wide 23 MP
     MODEL_13, // Linear 23 MP
     MODEL_13, // Wide 27 MP
     MODEL_13, // Linear 27 MP
-    MODEL_MAX2, // 9MP Linear
+    MODEL_MISSION|MODEL_MAX2, // 9MP Linear
     MODEL_13, // 13MP Linear
     MODEL_13, // 13MP Wide
     MODEL_13, // 13MP Ultra Wide
-    MODEL_MAX2|MODEL_13, // Ultra Wide 12 MP
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // Ultra Wide 12 MP
     MODEL_13, // 13MP Ultra Linear
     MODEL_12_ALL&(~MODEL_11), // Max SuperView
     MODEL_12_ALL&(~MODEL_11), // Wide
@@ -705,7 +725,7 @@ const static int32_t TIME_LAPSE_DIGITAL_LENSES_SUPPORT[] = {
 #define PHOTO_OUTPUT_ID 125
 #define PHOTO_OUTPUT_SIZE 4
 #define PHOTO_OUTPUT_NAME "Photo Output"
-#define PHOTO_OUTPUT_AVA MODEL_MAX2_ALL&(~MODEL_11)
+#define PHOTO_OUTPUT_AVA MODEL_MISSION_ALL&(~MODEL_11)
 const static char* PHOTO_OUTPUT_STRING[] = {
     "Standard",
     "RAW",
@@ -719,8 +739,8 @@ const static int32_t PHOTO_OUTPUT_VALUE[] = {
     3, // SuperPhoto
 };
 const static int32_t PHOTO_OUTPUT_SUPPORT[] = {
-    MODEL_MAX2_ALL&(~MODEL_11), // Standard 
-    MODEL_MAX2_ALL&(~MODEL_11), // RAW 
+    MODEL_MISSION_ALL&(~MODEL_11), // Standard 
+    MODEL_MISSION_ALL&(~MODEL_11), // RAW 
     MODEL_13_ALL&(~MODEL_11), // HDR 
     MODEL_13_ALL&(~MODEL_11), // SuperPhoto
 };
@@ -730,7 +750,7 @@ const static int32_t PHOTO_OUTPUT_SUPPORT[] = {
 #define BURST_OUTPUT_ID 126
 #define BURST_OUTPUT_SIZE 2
 #define BURST_OUTPUT_NAME "Burst Output"
-#define BURST_OUTPUT_AVA MODEL_MAX2_ALL&(~MODEL_11)
+#define BURST_OUTPUT_AVA MODEL_MISSION_ALL&(~MODEL_11)
 const static char* BURST_OUTPUT_STRING[] = {
     "Standard",
     "RAW",
@@ -740,8 +760,8 @@ const static int32_t BURST_OUTPUT_VALUE[] = {
     1, // RAW 
 };
 const static int32_t BURST_OUTPUT_SUPPORT[] = {
-    MODEL_MAX2_ALL&(~MODEL_11), // Standard 
-    MODEL_MAX2_ALL&(~MODEL_11), // RAW 
+    MODEL_MISSION_ALL&(~MODEL_11), // Standard 
+    MODEL_MISSION_ALL&(~MODEL_11), // RAW 
 };
 #pragma endregion
 
@@ -749,7 +769,7 @@ const static int32_t BURST_OUTPUT_SUPPORT[] = {
 #define MEDIA_FORMAT_ID 128
 #define MEDIA_FORMAT_SIZE 4
 #define MEDIA_FORMAT_NAME "Media Format"
-#define MEDIA_FORMAT_AVA MODEL_MAX2_ALL&(~MODEL_11)
+#define MEDIA_FORMAT_AVA MODEL_MISSION_ALL&(~MODEL_11)
 const static char* MEDIA_FORMAT_STRING[] = {
     "Time Lapse Video",
     "Time Lapse Photo",
@@ -763,10 +783,10 @@ const static int32_t MEDIA_FORMAT_VALUE[] = {
     26, // Night Lapse Video
 };
 const static int32_t MEDIA_FORMAT_SUPPORT[] = {
-    MODEL_MAX2_ALL&(~MODEL_11), // Time Lapse Video 
-    MODEL_MAX2_ALL&(~MODEL_11), // Time Lapse Photo 
-    MODEL_MAX2_ALL&(~MODEL_11), // Night Lapse Photo 
-    MODEL_MAX2_ALL&(~MODEL_11), // Night Lapse Video
+    MODEL_MISSION_ALL&(~MODEL_11), // Time Lapse Video 
+    MODEL_MISSION_ALL&(~MODEL_11), // Time Lapse Photo 
+    MODEL_MISSION_ALL&(~MODEL_11), // Night Lapse Photo 
+    MODEL_MISSION_ALL&(~MODEL_11), // Night Lapse Video
 };
 #pragma endregion
 
@@ -818,7 +838,7 @@ const static int32_t ANTI_FLICKER_V2_SUPPORT[] = {
 #define HYPERSMOOTH_ID 135
 #define HYPERSMOOTH_SIZE 6
 #define HYPERSMOOTH_NAME "Hypersmooth"
-#define HYPERSMOOTH_AVA MODEL_MAX2_ALL
+#define HYPERSMOOTH_AVA MODEL_MISSION_ALL
 const static char* HYPERSMOOTH_STRING[] = {
     "Off",
     "Low",
@@ -836,11 +856,11 @@ const static int32_t HYPERSMOOTH_VALUE[] = {
     100, // Standard
 };
 const static int32_t HYPERSMOOTH_SUPPORT[] = {
-    MODEL_MAX2_ALL, // Off
-    MODEL_MAX2_ALL&(~MODEL_10), // Low
+    MODEL_MISSION_ALL, // Off
+    MODEL_MISSION_ALL&(~MODEL_10), // Low
     MODEL_10_ALL, // High
     MODEL_11_ALL, // Boost
-    MODEL_MAX2_ALL&(~MODEL_10_ALL), // Auto Boost
+    MODEL_MISSION_ALL&(~MODEL_10_ALL), // Auto Boost
     MODEL_10, // Standard
 };
 #pragma endregion
@@ -893,7 +913,7 @@ const static int32_t PHOTO_HORIZON_LEVELING_SUPPORT[] = {
 #define VIDEO_DURATION_ID 156
 #define VIDEO_DURATION_SIZE 11
 #define VIDEO_DURATION_NAME "Video Duration"
-#define VIDEO_DURATION_AVA MODEL_MAX2_ALL&(~MODEL_11)
+#define VIDEO_DURATION_AVA MODEL_MISSION_ALL&(~MODEL_11)
 const static char* VIDEO_DURATION_STRING[] = {
     "15 Sec",
     "30 Sec",
@@ -921,17 +941,17 @@ const static int32_t VIDEO_DURATION_VALUE[] = {
     100, // No Limit
 };
 const static int32_t VIDEO_DURATION_SUPPORT[] = {
-    MODEL_MAX2_ALL&(~MODEL_11), // 15 Sec
-    MODEL_MAX2_ALL&(~MODEL_11), // 30 Sec
-    MODEL_MAX2_ALL&(~MODEL_11), // 1 Min
-    MODEL_MAX2_ALL&(~MODEL_11), // 5 Min
-    MODEL_MAX2_ALL&(~MODEL_11), // 15 Min
-    MODEL_MAX2_ALL&(~MODEL_11), // 30 Min
-    MODEL_MAX2_ALL&(~MODEL_11), // 1 Hour
-    MODEL_MAX2_ALL&(~MODEL_11), // 2 Hour
-    MODEL_MAX2_ALL&(~MODEL_11), // 3 Hour
+    MODEL_MISSION_ALL&(~MODEL_11), // 15 Sec
+    MODEL_MISSION_ALL&(~MODEL_11), // 30 Sec
+    MODEL_MISSION_ALL&(~MODEL_11), // 1 Min
+    MODEL_MISSION_ALL&(~MODEL_11), // 5 Min
+    MODEL_MISSION_ALL&(~MODEL_11), // 15 Min
+    MODEL_MISSION_ALL&(~MODEL_11), // 30 Min
+    MODEL_MISSION_ALL&(~MODEL_11), // 1 Hour
+    MODEL_MISSION_ALL&(~MODEL_11), // 2 Hour
+    MODEL_MISSION_ALL&(~MODEL_11), // 3 Hour
     MODEL_13,// 5 Sec
-    MODEL_MAX2_ALL&(~MODEL_11), // No Limit
+    MODEL_MISSION_ALL&(~MODEL_11), // No Limit
 };
 #pragma endregion
 
@@ -939,7 +959,7 @@ const static int32_t VIDEO_DURATION_SUPPORT[] = {
 #define MULTISHOT_DURATION_ID 157
 #define MULTISHOT_DURATION_SIZE 11
 #define MULTISHOT_DURATION_NAME "Multi Shot Duration"
-#define MULTISHOT_DURATION_AVA MODEL_MAX2_ALL&(~MODEL_11)
+#define MULTISHOT_DURATION_AVA MODEL_MISSION_ALL&(~MODEL_11)
 const static char* MULTISHOT_DURATION_STRING[] = {
     "Off",
     "15 Sec",
@@ -967,16 +987,16 @@ const static int32_t MULTISHOT_DURATION_VALUE[] = {
     100, // No Limit
 };
 const static int32_t MULTISHOT_DURATION_SUPPORT[] = {
-    MODEL_MAX2, // Off
-    MODEL_MAX2_ALL&(~MODEL_11), // 15 Sec
-    MODEL_MAX2_ALL&(~MODEL_11), // 30 Sec
-    MODEL_MAX2_ALL&(~MODEL_11), // 1 Min
-    MODEL_MAX2_ALL&(~MODEL_11), // 5 Min
-    MODEL_MAX2_ALL&(~MODEL_11), // 15 Min
-    MODEL_MAX2_ALL&(~MODEL_11), // 30 Min
-    MODEL_MAX2_ALL&(~MODEL_11), // 1 Hour
-    MODEL_MAX2_ALL&(~MODEL_11), // 2 Hour
-    MODEL_MAX2_ALL&(~MODEL_11), // 3 Hour
+    MODEL_MISSION|MODEL_MAX2, // Off
+    MODEL_MISSION_ALL&(~MODEL_11), // 15 Sec
+    MODEL_MISSION_ALL&(~MODEL_11), // 30 Sec
+    MODEL_MISSION_ALL&(~MODEL_11), // 1 Min
+    MODEL_MISSION_ALL&(~MODEL_11), // 5 Min
+    MODEL_MISSION_ALL&(~MODEL_11), // 15 Min
+    MODEL_MISSION_ALL&(~MODEL_11), // 30 Min
+    MODEL_MISSION_ALL&(~MODEL_11), // 1 Hour
+    MODEL_MISSION_ALL&(~MODEL_11), // 2 Hour
+    MODEL_MISSION_ALL&(~MODEL_11), // 3 Hour
     MODEL_13_ALL&(~MODEL_11), // No Limit
 };
 #pragma endregion
@@ -1026,7 +1046,7 @@ const static int32_t HINDSIGHT_SUPPORT[] = {
 #define PHOTO_SINGLE_INTERVAL_ID 171
 #define PHOTO_SINGLE_INTERVAL_SIZE 10
 #define PHOTO_SINGLE_INTERVAL_NAME "Photo Single Interval"
-#define PHOTO_SINGLE_INTERVAL_AVA MODEL_MAX2|MODEL_13|MODEL_12
+#define PHOTO_SINGLE_INTERVAL_AVA MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12
 const static char* PHOTO_SINGLE_INTERVAL_STRING[] = {
     "Off",
     "0.5s",
@@ -1052,16 +1072,16 @@ const static int32_t PHOTO_SINGLE_INTERVAL_VALUE[] = {
     10, // 3s
 };
 const static int32_t PHOTO_SINGLE_INTERVAL_SUPPORT[] = {
-    MODEL_MAX2|MODEL_13|MODEL_12, // Off
-    MODEL_MAX2|MODEL_13|MODEL_12, // 0.5s
-    MODEL_MAX2|MODEL_13|MODEL_12, // 1s
-    MODEL_MAX2|MODEL_13|MODEL_12, // 2s
-    MODEL_MAX2|MODEL_13|MODEL_12, // 5s
-    MODEL_MAX2|MODEL_13|MODEL_12, // 10s
-    MODEL_MAX2|MODEL_13|MODEL_12, // 30s
-    MODEL_MAX2|MODEL_13|MODEL_12, // 60s
-    MODEL_MAX2|MODEL_13|MODEL_12, // 120s
-    MODEL_MAX2|MODEL_13|MODEL_12, // 3s
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // Off
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 0.5s
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 1s
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 2s
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 5s
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 10s
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 30s
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 60s
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 120s
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 3s
 };
 #pragma endregion
 
@@ -1069,7 +1089,7 @@ const static int32_t PHOTO_SINGLE_INTERVAL_SUPPORT[] = {
 #define PHOTO_SINGLE_DURATION_ID 172
 #define PHOTO_SINGLE_DURATION_SIZE 10
 #define PHOTO_SINGLE_DURATION_NAME "Photo Single Duration"
-#define PHOTO_SINGLE_DURATION_AVA MODEL_MAX2|MODEL_13|MODEL_12
+#define PHOTO_SINGLE_DURATION_AVA MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12
 const static char* PHOTO_SINGLE_DURATION_STRING[] = {
     "Off",
     "15 Sec",
@@ -1095,16 +1115,16 @@ const static int32_t PHOTO_SINGLE_DURATION_VALUE[] = {
     9, // 3 Hour
 };
 const static int32_t PHOTO_SINGLE_DURATION_SUPPORT[] = {
-    MODEL_MAX2|MODEL_13|MODEL_12, // Off
-    MODEL_MAX2|MODEL_13|MODEL_12, // 15 Sec
-    MODEL_MAX2|MODEL_13|MODEL_12, // 30 Sec
-    MODEL_MAX2|MODEL_13|MODEL_12, // 1 Min
-    MODEL_MAX2|MODEL_13|MODEL_12, // 5 Min
-    MODEL_MAX2|MODEL_13|MODEL_12, // 15 Min
-    MODEL_MAX2|MODEL_13|MODEL_12, // 30 Min
-    MODEL_MAX2|MODEL_13|MODEL_12, // 1 Hour
-    MODEL_MAX2|MODEL_13|MODEL_12, // 2 Hour
-    MODEL_MAX2|MODEL_13|MODEL_12, // 3 Hour
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // Off
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 15 Sec
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 30 Sec
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 1 Min
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 5 Min
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 15 Min
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 30 Min
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 1 Hour
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 2 Hour
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 3 Hour
 };
 #pragma endregion
 
@@ -1449,7 +1469,7 @@ const static int32_t ENABLE_NIGHT_PHOTO_SUPPORT[] = {
 #define WIRELESS_BAND_ID 178
 #define WIRELESS_BAND_SIZE 2
 #define WIRELESS_BAND_NAME "Wireless Band"
-#define WIRELESS_BAND_AVA MODEL_MAX2_ALL&(~(MODEL_10|MODEL_9))
+#define WIRELESS_BAND_AVA MODEL_MISSION_ALL&(~(MODEL_10|MODEL_9))
 const static char* WIRELESS_BAND_STRING[] = {
     "2.4 GHz",
     "5 GHz"
@@ -1459,8 +1479,8 @@ const static int32_t WIRELESS_BAND_VALUE[] = {
     1, // 5 GH
 };
 const static int32_t WIRELESS_BAND_SUPPORT[] = {
-    MODEL_MAX2_ALL&(~(MODEL_10|MODEL_9)), // 2.4 GHz
-    MODEL_MAX2_ALL&(~(MODEL_10|MODEL_9)), // 5 GH
+    MODEL_MISSION_ALL&(~(MODEL_10|MODEL_9)), // 2.4 GHz
+    MODEL_MISSION_ALL&(~(MODEL_10|MODEL_9)), // 5 GH
 };
 #pragma endregion
 
@@ -1468,7 +1488,7 @@ const static int32_t WIRELESS_BAND_SUPPORT[] = {
 #define STAR_TRAILS_LENGTH_ID 179
 #define STAR_TRAILS_LENGTH_SIZE 3
 #define STAR_TRAILS_LENGTH_NAME "Star Trails Length"
-#define STAR_TRAILS_LENGTH_AVA MODEL_MAX2_ALL&(~(MODEL_10|MODEL_9))
+#define STAR_TRAILS_LENGTH_AVA MODEL_MISSION_ALL&(~(MODEL_10|MODEL_9))
 const static char* STAR_TRAILS_LENGTH_STRING[] = {
     "Short",
     "Long",
@@ -1480,9 +1500,9 @@ const static int32_t STAR_TRAILS_LENGTH_VALUE[] = {
     3, // Max", 
 };
 const static int32_t STAR_TRAILS_LENGTH_SUPPORT[] = {
-    MODEL_MAX2_ALL&(~(MODEL_10|MODEL_9)), // Short",
-    MODEL_MAX2_ALL&(~(MODEL_10|MODEL_9)), // Long",
-    MODEL_MAX2_ALL&(~(MODEL_10|MODEL_9)), // Max", 
+    MODEL_MISSION_ALL&(~(MODEL_10|MODEL_9)), // Short",
+    MODEL_MISSION_ALL&(~(MODEL_10|MODEL_9)), // Long",
+    MODEL_MISSION_ALL&(~(MODEL_10|MODEL_9)), // Max", 
 };
 #pragma endregion
 
@@ -1518,7 +1538,7 @@ const static int32_t SYSTEM_VIDEO_MODE_SUPPORT[] = {
 #define VIDEO_BIT_RATE_ID 182
 #define VIDEO_BIT_RATE_SIZE 2
 #define VIDEO_BIT_RATE_NAME "Video Bit Rate"
-#define VIDEO_BIT_RATE_AVA MODEL_MAX2|MODEL_13|MODEL_12
+#define VIDEO_BIT_RATE_AVA MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12
 const static char* VIDEO_BIT_RATE_STRING[] = {
     "Standard",
     "High",
@@ -1528,8 +1548,8 @@ const static int32_t VIDEO_BIT_RATE_VALUE[] = {
     1, // High
 };
 const static int32_t VIDEO_BIT_RATE_SUPPORT[] = {
-    MODEL_MAX2|MODEL_13|MODEL_12, // Standard
-    MODEL_MAX2|MODEL_13|MODEL_12, // High
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // Standard
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // High
 };
 #pragma endregion
 
@@ -1537,7 +1557,7 @@ const static int32_t VIDEO_BIT_RATE_SUPPORT[] = {
 #define BIT_DEPTH_ID 183
 #define BIT_DEPTH_SIZE 2
 #define BIT_DEPTH_NAME "Bit Depth"
-#define BIT_DEPTH_AVA MODEL_MAX2|MODEL_13|MODEL_12
+#define BIT_DEPTH_AVA MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12
 const static char* BIT_DEPTH_STRING[] = {
     "8-bit",
     "10-bit",
@@ -1547,8 +1567,8 @@ const static int32_t BIT_DEPTH_VALUE[] = {
     2, // 10-bit
 };
 const static int32_t BIT_DEPTH_SUPPORT[] = {
-    MODEL_MAX2|MODEL_13|MODEL_12, // 8-bit
-    MODEL_MAX2|MODEL_13|MODEL_12, // 10-bit
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 8-bit
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // 10-bit
 };
 #pragma endregion
 
@@ -1556,7 +1576,7 @@ const static int32_t BIT_DEPTH_SUPPORT[] = {
 #define PROFILES_ID 184
 #define PROFILES_SIZE 4
 #define PROFILES_NAME "Profiles"
-#define PROFILES_AVA MODEL_MAX2|MODEL_13|MODEL_12
+#define PROFILES_AVA MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12
 const static char* PROFILES_STRING[] = {
     "Standard",
     "HDR",
@@ -1570,10 +1590,10 @@ const static int32_t PROFILES_VALUE[] = {
     2, // Log
 };
 const static int32_t PROFILES_SUPPORT[] = {
-    MODEL_MAX2|MODEL_13|MODEL_12, // Standard
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // Standard
     MODEL_13|MODEL_12, // HDR
     MODEL_13, // HLG HD
-    MODEL_MAX2|MODEL_13|MODEL_12, // Log
+    MODEL_MISSION|MODEL_MAX2|MODEL_13|MODEL_12, // Log
 };
 #pragma endregion
 
@@ -1807,7 +1827,7 @@ const static int32_t FRAMING_SUPPORT[] = {
 #define CAMERA_MODE_ID 194
 #define CAMERA_MODE_SIZE 2
 #define CAMERA_MODE_NAME "Camera Mode"
-#define CAMERA_MODE_AVA MODEL_MAX2
+#define CAMERA_MODE_AVA MODEL_MISSION|MODEL_MAX2
 const static char* CAMERA_MODE_STRING[] = {
     "Single Lens",
     "360", 
@@ -1817,8 +1837,8 @@ const static int32_t CAMERA_MODE_VALUE[] = {
     1, // 360"
 };
 const static int32_t CAMERA_MODE_SUPPORT[] = {
-    MODEL_MAX2, // Single Lens
-    MODEL_MAX2, // 360"
+    MODEL_MISSION|MODEL_MAX2, // Single Lens
+    MODEL_MISSION|MODEL_MAX2, // 360"
 };
 #pragma endregion
 
@@ -1826,7 +1846,7 @@ const static int32_t CAMERA_MODE_SUPPORT[] = {
 #define _360_PHOTO_FILES_EXTENSION_ID 196
 #define _360_PHOTO_FILES_EXTENSION_SIZE 2
 #define _360_PHOTO_FILES_EXTENSION_NAME "360 Photo Files Extension"
-#define _360_PHOTO_FILES_EXTENSION_AVA MODEL_MAX2
+#define _360_PHOTO_FILES_EXTENSION_AVA MODEL_MISSION|MODEL_MAX2
 const static char* _360_PHOTO_FILES_EXTENSION_STRING[] = {
     ".360",
     ".jpg",
@@ -1836,8 +1856,8 @@ const static int32_t _360_PHOTO_FILES_EXTENSION_VALUE[] = {
     1, // .jpg
 };
 const static int32_t _360_PHOTO_FILES_EXTENSION_SUPPORT[] = {
-    MODEL_MAX2, // .360
-    MODEL_MAX2, // .jpg
+    MODEL_MISSION|MODEL_MAX2, // .360
+    MODEL_MISSION|MODEL_MAX2, // .jpg
 };
 #pragma endregion
 
@@ -1845,7 +1865,7 @@ const static int32_t _360_PHOTO_FILES_EXTENSION_SUPPORT[] = {
 #define BEEP_VOLUME_ID 216
 #define BEEP_VOLUME_SIZE 3
 #define BEEP_VOLUME_NAME "Beep Volume"
-#define BEEP_VOLUME_AVA MODEL_MAX2|MODEL_13
+#define BEEP_VOLUME_AVA MODEL_MISSION|MODEL_MAX2|MODEL_13
 const static char* BEEP_VOLUME_STRING[] = {
     "Low",
     "Medium",
@@ -1857,9 +1877,9 @@ const static int32_t BEEP_VOLUME_VALUE[] = {
     100, // High
 };
 const static int32_t BEEP_VOLUME_SUPPORT[] = {
-    MODEL_MAX2|MODEL_13, // Low
-    MODEL_MAX2|MODEL_13, // Medium
-    MODEL_MAX2|MODEL_13, // High
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // Low
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // Medium
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // High
 };
 #pragma endregion
 
@@ -1867,7 +1887,7 @@ const static int32_t BEEP_VOLUME_SUPPORT[] = {
 #define SETUP_SCREEN_SAVER_ID 219
 #define SETUP_SCREEN_SAVER_SIZE 5
 #define SETUP_SCREEN_SAVER_NAME "Setup Screen Saver"
-#define SETUP_SCREEN_SAVER_AVA MODEL_MAX2|MODEL_13
+#define SETUP_SCREEN_SAVER_AVA MODEL_MISSION|MODEL_MAX2|MODEL_13
 const static char* SETUP_SCREEN_SAVER_STRING[] = {
     "Never",
     "1 Min",
@@ -1883,11 +1903,11 @@ const static int32_t SETUP_SCREEN_SAVER_VALUE[] = {
     4, // 5 Min
 };
 const static int32_t SETUP_SCREEN_SAVER_SUPPORT[] = {
-    MODEL_MAX2, // Never
-    MODEL_MAX2|MODEL_13, // 1 Min
-    MODEL_MAX2|MODEL_13, // 2 Min
-    MODEL_MAX2|MODEL_13, // 3 Min
-    MODEL_MAX2|MODEL_13, // 5 Min
+    MODEL_MISSION|MODEL_MAX2, // Never
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // 1 Min
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // 2 Min
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // 3 Min
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // 5 Min
 };
 #pragma endregion
 
@@ -1895,7 +1915,7 @@ const static int32_t SETUP_SCREEN_SAVER_SUPPORT[] = {
 #define SETUP_LANGUAGE_ID 223
 #define SETUP_LANGUAGE_SIZE 15
 #define SETUP_LANGUAGE_NAME "Setup Language"
-#define SETUP_LANGUAGE_AVA MODEL_MAX2|MODEL_13
+#define SETUP_LANGUAGE_AVA MODEL_MISSION|MODEL_MAX2|MODEL_13
 const static char* SETUP_LANGUAGE_STRING[] = {
     "English - US",
     "English - UK",
@@ -1931,21 +1951,21 @@ const static int32_t SETUP_LANGUAGE_VALUE[] = {
     14, // Swedish
 };
 const static int32_t SETUP_LANGUAGE_SUPPORT[] = {
-    MODEL_MAX2|MODEL_13, // English - US
-    MODEL_MAX2|MODEL_13, // English - UK
-    MODEL_MAX2|MODEL_13, // English - AUS
-    MODEL_MAX2|MODEL_13, // German
-    MODEL_MAX2|MODEL_13, // French
-    MODEL_MAX2|MODEL_13, // Italian
-    MODEL_MAX2|MODEL_13, // Spanish
-    MODEL_MAX2|MODEL_13, // Spanish - NA
-    MODEL_MAX2|MODEL_13, // Chinese
-    MODEL_MAX2|MODEL_13, // Japanese
-    MODEL_MAX2|MODEL_13, // Korean
-    MODEL_MAX2|MODEL_13, // Portuguese
-    MODEL_MAX2|MODEL_13, // Russian
-    MODEL_MAX2|MODEL_13, // English - IND
-    MODEL_MAX2|MODEL_13, // Swedish
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // English - US
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // English - UK
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // English - AUS
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // German
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // French
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // Italian
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // Spanish
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // Spanish - NA
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // Chinese
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // Japanese
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // Korean
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // Portuguese
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // Russian
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // English - IND
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // Swedish
 };
 #pragma endregion
 
@@ -2031,7 +2051,7 @@ const static int32_t MULTISHOT_FRAMING_SUPPORT[] = {
 #define FRAMERATE_ID 234
 #define FRAMERATE_SIZE 6
 #define FRAMERATE_NAME "Frame Rate"
-#define FRAMERATE_AVA MODEL_MAX2|MODEL_13
+#define FRAMERATE_AVA MODEL_MISSION|MODEL_MAX2|MODEL_13
 const static char* FRAMERATE_STRING[] = {
  	"240.0",
  	"120.0",
@@ -2065,13 +2085,13 @@ const static int32_t FRAMERATE_VALUE[] = {
 const static int32_t FRAMERATE_SUPPORT[] = {
     MODEL_13, // 240.0
     MODEL_13, // 120.0
-    MODEL_MAX2|MODEL_13, // 100.0
-    MODEL_MAX2, // 90.0
-    MODEL_MAX2|MODEL_13, // 60.0
-    MODEL_MAX2|MODEL_13, // 50.0
-    MODEL_MAX2|MODEL_13, // 30.0
-    MODEL_MAX2|MODEL_13, // 25.0
-    MODEL_MAX2|MODEL_13, // 24.0
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // 100.0
+    MODEL_MISSION|MODEL_MAX2, // 90.0
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // 60.0
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // 50.0
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // 30.0
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // 25.0
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // 24.0
     MODEL_13, // 200.0
     MODEL_13, // 400.0
     MODEL_13, // 360.0
@@ -2083,7 +2103,7 @@ const static int32_t FRAMERATE_SUPPORT[] = {
 #define AUTOMATIC_WI_FI_ACCESS_POINT_ID 236
 #define AUTOMATIC_WI_FI_ACCESS_POINT_SIZE 2
 #define AUTOMATIC_WI_FI_ACCESS_POINT_NAME "Automatic Wi-Fi Access Point"
-#define AUTOMATIC_WI_FI_ACCESS_POINT_AVA MODEL_MAX2
+#define AUTOMATIC_WI_FI_ACCESS_POINT_AVA MODEL_MISSION|MODEL_MAX2
 const static char* AUTOMATIC_WI_FI_ACCESS_POINT_STRING[] = {
     "Off",
     "On",
@@ -2093,8 +2113,8 @@ const static int32_t AUTOMATIC_WI_FI_ACCESS_POINT_VALUE[] = {
     1, // On
 };
 const static int32_t AUTOMATIC_WI_FI_ACCESS_POINT_SUPPORT[] = {
-    MODEL_MAX2,  // Off
-    MODEL_MAX2, // On
+    MODEL_MISSION|MODEL_MAX2,  // Off
+    MODEL_MISSION|MODEL_MAX2, // On
 };
 #pragma endregion
 
@@ -2104,7 +2124,7 @@ const static int32_t AUTOMATIC_WI_FI_ACCESS_POINT_SUPPORT[] = {
 #define WHITE_BALANCE_ID 115
 #define WHITE_BALANCE_SIZE 11
 #define WHITE_BALANCE_NAME "White Balance"
-#define WHITE_BALANCE_AVA MODEL_MAX2_ALL
+#define WHITE_BALANCE_AVA MODEL_MISSION_ALL
 const static char* WHITE_BALANCE_STRING[] = {
     "Auto",
     "5500K",
@@ -2132,17 +2152,17 @@ const static int32_t WHITE_BALANCE_VALUE[] = {
     12, // 5000K
 };
 const static int32_t WHITE_BALANCE_SUPPORT[] = {
-    MODEL_MAX2_ALL, // Auto
-    MODEL_MAX2_ALL, // 5500K
-    MODEL_MAX2_ALL, // 6500K
-    MODEL_MAX2_ALL, // Native
-    MODEL_MAX2_ALL, // 4000K
-    MODEL_MAX2_ALL, // 6000K
-    MODEL_MAX2_ALL, // 2300K
-    MODEL_MAX2_ALL, // 2800K
-    MODEL_MAX2_ALL, // 3200K
-    MODEL_MAX2_ALL, // 4500K
-    MODEL_MAX2_ALL, // 5000K
+    MODEL_MISSION_ALL, // Auto
+    MODEL_MISSION_ALL, // 5500K
+    MODEL_MISSION_ALL, // 6500K
+    MODEL_MISSION_ALL, // Native
+    MODEL_MISSION_ALL, // 4000K
+    MODEL_MISSION_ALL, // 6000K
+    MODEL_MISSION_ALL, // 2300K
+    MODEL_MISSION_ALL, // 2800K
+    MODEL_MISSION_ALL, // 3200K
+    MODEL_MISSION_ALL, // 4500K
+    MODEL_MISSION_ALL, // 5000K
 };
 #pragma endregion
 
@@ -2150,7 +2170,7 @@ const static int32_t WHITE_BALANCE_SUPPORT[] = {
 #define SHARPNESS_ID 117
 #define SHARPNESS_SIZE 3
 #define SHARPNESS_NAME "Sharpness"
-#define SHARPNESS_AVA MODEL_MAX2_ALL
+#define SHARPNESS_AVA MODEL_MISSION_ALL
 const static char* SHARPNESS_STRING[] = {
     "High",
     "Midium",
@@ -2162,9 +2182,9 @@ const static int32_t SHARPNESS_VALUE[] = {
     2, // Lo
 };
 const static int32_t SHARPNESS_SUPPORT[] = {
-    MODEL_MAX2_ALL, // High
-    MODEL_MAX2_ALL, // Midium
-    MODEL_MAX2_ALL, // Lo
+    MODEL_MISSION_ALL, // High
+    MODEL_MISSION_ALL, // Midium
+    MODEL_MISSION_ALL, // Lo
 };
 #pragma endregion
 
@@ -2172,7 +2192,7 @@ const static int32_t SHARPNESS_SUPPORT[] = {
 #define DENOISE_ID 198
 #define DENOISE_SIZE 3
 #define DENOISE_NAME "Denoise"
-#define DENOISE_AVA MODEL_MAX2|MODEL_13
+#define DENOISE_AVA MODEL_MISSION|MODEL_MAX2|MODEL_13
 const static char* DENOISE_STRING[] = {
     "High",
     "Midium",
@@ -2184,9 +2204,9 @@ const static int32_t DENOISE_VALUE[] = {
     0, // Low
 };
 const static int32_t DENOISE_SUPPORT[] = {
-    MODEL_MAX2|MODEL_13, // High
-    MODEL_MAX2|MODEL_13, // Midium
-    MODEL_MAX2|MODEL_13, // Low
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // High
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // Midium
+    MODEL_MISSION|MODEL_MAX2|MODEL_13, // Low
 };
 #pragma endregio
 
@@ -2194,7 +2214,7 @@ const static int32_t DENOISE_SUPPORT[] = {
 #define EXPOSURE_ID 118
 #define EXPOSURE_SIZE 9
 #define EXPOSURE_NAME "EV Comp"
-#define EXPOSURE_AVA MODEL_MAX2_ALL
+#define EXPOSURE_AVA MODEL_MISSION_ALL
 const static char* EXPOSURE_STRING[] = {
     "-2.0",
     "-1.5",
@@ -2218,15 +2238,15 @@ const static int32_t EXPOSURE_VALUE[] = {
     0, // 2.0
 };
 const static int32_t EXPOSURE_SUPPORT[] = {
-    MODEL_MAX2_ALL, // -2.0
-    MODEL_MAX2_ALL, // -1.5
-    MODEL_MAX2_ALL, // -1.0
-    MODEL_MAX2_ALL, // -0.5
-    MODEL_MAX2_ALL, // 0.0
-    MODEL_MAX2_ALL, // 0.5
-    MODEL_MAX2_ALL, // 1.0
-    MODEL_MAX2_ALL, // 1.5
-    MODEL_MAX2_ALL, // 2.0
+    MODEL_MISSION_ALL, // -2.0
+    MODEL_MISSION_ALL, // -1.5
+    MODEL_MISSION_ALL, // -1.0
+    MODEL_MISSION_ALL, // -0.5
+    MODEL_MISSION_ALL, // 0.0
+    MODEL_MISSION_ALL, // 0.5
+    MODEL_MISSION_ALL, // 1.0
+    MODEL_MISSION_ALL, // 1.5
+    MODEL_MISSION_ALL, // 2.0
 };
 #pragma endregion
 
@@ -2234,7 +2254,7 @@ const static int32_t EXPOSURE_SUPPORT[] = {
 #define COLOR_ID 116
 #define COLOR_SIZE 4
 #define COLOR_NAME "Color"
-#define COLOR_AVA MODEL_MAX2_ALL
+#define COLOR_AVA MODEL_MISSION_ALL
 const static char* COLOR_STRING[] = {
     "GP-LOG",
     "Vibrant",
@@ -2248,10 +2268,10 @@ const static int32_t COLOR_VALUE[] = {
     1, // Flat
 };
 const static int32_t COLOR_SUPPORT[] = {
-    MODEL_MAX2_ALL, // GP-LOP
-    MODEL_MAX2_ALL, // Vibrant
-    MODEL_MAX2_ALL, // Natural
-    MODEL_MAX2_ALL, // Flat
+    MODEL_MISSION_ALL, // GP-LOP
+    MODEL_MISSION_ALL, // Vibrant
+    MODEL_MISSION_ALL, // Natural
+    MODEL_MISSION_ALL, // Flat
 };
 #pragma endregion
 
@@ -2259,7 +2279,7 @@ const static int32_t COLOR_SUPPORT[] = {
 #define ISO_MIN_VIDEO_ID 102
 #define ISO_MIN_VIDEO_SIZE 8
 #define ISO_MIN_VIDEO_NAME "ISO Minimum"
-#define ISO_MIN_VIDEO_AVA MODEL_MAX2_ALL
+#define ISO_MIN_VIDEO_AVA MODEL_MISSION_ALL
 const static char* ISO_MIN_VIDEO_STRING[] = {
     "6400",
     "1600",
@@ -2281,22 +2301,22 @@ const static int32_t ISO_MIN_VIDEO_VALUE[] = {
     9, // Auto
 };
 const static int32_t ISO_MIN_VIDEO_SUPPORT[] = {
-    MODEL_MAX2_ALL, // 6400
-    MODEL_MAX2_ALL, // 1600
-    MODEL_MAX2_ALL, // 400
-    MODEL_MAX2_ALL, // 3200
-    MODEL_MAX2_ALL, // 800
-    MODEL_MAX2_ALL, // 200
-    MODEL_MAX2_ALL, // 100
-    MODEL_MAX2_ALL, // Auto
+    MODEL_MISSION_ALL, // 6400
+    MODEL_MISSION_ALL, // 1600
+    MODEL_MISSION_ALL, // 400
+    MODEL_MISSION_ALL, // 3200
+    MODEL_MISSION_ALL, // 800
+    MODEL_MISSION_ALL, // 200
+    MODEL_MISSION_ALL, // 100
+    MODEL_MISSION_ALL, // Auto
 };
 #pragma endregion
 
 #pragma region ISO Max Video
 #define ISO_MAX_VIDEO_ID 13
-#define ISO_MAX_VIDEO_SIZE 8
+#define ISO_MAX_VIDEO_SIZE 15
 #define ISO_MAX_VIDEO_NAME "ISO Maximum"
-#define ISO_MAX_VIDEO_AVA MODEL_MAX2_ALL
+#define ISO_MAX_VIDEO_AVA MODEL_MISSION_ALL
 const static char* ISO_MAX_VIDEO_STRING[] = {
     "6400",
     "1600",
@@ -2306,6 +2326,13 @@ const static char* ISO_MAX_VIDEO_STRING[] = {
     "200",
     "100",
     "Auto",
+    "25-6400",
+    "25-3200",
+    "25-1600",
+    "25-800",
+    "25-400",
+    "25-200",
+    "25-100",
 };
 const static int32_t ISO_MAX_VIDEO_VALUE[] = {
     0, // 6400
@@ -2316,16 +2343,30 @@ const static int32_t ISO_MAX_VIDEO_VALUE[] = {
     7, // 200
     8, // 100
     9, // Auto
+    101, // 25-6400
+    102, // 25-3200
+    103, // 25-1600
+    104, // 25-800
+    105, // 25-400
+    106, // 25-200
+    107, // 25-100
 };
 const static int32_t ISO_MAX_VIDEO_SUPPORT[] = {
-    MODEL_MAX2_ALL, // 6400
-    MODEL_MAX2_ALL, // 1600
-    MODEL_MAX2_ALL, // 400
-    MODEL_MAX2_ALL, // 3200
-    MODEL_MAX2_ALL, // 800
-    MODEL_MAX2_ALL, // 200
-    MODEL_MAX2_ALL, // 100
-    MODEL_MAX2_ALL, // Auto
+    MODEL_MISSION_ALL, // 6400
+    MODEL_MISSION_ALL, // 1600
+    MODEL_MISSION_ALL, // 400
+    MODEL_MISSION_ALL, // 3200
+    MODEL_MISSION_ALL, // 800
+    MODEL_MISSION_ALL, // 200
+    MODEL_MISSION_ALL, // 100
+    MODEL_MISSION_ALL, // Auto
+    MODEL_MISSION, // 25-6400
+    MODEL_MISSION, // 25-3200
+    MODEL_MISSION, // 25-1600
+    MODEL_MISSION, // 25-800
+    MODEL_MISSION, // 25-400
+    MODEL_MISSION, // 25-200
+    MODEL_MISSION, // 25-100
 };
 #pragma endregion
 
@@ -2333,7 +2374,7 @@ const static int32_t ISO_MAX_VIDEO_SUPPORT[] = {
 #define ISO_MIN_PHOTO_ID 75
 #define ISO_MIN_PHOTO_SIZE 6
 #define ISO_MIN_PHOTO_NAME "ISO Minimum"
-#define ISO_MIN_PHOTO_AVA MODEL_MAX2_ALL
+#define ISO_MIN_PHOTO_AVA MODEL_MISSION_ALL
 const static char* ISO_MIN_PHOTO_STRING[] = {
     "800",
     "400",
@@ -2351,12 +2392,12 @@ const static int32_t ISO_MIN_PHOTO_VALUE[] = {
     5, // 3200
 };
 const static int32_t ISO_MIN_PHOTO_SUPPORT[] = {
-    MODEL_MAX2_ALL, // 800
-    MODEL_MAX2_ALL, // 400
-    MODEL_MAX2_ALL, // 200
-    MODEL_MAX2_ALL, // 100
-    MODEL_MAX2_ALL, // 1600
-    MODEL_MAX2_ALL, // 3200
+    MODEL_MISSION_ALL, // 800
+    MODEL_MISSION_ALL, // 400
+    MODEL_MISSION_ALL, // 200
+    MODEL_MISSION_ALL, // 100
+    MODEL_MISSION_ALL, // 1600
+    MODEL_MISSION_ALL, // 3200
 };
 #pragma endregion
 
@@ -2364,7 +2405,7 @@ const static int32_t ISO_MIN_PHOTO_SUPPORT[] = {
 #define ISO_MAX_PHOTO_ID 24
 #define ISO_MAX_PHOTO_SIZE 6
 #define ISO_MAX_PHOTO_NAME "ISO Maximum"
-#define ISO_MAX_PHOTO_AVA MODEL_MAX2_ALL
+#define ISO_MAX_PHOTO_AVA MODEL_MISSION_ALL
 const static char* ISO_MAX_PHOTO_STRING[] = {
     "800",
     "400",
@@ -2382,12 +2423,12 @@ const static int32_t ISO_MAX_PHOTO_VALUE[] = {
     5, // 3200
 };
 const static int32_t ISO_MAX_PHOTO_SUPPORT[] = {
-    MODEL_MAX2_ALL, // 800
-    MODEL_MAX2_ALL, // 400
-    MODEL_MAX2_ALL, // 200
-    MODEL_MAX2_ALL, // 100
-    MODEL_MAX2_ALL, // 1600
-    MODEL_MAX2_ALL, // 3200
+    MODEL_MISSION_ALL, // 800
+    MODEL_MISSION_ALL, // 400
+    MODEL_MISSION_ALL, // 200
+    MODEL_MISSION_ALL, // 100
+    MODEL_MISSION_ALL, // 1600
+    MODEL_MISSION_ALL, // 3200
 };
 #pragma endregion
 
@@ -2395,7 +2436,7 @@ const static int32_t ISO_MAX_PHOTO_SUPPORT[] = {
 #define ISO_MIN_BURST_ID 76
 #define ISO_MIN_BURST_SIZE 6
 #define ISO_MIN_BURST_NAME "ISO Minimum"
-#define ISO_MIN_BURST_AVA MODEL_MAX2_ALL
+#define ISO_MIN_BURST_AVA MODEL_MISSION_ALL
 const static char* ISO_MIN_BURST_STRING[] = {
     "800",
     "400",
@@ -2413,12 +2454,12 @@ const static int32_t ISO_MIN_BURST_VALUE[] = {
     5, // 3200
 };
 const static int32_t ISO_MIN_BURST_SUPPORT[] = {
-    MODEL_MAX2_ALL, // 800
-    MODEL_MAX2_ALL, // 400
-    MODEL_MAX2_ALL, // 200
-    MODEL_MAX2_ALL, // 100
-    MODEL_MAX2_ALL, // 1600
-    MODEL_MAX2_ALL, // 3200
+    MODEL_MISSION_ALL, // 800
+    MODEL_MISSION_ALL, // 400
+    MODEL_MISSION_ALL, // 200
+    MODEL_MISSION_ALL, // 100
+    MODEL_MISSION_ALL, // 1600
+    MODEL_MISSION_ALL, // 3200
 };
 #pragma endregion
 
@@ -2426,7 +2467,7 @@ const static int32_t ISO_MIN_BURST_SUPPORT[] = {
 #define ISO_MAX_BURST_ID 37
 #define ISO_MAX_BURST_SIZE 6
 #define ISO_MAX_BURST_NAME "ISO Maximum"
-#define ISO_MAX_BURST_AVA MODEL_MAX2_ALL
+#define ISO_MAX_BURST_AVA MODEL_MISSION_ALL
 const static char* ISO_MAX_BURST_STRING[] = {
     "800",
     "400",
@@ -2444,12 +2485,12 @@ const static int32_t ISO_MAX_BURST_VALUE[] = {
     5, // 3200
 };
 const static int32_t ISO_MAX_BURST_SUPPORT[] = {
-    MODEL_MAX2_ALL, // 800
-    MODEL_MAX2_ALL, // 400
-    MODEL_MAX2_ALL, // 200
-    MODEL_MAX2_ALL, // 100
-    MODEL_MAX2_ALL, // 1600
-    MODEL_MAX2_ALL, // 3200
+    MODEL_MISSION_ALL, // 800
+    MODEL_MISSION_ALL, // 400
+    MODEL_MISSION_ALL, // 200
+    MODEL_MISSION_ALL, // 100
+    MODEL_MISSION_ALL, // 1600
+    MODEL_MISSION_ALL, // 3200
 };
 #pragma endregion
 
@@ -2457,7 +2498,7 @@ const static int32_t ISO_MAX_BURST_SUPPORT[] = {
 #define SHUTTER_SPEED_VIDEO_ID 145
 #define SHUTTER_SPEED_VIDEO_SIZE 62
 #define SHUTTER_SPEED_VIDEO_NAME "Shutter Speed"
-#define SHUTTER_SPEED_VIDEO_AVA MODEL_MAX2_ALL
+#define SHUTTER_SPEED_VIDEO_AVA MODEL_MISSION_ALL
 const static char* SHUTTER_SPEED_VIDEO_STRING[] = {
     "Auto",
     "Auto Cinematic",
@@ -2587,68 +2628,68 @@ const static int32_t SHUTTER_SPEED_VIDEO_VALUE[] = {
     3, // 1/24
 };
 const static int32_t SHUTTER_SPEED_VIDEO_SUPPORT[] = {
-    MODEL_MAX2_ALL, // "Auto
-    MODEL_MAX2_ALL, // "Auto Cinematic
-    MODEL_MAX2_ALL, // 1/8640
-    MODEL_MAX2_ALL, // 1/7680
-    MODEL_MAX2_ALL, // 1/7200
-    MODEL_MAX2_ALL, // 1/6400
-    MODEL_MAX2_ALL, // 1/6144
-    MODEL_MAX2_ALL, // 1/5760
-    MODEL_MAX2_ALL, // 1/4800
-    MODEL_MAX2_ALL, // 1/4608
-    MODEL_MAX2_ALL, // 1/4320
-    MODEL_MAX2_ALL, // 1/3840
-    MODEL_MAX2_ALL, // 1/3600
-    MODEL_MAX2_ALL, // 1/3200
-    MODEL_MAX2_ALL, // 1/3072
-    MODEL_MAX2_ALL, // 1/2880
-    MODEL_MAX2_ALL, // 1/2400
-    MODEL_MAX2_ALL, // 1/2304
-    MODEL_MAX2_ALL, // 1/2160
-    MODEL_MAX2_ALL, // 1/1920
-    MODEL_MAX2_ALL, // 1/1800
-    MODEL_MAX2_ALL, // 1/1600
-    MODEL_MAX2_ALL, // 1/1536
-    MODEL_MAX2_ALL, // 1/1440
-    MODEL_MAX2_ALL, // 1/1200
-    MODEL_MAX2_ALL, // 1/1152
-    MODEL_MAX2_ALL, // 1/1080
-    MODEL_MAX2_ALL, // 1/960
-    MODEL_MAX2_ALL, // 1/900
-    MODEL_MAX2_ALL, // 1/800
-    MODEL_MAX2_ALL, // 1/768
-    MODEL_MAX2_ALL, // 1/720
-    MODEL_MAX2_ALL, // 1/600
-    MODEL_MAX2_ALL, // 1/576
-    MODEL_MAX2_ALL, // 1/540
-    MODEL_MAX2_ALL, // 1/480
-    MODEL_MAX2_ALL, // 1/450
-    MODEL_MAX2_ALL, // 1/400
-    MODEL_MAX2_ALL, // 1/384
-    MODEL_MAX2_ALL, // 1/360
-    MODEL_MAX2_ALL, // 1/300
-    MODEL_MAX2_ALL, // 1/288
-    MODEL_MAX2_ALL, // 1/240
-    MODEL_MAX2_ALL, // 1/200
-    MODEL_MAX2_ALL, // 1/192
-    MODEL_MAX2_ALL, // 1/180
-    MODEL_MAX2_ALL, // 1/150
-    MODEL_MAX2_ALL, // 1/144
-    MODEL_MAX2_ALL, // 1/120
-    MODEL_MAX2_ALL, // 1/100
-    MODEL_MAX2_ALL, // 1/96
-    MODEL_MAX2_ALL, // 1/90
-    MODEL_MAX2_ALL, // 1/75
-    MODEL_MAX2_ALL, // 1/72
-    MODEL_MAX2_ALL, // 1/60
-    MODEL_MAX2_ALL, // 1/50
-    MODEL_MAX2_ALL, // 1/48
-    MODEL_MAX2_ALL, // 1/45
-    MODEL_MAX2_ALL, // 1/36
-    MODEL_MAX2_ALL, // 1/30
-    MODEL_MAX2_ALL, // 1/25
-    MODEL_MAX2_ALL, // 1/24
+    MODEL_MISSION_ALL, // "Auto
+    MODEL_MISSION_ALL, // "Auto Cinematic
+    MODEL_MISSION_ALL, // 1/8640
+    MODEL_MISSION_ALL, // 1/7680
+    MODEL_MISSION_ALL, // 1/7200
+    MODEL_MISSION_ALL, // 1/6400
+    MODEL_MISSION_ALL, // 1/6144
+    MODEL_MISSION_ALL, // 1/5760
+    MODEL_MISSION_ALL, // 1/4800
+    MODEL_MISSION_ALL, // 1/4608
+    MODEL_MISSION_ALL, // 1/4320
+    MODEL_MISSION_ALL, // 1/3840
+    MODEL_MISSION_ALL, // 1/3600
+    MODEL_MISSION_ALL, // 1/3200
+    MODEL_MISSION_ALL, // 1/3072
+    MODEL_MISSION_ALL, // 1/2880
+    MODEL_MISSION_ALL, // 1/2400
+    MODEL_MISSION_ALL, // 1/2304
+    MODEL_MISSION_ALL, // 1/2160
+    MODEL_MISSION_ALL, // 1/1920
+    MODEL_MISSION_ALL, // 1/1800
+    MODEL_MISSION_ALL, // 1/1600
+    MODEL_MISSION_ALL, // 1/1536
+    MODEL_MISSION_ALL, // 1/1440
+    MODEL_MISSION_ALL, // 1/1200
+    MODEL_MISSION_ALL, // 1/1152
+    MODEL_MISSION_ALL, // 1/1080
+    MODEL_MISSION_ALL, // 1/960
+    MODEL_MISSION_ALL, // 1/900
+    MODEL_MISSION_ALL, // 1/800
+    MODEL_MISSION_ALL, // 1/768
+    MODEL_MISSION_ALL, // 1/720
+    MODEL_MISSION_ALL, // 1/600
+    MODEL_MISSION_ALL, // 1/576
+    MODEL_MISSION_ALL, // 1/540
+    MODEL_MISSION_ALL, // 1/480
+    MODEL_MISSION_ALL, // 1/450
+    MODEL_MISSION_ALL, // 1/400
+    MODEL_MISSION_ALL, // 1/384
+    MODEL_MISSION_ALL, // 1/360
+    MODEL_MISSION_ALL, // 1/300
+    MODEL_MISSION_ALL, // 1/288
+    MODEL_MISSION_ALL, // 1/240
+    MODEL_MISSION_ALL, // 1/200
+    MODEL_MISSION_ALL, // 1/192
+    MODEL_MISSION_ALL, // 1/180
+    MODEL_MISSION_ALL, // 1/150
+    MODEL_MISSION_ALL, // 1/144
+    MODEL_MISSION_ALL, // 1/120
+    MODEL_MISSION_ALL, // 1/100
+    MODEL_MISSION_ALL, // 1/96
+    MODEL_MISSION_ALL, // 1/90
+    MODEL_MISSION_ALL, // 1/75
+    MODEL_MISSION_ALL, // 1/72
+    MODEL_MISSION_ALL, // 1/60
+    MODEL_MISSION_ALL, // 1/50
+    MODEL_MISSION_ALL, // 1/48
+    MODEL_MISSION_ALL, // 1/45
+    MODEL_MISSION_ALL, // 1/36
+    MODEL_MISSION_ALL, // 1/30
+    MODEL_MISSION_ALL, // 1/25
+    MODEL_MISSION_ALL, // 1/24
 };
 #pragma endregion
 
@@ -2656,7 +2697,7 @@ const static int32_t SHUTTER_SPEED_VIDEO_SUPPORT[] = {
 #define SHUTTER_SPEED_PHOTO_ID 146
 #define SHUTTER_SPEED_PHOTO_SIZE 7
 #define SHUTTER_SPEED_PHOTO_NAME "Shutter Speed"
-#define SHUTTER_SPEED_PHOTO_AVA MODEL_MAX2_ALL
+#define SHUTTER_SPEED_PHOTO_AVA MODEL_MISSION_ALL
 const static char* SHUTTER_SPEED_PHOTO_STRING[] = {
     "Auto",
     "Auto Cinematic",
@@ -2676,13 +2717,13 @@ const static int32_t SHUTTER_SPEED_PHOTO_VALUE[] = {
     5, // 1/2000
 };
 const static int32_t SHUTTER_SPEED_PHOTO_SUPPORT[] = {
-    MODEL_MAX2_ALL, // Auto
-    MODEL_MAX2_ALL, // Auto Cinematic
-    MODEL_MAX2_ALL, // 1/125
-    MODEL_MAX2_ALL, // 1/250
-    MODEL_MAX2_ALL, // 1/500
-    MODEL_MAX2_ALL, // 1/1000
-    MODEL_MAX2_ALL, // 1/2000
+    MODEL_MISSION_ALL, // Auto
+    MODEL_MISSION_ALL, // Auto Cinematic
+    MODEL_MISSION_ALL, // 1/125
+    MODEL_MISSION_ALL, // 1/250
+    MODEL_MISSION_ALL, // 1/500
+    MODEL_MISSION_ALL, // 1/1000
+    MODEL_MISSION_ALL, // 1/2000
 };
 #pragma endregion
 
@@ -2690,7 +2731,7 @@ const static int32_t SHUTTER_SPEED_PHOTO_SUPPORT[] = {
 #define PHOTO_BURST_RATE_ID 147
 #define PHOTO_BURST_RATE_SIZE 10
 #define PHOTO_BURST_RATE_NAME "Photo Burst Rate"
-#define PHOTO_BURST_RATE_AVA MODEL_MAX2_ALL
+#define PHOTO_BURST_RATE_AVA MODEL_MISSION_ALL
 const static char* PHOTO_BURST_RATE_STRING[] = {
     "60 Photos / 10 Seconds",
     "60 Photos / 6 Seconds",
@@ -2716,16 +2757,38 @@ const static int32_t PHOTO_BURST_RATE_VALUE[] = {
     9, // Auto
 };
 const static int32_t PHOTO_BURST_RATE_SUPPORT[] = {
-    MODEL_MAX2_ALL, // 60 Photos / 10 Seconds
-    MODEL_MAX2_ALL, // 60 Photos / 6 Seconds
-    MODEL_MAX2_ALL, // 30 Photos / 6 Seconds
-    MODEL_MAX2_ALL, // 30 Photos / 3 Seconds
-    MODEL_MAX2_ALL, // 30 Photos / 1 Second
-    MODEL_MAX2_ALL, // 10 Photos / 3 Seconds
-    MODEL_MAX2_ALL, // 10 Photos / 1 Second
-    MODEL_MAX2_ALL, // 5 Photos / 1 Second
-    MODEL_MAX2_ALL, // 3 Photos / 1 Second
-    MODEL_MAX2_ALL, // Auto
+    MODEL_MISSION_ALL, // 60 Photos / 10 Seconds
+    MODEL_MISSION_ALL, // 60 Photos / 6 Seconds
+    MODEL_MISSION_ALL, // 30 Photos / 6 Seconds
+    MODEL_MISSION_ALL, // 30 Photos / 3 Seconds
+    MODEL_MISSION_ALL, // 30 Photos / 1 Second
+    MODEL_MISSION_ALL, // 10 Photos / 3 Seconds
+    MODEL_MISSION_ALL, // 10 Photos / 1 Second
+    MODEL_MISSION_ALL, // 5 Photos / 1 Second
+    MODEL_MISSION_ALL, // 3 Photos / 1 Second
+    MODEL_MISSION_ALL, // Auto
+};
+#pragma endregion
+
+#pragma region ISO Auto
+#define ISO_AUTO_ID 259
+#define ISO_AUTO_SIZE 3
+#define ISO_AUTO_NAME "ISO Auto"
+#define ISO_AUTO_AVA MODEL_MISSION
+const static char* ISO_AUTO_STRING[] = {
+    "Auto",
+    "Const",
+    "Range"
+};
+const static int32_t ISO_AUTO_VALUE[] = {
+    0,
+    1,
+    2,
+};
+const static int32_t ISO_AUTO_SUPPORT[] = {
+    MODEL_MISSION,
+    MODEL_MISSION,
+    MODEL_MISSION,
 };
 #pragma endregion
 
@@ -2733,7 +2796,7 @@ const static int32_t PHOTO_BURST_RATE_SUPPORT[] = {
 #define ISO_BOTH_VIDEO_ID 10000
 #define ISO_BOTH_VIDEO_SIZE 8
 #define ISO_BOTH_VIDEO_NAME "ISO Both"
-#define ISO_BOTH_VIDEO_AVA MODEL_MAX2_ALL
+#define ISO_BOTH_VIDEO_AVA MODEL_MISSION_ALL
 const static char* ISO_BOTH_VIDEO_STRING[] = {
     "6400",
     "1600",
@@ -2755,14 +2818,14 @@ const static int32_t ISO_BOTH_VIDEO_VALUE[] = {
     9, // Auto
 };
 const static int32_t ISO_BOTH_VIDEO_SUPPORT[] = {
-    MODEL_MAX2_ALL, // 6400
-    MODEL_MAX2_ALL, // 1600
-    MODEL_MAX2_ALL, // 400
-    MODEL_MAX2_ALL, // 3200
-    MODEL_MAX2_ALL, // 800
-    MODEL_MAX2_ALL, // 200
-    MODEL_MAX2_ALL, // 100
-    MODEL_MAX2_ALL, // Auto
+    MODEL_MISSION_ALL, // 6400
+    MODEL_MISSION_ALL, // 1600
+    MODEL_MISSION_ALL, // 400
+    MODEL_MISSION_ALL, // 3200
+    MODEL_MISSION_ALL, // 800
+    MODEL_MISSION_ALL, // 200
+    MODEL_MISSION_ALL, // 100
+    MODEL_MISSION_ALL, // Auto
 };
 #pragma endregion
 
@@ -2770,7 +2833,7 @@ const static int32_t ISO_BOTH_VIDEO_SUPPORT[] = {
 #define ISO_BOTH_PHOTO_ID 10001
 #define ISO_BOTH_PHOTO_SIZE 6
 #define ISO_BOTH_PHOTO_NAME "ISO BOTH"
-#define ISO_BOTH_PHOTO_AVA MODEL_MAX2_ALL
+#define ISO_BOTH_PHOTO_AVA MODEL_MISSION_ALL
 const static char* ISO_BOTH_PHOTO_STRING[] = {
     "800",
     "400",
@@ -2788,12 +2851,12 @@ const static int32_t ISO_BOTH_PHOTO_VALUE[] = {
     5, // 3200
 };
 const static int32_t ISO_BOTH_PHOTO_SUPPORT[] = {
-    MODEL_MAX2_ALL, // 800
-    MODEL_MAX2_ALL, // 400
-    MODEL_MAX2_ALL, // 200
-    MODEL_MAX2_ALL, // 100
-    MODEL_MAX2_ALL, // 1600
-    MODEL_MAX2_ALL, // 3200
+    MODEL_MISSION_ALL, // 800
+    MODEL_MISSION_ALL, // 400
+    MODEL_MISSION_ALL, // 200
+    MODEL_MISSION_ALL, // 100
+    MODEL_MISSION_ALL, // 1600
+    MODEL_MISSION_ALL, // 3200
 };
 #pragma endregion
 
@@ -2801,7 +2864,7 @@ const static int32_t ISO_BOTH_PHOTO_SUPPORT[] = {
 #define ISO_BOTH_BURST_ID 10002
 #define ISO_BOTH_BURST_SIZE 6
 #define ISO_BOTH_BURST_NAME "ISO BOTH"
-#define ISO_BOTH_BURST_AVA MODEL_MAX2_ALL
+#define ISO_BOTH_BURST_AVA MODEL_MISSION_ALL
 const static char* ISO_BOTH_BURST_STRING[] = {
     "800",
     "400",
@@ -2819,12 +2882,12 @@ const static int32_t ISO_BOTH_BURST_VALUE[] = {
     5, // 3200
 };
 const static int32_t ISO_BOTH_BURST_SUPPORT[] = {
-    MODEL_MAX2_ALL, // 800
-    MODEL_MAX2_ALL, // 400
-    MODEL_MAX2_ALL, // 200
-    MODEL_MAX2_ALL, // 100
-    MODEL_MAX2_ALL, // 1600
-    MODEL_MAX2_ALL, // 3200
+    MODEL_MISSION_ALL, // 800
+    MODEL_MISSION_ALL, // 400
+    MODEL_MISSION_ALL, // 200
+    MODEL_MISSION_ALL, // 100
+    MODEL_MISSION_ALL, // 1600
+    MODEL_MISSION_ALL, // 3200
 };
 #pragma endregion
 
