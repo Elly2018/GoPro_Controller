@@ -27,29 +27,25 @@ GoProController::~GoProController() {
 }
 
 void GoProController::update(){
-    std::thread([&]() {
-        while(true){
-            std::vector<std::string> fine = std::vector<std::string>();
-            std::vector<std::string> buffer = std::vector<std::string>();
-            {
-                std::lock_guard lock(ips_mutex);
-                buffer = std::vector<std::string>(camera_ips.begin(), camera_ips.end());
-            }
-            
-            for(int32_t i = 0; i < buffer.size(); i++){
-                auto ping = icmplib::Ping(icmplib::IPAddress(buffer.at(i)), ICMPLIB_TIMEOUT_1S);
-                bool connected = ping.delay != ICMPLIB_TIMEOUT_1S || ping.response == icmplib::PingResponseType::Success || ping.response == icmplib::PingResponseType::Unreachable; 
-                if(connected){
-                    fine.push_back(buffer.at(i));
-                }
-            }
-
-            {
-                std::lock_guard lock(ips_alive_mutex);
-                camera_alive_ips = fine;
-            }
-
-            std::this_thread::sleep_for(std::chrono::milliseconds(ICMPLIB_TIMEOUT_1S));
+    std::vector<std::string> fine = std::vector<std::string>();
+    std::vector<std::string> buffer = std::vector<std::string>();
+    {
+        std::lock_guard lock(ips_mutex);
+        buffer = std::vector<std::string>(camera_ips.begin(), camera_ips.end());
+    }
+    
+    for(int32_t i = 0; i < buffer.size(); i++){
+        auto ping = icmplib::Ping(icmplib::IPAddress(buffer.at(i)), ICMPLIB_TIMEOUT_1S);
+        bool connected = ping.delay != ICMPLIB_TIMEOUT_1S || ping.response == icmplib::PingResponseType::Success || ping.response == icmplib::PingResponseType::Unreachable; 
+        if(connected){
+            fine.push_back(buffer.at(i));
         }
-    }).detach();
+    }
+
+    {
+        std::lock_guard lock(ips_alive_mutex);
+        camera_alive_ips = fine;
+    }
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(ICMPLIB_TIMEOUT_1S));
 }

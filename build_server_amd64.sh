@@ -7,7 +7,5 @@ cd build_server_amd64
 # Configure CMake with Toolchain
 cmake .. -DCMAKE_BUILD_TYPE=Debug -DBUILD_SERVER=ON -DBUILD_MASTER=OFF
 
-cp compile_commands.json ..
-
 # Build
 cmake --build . -j $nproc

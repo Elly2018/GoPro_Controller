@@ -23,26 +23,32 @@
 #include <iostream>
 #include <vector>
 
-void websocket_server(AppData &data) noexcept {
+void Websocket_server(AppData &data) noexcept
+{
   std::cout << "Starting GoPro Server (RPi)..." << std::endl;
   hv::WebSocketService ws;
-  ws.onopen = [&](const WebSocketChannelPtr &channel, const HttpRequestPtr &req) {
+  ws.onopen = [&](const WebSocketChannelPtr &channel, const HttpRequestPtr &req)
+  {
     std::lock_guard<std::mutex> lock(data.broadcast_mtx);
     printf("Client connected: %s\n", channel->peeraddr().c_str());
 
     int32_t f = -1;
-    for (int32_t i = 0; i < data.broadcast_addrs.size(); i++) {
+    for (int32_t i = 0; i < data.broadcast_addrs.size(); i++)
+    {
       if (data.broadcast_addrs.at(i).websocket_ip ==
-          channel->peeraddr().c_str()) {
+          channel->peeraddr().c_str())
+      {
         f = i;
         break;
       }
     }
 
-    if (f == -1) {
+    if (f == -1)
+    {
       SenderStruct sss = SenderStruct();
       std::string addd = channel->peeraddr().c_str();
-      while (addd.at(addd.size() - 1) != ':') {
+      while (addd.at(addd.size() - 1) != ':')
+      {
         addd.pop_back();
       }
       addd.pop_back();
@@ -59,48 +65,30 @@ void websocket_server(AppData &data) noexcept {
       data.broadcast_addrs.push_back((sss));
     }
   };
-  ws.onmessage = [&](const WebSocketChannelPtr &channel,
-                     const std::string &msg) {
-    if (!json::accept(msg.c_str()))
-      return;
-    std::thread([=]() {
-      printf("Received: %s\n", msg.c_str());
-      try {
-        json j = json::parse(msg.c_str());
-        // Simple command parsing
-        if (j["key"].get<std::string>() == "command") {
-          execute_command(&data.controller, channel, j["value"]);
-        } else if (j["key"].get<std::string>() == "query") {
-          query_action(&data.controller, channel, j["value"]);
-        } else if (j["key"].get<std::string>() == "webcam") {
-          webcam_action(&data.controller, channel, j["value"]);
-        } else if (j["key"].get<std::string>() == "media") {
-          media_action(&data.controller, channel, j["value"]);
-        } else if (j["key"].get<std::string>() == "preview") {
-          preview_action(&data.controller, channel, j["value"]);
-        } else if (j["key"].get<std::string>() == "preset") {
-          mode_action(&data.controller, channel, j["value"]);
-        }
-      } catch (const std::exception &e) {
-        std::cerr << "JSON Parse error: " << e.what() << std::endl;
-      }
-    }).detach();
+  ws.onmessage = [&](const WebSocketChannelPtr &channel, const std::string &msg)
+  {
+    InboundEvent ev{ channel, msg };
+    data.message_queue.push(ev);
   };
-  ws.onclose = [&](const WebSocketChannelPtr &channel) {
+  ws.onclose = [&](const WebSocketChannelPtr &channel)
+  {
     std::lock_guard<std::mutex> lock(broadcast_mtx);
     printf("Client disconnected: %s\n", channel->peeraddr().c_str());
 
     int32_t f = -1;
-    for (int32_t i = 0; i < broadcast_addrs.size(); i++) {
-      if (broadcast_addrs.at(i).websocket_ip == channel->peeraddr().c_str()) {
+    for (int32_t i = 0; i < data.broadcast_addrs.size(); i++)
+    {
+      if (data.broadcast_addrs.at(i).websocket_ip == channel->peeraddr().c_str())
+      {
         f = i;
         break;
       }
     }
-    if (f >= 0) {
-      SenderStruct &sss = broadcast_addrs.at(f);
+    if (f >= 0)
+    {
+      SenderStruct &sss = data.broadcast_addrs.at(f);
       closesocket(sss.sock_fd);
-      broadcast_addrs.erase(broadcast_addrs.begin() + f);
+      data.broadcast_addrs.erase(data.broadcast_addrs.begin() + f);
     }
   };
 
@@ -112,12 +100,14 @@ void websocket_server(AppData &data) noexcept {
   server.run();
 }
 
-void http_server() noexcept {
+void Http_server() noexcept
+{
   hv::HttpService router;
   ///
   /// Clean the res temp folder
   ///
-  if (fs::exists("res")) {
+  if (fs::exists("res"))
+  {
     fs::remove_all("res");
   }
   fs::create_directory("res");
@@ -133,11 +123,13 @@ void http_server() noexcept {
   http_server.run();
 }
 
-void upd_proxy_server() noexcept {
+void UDP_proxy_server() noexcept
+{
   std::cout << "Starting GoPro UDP Proxy Server (RPi)..." << std::endl;
   static hv::UdpServer us;
   int32_t bindfd = us.createsocket(listen_port);
-  if (bindfd == -1) {
+  if (bindfd == -1)
+  {
     std::cerr << "Failed to create socket for recevier: " << std::endl;
     return;
   }
@@ -148,9 +140,11 @@ void upd_proxy_server() noexcept {
   std::cout << "  Broadcasting to: " << broadcast_port << " (to all Masters)"
             << std::endl;
 
-  us.onMessage = [&](const hv::SocketChannelPtr &channel, hv::Buffer *buf) {
+  us.onMessage = [&](const hv::SocketChannelPtr &channel, hv::Buffer *buf)
+  {
     std::lock_guard<std::mutex> lock(broadcast_mtx);
-    for (auto &sss : broadcast_addrs) {
+    for (auto &sss : data.broadcast_addrs)
+    {
 #ifdef _WIN32
       sendto(sss.sock_fd, (const char *)buf->data(), buf->size(), 0,
              (struct sockaddr *)&sss.bcsa, sizeof(sss.bcsa));
@@ -163,31 +157,73 @@ void upd_proxy_server() noexcept {
   us.start();
 }
 
-int main() {
+int main()
+{
   AppData data = AppData();
 
   setvbuf(stdout, NULL, _IONBF, 0);
   setvbuf(stderr, NULL, _IONBF, 0);
 
-  std::thread t1 = std::thread([&data]() {
+  std::thread t1 = std::thread([&data]()
+                               {
     std::cout << "Create websocket server" << std::endl;
-    websocket_server(data);
-  });
+    Websocket_server(data); });
 
-  std::thread t2 = std::thread([&data]() {
+  std::thread t2 = std::thread([&data]()
+                               {
     std::cout << "Create http server" << std::endl;
-    http_server(data);
-  });
+    Http_server(data); });
 
-  std::thread t3 = std::thread([&data]() {
+  std::thread t3 = std::thread([&data]()
+                               {
     std::cout << "Create udp server" << std::endl;
-    upd_proxy_server(data);
-  });
+    UDP_proxy_server(data); });
 
-  data.controller.update();
+  while (!data.should_quit)
+  {
 
-  t3.join();
-  t2.join();
-  t1.join();
-  return 0;
+    if (!data.message_queue.empty())
+    {
+
+      const std::string p = data.message_queue.pop();
+
+      if (json::accept(msg.c_str()))
+      {
+
+        json j = json::parse(msg.c_str());
+
+        if (j["key"].get<std::string>() == "command")
+        {
+          Execute_command(data.controller, channel, j["value"]);
+        }
+        else if (j["key"].get<std::string>() == "query")
+        {
+          Query_action(data.controller, channel, j["value"]);
+        }
+        else if (j["key"].get<std::string>() == "webcam")
+        {
+          Webcam_action(data.controller, channel, j["value"]);
+        }
+        else if (j["key"].get<std::string>() == "media")
+        {
+          Media_action(data.controller, channel, j["value"]);
+        }
+        else if (j["key"].get<std::string>() == "preview")
+        {
+          Preview_action(data.controller, channel, j["value"]);
+        }
+        else if (j["key"].get<std::string>() == "preset")
+        {
+          Mode_action(data.controller, channel, j["value"]);
+        }
+      }
+
+      data.controller.update();
+    }
+
+    t3.join();
+    t2.join();
+    t1.join();
+    return 0;
+  }
 }
