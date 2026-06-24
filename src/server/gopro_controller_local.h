@@ -40,21 +40,21 @@ std::vector<SingleResponse> gopro_controller_local_set_setting_preset(gopro_cont
 std::vector<SingleResponse> gopro_controller_local_set_setting_preset(gopro_controller& controller, const std::string target, const int32_t preset, json res) noexcept;
 std::vector<SingleResponse> gopro_controller_local_set_setting_utility(gopro_controller& controller, const std::string target, json res, const std::vector<int32_t> setting_ids) noexcept;
 
-void gopro_controller_local_webcamAllMode(gopro_controller& controller, std::vector<std::string> targets) noexcept;
-void gopro_controller_local_webcamMode(gopro_controller& controller, std::string target) noexcept;
-void gopro_controller_local_webcamAllUnMode(gopro_controller& controller, std::vector<std::string> targets) noexcept;
-void gopro_controller_local_webcamUnMode(gopro_controller& controller, std::string target) noexcept;
-void gopro_controller_local_webcamAllOn(gopro_controller& controller, std::vector<std::string> targets, int32_t startPort, int32_t res, int32_t fov, bool TS) noexcept;
-void gopro_controller_local_webcamOn(gopro_controller& controller, std::string target, int32_t startPort, int32_t res, int32_t fov, bool TS) noexcept;
-void gopro_controller_local_webcamAllOff(gopro_controller& controller, std::vector<std::string> targets) noexcept;
-void gopro_controller_local_webcamOff(gopro_controller& controller, std::string target) noexcept;
+void gopro_controller_local_webcam_mode(gopro_controller& controller, std::vector<std::string> targets) noexcept;
+void gopro_controller_local_webcam_mode(gopro_controller& controller, std::string target) noexcept;
+void gopro_controller_local_webcam_mode_off(gopro_controller& controller, std::vector<std::string> targets) noexcept;
+void gopro_controller_local_webcam_mode_off(gopro_controller& controller, std::string target) noexcept;
+void gopro_controller_local_webcam_on(gopro_controller& controller, std::vector<std::string> targets, int32_t startPort, int32_t res, int32_t fov, bool TS) noexcept;
+void gopro_controller_local_webcam_on(gopro_controller& controller, std::string target, int32_t startPort, int32_t res, int32_t fov, bool TS) noexcept;
+void gopro_controller_local_webcam_off(gopro_controller& controller, std::vector<std::string> targets) noexcept;
+void gopro_controller_local_webcam_off(gopro_controller& controller, std::string target) noexcept;
 SingleResponse gopro_controller_local_webcamStatus(gopro_controller& controller, std::string target) noexcept;
 SingleResponse gopro_controller_local_webcamVersion(gopro_controller& controller, std::string target) noexcept;
 
-void gopro_controller_local_previewAllOn(gopro_controller& controller, std::vector<std::string> targets, int32_t port) noexcept;
-void gopro_controller_local_previewOn(gopro_controller& controller, std::string target, int32_t port) noexcept;
-void gopro_controller_local_previewAllOff(gopro_controller& controller, std::vector<std::string> targets) noexcept;
-void gopro_controller_local_previewOff(gopro_controller& controller, std::string target) noexcept;
+void gopro_controller_local_preview_on(gopro_controller& controller, std::vector<std::string> targets, int32_t port) noexcept;
+void gopro_controller_local_preview_on(gopro_controller& controller, std::string target, int32_t port) noexcept;
+void gopro_controller_local_preview_off(gopro_controller& controller, std::vector<std::string> targets) noexcept;
+void gopro_controller_local_preview_off(gopro_controller& controller, std::string target) noexcept;
 
 std::vector<SingleResponse> gopro_controller_local_getAllMediaList(gopro_controller& controller, std::vector<std::string> targets) noexcept;
 SingleResponse gopro_controller_local_getMediaList(gopro_controller& controller, std::string target) noexcept;

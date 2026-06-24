@@ -106,12 +106,12 @@ json gopro_controller_webcam_version(gopro_controller& controller, const std::st
 void gopro_controller_preview_on(gopro_controller& controller, const std::string target, const int32_t port) noexcept;
 void gopro_controller_preview_off(gopro_controller& controller, const std::string target) noexcept;
 
-std::string gopro_controller_getMediaList(gopro_controller& controller, std::string target) noexcept;
-std::string gopro_controller_getLastMedia(gopro_controller& controller, std::string target) noexcept;
-std::string gopro_controller_getFetchURL(gopro_controller& controller, std::string target_ip, bool is_local) noexcept;
-std::string gopro_controller_getSingleFetchURL(gopro_controller& controller, std::string target_ip, const std::string filename, bool is_local) noexcept;
-std::vector<SingleResponse> gopro_controller_getAllFetchURL(gopro_controller& controller, std::string target_ip, std::vector<std::string> filenames, bool is_local) noexcept;
-std::string gopro_controller_getThumbnailData(gopro_controller& controller, std::string target_ip, std::string path, bool is_local) noexcept;
-std::string gopro_controller_getMediaInfoData(gopro_controller& controller, std::string target_ip, std::string path, bool is_local) noexcept;
+json gopro_controller_get_media_list(gopro_controller& controller, const std::string target) noexcept;
+json gopro_controller_get_last_media(gopro_controller& controller, const std::string target) noexcept;
+std::string gopro_controller_get_fetch_URL(gopro_controller& controller, const std::string target_ip, const bool is_local) noexcept;
+std::string gopro_controller_get_filename_fetch_URL(gopro_controller& controller, const std::string target_ip, const std::string filename, bool is_local) noexcept;
+std::vector<SingleResponse> gopro_controller_get_filename_fetch_IRL(gopro_controller& controller, const std::string target_ip, const std::vector<std::string> filenames, const bool is_local) noexcept;
+std::string gopro_controller_get_thumbnail_data(gopro_controller& controller, const std::string target_ip, const std::string path, const bool is_local) noexcept;
+std::string gopro_controller_get_media_info_data(gopro_controller& controller, const std::string target_ip, const std::string path, const bool is_local) noexcept;
 
 #endif

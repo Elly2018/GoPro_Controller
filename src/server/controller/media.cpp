@@ -4,101 +4,59 @@
  * This software is licensed under the [MIT License].
  * See the LICENSE file in the project root for more information.
 */
-#include "../GoProController.h"
+#include "../gopro_controller.h"
+#include "../gopro_controller_local.h"
 #include <vector>
 #include <string>
 #include <thread>
 #include <future>
 #include "../../common/config.h"
 
-std::string GoProController::getMediaList(std::string target){
-    json res;
-    std::string address;
+json gopro_controller_get_media_list(gopro_controller& controller, const std::string target) noexcept{
     json arr = json::array();
     if(target.size() > 0){
-        json res;
-        try{
-            SingleResponse result = _getMediaList(target);
-            address = result.first;
-            res = json::parse(result.second);
-        }catch(const std::exception& ex){
-            res = json::object();
-        }
-        json i;
-        i["ip"] = address;
-        i["status"] = res;
-        arr.push_back(i);
+        SingleResponse result = gopro_controller_local_get_media_list(controller, target);
+        json buff;
+        buff["ip"] = result.first;
+        buff["status"] = result.second;
+        arr.push_back(buff);
     }else{
-        std::vector<std::future<SingleResponse>> calls = std::vector<std::future<SingleResponse>>();
-        std::vector<std::string> buffer = std::vector<std::string>(camera_alive_ips.size());
-        {
-            std::lock_guard<std::mutex> lock(ips_alive_mutex);
-            std::copy(std::begin(camera_alive_ips), std::end(camera_alive_ips), std::begin(buffer));
-        }
-        for(std::string ip : buffer){
-            calls.push_back(std::async(std::launch::async, [this, ip]() {
-                return _getMediaList(ip);
-            }));
-        }
+        std::vector<std::string> buffer = gopro_controller_local_element_alives(controller);
+        std::vector<SingleResponse> results = gopro_controller_local_get_media_list(controller, buffer);
 
-        for(auto& call : calls){
-            try{
-                SingleResponse result = call.get();
-                address = result.first;
-                res = json::parse(result.second);
-            }catch(const std::exception& ex){
-                res = json::object();
-            }
-            json i;
-            i["ip"] = address;
-            i["status"] = res;
-            arr.push_back(i);
-        }
-    }
-    return arr.dump();
-}
-
-std::string GoProController::getLastMedia(std::string target){
-    json res;
-    std::string address;
-    json arr = json::array();
-    if(target.size() > 0){
-        try{
-            SingleResponse result = _getLastMedia(target);
-            address = result.first;
-            res = json::parse(result.second);
-        }catch(const std::exception& ex){
-            res = json::object();
-        }
-        json i;
-        i["ip"] = address;
-        i["filename"] = res;
-        arr.push_back(i);
-    }else{
-        json res;
-        std::vector<std::string> buffer = std::vector<std::string>(camera_alive_ips.size());
-        {
-            std::lock_guard<std::mutex> lock(ips_alive_mutex);
-            std::copy(std::begin(camera_alive_ips), std::end(camera_alive_ips), std::begin(buffer));
-        }
-        std::vector<SingleResponse> results = _getAllLastMedia(buffer);
         for(int32_t i = 0; i < results.size(); i++){
-            address = results[i].first;
-            try{
-                res = json::parse(results[i].second);
-            }catch(const std::exception& ex){
-                res = json::object();
-            }
-            json b;
-            b["ip"] = address;
-            b["filename"] = res;
-            arr.push_back(b);
+            json buff = json::object();
+            buff["ip"] = results[i].first;
+            buff["status"] = results[i].second;
+            arr.push_back(buff);
+        }
+    }
+    return arr;
+}
+
+json gopro_controller_get_last_media(gopro_controller& controller, const std::string target) noexcept{
+    json arr = json::array();
+    if(target.size() > 0){
+        SingleResponse result = gopro_controller_local_get_last_media(controller, target);
+        json buff;
+        buff["ip"] = result.first;
+        buff["filename"] = result.second;
+        arr.push_back(buff);
+    }else{
+        std::vector<std::string> buffer = gopro_controller_local_element_alives(controller);
+        std::vector<SingleResponse> results = gopro_controller_local_get_last_media(controller, buffer);
+
+        for(int32_t i = 0; i < results.size(); i++){
+            json buff = json::object();
+            buff["ip"] = results[i].first;
+            buff["filename"] = results[i].second;
+            arr.push_back(buff);
         }
     }
     return arr.dump();
 }
 
-std::string GoProController::getFetchURL(std::string target_ip, bool is_local){
+std::string gopro_controller_get_fetch_URL(gopro_controller& controller, const std::string target_ip, const bool is_local) noexcept{
     std::cout << "Http GET /last_media " << target_ip << ", " << is_local << std::endl;
 
     if (target_ip.empty()) {
@@ -138,18 +96,18 @@ std::string GoProController::getFetchURL(std::string target_ip, bool is_local){
                 t++;
             }
             std::cout << "[last_media] try download " << gopro_url.c_str() << std::endl;
-#ifdef SERVER_MEDIA_DOWNLOAD_LOG
-            auto start = std::chrono::high_resolution_clock::now();
-#endif
+            if (SERVER_MEDIA_DOWNLOAD_LOG){
+                auto start = std::chrono::high_resolution_clock::now();
+            }
             size_t size = requests::downloadFile(gopro_url.c_str(), ("res/" + download_path).c_str(), [&target_ip, &start](size_t received_bytes, size_t total_bytes){
-#ifdef SERVER_MEDIA_DOWNLOAD_LOG
-                auto end = std::chrono::high_resolution_clock::now();
-                std::chrono::duration<double> elapsed = end - start;
-                if(elapsed.count() >= SERVER_MEDIA_DOWNLOAD_PERIOD){
-                    start = end;
-                    std::cout << "[last_media] download " << target_ip << " " << received_bytes << " / " << total_bytes << std::endl;
+                if (SERVER_MEDIA_DOWNLOAD_LOG){
+                    auto end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double> elapsed = end - start;
+                    if(elapsed.count() >= SERVER_MEDIA_DOWNLOAD_PERIOD){
+                        start = end;
+                        std::cout << "[last_media] download " << target_ip << " " << received_bytes << " / " << total_bytes << std::endl;
+                    }
                 }
-#endif
             });
             std::cout << "[last_media] return value: " << target_ip << " => " << download_path << std::endl;
             return download_path;
@@ -161,7 +119,7 @@ std::string GoProController::getFetchURL(std::string target_ip, bool is_local){
     }
 }
 
-std::string GoProController::getSingleFetchURL(std::string target_ip, const std::string filename, bool is_local){
+json gopro_controller_get_filename_fetch_URL(gopro_controller& controller, const std::string target_ip, const std::string filename, bool is_local) noexcept{
     std::cout << "Http GET /single_media " << target_ip << ", " << is_local << std::endl;
 
     if (target_ip.empty()) {
@@ -204,7 +162,7 @@ std::string GoProController::getSingleFetchURL(std::string target_ip, const std:
     }
 }
 
-std::vector<std::pair<std::string, std::string>> GoProController::getAllFetchURL(std::string target_ip, std::vector<std::string> filenames, bool is_local){
+std::vector<SingleResponse> gopro_controller_get_filename_fetch_IRL(gopro_controller& controller, const std::string target_ip, const std::vector<std::string> filenames, const bool is_local) noexcept{
     std::cout << "Http GET /all_media " << target_ip << ", " << is_local << std::endl;
 
     if (target_ip.empty()) {
@@ -251,7 +209,7 @@ std::vector<std::pair<std::string, std::string>> GoProController::getAllFetchURL
     }
 }
 
-std::string GoProController::getThumbnailData(std::string target_ip, std::string path, bool is_local){
+std::string gopro_controller_get_thumbnail_data(gopro_controller& controller, const std::string target_ip, const std::string path, const bool is_local) noexcept{
     std::cout << "Http GET /thumbnail " << target_ip << ", " << is_local << std::endl;
 
     if (target_ip.empty()) {
@@ -270,7 +228,7 @@ std::string GoProController::getThumbnailData(std::string target_ip, std::string
     }
 }
 
-std::string GoProController::getMediaInfoData(std::string target_ip, std::string path, bool is_local){
+std::string gopro_controller_get_media_info_data(gopro_controller& controller, const std::string target_ip, const std::string path, const bool is_local) noexcept{
     std::cout << "Http GET /media_info " << target_ip << ", " << is_local << std::endl;
 
     if (target_ip.empty()) {

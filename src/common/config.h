@@ -5,14 +5,14 @@
 /**
  * @brief When server received master, print out what header it got
  */
-#define SERVER_QUERY_LOG
+static constexpr bool SERVER_QUERY_LOG = true;
 /**
  * @brief Print the progress bar in console when server is download the media from GoPro
  */
-#define SERVER_MEDIA_DOWNLOAD_LOG
+static constexpr bool SERVER_MEDIA_DOWNLOAD_LOG = true;
 /**
  * @brief The progress bar wait period time (second)
  */
-#define SERVER_MEDIA_DOWNLOAD_PERIOD 1.0
+static constexpr float SERVER_MEDIA_DOWNLOAD_PERIOD = 1.0f;
 
 #endif
