@@ -10,7 +10,7 @@
 #include <thread>
 #include <future>
 
-void GoProController::webcamMode(std::string target){
+void gopro_controller_webcam_mode(gopro_controller& controller, const std::string target) noexcept {
     if(target.size() > 0) _webcamMode(target); 
     else {
         std::lock_guard<std::mutex> lock(ips_mutex);
@@ -18,7 +18,7 @@ void GoProController::webcamMode(std::string target){
     }
 }
 
-void GoProController::webcamUnMode(std::string target){
+void gopro_controller_webcam_mode_off(gopro_controller& controller, const std::string target) noexcept {
     if(target.size() > 0) _webcamUnMode(target); 
     else {
         std::lock_guard<std::mutex> lock(ips_mutex);
@@ -26,7 +26,7 @@ void GoProController::webcamUnMode(std::string target){
     }
 }
 
-void GoProController::webcamOn(std::string target, int32_t startPort, int32_t res, int32_t fov, bool TS){
+void gopro_controller_webcam_on(gopro_controller& controller, const std::string target, const int32_t startPort, const int32_t res, const int32_t fov, const bool TS) noexcept {
     if(target.size() > 0) _webcamOn(target, startPort, res, fov, TS); 
     else {
         std::lock_guard<std::mutex> lock(ips_mutex);
@@ -34,7 +34,7 @@ void GoProController::webcamOn(std::string target, int32_t startPort, int32_t re
     }
 }
 
-void GoProController::webcamOff(std::string target){
+void gopro_controller_webcam_off(gopro_controller& controller, const std::string target) noexcept {
     if(target.size() > 0) _webcamOff(target); 
     else {
         std::lock_guard<std::mutex> lock(ips_mutex);
@@ -42,7 +42,7 @@ void GoProController::webcamOff(std::string target){
     }
 }
 
-std::string GoProController::webcamStatus(std::string target){
+json gopro_controller_webcam_status(gopro_controller& controller, const std::string target) noexcept {
     json res;
     std::string address;
     json arr = json::array();
@@ -89,7 +89,7 @@ std::string GoProController::webcamStatus(std::string target){
     return arr.dump();
 }
 
-std::string GoProController::webcamVersion(std::string target){
+json gopro_controller_webcam_version(gopro_controller& controller, const std::string target) noexcept {
     json res;
     std::string address;
     json arr = json::array();
