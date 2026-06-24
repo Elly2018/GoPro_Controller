@@ -9,6 +9,8 @@
  * Hard limit.
  */
 #pragma once
+#ifndef GOPRO_CONTROLLER_H
+#define GOPRO_CONTROLLER_H
 
 #include "../common/camera_code.h"
 #include "../common/iphelper.h"
@@ -31,7 +33,7 @@ std::string getPacket(std::string key, json data);
 
 typedef std::pair<std::string, std::string> SingleResponse;
 
-struct GoProController {
+struct gopro_controller {
   static constexpr uint64_t client_limit = 128UL;
 
   bool applying_cancel = false;
@@ -507,3 +509,5 @@ private:
   std::atomic<bool> scanning{false};
 #pragma endregion
 };
+
+#endif

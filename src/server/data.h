@@ -8,7 +8,7 @@
 #ifndef DATA_H
 #define DATA_H
 #include <cinttypes>
-#include "GoProController.h"
+#include "gopro_controller.h"
 
 struct SenderStruct
 {
@@ -22,7 +22,7 @@ struct SenderStruct
 
 struct AppData
 {
-    GoProController controller;
+    gopro_controller controller;
     std::mutex download_mtx;
     std::mutex broadcast_mtx;
     std::array<SenderStruct, 10> broadcast_addrs = std::array<SenderStruct, 10>();

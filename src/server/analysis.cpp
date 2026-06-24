@@ -5,6 +5,8 @@
  * See the LICENSE file in the project root for more information.
 */
 #include "analysis.h"
+#include <cinttypes>
+#include "gopro_controller.h"
 
 std::string get_packet(std::string key, json data) {
   json response = json::object();
@@ -13,7 +15,7 @@ std::string get_packet(std::string key, json data) {
   return response.dump();
 }
 
-void execute_command(GoProController& controller, const WebSocketChannelPtr &channel, json j) noexcept {
+void execute_command(gopro_controller& controller, const WebSocketChannelPtr &channel, json j) noexcept {
   std::string resultText = "";
   std::string name = "";
   std::string target = "";
@@ -104,7 +106,7 @@ void execute_command(GoProController& controller, const WebSocketChannelPtr &cha
     channel->send(get_packet("command:unknown", r));
   }
 }
-void query_action(GoProController& controller, const WebSocketChannelPtr &channel, json j) noexcept {
+void query_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j) noexcept {
   std::string resultText = "";
   std::string name = "";
   std::string source = "";
@@ -188,7 +190,7 @@ void query_action(GoProController& controller, const WebSocketChannelPtr &channe
     channel->send(get_packet("query:unknown", r));
   }
 }
-void webcam_action(GoProController& controller, const WebSocketChannelPtr &channel, json j) noexcept {
+void webcam_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j) noexcept {
   std::string name = "";
   std::string target = "";
   int port = 8554;
@@ -238,7 +240,7 @@ void webcam_action(GoProController& controller, const WebSocketChannelPtr &chann
     channel->send(get_packet("webcam:unknown", r));
   }
 }
-void mode_action(GoProController& controller, const WebSocketChannelPtr &channel, json j) noexcept {
+void mode_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j) noexcept {
   std::string name = "";
   std::string target = "";
   int mode = 0;
@@ -261,7 +263,7 @@ void mode_action(GoProController& controller, const WebSocketChannelPtr &channel
     channel->send(get_packet("webcam:unknown", r));
   }
 }
-void media_action(GoProController& controller, const WebSocketChannelPtr &channel, json j) noexcept {
+void media_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j) noexcept {
   std::string resultText = "";
   std::string target = "";
   std::string name = "";
@@ -368,7 +370,7 @@ void media_action(GoProController& controller, const WebSocketChannelPtr &channe
     channel->send(get_packet("media:unknown", r));
   }
 }
-void preview_action(GoProController& controller, const WebSocketChannelPtr &channel, json j) noexcept {
+void preview_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j) noexcept {
   std::string target = "";
   std::string name = "";
   int32_t port = 8556;
