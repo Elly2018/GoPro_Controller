@@ -30,8 +30,8 @@ void gopro_controller_local_shutter(gopro_controller& controller, const std::vec
 void gopro_controller_local_shutter(gopro_controller& controller, const std::string target, const bool isstart) noexcept;
 void gopro_controller_local_locate(gopro_controller& controller, std::string target, bool ison) noexcept;
 
-std::vector<SingleResponse> gopro_controller_local_queryAllStatus(gopro_controller& controller, std::vector<std::string> targets) noexcept;
-SingleResponse gopro_controller_local_queryStatus(gopro_controller& controller, std::string target) noexcept;
+std::vector<SingleResponse> gopro_controller_local_query_status(gopro_controller& controller, const std::vector<std::string> targets) noexcept;
+SingleResponse gopro_controller_local_query_status(gopro_controller& controller, const std::string target) noexcept;
 std::vector<SingleResponse> gopro_controller_local_queryAllHW(gopro_controller& controller, std::vector<std::string> targets) noexcept;
 SingleResponse gopro_controller_local_queryHW(gopro_controller& controller, std::string target) noexcept;
 std::vector<SingleResponse> gopro_controller_local_setAllSetting(gopro_controller& controller, std::vector<std::string> targets, int32_t ID, std::string value) noexcept;
@@ -72,6 +72,8 @@ bool gopro_controller_local_element_remove(gopro_controller& controller, const s
 bool gopro_controller_local_element_clean(gopro_controller& controller) noexcept;
 int32_t gopro_controller_local_element_have_slot(gopro_controller& controller) noexcept;
 int32_t gopro_controller_local_element_find(gopro_controller& controller, const std::string ip) noexcept;
-std::vector<std::string> gopro_controller_local_alives(gopro_controller& controller) noexcept;
+std::vector<std::string> gopro_controller_local_element_alives(gopro_controller& controller) noexcept;
+void gopro_controller_local_element_set_hw(gopro_controller& controller, const std::string ip, json value) noexcept;
+json gopro_controller_local_element_get_hw(gopro_controller& controller, const std::string ip) noexcept;
 
 #endif

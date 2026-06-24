@@ -27,7 +27,7 @@
 using json = nlohmann::json;
 std::string getPacket(std::string key, json data);
 
-typedef std::pair<std::string, std::string> SingleResponse;
+typedef std::pair<std::string, json> SingleResponse;
 
 enum class Thread_state {
   NONE = 0,
@@ -38,11 +38,13 @@ enum class Thread_state {
 struct gopro_element {
   static constexpr uint64_t ip_str_length = 24UL;
   static constexpr uint64_t name_str_length = 256UL;
+  static constexpr uint64_t hw_str_length = 1024UL;
 
   bool exist;
   bool alive;
   char ip[ip_str_length];
   char name[name_str_length];
+  char hw[hw_str_length];
 };
 
 struct gopro_controller {
@@ -58,6 +60,8 @@ struct gopro_controller {
   Thread_state ping_thread_state;
   std::thread command_thread;
   Thread_state command_thread_state;
+  std::thread apply_thread;
+  Thread_state apply_thread_state;
   std::array<gopro_element, client_limit> camera_elements;
   std::mutex ips_mutex;
   std::mutex ips_alive_mutex;
@@ -85,12 +89,12 @@ void gopro_controller_datetime(gopro_controller& controller, const std::string t
 void gopro_controller_zoom(gopro_controller& controller, const std::string target, const int32_t value) noexcept;
 void gopro_controller_shutter(gopro_controller& controller, const std::string target, const bool is_start) noexcept;
 void gopro_controller_locate(gopro_controller& controller, const std::string target, const bool is_on) noexcept;
-std::string gopro_controller_get_IPs(gopro_controller& controller) noexcept;
+json gopro_controller_get_IPs(gopro_controller& controller) noexcept;
   
-std::string gopro_controller_queryStatus(gopro_controller& controller, std::string target) noexcept;
-std::string gopro_controller_setSetting(gopro_controller& controller, std::string target, int32_t ID, std::string value) noexcept;
-std::string gopro_controller_setSettingAll(gopro_controller& controller, const std::string source, const std::string target, int32_t preset, json value) noexcept;
-void gopro_controller_setSettingCancelAll(gopro_controller& controller) noexcept;
+json gopro_controller_query_status(gopro_controller& controller, const std::string target) noexcept;
+json gopro_controller_set_setting(gopro_controller& controller, const std::string target, const int32_t ID, const std::string value) noexcept;
+json gopro_controller_set_setting(gopro_controller& controller, const std::string source, const std::string target, const int32_t preset, const json value) noexcept;
+void gopro_controller_set_setting_cancel(gopro_controller& controller) noexcept;
 
 void gopro_controller_webcamMode(gopro_controller& controller, std::string target) noexcept;
 void gopro_controller_webcamUnMode(gopro_controller& controller, std::string target) noexcept;

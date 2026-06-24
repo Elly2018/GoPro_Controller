@@ -4,76 +4,44 @@
  * This software is licensed under the [MIT License].
  * See the LICENSE file in the project root for more information.
 */
-#include "../GoProController.h"
+#include "../gopro_controller.h"
+#include "../gopro_controller_local.h"
 #include <vector>
 #include <string>
 #include <algorithm>
 #include <iterator>
 
-std::string GoProController::queryStatus(std::string target){
+json gopro_controller_query_status(gopro_controller& controller, const std::string target) noexcept{
     json arr = json::array();
     json res = json::object();
     json hw = json::object();
-    std::string address;
     if(target.size() > 0){
-        SingleResponse result = _queryStatus(target);
-        SingleResponse result2 = _queryHW(target);
-        if(json::accept(result.second)){
-            address = result.first;
-            res = json::parse(result.second);
-        }else{
-            res = json::object();
-            std::cerr << "[ERROR] queryStatus: status parse error" << std::endl;
-        }
-
-        if(json::accept(result2.second)){
-            address = result2.first;
-            hw = json::parse(result2.second);
-        }else{
-            hw = json::object();
-            std::cerr << "[ERROR] queryStatus: hw parse error" << std::endl;
-        }
-
+        SingleResponse status_result = gopro_controller_local_query_status(target);
+        SingleResponse hw_result = gopro_controller_local_query_hw(target);
         json i = json::object();
-        i["ip"] = address;
-        i["status"] = res;
-        i["hw"] = hw;
-        camera_hw[address] = hw;
+        i["ip"] = status_result.first;
+        i["status"] = status_result.second;
+        i["hw"] = hw_result.second;
+        gopro_controller_local_element_set_hw(controller, status_result.first, hw_result.second);
         arr.push_back(i);
-    }else{
-        std::vector<std::string> buffer = std::vector<std::string>(camera_alive_ips.size());
-        {
-            std::lock_guard<std::mutex> lock(ips_alive_mutex);
-            std::copy(std::begin(camera_alive_ips), std::end(camera_alive_ips), std::begin(buffer));
-        }
-        std::vector<SingleResponse> results = _queryAllStatus(buffer);
-        std::vector<SingleResponse> hresults = _queryAllHW(buffer);
-        for(int32_t i = 0; i < results.size(); i++){
-            address = results[i].first;
-            if(json::accept(results[i].second)){
-                res = json::parse(results[i].second);
-            }else{
-                std::cerr << "[ERROR] queryStatus: res parser error" << std::endl;
-                res = json::object();
-            }
-            if(json::accept(hresults[i].second)){
-                hw = json::parse(hresults[i].second);
-            }else{
-                std::cerr << "[ERROR] queryStatus: hw parser error" << std::endl;
-                hw = json::object();
-            }
+    }
+    else{
+        std::vector<std::string> buffer = gopro_controller_local_element_alives(controller);
+        std::vector<SingleResponse> status_result = gopro_controller_local_query_status(buffer);
+        std::vector<SingleResponse> hw_result = gopro_controller_local_query_hw(buffer);
+        for(int32_t i = 0; i < status_result.size(); i++){
             json j = json::object();
-            j["ip"] = address;
-            j["status"] = res;
-            j["hw"] = hw;
-            camera_hw[address] = hw;
+            j["ip"] = status_result[i].first;
+            j["status"] = status_result[i].second;
+            j["hw"] = hw_result[i].second;
+            gopro_controller_local_element_set_hw(controller, status_result.first, hw_result.second);
             arr.push_back(j);
         }
     }
-    return arr.dump();
+    return arr;
 }
 
-std::string GoProController::setSetting(std::string target, int32_t ID, std::string value){
+json gopro_controller_set_setting(gopro_controller& controller, const std::string target, const int32_t ID, const std::string value) noexcept {
     json arr = json::array();
     json res = json::object();
     std::string address = "";
@@ -116,7 +84,7 @@ std::string GoProController::setSetting(std::string target, int32_t ID, std::str
     return arr.dump();
 }
 
-std::string GoProController::setSettingAll(const std::string source, const std::string target, int32_t preset, json value){
+json gopro_controller_set_setting(gopro_controller& controller, const std::string source, const std::string target, const int32_t preset, const json value) noexcept {
     json arr = json::array();
     json res = json::object();
     applying_cancel = false;
@@ -168,6 +136,6 @@ std::string GoProController::setSettingAll(const std::string source, const std::
     return arr.dump();
 }
 
-void GoProController::setSettingCancelAll() {
-    applying_cancel = true;
+void gopro_controller_set_setting_cancel(gopro_controller& controller) noexcept {
+    controller.applying_cancel = true;
 }

@@ -69,7 +69,7 @@ int32_t gopro_controller_local_element_find(gopro_controller& controller, const 
     return -1;
 }
 
-std::vector<std::string> gopro_controller_local_alives(gopro_controller& controller) noexcept {
+std::vector<std::string> gopro_controller_local_element_alives(gopro_controller& controller) noexcept {
     std::vector<std::string> buffer;
     for(int32_t i = 0; i < controller.client_limit; i++){
         const gopro_element &e = controller.camera_elements.at(i);
@@ -77,6 +77,31 @@ std::vector<std::string> gopro_controller_local_alives(gopro_controller& control
         buffer.push_back(e.ip);
     }
     return buffer;
+}
+
+void gopro_controller_local_element_set_hw(gopro_controller& controller, const std::string ip, json value) noexcept {
+    int32_t index = gopro_controller_local_element_find(controller, ip);
+    if(index == -1) return;
+
+    gopro_element &e = controller.camera_elements.at(index);
+
+    std::string dumped = value.dump();
+
+    uint64_t len = dumped.copy(e.hw, sizeof(e.hw) - 1);
+    e.hw[len] = '\0';
+}
+
+json gopro_controller_local_element_get_hw(gopro_controller& controller, const std::string ip) noexcept {
+    int32_t index = gopro_controller_local_element_find(controller, ip);
+    if(index == -1) return json::object();
+
+    const gopro_element &e = controller.camera_elements.at(index);
+    const std::string_view buff = std::string(e.hw);
+    if(!json::accept(buff)) {
+        return json::object();
+    }
+
+    return json::parse(buff);
 }
 
 #endif
