@@ -24,11 +24,28 @@
 #include <thread>
 #include <utility>
 #include <vector>
+#include <array>
 
 using json = nlohmann::json;
 std::string getPacket(std::string key, json data);
 
 typedef std::pair<std::string, std::string> SingleResponse;
+
+struct GoProController {
+  static constexpr uint64_t client_limit = 128UL;
+
+  bool applying_cancel = false;
+  mdns_cpp::mDNS mdns;
+  bool mdns_scaned = false;
+  std::array<std::thread, client_limit> scan_workers;
+  std::array<std::string, client_limit> camera_ips;
+  std::array<std::string, client_limit> camera_alive_ips;
+  std::mutex ips_mutex;
+  std::mutex ips_alive_mutex;
+  std::unordered_map<std::string, json> camera_hw;
+  std::unordered_map<std::string, std::string> camera_name;
+  bool scanning;
+};
 
 ///
 /// The middleware server worker, the hero

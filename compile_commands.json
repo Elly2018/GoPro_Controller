@@ -1,6 +1,12 @@
 [
 {
   "directory": "/home/funique0807/dev/GoPro_Controller/build_server_amd64",
+  "command": "/usr/bin/c++ -DCURL_STATICLIB -DHV_STATICLIB -I/home/funique0807/dev/GoPro_Controller/lib/mdns/include -I/home/funique0807/dev/GoPro_Controller/lib/crashlog -I/home/funique0807/dev/GoPro_Controller/lib/icmplib -I/home/funique0807/dev/GoPro_Controller/lib/json/include -I/home/funique0807/dev/GoPro_Controller/lib/mdns/src -I/home/funique0807/dev/GoPro_Controller/build_server_amd64/_deps/libhv-src/include -I/home/funique0807/dev/GoPro_Controller/build_server_amd64/_deps/curl-src/include -g -std=c++17 -o CMakeFiles/server.dir/src/server/analysis.cpp.o -c /home/funique0807/dev/GoPro_Controller/src/server/analysis.cpp",
+  "file": "/home/funique0807/dev/GoPro_Controller/src/server/analysis.cpp",
+  "output": "CMakeFiles/server.dir/src/server/analysis.cpp.o"
+},
+{
+  "directory": "/home/funique0807/dev/GoPro_Controller/build_server_amd64",
   "command": "/usr/bin/c++ -DCURL_STATICLIB -DHV_STATICLIB -I/home/funique0807/dev/GoPro_Controller/lib/mdns/include -I/home/funique0807/dev/GoPro_Controller/lib/crashlog -I/home/funique0807/dev/GoPro_Controller/lib/icmplib -I/home/funique0807/dev/GoPro_Controller/lib/json/include -I/home/funique0807/dev/GoPro_Controller/lib/mdns/src -I/home/funique0807/dev/GoPro_Controller/build_server_amd64/_deps/libhv-src/include -I/home/funique0807/dev/GoPro_Controller/build_server_amd64/_deps/curl-src/include -g -std=c++17 -o CMakeFiles/server.dir/src/server/controller/GoProController.cpp.o -c /home/funique0807/dev/GoPro_Controller/src/server/controller/GoProController.cpp",
   "file": "/home/funique0807/dev/GoPro_Controller/src/server/controller/GoProController.cpp",
   "output": "CMakeFiles/server.dir/src/server/controller/GoProController.cpp.o"

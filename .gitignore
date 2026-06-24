@@ -44,6 +44,8 @@ test
 
 # Build directories
 lib/*.exe
+build/
+build_*/
 build_master/
 build_master_*/
 build_server/
