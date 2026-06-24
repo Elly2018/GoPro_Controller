@@ -69,4 +69,14 @@ int32_t gopro_controller_local_element_find(gopro_controller& controller, const 
     return -1;
 }
 
+std::vector<std::string> gopro_controller_local_alives(gopro_controller& controller) noexcept {
+    std::vector<std::string> buffer;
+    for(int32_t i = 0; i < controller.client_limit; i++){
+        const gopro_element &e = controller.camera_elements.at(i);
+        if(!e.exist || !e.alive) continue;
+        buffer.push_back(e.ip);
+    }
+    return buffer;
+}
+
 #endif

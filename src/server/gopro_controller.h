@@ -56,6 +56,8 @@ struct gopro_controller {
   Thread_state scan_thread_state;
   std::thread ping_thread;
   Thread_state ping_thread_state;
+  std::thread command_thread;
+  Thread_state command_thread_state;
   std::array<gopro_element, client_limit> camera_elements;
   std::mutex ips_mutex;
   std::mutex ips_alive_mutex;
@@ -74,16 +76,16 @@ void gopro_controller_renameCameras(gopro_controller& controller, const std::str
 void gopro_controller_addCameras(gopro_controller& controller, const std::string serial) noexcept;
 void gopro_controller_deleteCameras(gopro_controller& controller, const std::string ip) noexcept;
 
-void gopro_controller_setPreset(gopro_controller& controller, const std::string target, const int32_t mode) noexcept;
+void gopro_controller_set_preset(gopro_controller& controller, const std::string target, const int32_t mode) noexcept;
 void gopro_controller_reboot(gopro_controller& controller, const std::string target) noexcept;
 void gopro_controller_shutdown(gopro_controller& controller, const std::string target) noexcept;
 void gopro_controller_keep_alive(gopro_controller& controller, const std::string target) noexcept;
-void gopro_controller_usb(gopro_controller& controller, const std::string target, const bool ison) noexcept;
+void gopro_controller_usb(gopro_controller& controller, const std::string target, const bool is_on) noexcept;
 void gopro_controller_datetime(gopro_controller& controller, const std::string target) noexcept;
 void gopro_controller_zoom(gopro_controller& controller, const std::string target, const int32_t value) noexcept;
-void gopro_controller_shutter(gopro_controller& controller, const std::string target, const bool isstart) noexcept;
-void gopro_controller_locate(gopro_controller& controller, const std::string target, const bool ison) noexcept;
-std::string gopro_controller_getAllIP(gopro_controller& controller) noexcept;
+void gopro_controller_shutter(gopro_controller& controller, const std::string target, const bool is_start) noexcept;
+void gopro_controller_locate(gopro_controller& controller, const std::string target, const bool is_on) noexcept;
+std::string gopro_controller_get_IPs(gopro_controller& controller) noexcept;
   
 std::string gopro_controller_queryStatus(gopro_controller& controller, std::string target) noexcept;
 std::string gopro_controller_setSetting(gopro_controller& controller, std::string target, int32_t ID, std::string value) noexcept;

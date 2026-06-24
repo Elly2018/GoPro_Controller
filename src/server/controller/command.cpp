@@ -9,127 +9,93 @@
 #include <string>
 #include <thread>
 
-void gopro_controller_setPreset(gopro_controller& controller, const std::string target, const int32_t mode) noexcept {
+void gopro_controller_set_preset(gopro_controller& controller, const std::string target, const int32_t mode) noexcept {
     if(target.size() > 0){
-        _setPreset(target, mode);
-    }else{
-        std::vector<std::future<void>> calls = std::vector<std::future<void>>();
-        std::vector<std::string> buffer = std::vector<std::string>(camera_alive_ips.size());
-        {
-            std::lock_guard<std::mutex> lock(ips_alive_mutex);
-            std::copy(std::begin(camera_alive_ips), std::end(camera_alive_ips), std::begin(buffer));
-        }
-        for(std::string ip : buffer){
-            calls.push_back(std::async(std::launch::async, [this, ip, mode]() {
-                this->_setPreset(ip, mode);
-            }));
-        }
+        gopro_controller_local_set_sreset(controller, target, mode);
+        return;
+    }
+    std::vector<std::string> buffer = gopro_controller_local_alives(controller);
+    gopro_controller_local_set_preset(controller, buffer, mode);
+}
 
-        for(auto& call : calls){
-            call.get();
-        }
+void gopro_controller_reboot(gopro_controller& controller, const std::string target) noexcept {
+    if(target.size() > 0) {
+        gopro_controller_local_reboot(controller, target); 
+        return;
+    }
+    std::vector<std::string> buffer = gopro_controller_local_alives(controller);
+    gopro_controller_local_reboot(controller, buffer);
+}
+
+void gopro_controller_shutdown(gopro_controller& controller, const std::string target) noexcept {
+    if(target.size() > 0) {
+        gopro_controller_local_shutdown(controller, target);
+        return;
+    }
+    std::vector<std::string> buffer = gopro_controller_local_alives(controller);
+    gopro_controller_local_shutdown(controller, buffer);
+}
+
+void gopro_controller_keep_alive(gopro_controller& controller, const std::string target) noexcept {
+    if(target.size() > 0) {
+        gopro_controller_local_keep_alive(controller, target);
+        return;
+    }
+    std::vector<std::string> buffer = gopro_controller_local_alives(controller);
+    gopro_controller_local_keep_alive(controller, buffer);
+}
+
+void gopro_controller_usb(gopro_controller& controller, const std::string target, const bool is_on) noexcept {
+    if(target.size() > 0) {
+        gopro_controller_local_usb(controller, target, is_on);
+        return;
+    }
+    std::vector<std::string> buffer = gopro_controller_local_alives(controller);
+    gopro_controller_local_usb(controller, buffer, is_on);
+}
+
+void gopro_controller_datetime(gopro_controller& controller, const std::string target) noexcept {
+    if(target.size() > 0) {
+        gopro_controller_local_datetime(controller, target);
+        return;
+    }
+    std::vector<std::string> buffer = gopro_controller_local_alives(controller);
+    gopro_controller_local_datetime(controller, buffer);
+}
+
+void gopro_controller_zoom(gopro_controller& controller, const std::string target, const int32_t value) noexcept {
+    if(target.size() > 0) {
+        gopro_controller_local_zoom(controller, target, value);
+        return;
+    }
+    std::vector<std::string> buffer = gopro_controller_local_alives(controller);
+    gopro_controller_local_zoom(controller, buffer, value);
+}
+
+void gopro_controller_shutter(gopro_controller& controller, const std::string target, const bool is_start) noexcept {
+    if(target.size() > 0) {
+        gopro_controller_local_shutter(controller, target, is_start);
+        return;
+    }
+    std::vector<std::string> buffer = gopro_controller_local_alives(controller);
+    gopro_controller_local_shutter(controller, buffer, is_start);
+}
+
+void gopro_controller_locate(gopro_controller& controller, const std::string target, const bool is_on) noexcept {
+    if(target.size() > 0) {
+        gopro_controller_local_locate(target, is_on); 
     }
 }
 
-void GoProController::reboot(std::string target){
-    if(target.size() > 0) _reboot(target); 
-    else {
-        std::vector<std::string> buffer = std::vector<std::string>(camera_alive_ips.size());
-        {
-            std::lock_guard<std::mutex> lock(ips_alive_mutex);
-            std::copy(std::begin(camera_alive_ips), std::end(camera_alive_ips), std::begin(buffer));
-        }
-        _rebootAll(buffer);
-    }
-}
-
-void GoProController::shutdown(std::string target){
-    if(target.size() > 0) _shutdown(target); 
-    else {
-        std::vector<std::string> buffer = std::vector<std::string>(camera_alive_ips.size());
-        {
-            std::lock_guard<std::mutex> lock(ips_alive_mutex);
-            std::copy(std::begin(camera_alive_ips), std::end(camera_alive_ips), std::begin(buffer));
-        }
-        _shutdownAll(buffer);
-    }
-}
-
-void GoProController::keep_alive(std::string target){
-    if(target.size() > 0) _keepAlive(target); 
-    else {
-        std::vector<std::string> buffer = std::vector<std::string>(camera_alive_ips.size());
-        {
-            std::lock_guard<std::mutex> lock(ips_alive_mutex);
-            std::copy(std::begin(camera_alive_ips), std::end(camera_alive_ips), std::begin(buffer));
-        }
-        _keepAliveAll(buffer);
-    }
-}
-
-void GoProController::usb(std::string target, bool ison){
-    if(target.size() > 0) _usb(target, ison); 
-    else {
-        std::vector<std::string> buffer = std::vector<std::string>(camera_alive_ips.size());
-        {
-            std::lock_guard<std::mutex> lock(ips_alive_mutex);
-            std::copy(std::begin(camera_alive_ips), std::end(camera_alive_ips), std::begin(buffer));
-        }
-        _usbAll(buffer, ison);
-    }
-}
-
-void GoProController::datetime(std::string target){
-    if(target.size() > 0) _datetime(target);
-    else {
-        std::vector<std::string> buffer = std::vector<std::string>(camera_alive_ips.size());
-        {
-            std::lock_guard<std::mutex> lock(ips_alive_mutex);
-            std::copy(std::begin(camera_alive_ips), std::end(camera_alive_ips), std::begin(buffer));
-        }
-        _datetimeAll(buffer);
-    }
-}
-
-void GoProController::zoom(std::string target, int32_t value){
-    if(target.size() > 0) _zoom(target, value); 
-    else {
-        std::vector<std::string> buffer = std::vector<std::string>(camera_alive_ips.size());
-        {
-            std::lock_guard<std::mutex> lock(ips_alive_mutex);
-            std::copy(std::begin(camera_alive_ips), std::end(camera_alive_ips), std::begin(buffer));
-        }
-        _zoomAll(buffer, value);
-    }
-}
-
-void GoProController::shutter(std::string target, bool isstart){
-    if(target.size() > 0) _shutter(target, isstart); 
-    else {
-        std::vector<std::string> buffer = std::vector<std::string>(camera_alive_ips.size());
-        {
-            std::lock_guard<std::mutex> lock(ips_alive_mutex);
-            std::copy(std::begin(camera_alive_ips), std::end(camera_alive_ips), std::begin(buffer));
-        }
-        _shutterAll(buffer, isstart);
-    }
-}
-void GoProController::locate(std::string target, bool ison){
-    if(target.size() > 0) _locate(target, ison); 
-}
-
-std::string GoProController::getAllIP(){
+std::string gopro_controller_get_IPs(gopro_controller& controller) noexcept {
     json result = json::array();
-    std::vector<std::string> buffer = std::vector<std::string>(camera_ips.size());
-    {
-        std::lock_guard<std::mutex> lock(ips_mutex);
-        std::copy(std::begin(camera_ips), std::end(camera_ips), std::begin(buffer));
-    }
-    for(std::string target : buffer){
-        if(camera_name.count(target)){
-            result.push_back(target + " " + camera_name.at(target));
+    for(int32_t i = 0; i < controller.client_limit; i++){
+        const gopro_element &e = controller.camera_elements.at(i);
+        if(!e.exist) continue;
+        if(strlen(e.name) > 0){
+            result.push_back(std::string(e.ip) + " " + std::string(e.name));
         }else{
-            result.push_back(target);
+            result.push_back(std::string(e.ip));
         }
     }
     return result.dump();

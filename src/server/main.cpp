@@ -186,6 +186,12 @@ int main() {
 		
 		while (!data.message_queue.empty()) {
 
+			if (data.controller.command_thread_state == Thread_state::PROCESSING) {
+				break;
+			}
+
+			data.controller.command_thread_state = Thread_state::PROCESSING;
+
 			const std::string p = data.message_queue.pop();
 
 			if (json::accept(msg.c_str())) {

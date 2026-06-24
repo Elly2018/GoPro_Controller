@@ -11,22 +11,23 @@
 
 void gopro_controller_local_loadRecord(gopro_controller& controller) noexcept;
 void gopro_controller_local_updateRecord(gopro_controller& controller) noexcept;
-void gopro_controller_local_setAllPreset(gopro_controller& controller, std::vector<std::string> targets, int32_t mode) noexcept;
-void gopro_controller_local_setPreset(gopro_controller& controller, std::string target, int32_t mode) noexcept;
-void gopro_controller_local_rebootAll(gopro_controller& controller, std::vector<std::string> targets) noexcept;
-void gopro_controller_local_reboot(gopro_controller& controller, std::string target) noexcept;
-void gopro_controller_local_shutdownAll(gopro_controller& controller, std::vector<std::string> targets) noexcept;
-void gopro_controller_local_shutdown(gopro_controller& controller, std::string target) noexcept;
-void gopro_controller_local_keepAliveAll(gopro_controller& controller, std::vector<std::string> targets) noexcept;
-void gopro_controller_local_keepAlive(gopro_controller& controller, std::string target) noexcept;
-void gopro_controller_local_usbAll(gopro_controller& controller, std::vector<std::string> targets, bool ison) noexcept;
-void gopro_controller_local_usb(gopro_controller& controller, std::string target, bool ison) noexcept;
-void gopro_controller_local_datetimeAll(gopro_controller& controller, std::vector<std::string> targets) noexcept;
-void gopro_controller_local_datetime(gopro_controller& controller, std::string target) noexcept;
-void gopro_controller_local_zoomAll(gopro_controller& controller, std::vector<std::string> targets, int32_t value) noexcept;
-void gopro_controller_local_zoom(gopro_controller& controller, std::string target, int32_t value) noexcept;
-void gopro_controller_local_shutterAll(gopro_controller& controller, std::vector<std::string> targets, bool isstart) noexcept;
-void gopro_controller_local_shutter(gopro_controller& controller, std::string target, bool isstart) noexcept;
+void gopro_controller_local_setAllPreset(gopro_controller& controller, std::vector<std::string> targets, const int32_t mode) noexcept;
+void gopro_controller_local_set_preset(gopro_controller& controller, const std::string target, const int32_t mode) noexcept;
+void gopro_controller_local_set_preset(gopro_controller& controller, const std::vector<std::string> target, const int32_t mode) noexcept;
+void gopro_controller_local_reboot(gopro_controller& controller, const std::vector<std::string> targets) noexcept;
+void gopro_controller_local_reboot(gopro_controller& controller, const std::string target) noexcept;
+void gopro_controller_local_shutdown(gopro_controller& controller, const std::vector<std::string> targets) noexcept;
+void gopro_controller_local_shutdown(gopro_controller& controller, const std::string target) noexcept;
+void gopro_controller_local_keep_alive(gopro_controller& controller, const std::vector<std::string> targets) noexcept;
+void gopro_controller_local_keep_alive(gopro_controller& controller, const std::string target) noexcept;
+void gopro_controller_local_usb(gopro_controller& controller, const std::vector<std::string> targets, const bool ison) noexcept;
+void gopro_controller_local_usb(gopro_controller& controller, const std::string target, const bool ison) noexcept;
+void gopro_controller_local_datetime(gopro_controller& controller, const std::vector<std::string> targets) noexcept;
+void gopro_controller_local_datetime(gopro_controller& controller, const std::string target) noexcept;
+void gopro_controller_local_zoom(gopro_controller& controller, const std::vector<std::string> targets, const int32_t value) noexcept;
+void gopro_controller_local_zoom(gopro_controller& controller, const std::string target, int32_t value) noexcept;
+void gopro_controller_local_shutter(gopro_controller& controller, const std::vector<std::string> targets, const bool isstart) noexcept;
+void gopro_controller_local_shutter(gopro_controller& controller, const std::string target, const bool isstart) noexcept;
 void gopro_controller_local_locate(gopro_controller& controller, std::string target, bool ison) noexcept;
 
 std::vector<SingleResponse> gopro_controller_local_queryAllStatus(gopro_controller& controller, std::vector<std::string> targets) noexcept;
@@ -71,5 +72,6 @@ bool gopro_controller_local_element_remove(gopro_controller& controller, const s
 bool gopro_controller_local_element_clean(gopro_controller& controller) noexcept;
 int32_t gopro_controller_local_element_have_slot(gopro_controller& controller) noexcept;
 int32_t gopro_controller_local_element_find(gopro_controller& controller, const std::string ip) noexcept;
+std::vector<std::string> gopro_controller_local_alives(gopro_controller& controller) noexcept;
 
 #endif
