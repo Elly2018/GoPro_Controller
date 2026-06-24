@@ -32,13 +32,13 @@ void gopro_controller_local_locate(gopro_controller& controller, std::string tar
 
 std::vector<SingleResponse> gopro_controller_local_query_status(gopro_controller& controller, const std::vector<std::string> targets) noexcept;
 SingleResponse gopro_controller_local_query_status(gopro_controller& controller, const std::string target) noexcept;
-std::vector<SingleResponse> gopro_controller_local_queryAllHW(gopro_controller& controller, std::vector<std::string> targets) noexcept;
-SingleResponse gopro_controller_local_queryHW(gopro_controller& controller, std::string target) noexcept;
-std::vector<SingleResponse> gopro_controller_local_setAllSetting(gopro_controller& controller, std::vector<std::string> targets, int32_t ID, std::string value) noexcept;
-SingleResponse gopro_controller_local_setSetting(gopro_controller& controller, std::string target, int32_t ID, std::string value) noexcept;
-std::vector<SingleResponse> gopro_controller_local_setAllSetting(gopro_controller& controller, std::vector<std::string> targets, int32_t preset, json res) noexcept;
-std::vector<SingleResponse> gopro_controller_local_setSetting(gopro_controller& controller, std::string target, int32_t preset, json res) noexcept;
-std::vector<SingleResponse> gopro_controller_local_setSetting_utility(gopro_controller& controller, std::string target, json res, std::vector<int32_t> setting_ids) noexcept;
+std::vector<SingleResponse> gopro_controller_local_query_HW(gopro_controller& controller, std::vector<std::string> targets) noexcept;
+SingleResponse gopro_controller_local_query_HW(gopro_controller& controller, std::string target) noexcept;
+std::vector<SingleResponse> gopro_controller_local_set_setting(gopro_controller& controller, const std::vector<std::string> targets, const int32_t ID, const std::string value) noexcept;
+SingleResponse gopro_controller_local_set_setting(gopro_controller& controller, const std::string target, const int32_t ID, const std::string value) noexcept;
+std::vector<SingleResponse> gopro_controller_local_set_setting_preset(gopro_controller& controller, const std::vector<std::string> targets, const int32_t preset, json res) noexcept;
+std::vector<SingleResponse> gopro_controller_local_set_setting_preset(gopro_controller& controller, const std::string target, const int32_t preset, json res) noexcept;
+std::vector<SingleResponse> gopro_controller_local_set_setting_utility(gopro_controller& controller, const std::string target, json res, const std::vector<int32_t> setting_ids) noexcept;
 
 void gopro_controller_local_webcamAllMode(gopro_controller& controller, std::vector<std::string> targets) noexcept;
 void gopro_controller_local_webcamMode(gopro_controller& controller, std::string target) noexcept;

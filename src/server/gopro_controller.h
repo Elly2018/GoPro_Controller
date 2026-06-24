@@ -93,7 +93,7 @@ json gopro_controller_get_IPs(gopro_controller& controller) noexcept;
   
 json gopro_controller_query_status(gopro_controller& controller, const std::string target) noexcept;
 json gopro_controller_set_setting(gopro_controller& controller, const std::string target, const int32_t ID, const std::string value) noexcept;
-json gopro_controller_set_setting(gopro_controller& controller, const std::string source, const std::string target, const int32_t preset, const json value) noexcept;
+json gopro_controller_set_setting_preset(gopro_controller& controller, const std::string source, const std::string target, const int32_t preset, const json value) noexcept;
 void gopro_controller_set_setting_cancel(gopro_controller& controller) noexcept;
 
 void gopro_controller_webcamMode(gopro_controller& controller, std::string target) noexcept;
