@@ -4,83 +4,12 @@
  * This software is licensed under the [MIT License].
  * See the LICENSE file in the project root for more information.
 */
-#include "../GoProController.h"
-#include <vector>
+#include "../gopro_controller.h"
+#include "../gopro_controller_local.h"
 #include <string>
 #include <thread>
-#include <future>
 
-void GoProController::scanCameras() {
-    if(!mdns_scaned){
-        mdns_scaned = true;
-            mdns_cpp::Logger::setLoggerSink([&](const std::string& log_msg) {
-            std::string keyword = std::string("gopro");
-            size_t pos = log_msg.find(keyword);
-            if(pos != std::string::npos){
-                std::string p = std::string(log_msg.substr(0,13).c_str());
-                std::cout << "[MDNS] gopro service found: " << p << "\n";
-                bool find = false;
-                for(auto i : camera_ips){
-                    if(i == p){
-                        find = true;
-                        break;
-                    }
-                }
-                if(!find){
-                    std::lock_guard<std::mutex> lock(ips_mutex);
-                    camera_ips.push_back(p);
-                    _updateRecord();
-                }
-            }else {
-                std::cout << "[MDNS] ignore service: " << log_msg << "\n";
-            }
-        });
-    }
-    scan_workers.push_back(std::thread([&](){
-        mdns.executeDiscovery();
-    }));
-}
-
-void GoProController::cleanCameras(){
-    std::lock_guard<std::mutex> lock(ips_mutex);
-    camera_ips.clear();
-    _updateRecord();
-}
-
-void GoProController::addCameras(std::string serial){
-    std::lock_guard<std::mutex> lock(ips_mutex);
-    if(serial.size() >= 3){
-        std::string p = GetRemoteIPBySerial(serial);
-        bool find = false;
-        for(auto i : camera_ips){
-            if(i == p){
-                find = true;
-                break;
-            }
-        }
-        if(!find){
-            camera_ips.push_back(p);
-            _updateRecord();
-        }
-    }
-}
-
-void GoProController::deleteCameras(std::string ip) {
-    std::lock_guard<std::mutex> lock(ips_mutex);
-    for(int32_t i = 0; i < camera_ips.size(); i++){
-        if(camera_ips[i] == ip){
-            camera_ips.erase(camera_ips.begin() + i);
-            return;
-        }
-    }
-}
-
-void GoProController::renameCameras(std::string ip, std::string name){
-    camera_name.insert_or_assign(ip, name);
-    _updateRecord();
-}
-
-void GoProController::setPreset(std::string target, int32_t mode){
+void gopro_controller_setPreset(gopro_controller& controller, const std::string target, const int32_t mode) noexcept {
     if(target.size() > 0){
         _setPreset(target, mode);
     }else{

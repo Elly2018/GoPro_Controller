@@ -4,12 +4,13 @@
  * This software is licensed under the [MIT License].
  * See the LICENSE file in the project root for more information.
 */
-#include "../GoProController.h"
+#include "../gopro_controller_local.h"
+#include "../gopro_controller.h"
 #include <fstream>
 #include <vector>
 #include <string>
 
-void GoProController::_loadRecord(){
+void gopro_controller_local_loadRecord(gopro_controller& controller) noexcept{
     std::string homedir = "";
     homedir += "record.txt";
     std::cout << "Trying load data from: " << homedir << std::endl;

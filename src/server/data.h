@@ -12,6 +12,7 @@
 #include <mutex>
 #include "../common/thread_safe_queue.h"
 #include "gopro_controller.h"
+#include "WebSocketServer.h"
 
 struct SenderStruct
 {

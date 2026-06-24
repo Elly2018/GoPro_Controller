@@ -4,7 +4,8 @@
  * This software is licensed under the [MIT License].
  * See the LICENSE file in the project root for more information.
 */
-#include "../GoProController.h"
+#include "../gopro_controller.h"
+#include "../gopro_controller_local.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -14,33 +15,30 @@
 
 void gopro_controller_init(gopro_controller& controller) noexcept {
     curl_global_init(CURL_GLOBAL_DEFAULT);
-    _loadRecord();
+    controller.ping_thread = std::thread(gopro_controller_ping, controller)
+    controller.ping_thread_state = Thread_state::PROCESSING;
+    gopro_controller_local_loadRecord(controller);
 }
 
 void gopro_controller_dispose(gopro_controller& controller) noexcept {
-
+    controller.shutdown = true;
+    if(controller.ping_thread.joinable()){
+        controller.ping_thread.join();
+    }
 }
 
 void gopro_controller_update(gopro_controller& controller) noexcept {
-    std::vector<std::string> fine = std::vector<std::string>();
-    std::vector<std::string> buffer = std::vector<std::string>();
-    {
-        std::lock_guard lock(ips_mutex);
-        buffer = std::vector<std::string>(camera_ips.begin(), camera_ips.end());
-    }
     
-    for(int32_t i = 0; i < buffer.size(); i++){
-        auto ping = icmplib::Ping(icmplib::IPAddress(buffer.at(i)), ICMPLIB_TIMEOUT_1S);
-        bool connected = ping.delay != ICMPLIB_TIMEOUT_1S || ping.response == icmplib::PingResponseType::Success || ping.response == icmplib::PingResponseType::Unreachable; 
-        if(connected){
-            fine.push_back(buffer.at(i));
+}
+
+void gopro_controller_ping(gopro_controller& controller) noexcept {
+    while(!controller.shutdown) {
+        for(int32_t i = 0; i < controller.client_limit; i++){
+            const gopro_element &e = controller.camera_elements.at(i);
+            if(!e.exist) continue;
+            auto ping = icmplib::Ping(icmplib::IPAddress(e.ip), ICMPLIB_TIMEOUT_1S);
+            bool connected = ping.delay != ICMPLIB_TIMEOUT_1S || ping.response == icmplib::PingResponseType::Success || ping.response == icmplib::PingResponseType::Unreachable; 
+            e.alive = connected;
         }
     }
-
-    {
-        std::lock_guard lock(ips_alive_mutex);
-        camera_alive_ips = fine;
-    }
-
-    std::this_thread::sleep_for(std::chrono::milliseconds(ICMPLIB_TIMEOUT_1S));
 }

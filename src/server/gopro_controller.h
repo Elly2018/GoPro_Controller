@@ -29,6 +29,12 @@ std::string getPacket(std::string key, json data);
 
 typedef std::pair<std::string, std::string> SingleResponse;
 
+enum class Thread_state {
+  NONE = 0,
+  PROCESSING = 1,
+  FINISHED = 2,
+};
+
 struct gopro_element {
   static constexpr uint64_t ip_str_length = 24UL;
   static constexpr uint64_t name_str_length = 256UL;
@@ -42,11 +48,15 @@ struct gopro_element {
 struct gopro_controller {
   static constexpr uint64_t client_limit = 128UL;
 
-  bool applying_cancel = false;
+  bool shutdown;
+  bool applying_cancel;
   mdns_cpp::mDNS mdns;
-  bool mdns_scaned = false;
-  std::array<std::thread, client_limit> scan_workers;
-  std::array<gopro_element, client_limit> camera_ips;
+  bool mdns_event_registered;
+  std::thread scan_thread;
+  Thread_state scan_thread_state;
+  std::thread ping_thread;
+  Thread_state ping_thread_state;
+  std::array<gopro_element, client_limit> camera_elements;
   std::mutex ips_mutex;
   std::mutex ips_alive_mutex;
   std::unordered_map<std::string, json> camera_hw;
@@ -56,22 +66,23 @@ struct gopro_controller {
 void gopro_controller_init(gopro_controller& controller) noexcept;
 void gopro_controller_dispose(gopro_controller& controller) noexcept;
 void gopro_controller_update(gopro_controller& controller) noexcept;
+void gopro_controller_ping(gopro_controller& controller) noexcept;
 
 void gopro_controller_scanCameras(gopro_controller& controller) noexcept;
 void gopro_controller_cleanCameras(gopro_controller& controller) noexcept;
-void gopro_controller_renameCameras(gopro_controller& controller, std::string ip, std::string name) noexcept;
-void gopro_controller_addCameras(gopro_controller& controller, std::string serial) noexcept;
-void gopro_controller_deleteCameras(gopro_controller& controller, std::string ip) noexcept;
+void gopro_controller_renameCameras(gopro_controller& controller, const std::string ip, const std::string name) noexcept;
+void gopro_controller_addCameras(gopro_controller& controller, const std::string serial) noexcept;
+void gopro_controller_deleteCameras(gopro_controller& controller, const std::string ip) noexcept;
 
-void gopro_controller_setPreset(gopro_controller& controller, std::string target, int32_t mode) noexcept;
-void gopro_controller_reboot(gopro_controller& controller, std::string target) noexcept;
-void gopro_controller_shutdown(gopro_controller& controller, std::string target) noexcept;
-void gopro_controller_keep_alive(gopro_controller& controller, std::string target) noexcept;
-void gopro_controller_usb(gopro_controller& controller, std::string target, bool ison) noexcept;
-void gopro_controller_datetime(gopro_controller& controller, std::string target) noexcept;
-void gopro_controller_zoom(gopro_controller& controller, std::string target, int32_t value) noexcept;
-void gopro_controller_shutter(gopro_controller& controller, std::string target, bool isstart) noexcept;
-void gopro_controller_locate(gopro_controller& controller, std::string target, bool ison) noexcept;
+void gopro_controller_setPreset(gopro_controller& controller, const std::string target, const int32_t mode) noexcept;
+void gopro_controller_reboot(gopro_controller& controller, const std::string target) noexcept;
+void gopro_controller_shutdown(gopro_controller& controller, const std::string target) noexcept;
+void gopro_controller_keep_alive(gopro_controller& controller, const std::string target) noexcept;
+void gopro_controller_usb(gopro_controller& controller, const std::string target, const bool ison) noexcept;
+void gopro_controller_datetime(gopro_controller& controller, const std::string target) noexcept;
+void gopro_controller_zoom(gopro_controller& controller, const std::string target, const int32_t value) noexcept;
+void gopro_controller_shutter(gopro_controller& controller, const std::string target, const bool isstart) noexcept;
+void gopro_controller_locate(gopro_controller& controller, const std::string target, const bool ison) noexcept;
 std::string gopro_controller_getAllIP(gopro_controller& controller) noexcept;
   
 std::string gopro_controller_queryStatus(gopro_controller& controller, std::string target) noexcept;

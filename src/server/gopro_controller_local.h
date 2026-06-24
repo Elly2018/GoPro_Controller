@@ -10,6 +10,7 @@
 #include "gopro_controller.h"
 
 void gopro_controller_local_loadRecord(gopro_controller& controller) noexcept;
+void gopro_controller_local_updateRecord(gopro_controller& controller) noexcept;
 void gopro_controller_local_setAllPreset(gopro_controller& controller, std::vector<std::string> targets, int32_t mode) noexcept;
 void gopro_controller_local_setPreset(gopro_controller& controller, std::string target, int32_t mode) noexcept;
 void gopro_controller_local_rebootAll(gopro_controller& controller, std::vector<std::string> targets) noexcept;
@@ -63,5 +64,12 @@ SingleResponse gopro_controller_local_getSingleResponse(gopro_controller& contro
 std::vector<SingleResponse> gopro_controller_local_getAllResponse(gopro_controller& controller, std::vector<std::string> targets, std::string suffix) noexcept;
 std::string gopro_controller_local_base64_encode(gopro_controller& controller, const std::vector<u_char> &data) noexcept;
 int32_t gopro_controller_local_get_current_model(gopro_controller& controller, json hwinfo) noexcept;
+
+bool gopro_controller_local_element_exist(gopro_controller& controller, const std::string ip, bool should_be_alive = false) noexcept;
+int32_t gopro_controller_local_element_add(gopro_controller& controller, const std::string ip) noexcept;
+bool gopro_controller_local_element_remove(gopro_controller& controller, const std::string ip) noexcept;
+bool gopro_controller_local_element_clean(gopro_controller& controller) noexcept;
+int32_t gopro_controller_local_element_have_slot(gopro_controller& controller) noexcept;
+int32_t gopro_controller_local_element_find(gopro_controller& controller, const std::string ip) noexcept;
 
 #endif
