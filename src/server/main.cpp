@@ -218,7 +218,7 @@ int main()
         }
       }
 
-      data.controller.update();
+      gopro_controller_update(data.controller)
     }
 
     t3.join();

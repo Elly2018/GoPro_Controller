@@ -12,21 +12,16 @@
 #include <future>
 #include "icmplib.h"
 
-GoProController::GoProController() {
+void gopro_controller_init(gopro_controller& controller) noexcept {
     curl_global_init(CURL_GLOBAL_DEFAULT);
     _loadRecord();
 }
 
-GoProController::~GoProController() {
-    curl_global_cleanup();
-    for(auto& thread : scan_workers){
-        if (thread.joinable()) {
-            thread.join();
-        }
-    }
+void gopro_controller_dispose(gopro_controller& controller) noexcept {
+
 }
 
-void GoProController::update(){
+void gopro_controller_update(gopro_controller& controller) noexcept {
     std::vector<std::string> fine = std::vector<std::string>();
     std::vector<std::string> buffer = std::vector<std::string>();
     {
