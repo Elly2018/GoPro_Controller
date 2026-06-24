@@ -103,8 +103,8 @@ void gopro_controller_webcam_off(gopro_controller& controller, const std::string
 json gopro_controller_webcam_status(gopro_controller& controller, const std::string target) noexcept;
 json gopro_controller_webcam_version(gopro_controller& controller, const std::string target) noexcept;
 
-void gopro_controller_previewOn(gopro_controller& controller, std::string target, int32_t port) noexcept;
-void gopro_controller_previewOff(gopro_controller& controller, std::string target) noexcept;
+void gopro_controller_preview_on(gopro_controller& controller, const std::string target, const int32_t port) noexcept;
+void gopro_controller_preview_off(gopro_controller& controller, const std::string target) noexcept;
 
 std::string gopro_controller_getMediaList(gopro_controller& controller, std::string target) noexcept;
 std::string gopro_controller_getLastMedia(gopro_controller& controller, std::string target) noexcept;

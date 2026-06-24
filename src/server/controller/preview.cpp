@@ -4,30 +4,25 @@
  * This software is licensed under the [MIT License].
  * See the LICENSE file in the project root for more information.
 */
-#include "../GoProController.h"
+#include "../gopro_controller.h"
+#include "../gopro_controller_local.h"
 #include <vector>
 #include <string>
 
-void GoProController::previewOn(std::string target, int32_t port){
-    if(target.size() > 0) _previewOn(target, port); 
-    else {
-        std::vector<std::string> buffer = std::vector<std::string>(camera_alive_ips.size());
-        {
-            std::lock_guard<std::mutex> lock(ips_alive_mutex);
-            std::copy(std::begin(camera_alive_ips), std::end(camera_alive_ips), std::begin(buffer));
-        }
-        _previewAllOn(buffer, port);
+void gopro_controller_preview_on(gopro_controller& controller, const std::string target, const int32_t port) noexcept {
+    if(target.size() > 0) {
+        gopro_controller_local_preview_on(controller, target, port); 
+        return;
     }
+    std::vector<std::string> buffer = gopro_controller_local_element_alives(controller);
+    gopro_controller_local_preview_on(controller, buffer, port);
 }
 
-void GoProController::previewOff(std::string target){
-    if(target.size() > 0) _previewOff(target); 
-    else {
-        std::vector<std::string> buffer = std::vector<std::string>(camera_alive_ips.size());
-        {
-            std::lock_guard<std::mutex> lock(ips_alive_mutex);
-            std::copy(std::begin(camera_alive_ips), std::end(camera_alive_ips), std::begin(buffer));
-        }
-        _previewAllOff(buffer);
+void gopro_controller_preview_off(gopro_controller& controller, const std::string target) noexcept {
+    if(target.size() > 0) {
+        gopro_controller_local_preview_off(controller, target); 
+        return;
     }
+    std::vector<std::string> buffer = gopro_controller_local_element_alives(controller);
+    gopro_controller_local_preview_off(controller, buffer);
 }
