@@ -4,89 +4,69 @@
  * This software is licensed under the [MIT License].
  * See the LICENSE file in the project root for more information.
 */
-#include "../GoProController.h"
+#include "../gopro_controller.h"
+#include "../gopro_controller_local.h"
 #include <vector>
 #include <string>
 #include <thread>
 #include <future>
 
 void gopro_controller_webcam_mode(gopro_controller& controller, const std::string target) noexcept {
-    if(target.size() > 0) _webcamMode(target); 
-    else {
-        std::lock_guard<std::mutex> lock(ips_mutex);
-        _webcamAllMode(camera_ips);
+    if(target.size() > 0) {
+        gopro_controller_local_webcam_mode(controller, target); 
+        return;
     }
+    std::vector<std::string> buffer = gopro_controller_local_element_alives(controller);
+    gopro_controller_local_webcam_mode(controller, buffer); 
 }
 
 void gopro_controller_webcam_mode_off(gopro_controller& controller, const std::string target) noexcept {
-    if(target.size() > 0) _webcamUnMode(target); 
-    else {
-        std::lock_guard<std::mutex> lock(ips_mutex);
-        _webcamAllUnMode(camera_ips);
+    if(target.size() > 0) {
+        gopro_controller_local_webcam_mode_off(controller, target); 
+        return;
     }
+    std::vector<std::string> buffer = gopro_controller_local_element_alives(controller);
+    gopro_controller_local_webcam_mode_off(controller, buffer); 
 }
 
-void gopro_controller_webcam_on(gopro_controller& controller, const std::string target, const int32_t startPort, const int32_t res, const int32_t fov, const bool TS) noexcept {
-    if(target.size() > 0) _webcamOn(target, startPort, res, fov, TS); 
-    else {
-        std::lock_guard<std::mutex> lock(ips_mutex);
-        _webcamAllOn(camera_ips, startPort, res, fov, TS);
+void gopro_controller_webcam_on(gopro_controller& controller, const std::string target, const int32_t start_port, const int32_t res, const int32_t fov, const bool ts) noexcept {
+    if(target.size() > 0) {
+        gopro_controller_local_webcam_on(controller, target, start_port, res, fov, ts); 
+        return;
     }
+    std::vector<std::string> buffer = gopro_controller_local_element_alives(controller);
+    gopro_controller_local_webcam_on(controller, buffer, start_port, res, fov, ts); 
 }
 
 void gopro_controller_webcam_off(gopro_controller& controller, const std::string target) noexcept {
-    if(target.size() > 0) _webcamOff(target); 
-    else {
-        std::lock_guard<std::mutex> lock(ips_mutex);
-        _webcamAllOff(camera_ips);
+    if(target.size() > 0) {
+        gopro_controller_local_webcam_off(controller, target); 
+        return;
     }
+    std::vector<std::string> buffer = gopro_controller_local_element_alives(controller);
+    gopro_controller_local_webcam_off(controller, buffer); 
 }
 
 json gopro_controller_webcam_status(gopro_controller& controller, const std::string target) noexcept {
-    json res;
-    std::string address;
     json arr = json::array();
     if(target.size() > 0){
-        json res;
-        try{
-            SingleResponse result = _webcamStatus(target);
-            address = result.first;
-            res = json::parse(result.second);
-        }catch(const std::exception& ex){
-            res = json::object();
-        }
-        json i;
-        i["ip"] = address;
-        i["status"] = res;
-        arr.push_back(i);
+        SingleResponse result = gopro_controller_local_webcam_status(controller, target);
+        json buff;
+        buff["ip"] = result.first;
+        buff["status"] = result.second;
+        arr.push_back(buff);
     }else{
-        std::vector<std::future<SingleResponse>> calls = std::vector<std::future<SingleResponse>>();
-        std::vector<std::string> buffer = std::vector<std::string>(camera_alive_ips.size());
-        {
-            std::lock_guard<std::mutex> lock(ips_alive_mutex);
-            std::copy(std::begin(camera_alive_ips), std::end(camera_alive_ips), std::begin(buffer));
-        }
-        for(std::string ip : buffer){
-            calls.push_back(std::async(std::launch::async, [this, ip]() {
-                return _webcamStatus(ip);
-            }));
-        }
+        std::vector<std::string> buffer = gopro_controller_local_element_alives(controller);
+        std::vector<SingleResponse> results = gopro_controller_local_webcam_status(controller, buffer);
 
-        for(auto& call : calls){
-            try{
-                SingleResponse result = call.get();
-                address = result.first;
-                res = json::parse(result.second);
-            }catch(const std::exception& ex){
-                res = json::object();
-            }
-            json i;
-            i["ip"] = address;
-            i["status"] = res;
-            arr.push_back(i);
+        for(int32_t i = 0; i < results.size(); i++){
+            json buff = json::object();
+            buff["ip"] = results[i].first;
+            buff["status"] = results[i].second;
+            arr.push_back(buff);
         }
     }
-    return arr.dump();
+    return arr;
 }
 
 json gopro_controller_webcam_version(gopro_controller& controller, const std::string target) noexcept {
@@ -94,44 +74,21 @@ json gopro_controller_webcam_version(gopro_controller& controller, const std::st
     std::string address;
     json arr = json::array();
     if(target.size() > 0){
-        json res;
-        try{
-            SingleResponse result = _webcamVersion(target);
-            address = result.first;
-            res = json::parse(result.second);
-        }catch(const std::exception& ex){
-            res = json::object();
-        }
-        json i;
-        i["ip"] = address;
-        i["status"] = res;
-        arr.push_back(i);
+        SingleResponse result = gopro_controller_local_webcam_version(controller, target);
+        json buff;
+        buff["ip"] = result.first;
+        buff["status"] = result.second;
+        arr.push_back(buff);
     }else{
-        std::vector<std::future<SingleResponse>> calls = std::vector<std::future<SingleResponse>>();
-        std::vector<std::string> buffer = std::vector<std::string>(camera_alive_ips.size());
-        {
-            std::lock_guard<std::mutex> lock(ips_alive_mutex);
-            std::copy(std::begin(camera_alive_ips), std::end(camera_alive_ips), std::begin(buffer));
-        }
-        for(std::string ip : buffer){
-            calls.push_back(std::async(std::launch::async, [this, ip]() {
-                return _webcamVersion(ip);
-            }));
-        }
+        std::vector<std::string> buffer = gopro_controller_local_element_alives(controller);
+        std::vector<SingleResponse> results = gopro_controller_local_webcam_version(controller, buffer);
 
-        for(auto& call : calls){
-            try{
-                SingleResponse result = call.get();
-                address = result.first;
-                res = json::parse(result.second);
-            }catch(const std::exception& ex){
-                res = json::object();
-            }
-            json i;
-            i["ip"] = address;
-            i["status"] = res;
-            arr.push_back(i);
+        for(int32_t i = 0; i < results.size(); i++){
+            json buff = json::object();
+            buff["ip"] = results[i].first;
+            buff["status"] = results[i].second;
+            arr.push_back(buff);
         }
     }
-    return arr.dump();
+    return arr;
 }

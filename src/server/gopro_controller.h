@@ -98,7 +98,7 @@ void gopro_controller_set_setting_cancel(gopro_controller& controller) noexcept;
 
 void gopro_controller_webcam_mode(gopro_controller& controller, const std::string target) noexcept;
 void gopro_controller_webcam_mode_off(gopro_controller& controller, const std::string target) noexcept;
-void gopro_controller_webcam_on(gopro_controller& controller, const std::string target, const int32_t startPort, const int32_t res, const int32_t fov, const bool TS) noexcept;
+void gopro_controller_webcam_on(gopro_controller& controller, const std::string target, const int32_t start_port, const int32_t res, const int32_t fov, const bool ts) noexcept;
 void gopro_controller_webcam_off(gopro_controller& controller, const std::string target) noexcept;
 json gopro_controller_webcam_status(gopro_controller& controller, const std::string target) noexcept;
 json gopro_controller_webcam_version(gopro_controller& controller, const std::string target) noexcept;
