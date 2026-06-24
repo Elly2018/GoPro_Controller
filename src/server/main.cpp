@@ -184,7 +184,7 @@ int main() {
 	
 	while (!data.should_quit) {
 		
-		if (!data.message_queue.empty()) {
+		while (!data.message_queue.empty()) {
 
 			const std::string p = data.message_queue.pop();
 

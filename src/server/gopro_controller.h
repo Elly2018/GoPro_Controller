@@ -29,6 +29,16 @@ std::string getPacket(std::string key, json data);
 
 typedef std::pair<std::string, std::string> SingleResponse;
 
+struct gopro_element {
+  static constexpr uint64_t ip_str_length = 24UL;
+  static constexpr uint64_t name_str_length = 256UL;
+
+  bool exist;
+  bool alive;
+  char ip[ip_str_length];
+  char name[name_str_length];
+};
+
 struct gopro_controller {
   static constexpr uint64_t client_limit = 128UL;
 
@@ -36,12 +46,10 @@ struct gopro_controller {
   mdns_cpp::mDNS mdns;
   bool mdns_scaned = false;
   std::array<std::thread, client_limit> scan_workers;
-  std::array<std::string, client_limit> camera_ips;
-  std::array<std::string, client_limit> camera_alive_ips;
+  std::array<gopro_element, client_limit> camera_ips;
   std::mutex ips_mutex;
   std::mutex ips_alive_mutex;
   std::unordered_map<std::string, json> camera_hw;
-  std::unordered_map<std::string, std::string> camera_name;
   bool scanning;
 };
 
