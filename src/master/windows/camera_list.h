@@ -7,6 +7,31 @@
 #pragma once
 #include "base_window.h"
 
+enum class FilterType {
+    None, Connect, Server
+};
+
+enum class SortType {
+    None, Name, IP
+};
+
+struct Camera_list_window {
+    ImVec2 get_rect_size();
+    std::vector<CameraInfo> get_filtering_result();
+    std::string get_filter_string(FilterType type);
+    std::string get_sort_string(SortType type);
+    std::string toTimeCode(int32_t timer);
+    std::string bytesToGbString(long bytes);
+
+    int32_t size = 1;
+    FilterType filter = FilterType::None;
+    SortType sort = SortType::None;
+
+    std::string search = "";
+    std::string filter_ip = "";
+    bool filter_connect = false;
+};
+
 /**
  * Display camera as a grid items or list items
  * Includes some filter and sort function
@@ -19,27 +44,6 @@ public:
         std::shared_ptr<GlobalState> _state, 
         std::shared_ptr<GoProMaster> _master);
     virtual ~CameraListWindow();
-
-    enum class FilterType {
-        /**
-         * Do not filter anything, display everything out
-         */
-        None, 
-        /**
-         * Pass through connected filter
-         * This will display only with connected flag you choose
-         */
-        Connect, 
-        /**
-         * Pass through server filter
-         * This will display only camera with selected server
-         */
-        Server
-    };
-
-    enum class SortType {
-        None, Name, IP
-    };
 
     json get_window_data() override;
     void set_window_data(json data) override;

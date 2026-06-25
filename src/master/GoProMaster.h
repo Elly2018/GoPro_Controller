@@ -39,7 +39,7 @@ struct DownloadMediaParameters {
 /// And handles the message sender and process
 /// It also use multithread to decode the message from the websocket instancess
 ///
-class GoProMaster {
+class Gopro_master {
 public:
     GoProMaster();
     /// 

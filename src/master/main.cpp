@@ -75,40 +75,40 @@ void assign_log(std::string key, std::string value){
     }
 }
 
-void settingGetterFeedback(std::string ip, json setting){
+void setting_getter_feedback(std::string ip, json setting){
     if(global_state->current_camera_item == ip){
         global_state->current_setting_items = setting;
         global_state->current_setting_items_bind = true;
     }
 }
 
-void statusGetterFeedback(std::string ip, json status){
+void status_getter_feedback(std::string ip, json status){
     if(global_state->current_camera_item == ip){
         global_state->current_status_items = status;
         global_state->current_status_items_bind = true;
     }
 }
 
-void hwGetterFeedback(std::string ip, json hw){
+void HW_getter_feedback(std::string ip, json hw){
     if(global_state->current_camera_item == ip){
         global_state->current_hw_items = hw;
         global_state->current_hw_items_bind = true;
     }
 }
 
-void applyAllFeedback(){
+void apply_feedbacks(){
     global_state->applying_all_count++;
     if(global_state->applying_all_count >= master->getServerCount()){
         global_state->applying_all = false;
     }
 }
 
-void updateMediaList(std::vector<MediaInfo> data){
+void update_media_list(std::vector<MediaInfo> data){
     std::lock_guard<std::mutex> lock(global_state->media_list_mtx);
     global_state->current_media_list = data;
 }
 
-void updateServerList(){
+void update_server_list(){
     std::cout << "updateServerList" << std::endl;
     json data = json::object();
     data["data"] = json::array();
@@ -128,7 +128,7 @@ void updateServerList(){
     servers->swap(data);
 }
 
-void updateGUIList(){
+void update_GUI_list(){
     (*gui)["websocket_server_window"] = websocket_win->is_enable();
     (*gui)["camera_list_win"] = camera_list_win->is_enable();
     (*gui)["inspector_win"] = inspector_win->is_enable();
@@ -137,11 +137,11 @@ void updateGUIList(){
     ImGui::SaveIniSettingsToDisk("imgui.ini");
 }
 
-void updatePresetList(){
+void update_preset_list(){
     savePresetList(*presets);
 }
 
-void pushCommand(const char* cmd){
+void push_command(const char* cmd){
     command_queue.push(cmd);
 }
 
@@ -152,9 +152,9 @@ int main(int, char**)
     setvbuf(stdout, NULL, _IONBF, 0);
     setvbuf(stderr, NULL, _IONBF, 0);
     
-    // Setup SDL
     SDL_Window* window;
     SDL_GLContext gl_context;
+
     const char* glsl_version;
     {
         std::tuple<SDL_Window*, const char*> sdl_ctx;
@@ -164,12 +164,13 @@ int main(int, char**)
         glsl_version = std::get<1>(sdl_ctx);
         SDL_GL_MakeCurrent(window, gl_context);
     }
+    
     SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL);
-    global_state->m_renderer = renderer;
+    data.global_state.m_renderer = renderer;
 
-    servers = std::make_shared<json>(loadServerList());
-    gui = std::make_shared<json>(loadGUI());
-    presets= std::make_shared<json>(loadPresetList());
+    data.servers = loadServerList();
+    data.gui = loadGUI();
+    data.presets= loadPresetList();
     // Win
     WIN_INIT(websocket_win, WebsocketWindow, windows_array, 0);
     WIN_INIT(camera_list_win, CameraListWindow, windows_array, 1);
@@ -184,19 +185,19 @@ int main(int, char**)
     WIN_INIT(preset_manager_popwin, PresetManagerPopup, pop_windows_array, 5);
     WIN_INIT(media_browser_popwin, MediaBrowserPopup, pop_windows_array, 6);
     // Register event for master
-    master->registerCameraMediaListFeedback(updateMediaList);
-    master->registerCameraSettingFeedback(settingGetterFeedback);
-    master->registerCameraStatusFeedback(statusGetterFeedback);
-    master->registerCameraHWFeedback(hwGetterFeedback);
-    master->registerCameraLogFeedback(assign_log);
-    master->registerSavePreset(updatePresetList);
-    master->set_preset_data(presets);
-    master->registerApplyAllFeedback(applyAllFeedback);
-    preview_popwin->register_setting_drawer(InspectorWindow::global_draw_setting);
-    preview_popwin->register_protune_drawer(InspectorWindow::global_draw_protune);
-    global_state->update_server = updateServerList;
-    global_state->update_preset = updatePresetList;
-    global_state->command_sender = pushCommand;
+    data.master->registerCameraMediaListFeedback(updateMediaList);
+    data.master->registerCameraSettingFeedback(settingGetterFeedback);
+    data.master->registerCameraStatusFeedback(statusGetterFeedback);
+    data.master->registerCameraHWFeedback(hwGetterFeedback);
+    data.master->registerCameraLogFeedback(assign_log);
+    data.master->registerSavePreset(updatePresetList);
+    data.master->set_preset_data(presets);
+    data.master->registerApplyAllFeedback(applyAllFeedback);
+    data.preview_popwin->register_setting_drawer(InspectorWindow::global_draw_setting);
+    data.preview_popwin->register_protune_drawer(InspectorWindow::global_draw_protune);
+    data.global_state.update_server = update_server_list;
+    data.global_state.update_preset = update_preset_list;
+    data.global_state.command_sender = push_command;
     std::thread bg_thread(background_worker);
 
     setup_imgui();

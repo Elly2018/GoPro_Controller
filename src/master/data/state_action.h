@@ -8,23 +8,15 @@
 #ifndef DATA_STATE_ACTION_H
 #define DATA_STATE_ACTION_H
 #include <nlohmann/json.hpp>
+#include "app.h"
 
 using json = nlohmann::json;
 
-struct GlobalState;
-struct GoProMaster;
-struct BaseWindow;
-struct BasePopWindow;
+struct Global_state;
+struct Gopro_master;
 
-extern "C" void init_state_setup(
-    std::shared_ptr<json> servers,
-    std::shared_ptr<json> gui,
-    std::shared_ptr<struct GlobalState> global_state,
-    std::shared_ptr<struct GoProMaster> master,
-    std::shared_ptr<struct BaseWindow> windows[],
-    std::shared_ptr<struct BasePopWindow> popwins[]
-);
-extern "C" json get_global_state_data(struct GlobalState& data);
-extern "C" void set_global_state_data(struct GlobalState& data, json refs);
+void init_state_setup(json servers, json gui, AppData& app);
+json get_global_state_data(struct GlobalState& data);
+void set_global_state_data(struct GlobalState& data, json refs);
 
 #endif

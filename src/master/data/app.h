@@ -17,19 +17,34 @@ using json = nlohmann::json;
 struct AppData
 {
     std::queue<std::string> command_queue;
-    GoProMaster master;
-    GlobalState global_state;
+    Gopro_master master;
+    Global_state global_state;
     json gui;
     json servers;
     json presets;
 
-    CameraListWindow camera_list_win;
-    InspectorWindow inspector_win;
-    WebsocketWindow websocket_win;
-    StyleSetting style_setting_win;
-    BaseWindow windows_array[4];
+    union {
+        Camera_list_window camera_list_window;
+        Gopro_master_window camera_list_window_base;
+    };
+    union {
+        Inspector_window inspector_window;
+        Gopro_master_window inspector_window_base;
+    };
+    union {
+        Websocket_window websocket_window;
+        Gopro_master_window websocket_window_base;
+    };
+    union {
+        Style_window style_window;
+        Gopro_master_window style_window_base;
+    };
+    Gopro_master_window* windows_array[4];
 
-    AddCameraPopup add_camera_popwin;
+    union {
+        Add_camera_popup add_camera_popup_window;
+        Gopro_master_popup_window add_camera_popup_window_base;
+    }
     ScanCameraPopup scan_camera_popwin;
     StartWebcamPopup start_webcam_popwin;
     PreviewPopup preview_popwin;

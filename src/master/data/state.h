@@ -19,14 +19,14 @@ enum class InspectorObjectType {
     Camera
 };
 
-struct MediaInfo {
+struct Media_info {
     std::string filename;
     uint32_t created;
     uint32_t modified;
     size_t size;
 };
 
-struct GlobalState {
+struct Global_state {
     SDL_Renderer* m_renderer;
     bool done;
     int32_t applying_all_count = 0;
