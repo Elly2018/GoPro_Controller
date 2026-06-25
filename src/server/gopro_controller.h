@@ -69,49 +69,49 @@ struct gopro_controller {
   bool scanning;
 };
 
-void gopro_controller_init(gopro_controller& controller) noexcept;
-void gopro_controller_dispose(gopro_controller& controller) noexcept;
-void gopro_controller_update(gopro_controller& controller) noexcept;
-void gopro_controller_ping(gopro_controller& controller) noexcept;
+void gopro_controller_init(gopro_controller& controller);
+void gopro_controller_dispose(gopro_controller& controller);
+void gopro_controller_update(gopro_controller& controller);
+void gopro_controller_ping(gopro_controller& controller);
 
-void gopro_controller_scanCameras(gopro_controller& controller) noexcept;
-void gopro_controller_cleanCameras(gopro_controller& controller) noexcept;
-void gopro_controller_renameCameras(gopro_controller& controller, const std::string ip, const std::string name) noexcept;
-void gopro_controller_addCameras(gopro_controller& controller, const std::string serial) noexcept;
-void gopro_controller_deleteCameras(gopro_controller& controller, const std::string ip) noexcept;
+void gopro_controller_scanCameras(gopro_controller& controller);
+void gopro_controller_cleanCameras(gopro_controller& controller);
+void gopro_controller_renameCameras(gopro_controller& controller, const std::string ip, const std::string name);
+void gopro_controller_addCameras(gopro_controller& controller, const std::string serial);
+void gopro_controller_deleteCameras(gopro_controller& controller, const std::string ip);
 
-void gopro_controller_set_preset(gopro_controller& controller, const std::string target, const int32_t mode) noexcept;
-void gopro_controller_reboot(gopro_controller& controller, const std::string target) noexcept;
-void gopro_controller_shutdown(gopro_controller& controller, const std::string target) noexcept;
-void gopro_controller_keep_alive(gopro_controller& controller, const std::string target) noexcept;
-void gopro_controller_usb(gopro_controller& controller, const std::string target, const bool is_on) noexcept;
-void gopro_controller_datetime(gopro_controller& controller, const std::string target) noexcept;
-void gopro_controller_zoom(gopro_controller& controller, const std::string target, const int32_t value) noexcept;
-void gopro_controller_shutter(gopro_controller& controller, const std::string target, const bool is_start) noexcept;
-void gopro_controller_locate(gopro_controller& controller, const std::string target, const bool is_on) noexcept;
-json gopro_controller_get_IPs(gopro_controller& controller) noexcept;
+void gopro_controller_set_preset(gopro_controller& controller, const std::string target, const int32_t mode);
+void gopro_controller_reboot(gopro_controller& controller, const std::string target);
+void gopro_controller_shutdown(gopro_controller& controller, const std::string target);
+void gopro_controller_keep_alive(gopro_controller& controller, const std::string target);
+void gopro_controller_usb(gopro_controller& controller, const std::string target, const bool is_on);
+void gopro_controller_datetime(gopro_controller& controller, const std::string target);
+void gopro_controller_zoom(gopro_controller& controller, const std::string target, const int32_t value);
+void gopro_controller_shutter(gopro_controller& controller, const std::string target, const bool is_start);
+void gopro_controller_locate(gopro_controller& controller, const std::string target, const bool is_on);
+json gopro_controller_get_IPs(gopro_controller& controller);
   
-json gopro_controller_query_status(gopro_controller& controller, const std::string target) noexcept;
-json gopro_controller_set_setting(gopro_controller& controller, const std::string target, const int32_t ID, const std::string value) noexcept;
-json gopro_controller_set_setting_preset(gopro_controller& controller, const std::string source, const std::string target, const int32_t preset, const json value) noexcept;
-void gopro_controller_set_setting_cancel(gopro_controller& controller) noexcept;
+json gopro_controller_query_status(gopro_controller& controller, const std::string target);
+json gopro_controller_set_setting(gopro_controller& controller, const std::string target, const int32_t ID, const std::string value);
+json gopro_controller_set_setting_preset(gopro_controller& controller, const std::string source, const std::string target, const int32_t preset, const json value);
+void gopro_controller_set_setting_cancel(gopro_controller& controller);
 
-void gopro_controller_webcam_mode(gopro_controller& controller, const std::string target) noexcept;
-void gopro_controller_webcam_mode_off(gopro_controller& controller, const std::string target) noexcept;
-void gopro_controller_webcam_on(gopro_controller& controller, const std::string target, const int32_t start_port, const int32_t res, const int32_t fov, const bool ts) noexcept;
-void gopro_controller_webcam_off(gopro_controller& controller, const std::string target) noexcept;
-json gopro_controller_webcam_status(gopro_controller& controller, const std::string target) noexcept;
-json gopro_controller_webcam_version(gopro_controller& controller, const std::string target) noexcept;
+void gopro_controller_webcam_mode(gopro_controller& controller, const std::string target);
+void gopro_controller_webcam_mode_off(gopro_controller& controller, const std::string target);
+void gopro_controller_webcam_on(gopro_controller& controller, const std::string target, const int32_t start_port, const int32_t res, const int32_t fov, const bool ts);
+void gopro_controller_webcam_off(gopro_controller& controller, const std::string target);
+json gopro_controller_webcam_status(gopro_controller& controller, const std::string target);
+json gopro_controller_webcam_version(gopro_controller& controller, const std::string target);
 
-void gopro_controller_preview_on(gopro_controller& controller, const std::string target, const int32_t port) noexcept;
-void gopro_controller_preview_off(gopro_controller& controller, const std::string target) noexcept;
+void gopro_controller_preview_on(gopro_controller& controller, const std::string target, const int32_t port);
+void gopro_controller_preview_off(gopro_controller& controller, const std::string target);
 
-json gopro_controller_get_media_list(gopro_controller& controller, const std::string target) noexcept;
-json gopro_controller_get_last_media(gopro_controller& controller, const std::string target) noexcept;
-std::string gopro_controller_get_fetch_URL(gopro_controller& controller, const std::string target_ip, const bool is_local) noexcept;
-std::string gopro_controller_get_filename_fetch_URL(gopro_controller& controller, const std::string target_ip, const std::string filename, bool is_local) noexcept;
-std::vector<SingleResponse> gopro_controller_get_filename_fetch_IRL(gopro_controller& controller, const std::string target_ip, const std::vector<std::string> filenames, const bool is_local) noexcept;
-std::string gopro_controller_get_thumbnail_data(gopro_controller& controller, const std::string target_ip, const std::string path, const bool is_local) noexcept;
-std::string gopro_controller_get_media_info_data(gopro_controller& controller, const std::string target_ip, const std::string path, const bool is_local) noexcept;
+json gopro_controller_get_media_list(gopro_controller& controller, const std::string target);
+json gopro_controller_get_last_media(gopro_controller& controller, const std::string target);
+std::string gopro_controller_get_fetch_URL(gopro_controller& controller, const std::string target_ip, const bool is_local);
+std::string gopro_controller_get_filename_fetch_URL(gopro_controller& controller, const std::string target_ip, const std::string filename, bool is_local);
+std::vector<SingleResponse> gopro_controller_get_filename_fetch_IRL(gopro_controller& controller, const std::string target_ip, const std::vector<std::string> filenames, const bool is_local);
+std::string gopro_controller_get_thumbnail_data(gopro_controller& controller, const std::string target_ip, const std::string path, const bool is_local);
+std::string gopro_controller_get_media_info_data(gopro_controller& controller, const std::string target_ip, const std::string path, const bool is_local);
 
 #endif

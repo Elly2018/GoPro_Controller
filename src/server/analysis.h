@@ -13,11 +13,11 @@
 
 using json = nlohmann::json;
 
-void Execute_command(gopro_controller& controller, const WebSocketChannelPtr &channel, json j) noexcept;
-void Query_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j) noexcept;
-void Webcam_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j) noexcept;
-void Mode_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j) noexcept;
-void Media_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j) noexcept;
-void Preview_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j) noexcept;
+void Execute_command(gopro_controller& controller, const WebSocketChannelPtr &channel, json j);
+void Query_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j);
+void Webcam_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j);
+void Mode_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j);
+void Media_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j);
+void Preview_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j);
 
 #endif

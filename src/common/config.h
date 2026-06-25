@@ -15,4 +15,6 @@ static constexpr bool SERVER_MEDIA_DOWNLOAD_LOG = true;
  */
 static constexpr float SERVER_MEDIA_DOWNLOAD_PERIOD = 1.0f;
 
+static constexpr char* SERVER_CLIENT_RECORD_FILENAME = "record.txt";
+
 #endif

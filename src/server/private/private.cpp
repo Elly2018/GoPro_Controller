@@ -6,20 +6,22 @@
 */
 #include "../gopro_controller_local.h"
 #include "../gopro_controller.h"
+#include "../../common/config.h"
 #include <fstream>
 #include <vector>
 #include <string>
 
-void gopro_controller_local_loadRecord(gopro_controller& controller) noexcept{
-    std::string homedir = "";
-    homedir += "record.txt";
-    std::cout << "Trying load data from: " << homedir << std::endl;
-    std::ifstream inFile(homedir.c_str());
+void gopro_controller_local_load_record(gopro_controller& controller) {
+    std::cout << "Trying load data from: " << SERVER_CLIENT_RECORD_FILENAME << std::endl;
+    std::ifstream inFile(SERVER_CLIENT_RECORD_FILENAME);
+
     if (!inFile.is_open()) {
         std::cerr << "Error: Could not open the file: " << homedir << std::endl;
-        return; // Return with an error code
+        return;
     }
+
     std::string line;
+
     while (std::getline(inFile, line)) {
         std::vector<std::string> words = std::vector<std::string>();
         std::stringstream ss(line);
@@ -37,7 +39,7 @@ void gopro_controller_local_loadRecord(gopro_controller& controller) noexcept{
     inFile.close();
 }
 
-void GoProController::_updateRecord(){
+void gopro_controller_local_update_record(gopro_controller& controller) {
     std::string homedir = "";
     homedir += "record.txt";
     std::cout << "Trying export data to: " << homedir << std::endl;

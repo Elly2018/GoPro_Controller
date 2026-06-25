@@ -23,7 +23,7 @@
 #include <iostream>
 #include <vector>
 
-void Websocket_server(AppData &data) noexcept
+void Websocket_server(AppData &data) 
 {
 	std::cout << "Starting GoPro Server (RPi)..." << std::endl;
 	hv::WebSocketService ws;
@@ -100,7 +100,7 @@ void Websocket_server(AppData &data) noexcept
 	server.run();
 }
 
-void Http_server() noexcept
+void Http_server() 
 {
 	hv::HttpService router;
 	///
@@ -123,7 +123,7 @@ void Http_server() noexcept
 	http_server.run();
 }
 
-void UDP_proxy_server() noexcept
+void UDP_proxy_server() 
 {
 	std::cout << "Starting GoPro UDP Proxy Server (RPi)..." << std::endl;
 	static hv::UdpServer us;

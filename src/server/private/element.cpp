@@ -7,7 +7,7 @@
 #include "../gopro_controller_local.h"
 #include "../gopro_controller.h"
 
-bool gopro_controller_local_element_exist(gopro_controller& controller, const std::string ip, bool should_be_alive) noexcept {
+bool gopro_controller_local_element_exist(gopro_controller& controller, const std::string ip, bool should_be_alive) {
     for(int32_t i = 0; i < controller.client_limit; i++){
         const gopro_element &e = controller.camera_elements.at(i);
         if(!e.exist) continue;
@@ -17,7 +17,7 @@ bool gopro_controller_local_element_exist(gopro_controller& controller, const st
     return false;
 }
 
-int32_t gopro_controller_local_element_add(gopro_controller& controller, const std::string ip) noexcept {
+int32_t gopro_controller_local_element_add(gopro_controller& controller, const std::string ip) {
     for(int32_t i = 0; i < controller.client_limit; i++){
         const gopro_element &e = controller.camera_elements.at(i);
         if(e.exist) continue;
@@ -31,7 +31,7 @@ int32_t gopro_controller_local_element_add(gopro_controller& controller, const s
     return -1;
 }
 
-bool gopro_controller_local_element_remove(gopro_controller& controller, const std::string ip) noexcept {
+bool gopro_controller_local_element_remove(gopro_controller& controller, const std::string ip) {
     for(int32_t i = 0; i < controller.client_limit; i++){
         const gopro_element &e = controller.camera_elements.at(i);
         if(!e.exist) continue;
@@ -44,7 +44,7 @@ bool gopro_controller_local_element_remove(gopro_controller& controller, const s
     return false;
 }
 
-bool gopro_controller_local_element_clean(gopro_controller& controller) noexcept {
+bool gopro_controller_local_element_clean(gopro_controller& controller) {
     for(int32_t i = 0; i < controller.client_limit; i++){
         const gopro_element &e = controller.camera_elements.at(i);
         e.exist = false;
@@ -52,7 +52,7 @@ bool gopro_controller_local_element_clean(gopro_controller& controller) noexcept
     return true;
 }
 
-int32_t gopro_controller_local_element_have_slot(gopro_controller& controller) noexcept {
+int32_t gopro_controller_local_element_have_slot(gopro_controller& controller) {
     for(int32_t i = 0; i < controller.client_limit; i++){
         const gopro_element &e = controller.camera_elements.at(i);
         if(!e.exist) return i;
@@ -60,7 +60,7 @@ int32_t gopro_controller_local_element_have_slot(gopro_controller& controller) n
     return -1;
 }
 
-int32_t gopro_controller_local_element_find(gopro_controller& controller, const std::string ip) noexcept {
+int32_t gopro_controller_local_element_find(gopro_controller& controller, const std::string ip) {
     for(int32_t i = 0; i < controller.client_limit; i++){
         const gopro_element &e = controller.camera_elements.at(i);
         if(!e.exist) continue;
@@ -69,7 +69,7 @@ int32_t gopro_controller_local_element_find(gopro_controller& controller, const 
     return -1;
 }
 
-std::vector<std::string> gopro_controller_local_element_alives(gopro_controller& controller) noexcept {
+std::vector<std::string> gopro_controller_local_element_alives(gopro_controller& controller) {
     std::vector<std::string> buffer;
     for(int32_t i = 0; i < controller.client_limit; i++){
         const gopro_element &e = controller.camera_elements.at(i);
@@ -79,7 +79,7 @@ std::vector<std::string> gopro_controller_local_element_alives(gopro_controller&
     return buffer;
 }
 
-void gopro_controller_local_element_set_hw(gopro_controller& controller, const std::string ip, json value) noexcept {
+void gopro_controller_local_element_set_hw(gopro_controller& controller, const std::string ip, json value) {
     int32_t index = gopro_controller_local_element_find(controller, ip);
     if(index == -1) return;
 
@@ -91,7 +91,7 @@ void gopro_controller_local_element_set_hw(gopro_controller& controller, const s
     e.hw[len] = '\0';
 }
 
-json gopro_controller_local_element_get_hw(gopro_controller& controller, const std::string ip) noexcept {
+json gopro_controller_local_element_get_hw(gopro_controller& controller, const std::string ip) {
     int32_t index = gopro_controller_local_element_find(controller, ip);
     if(index == -1) return json::object();
 

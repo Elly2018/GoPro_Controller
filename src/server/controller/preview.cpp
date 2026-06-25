@@ -9,7 +9,7 @@
 #include <vector>
 #include <string>
 
-void gopro_controller_preview_on(gopro_controller& controller, const std::string target, const int32_t port) noexcept {
+void gopro_controller_preview_on(gopro_controller& controller, const std::string target, const int32_t port) {
     if(target.size() > 0) {
         gopro_controller_local_preview_on(controller, target, port); 
         return;
@@ -18,7 +18,7 @@ void gopro_controller_preview_on(gopro_controller& controller, const std::string
     gopro_controller_local_preview_on(controller, buffer, port);
 }
 
-void gopro_controller_preview_off(gopro_controller& controller, const std::string target) noexcept {
+void gopro_controller_preview_off(gopro_controller& controller, const std::string target) {
     if(target.size() > 0) {
         gopro_controller_local_preview_off(controller, target); 
         return;

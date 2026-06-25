@@ -11,7 +11,7 @@
 #include <algorithm>
 #include <iterator>
 
-json gopro_controller_query_status(gopro_controller& controller, const std::string target) noexcept{
+json gopro_controller_query_status(gopro_controller& controller, const std::string target){
     json arr = json::array();
     if(target.size() > 0){
         SingleResponse status_result = gopro_controller_local_query_status(controller, target);
@@ -39,7 +39,7 @@ json gopro_controller_query_status(gopro_controller& controller, const std::stri
     return arr;
 }
 
-json gopro_controller_set_setting(gopro_controller& controller, const std::string target, const int32_t ID, const std::string value) noexcept {
+json gopro_controller_set_setting(gopro_controller& controller, const std::string target, const int32_t ID, const std::string value) {
     json arr = json::array();
     if(target.size() > 0){
         SingleResponse result = gopro_controller_local_set_setting(controller, target, ID, value);
@@ -60,7 +60,7 @@ json gopro_controller_set_setting(gopro_controller& controller, const std::strin
     return arr;
 }
 
-json gopro_controller_set_setting_preset(gopro_controller& controller, const std::string source, const std::string target, const int32_t preset, const json value) noexcept {
+json gopro_controller_set_setting_preset(gopro_controller& controller, const std::string source, const std::string target, const int32_t preset, const json value) {
     json arr = json::array();
     controller.applying_cancel = false;
     if(target.size() > 0){ 
@@ -87,6 +87,6 @@ json gopro_controller_set_setting_preset(gopro_controller& controller, const std
     return arr;
 }
 
-void gopro_controller_set_setting_cancel(gopro_controller& controller) noexcept {
+void gopro_controller_set_setting_cancel(gopro_controller& controller) {
     controller.applying_cancel = true;
 }

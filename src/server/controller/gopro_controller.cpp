@@ -13,25 +13,25 @@
 #include <future>
 #include "icmplib.h"
 
-void gopro_controller_init(gopro_controller& controller) noexcept {
+void gopro_controller_init(gopro_controller& controller) {
     curl_global_init(CURL_GLOBAL_DEFAULT);
     controller.ping_thread = std::thread(gopro_controller_ping, controller)
     controller.ping_thread_state = Thread_state::PROCESSING;
     gopro_controller_local_loadRecord(controller);
 }
 
-void gopro_controller_dispose(gopro_controller& controller) noexcept {
+void gopro_controller_dispose(gopro_controller& controller) {
     controller.shutdown = true;
     if(controller.ping_thread.joinable()){
         controller.ping_thread.join();
     }
 }
 
-void gopro_controller_update(gopro_controller& controller) noexcept {
+void gopro_controller_update(gopro_controller& controller) {
     
 }
 
-void gopro_controller_ping(gopro_controller& controller) noexcept {
+void gopro_controller_ping(gopro_controller& controller) {
     while(!controller.shutdown) {
         for(int32_t i = 0; i < controller.client_limit; i++){
             const gopro_element &e = controller.camera_elements.at(i);

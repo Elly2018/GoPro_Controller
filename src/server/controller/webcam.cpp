@@ -11,7 +11,7 @@
 #include <thread>
 #include <future>
 
-void gopro_controller_webcam_mode(gopro_controller& controller, const std::string target) noexcept {
+void gopro_controller_webcam_mode(gopro_controller& controller, const std::string target) {
     if(target.size() > 0) {
         gopro_controller_local_webcam_mode(controller, target); 
         return;
@@ -20,7 +20,7 @@ void gopro_controller_webcam_mode(gopro_controller& controller, const std::strin
     gopro_controller_local_webcam_mode(controller, buffer); 
 }
 
-void gopro_controller_webcam_mode_off(gopro_controller& controller, const std::string target) noexcept {
+void gopro_controller_webcam_mode_off(gopro_controller& controller, const std::string target) {
     if(target.size() > 0) {
         gopro_controller_local_webcam_mode_off(controller, target); 
         return;
@@ -29,7 +29,7 @@ void gopro_controller_webcam_mode_off(gopro_controller& controller, const std::s
     gopro_controller_local_webcam_mode_off(controller, buffer); 
 }
 
-void gopro_controller_webcam_on(gopro_controller& controller, const std::string target, const int32_t start_port, const int32_t res, const int32_t fov, const bool ts) noexcept {
+void gopro_controller_webcam_on(gopro_controller& controller, const std::string target, const int32_t start_port, const int32_t res, const int32_t fov, const bool ts) {
     if(target.size() > 0) {
         gopro_controller_local_webcam_on(controller, target, start_port, res, fov, ts); 
         return;
@@ -38,7 +38,7 @@ void gopro_controller_webcam_on(gopro_controller& controller, const std::string 
     gopro_controller_local_webcam_on(controller, buffer, start_port, res, fov, ts); 
 }
 
-void gopro_controller_webcam_off(gopro_controller& controller, const std::string target) noexcept {
+void gopro_controller_webcam_off(gopro_controller& controller, const std::string target) {
     if(target.size() > 0) {
         gopro_controller_local_webcam_off(controller, target); 
         return;
@@ -47,7 +47,7 @@ void gopro_controller_webcam_off(gopro_controller& controller, const std::string
     gopro_controller_local_webcam_off(controller, buffer); 
 }
 
-json gopro_controller_webcam_status(gopro_controller& controller, const std::string target) noexcept {
+json gopro_controller_webcam_status(gopro_controller& controller, const std::string target) {
     json arr = json::array();
     if(target.size() > 0){
         SingleResponse result = gopro_controller_local_webcam_status(controller, target);
@@ -69,7 +69,7 @@ json gopro_controller_webcam_status(gopro_controller& controller, const std::str
     return arr;
 }
 
-json gopro_controller_webcam_version(gopro_controller& controller, const std::string target) noexcept {
+json gopro_controller_webcam_version(gopro_controller& controller, const std::string target) {
     json res;
     std::string address;
     json arr = json::array();

@@ -5,8 +5,8 @@
  * See the LICENSE file in the project root for more information.
 */
 #pragma once
-#ifndef THREAD_SAFE_QUEUE_H
-#define THREAD_SAFE_QUEUE_H
+#ifndef GCG_THREAD_SAFE_QUEUE_H
+#define GCG_THREAD_SAFE_QUEUE_H
 #include <queue>
 #include <mutex>
 #include <condition_variable>

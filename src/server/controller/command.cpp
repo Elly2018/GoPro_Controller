@@ -9,7 +9,7 @@
 #include <string>
 #include <thread>
 
-void gopro_controller_set_preset(gopro_controller& controller, const std::string target, const int32_t mode) noexcept {
+void gopro_controller_set_preset(gopro_controller& controller, const std::string target, const int32_t mode) {
     if(target.size() > 0){
         gopro_controller_local_set_sreset(controller, target, mode);
         return;
@@ -18,7 +18,7 @@ void gopro_controller_set_preset(gopro_controller& controller, const std::string
     gopro_controller_local_set_preset(controller, buffer, mode);
 }
 
-void gopro_controller_reboot(gopro_controller& controller, const std::string target) noexcept {
+void gopro_controller_reboot(gopro_controller& controller, const std::string target) {
     if(target.size() > 0) {
         gopro_controller_local_reboot(controller, target); 
         return;
@@ -27,7 +27,7 @@ void gopro_controller_reboot(gopro_controller& controller, const std::string tar
     gopro_controller_local_reboot(controller, buffer);
 }
 
-void gopro_controller_shutdown(gopro_controller& controller, const std::string target) noexcept {
+void gopro_controller_shutdown(gopro_controller& controller, const std::string target) {
     if(target.size() > 0) {
         gopro_controller_local_shutdown(controller, target);
         return;
@@ -36,7 +36,7 @@ void gopro_controller_shutdown(gopro_controller& controller, const std::string t
     gopro_controller_local_shutdown(controller, buffer);
 }
 
-void gopro_controller_keep_alive(gopro_controller& controller, const std::string target) noexcept {
+void gopro_controller_keep_alive(gopro_controller& controller, const std::string target) {
     if(target.size() > 0) {
         gopro_controller_local_keep_alive(controller, target);
         return;
@@ -45,7 +45,7 @@ void gopro_controller_keep_alive(gopro_controller& controller, const std::string
     gopro_controller_local_keep_alive(controller, buffer);
 }
 
-void gopro_controller_usb(gopro_controller& controller, const std::string target, const bool is_on) noexcept {
+void gopro_controller_usb(gopro_controller& controller, const std::string target, const bool is_on) {
     if(target.size() > 0) {
         gopro_controller_local_usb(controller, target, is_on);
         return;
@@ -54,7 +54,7 @@ void gopro_controller_usb(gopro_controller& controller, const std::string target
     gopro_controller_local_usb(controller, buffer, is_on);
 }
 
-void gopro_controller_datetime(gopro_controller& controller, const std::string target) noexcept {
+void gopro_controller_datetime(gopro_controller& controller, const std::string target) {
     if(target.size() > 0) {
         gopro_controller_local_datetime(controller, target);
         return;
@@ -63,7 +63,7 @@ void gopro_controller_datetime(gopro_controller& controller, const std::string t
     gopro_controller_local_datetime(controller, buffer);
 }
 
-void gopro_controller_zoom(gopro_controller& controller, const std::string target, const int32_t value) noexcept {
+void gopro_controller_zoom(gopro_controller& controller, const std::string target, const int32_t value) {
     if(target.size() > 0) {
         gopro_controller_local_zoom(controller, target, value);
         return;
@@ -72,7 +72,7 @@ void gopro_controller_zoom(gopro_controller& controller, const std::string targe
     gopro_controller_local_zoom(controller, buffer, value);
 }
 
-void gopro_controller_shutter(gopro_controller& controller, const std::string target, const bool is_start) noexcept {
+void gopro_controller_shutter(gopro_controller& controller, const std::string target, const bool is_start) {
     if(target.size() > 0) {
         gopro_controller_local_shutter(controller, target, is_start);
         return;
@@ -81,13 +81,13 @@ void gopro_controller_shutter(gopro_controller& controller, const std::string ta
     gopro_controller_local_shutter(controller, buffer, is_start);
 }
 
-void gopro_controller_locate(gopro_controller& controller, const std::string target, const bool is_on) noexcept {
+void gopro_controller_locate(gopro_controller& controller, const std::string target, const bool is_on) {
     if(target.size() > 0) {
         gopro_controller_local_locate(target, is_on); 
     }
 }
 
-json gopro_controller_get_IPs(gopro_controller& controller) noexcept {
+json gopro_controller_get_IPs(gopro_controller& controller) {
     json result = json::array();
     for(int32_t i = 0; i < controller.client_limit; i++){
         const gopro_element &e = controller.camera_elements.at(i);
