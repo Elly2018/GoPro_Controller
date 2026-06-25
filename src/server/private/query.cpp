@@ -105,12 +105,7 @@ std::vector<SingleResponse> gopro_controller_local_set_setting_utility(gopro_con
     }
 
     gopro_element &e = controller.camera_elements.at(index);
-    std::string_view sv = e.hw;
-    if(!json::accept(sv)) {
-        return r;
-    }
-
-    target_hw = json::parse(sv);
+    target_hw = e.hw;
     target_model = gopro_controller_local_get_current_model(controller, target_hw);
     
     if(res["model"].is_number()){

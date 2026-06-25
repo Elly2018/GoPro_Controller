@@ -37,13 +37,12 @@ enum class Thread_state {
 struct gopro_element {
   static constexpr uint64_t ip_str_length = 24UL;
   static constexpr uint64_t name_str_length = 256UL;
-  static constexpr uint64_t hw_str_length = 1024UL;
 
   bool exist;
   bool alive;
   char ip[ip_str_length];
   char name[name_str_length];
-  char hw[hw_str_length];
+  json hw;
 };
 
 struct gopro_controller {

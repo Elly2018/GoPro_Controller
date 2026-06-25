@@ -85,11 +85,7 @@ void gopro_controller_local_element_set_HW(gopro_controller& controller, const s
     if(index == -1) return;
 
     gopro_element &e = controller.camera_elements.at(index);
-
-    std::string dumped = value.dump();
-
-    uint64_t len = dumped.copy(e.hw, sizeof(e.hw) - 1);
-    e.hw[len] = '\0';
+    e.hw = value;
 }
 
 json gopro_controller_local_element_get_HW(gopro_controller& controller, const std::string ip) {
@@ -97,10 +93,5 @@ json gopro_controller_local_element_get_HW(gopro_controller& controller, const s
     if(index == -1) return json::object();
 
     const gopro_element &e = controller.camera_elements.at(index);
-    const std::string_view buff = std::string(e.hw);
-    if(!json::accept(buff)) {
-        return json::object();
-    }
-
-    return json::parse(buff);
+    return e.hw;
 }

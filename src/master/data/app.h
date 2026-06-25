@@ -16,12 +16,12 @@ using json = nlohmann::json;
 
 struct AppData
 {
-    std::queue<std::string> command_queue = std::queue<std::string>();
-    GoProMaster master = std::make_shared<GoProMaster>();
+    std::queue<std::string> command_queue;
+    GoProMaster master;
+    GlobalState global_state;
     json gui;
     json servers;
     json presets;
-    GlobalState global_state = std::make_shared<GlobalState>();
 
     CameraListWindow camera_list_win;
     InspectorWindow inspector_win;

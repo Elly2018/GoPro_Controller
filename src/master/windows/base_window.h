@@ -22,6 +22,17 @@ using json = nlohmann::json;
 
 #define w_flag ImGuiWindowFlags_NoCollapse
 
+struct gopro_master_window {
+    bool enable = false;
+    std::shared_ptr<json> setting;
+    std::shared_ptr<GlobalState> state;
+    std::shared_ptr<GoProMaster> master;
+    std::string title = "";
+};
+
+gopro_master_window_init();
+gopro_master_window_dispose();
+
 class BaseWindow {
 public:
     BaseWindow(
