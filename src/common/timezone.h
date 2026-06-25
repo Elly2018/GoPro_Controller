@@ -7,6 +7,10 @@
 #include <chrono>
 #include <ctime>
 
+#ifdef _WIN32
+    #include <windows.h>
+#endif
+
 int32_t get_timezone_offset_minutes() {
 #ifdef _WIN32
     // Windows-specific implementation using Win32 API

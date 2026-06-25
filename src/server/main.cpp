@@ -35,8 +35,10 @@ void Websocket_server(AppData &data)
 		int32_t f = -1;
 		for (int32_t i = 0; i < data.broadcast_addrs.size(); i++)
 		{
-			if (data.broadcast_addrs.at(i).websocket_ip ==
-			channel->peeraddr().c_str())
+			SenderStruct& sss = data.broadcast_addrs.at(i);
+			if(!sss.vaild) continue;
+
+			if (data.broadcast_addrs.at(i).websocket_ip == channel->peeraddr().c_str())
 			{
 				f = i;
 				break;
@@ -54,13 +56,15 @@ void Websocket_server(AppData &data)
 			addd.pop_back();
 			
 			sss.websocket_ip = channel->peeraddr().c_str();
-			sss.host_ip = addd.c_str();
+			uint64_t len = addd.copy(sss.host_ip, sizeof(sss.host_ip) - 1);
+			sss.host_ip[len] = '\0';
 			
 			sss.sock_fd = socket(AF_INET, SOCK_DGRAM, 0);
 			memset(&sss.bcsa, 0, sizeof(sss.bcsa));
 			sss.bcsa.sin_family = AF_INET;
 			sss.bcsa.sin_port = htons(data.broadcast_port);
 			sss.bcsa.sin_addr.s_addr = inet_addr(addd.c_str());
+			sss.vaild = true;
 			
 			data.broadcast_addrs.push_back((sss));
 		}
@@ -78,7 +82,10 @@ void Websocket_server(AppData &data)
 		int32_t f = -1;
 		for (int32_t i = 0; i < data.broadcast_addrs.size(); i++)
 		{
-			if (data.broadcast_addrs.at(i).websocket_ip == channel->peeraddr().c_str())
+			SenderStruct& sss = data.broadcast_addrs.at(i);
+			if(!sss.vaild) continue;
+
+			if (sss.websocket_ip == channel->peeraddr().c_str())
 			{
 				f = i;
 				break;
@@ -88,7 +95,7 @@ void Websocket_server(AppData &data)
 		{
 			SenderStruct &sss = data.broadcast_addrs.at(f);
 			closesocket(sss.sock_fd);
-			data.broadcast_addrs.erase(data.broadcast_addrs.begin() + f);
+			sss.vaild = false;
 		}
 	};
 	
@@ -100,7 +107,7 @@ void Websocket_server(AppData &data)
 	server.run();
 }
 
-void Http_server() 
+void Http_server(AppData &data) 
 {
 	hv::HttpService router;
 	///
@@ -123,7 +130,7 @@ void Http_server()
 	http_server.run();
 }
 
-void UDP_proxy_server() 
+void UDP_proxy_server(AppData &data) 
 {
 	std::cout << "Starting GoPro UDP Proxy Server (RPi)..." << std::endl;
 	static hv::UdpServer us;
@@ -142,7 +149,7 @@ void UDP_proxy_server()
 	
 	us.onMessage = [&](const hv::SocketChannelPtr &channel, hv::Buffer *buf)
 	{
-		std::lock_guard<std::mutex> lock(broadcast_mtx);
+		std::lock_guard<std::mutex> lock(controller.broadcast_mtx);
 		for (auto &sss : data.broadcast_addrs)
 		{
 			#ifdef _WIN32
@@ -192,11 +199,11 @@ int main() {
 
 			data.controller.command_thread_state = Thread_state::PROCESSING;
 
-			const std::string p = data.message_queue.pop();
+			const InboundEvent p = data.message_queue.pop();
 
-			if (json::accept(msg.c_str())) {
+			if (json::accept(p.payload)) {
 				
-				json j = json::parse(msg.c_str());
+				json j = json::parse(p.payload);
 				
 				if (j["key"].get<std::string>() == "command")
 				{
@@ -224,7 +231,7 @@ int main() {
 				}
 			}
 		}
-		gopro_controller_update(data.controller)
+		gopro_controller_update(data.controller);
 	}
 
 	t3.join();

@@ -7,9 +7,6 @@
 #pragma once
 #ifndef GOPRO_CONTROLLER_H
 #define GOPRO_CONTROLLER_H
-
-#include "../common/camera_code.h"
-#include "../common/iphelper.h"
 #include "hv/requests.h"
 #include "mdns_cpp/logger.hpp"
 #include "mdns_cpp/mdns.hpp"
@@ -23,9 +20,11 @@
 #include <utility>
 #include <vector>
 #include <array>
+#include "../common/camera_code.h"
+#include "../common/iphelper.h"
+#include "../common/utility.h"
 
 using json = nlohmann::json;
-std::string getPacket(std::string key, json data);
 
 typedef std::pair<std::string, json> SingleResponse;
 

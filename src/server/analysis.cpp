@@ -7,13 +7,7 @@
 #include "analysis.h"
 #include <cinttypes>
 #include "gopro_controller.h"
-
-std::string Get_packet(std::string key, json data) {
-  json response = json::object();
-  response["key"] = key;
-  response["value"] = data;
-  return response.dump();
-}
+#include "../common/utility.h"
 
 void Execute_command(gopro_controller& controller, const WebSocketChannelPtr &channel, json j) {
   std::string resultText = "";
@@ -219,22 +213,22 @@ void Webcam_action(gopro_controller& controller, const WebSocketChannelPtr &chan
   }
 
   if (name == "preview") {
-    controller.webcamMode(target);
+    gopro_controller_webcam_mode(controller, target);
     channel->send(Get_packet("webcam:reboot", r));
   } else if (name == "exit") {
-    controller.webcamUnMode(target);
+    gopro_controller_webcam_mode_off(controller, target);
     channel->send(Get_packet("webcam:exit", r));
   } else if (name == "start") {
-    controller.webcamOn(target, port, res, fov, ts);
+    gopro_controller_webcam_on(controller, target, port, res, fov, ts);
     channel->send(Get_packet("webcam:start", r));
   } else if (name == "stop") {
-    controller.webcamOff(target);
+    gopro_controller_webcam_off(controller, target);
     channel->send(Get_packet("webcam:stop", r));
   } else if (name == "status") {
-    r["data"] = json::parse(controller.webcamStatus(target));
+    r["data"] = controller.gopro_controller_webcam_status(controller, target);
     channel->send(Get_packet("webcam:status", r));
   } else if (name == "version") {
-    r["data"] = json::parse(controller.webcamVersion(target));
+    r["data"] = controller.gopro_controller_webcam_version(controller, target);
     channel->send(Get_packet("webcam:version", r));
   } else {
     channel->send(Get_packet("webcam:unknown", r));

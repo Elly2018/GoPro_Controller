@@ -1,0 +1,4685 @@
+commit 2188cca2a8fd9c31b82ecf895c51364e76f20738
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu Jun 25 09:45:34 2026 +0800
+
+    Fixed more private functions
+
+commit 07d9eb48ae93e5a983dd64d3ea9f0dca6089ed68
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu Jun 25 09:12:06 2026 +0800
+
+    remove noexcept ...
+
+commit 068ee33e5a7437c7c0c738cc7d9b986f4831a1e8
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 24 17:38:02 2026 +0800
+
+    Update define issue
+
+commit 9f0dc84620296e5365aee5f2dffa4803668eba08
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 24 17:21:54 2026 +0800
+
+    Fixed preview func
+
+commit 59ed36cf01301c2c14d4481152dbaf937d354153
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 24 17:18:31 2026 +0800
+
+    Finish webcam part
+
+commit e734fcc1b0cce8275032a6b2d97576eae0f72ef5
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 24 16:52:20 2026 +0800
+
+    Start convert webcam pub func
+
+commit 52962019413285ff430ca5d235bc73274dfc6660
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 24 16:49:35 2026 +0800
+
+    Rename function and refactor to increase readability
+
+commit b9508ce4a2dd5bfa6a2c5381b0340960a26b4970
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 24 16:37:51 2026 +0800
+
+    Slowly convert to functional..
+    Added more gopro element func
+    Added more public func
+
+commit e4299b6b6073ec9f1ca5ca7a4526c148f994a80b
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 24 16:06:44 2026 +0800
+
+    Finish public command for server part codebase
+
+commit 28c43ac8a16a4beb9b074028d40a6ae55eedd423
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 24 14:53:51 2026 +0800
+
+    Finish server camera call
+
+commit 319e1262f82775d24ccc8740588ad76d51c4fbfd
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 24 11:18:41 2026 +0800
+
+    Update main loop from single to poll all event
+
+commit d4a7d12be01f6297a188d4a617159ccca2c48e49
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 24 11:15:29 2026 +0800
+
+    Fixed main
+
+commit 967de2f64f9646777be428d16335c7a601f4b795
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 24 11:08:38 2026 +0800
+
+    Sorting function for gopro server handler classes
+
+commit b4e84529c58fe749e593ee99189e19c1dee2ca56
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 24 10:51:19 2026 +0800
+
+    Finish the Dod in the main file
+
+commit 1c28d013e316e1a9ee11995b5ec160c579a381f1
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 24 09:44:28 2026 +0800
+
+    Converting to DOD
+
+commit dfc9d2e138abe25ab8a8b78cd14389c8f3d59dd4
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 24 09:39:21 2026 +0800
+
+    Slowly convert it
+
+commit 29986150c442a408e977005661a3f631634174bf
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 24 09:08:32 2026 +0800
+
+    F
+
+commit 00c6b6b8996ba382de4966ab461ea4c27df9599a
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 24 09:05:23 2026 +0800
+
+    F
+
+commit 4aa4dfa327d0fef54be7cf9ca60ae77d392008a4
+Merge: 5f240dfb b2bccffe
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Jun 24 09:03:44 2026 +0800
+
+    Merge pull request #53 from Elly2018/v1.1.x
+    
+    First commit
+
+commit b2bccffee28dda3dd228e7f2c06bb83912281ede
+Merge: 0add76ff 5f240dfb
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jun 23 16:15:13 2026 +0800
+
+    Merge branch 'develop' into v1.1.x
+
+commit 5f240dfb5eb7e6bf555ed9e5ab8070fd00e5570b
+Merge: afa81663 42f8d849
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jun 23 14:53:53 2026 +0800
+
+    Merge pull request #54 from Elly2018/dev
+    
+    Dev
+
+commit 42f8d849cef282c6ee501bf550c540271641cdf6
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue Jun 23 14:44:23 2026 +0800
+
+    Trying to make the program safer. i guess, getting JSF reference online. Still trying to transfer this mess to it
+
+commit 18441060236d9fc138ecdcf208638b2a878d131c
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Fri Jun 5 11:09:29 2026 +0800
+
+    Fixed display issue (Camera list)
+
+commit 821e893482284ae24cc84b840e407801d5e7b16c
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Fri Jun 5 10:48:54 2026 +0800
+
+    Added ISO change for mission 1
+
+commit 63de32bc47818ab415297f23010dc9afa8ba9576
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 3 17:24:04 2026 +0800
+
+    Update support
+
+commit 20ac3c62ede0f9d2e6526cb0cf141ff213c25520
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 3 17:18:56 2026 +0800
+
+    Update res
+
+commit c3a02b432ffaf83a40c346e4fc9218f42c5458af
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 3 17:08:42 2026 +0800
+
+    Add mission res id
+
+commit a02d460f4f8d6572fd57bf2b3127735f787c0f21
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 3 16:50:28 2026 +0800
+
+    Update support
+
+commit 91dcdc8e3bb17d9aa755648213e66b725416a940
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Jun 3 16:36:44 2026 +0800
+
+    added support for mission, ID added
+
+commit 0add76ff05bd3859ef8168f211e431c7bf587308
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 12 11:51:38 2026 +0800
+
+    First commit
+
+commit c4d200f40ccfdb259a841537bcd1aebd3f8954b2
+Merge: 77a870d4 afa81663
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 12 11:50:50 2026 +0800
+
+    Merge pull request #52 from Elly2018/develop
+    
+    Develop
+
+commit afa816634f904f35392111356627b04103544164
+Merge: 82973bfd 323debb7
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 12 11:49:51 2026 +0800
+
+    Merge pull request #39 from Elly2018/v1.0.x
+    
+    First wave of debug
+
+commit 323debb700ef4edba96f808fe02a1f1b86091646
+Merge: bdc21da2 d48add70
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 12 11:49:30 2026 +0800
+
+    Merge pull request #50 from Elly2018/v1.0.6
+    
+    Media Browser, Control
+
+commit d48add702dbdce4e16c171eeacdb320152905863
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 12 11:36:10 2026 +0800
+
+    Update version for package config files
+
+commit 31440efdc345b168c0548679b099d16c61395256
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 12 11:30:10 2026 +0800
+
+    Make master access the global state
+
+commit 634422dcf6a6844623b0b9dee1f59934f44f6487
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 12 10:31:52 2026 +0800
+
+    Added thumbnail assign methid
+
+commit f6ef92537152b723985441536eb9564f3c7022c1
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Mon May 11 16:12:38 2026 +0800
+
+    Added thread safe cancel boolean on server side
+
+commit eb4e2798ecca54b65feaab4129fc27f486ef3863
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Mon May 11 16:11:05 2026 +0800
+
+    Added apply cancel
+
+commit 15e9c78a081cfa8888d42f6cc24a15655ab31565
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Fri May 8 10:31:45 2026 +0800
+
+    Update server codebase typo
+
+commit 19d3036e480c82c748837fa0edab874d9cdce19c
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Fri May 8 10:29:16 2026 +0800
+
+    Update response for server
+
+commit 733339a4474013b5cb6c3b64e0c4343e48d294b4
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Fri May 8 10:26:58 2026 +0800
+
+    Update
+
+commit 4cee278c2137e5199072e5da3daccc5a645d730f
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu May 7 18:04:09 2026 +0800
+
+    update same
+
+commit f8eb5114f6a9a945f368175a76bdfc7c40365000
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu May 7 18:02:53 2026 +0800
+
+    Update server media controoler script details
+
+commit f63c36905d51395f2d45263ff5b77dc2f812168b
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu May 7 17:35:38 2026 +0800
+
+    Update server
+
+commit 9a9e77f2b088f7d4612edd1c228f6535cf5a9e47
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu May 7 17:30:35 2026 +0800
+
+    Update master signal send and server d single and d all receiver
+
+commit 373be7afd46a1a6540187044bc465021e18601fa
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu May 7 17:11:38 2026 +0800
+
+    Update singled download media file argument list
+
+commit 6e85ae96ba29fd1247b0df533f2920f41711098a
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu May 7 17:04:08 2026 +0800
+
+    Update process message
+
+commit 8b8ee0b7baefc65333f1221cc9a297a5140e3a33
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu May 7 15:08:01 2026 +0800
+
+    Added more buttons, For meida browser actions
+
+commit 344a55a8014022a616061de778b2a52c81ca7d66
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu May 7 15:01:13 2026 +0800
+
+    Update media browser layout
+
+commit b70027fb6630a35d6164d2a6f539bc519bd22653
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu May 7 15:00:07 2026 +0800
+
+    Help selection for meida browser
+
+commit c375e0c6a2786c4978292cacbcbf3d7e75146a36
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu May 7 14:58:15 2026 +0800
+
+    Successfully create media list in master server
+
+commit 68fef3098420b87c6a6f57baa9a2f8a5070e115b
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu May 7 14:31:59 2026 +0800
+
+    Register media list update event
+
+commit 36b8365617dcdb34145d0cb0d92ddaf1e6f3fb15
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu May 7 13:40:39 2026 +0800
+
+    Added master send media info and list command to server
+
+commit 9abb81e2786e06f96175a480c55cce85f2e9c956
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu May 7 10:11:39 2026 +0800
+
+    Added master function for media
+
+commit 63d7b7fca526299412a8a122e839a567965cfe42
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu May 7 10:10:18 2026 +0800
+
+    Update state structure
+
+commit e0618336ec3d8cf2a84009ae4e7a7946fa38b72b
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu May 7 09:58:29 2026 +0800
+
+    Added media info query method for server
+
+commit 7200bd8e2fb61a890a31cd5b8a7351aa27ee4d18
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 5 16:27:37 2026 +0800
+
+    Added media list fetch
+
+commit 8675227cbe72cd3b4f8ee74b165097ae102175fa
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 5 16:15:09 2026 +0800
+
+    Added base64 encoder function in server side
+
+commit ad03a6202a3aa5667e30bff7cef98e1ceaff9d11
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 5 15:57:12 2026 +0800
+
+    Added server thumbnail entry point
+
+commit b550f793891b65b9f431df1dd044da287018a645
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 5 15:24:21 2026 +0800
+
+    Adjust the media browser
+
+commit e8b5b2a924064bf048a9f2baa9b8b85c292d4103
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 5 15:07:36 2026 +0800
+
+    Fixed file extension issue
+
+commit 4dfd2a3680b7dee37d9376b68cfbaf3c004bb47d
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 5 14:45:24 2026 +0800
+
+    Update media browser size and position calculation
+
+commit be412a5d5f5a7647a55dd35013e143813640ba8b
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 5 14:40:08 2026 +0800
+
+    Added media browser popwin frame
+
+commit 02bfec044f60ca9e7dcb38dd6544dff72dffaf06
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 5 14:33:18 2026 +0800
+
+    First Commit
+
+commit bdc21da201a325ebab03ca4b15445bbe3c07f53d
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 5 14:28:15 2026 +0800
+
+    Update package versions
+
+commit bdca80b70a9f56df6e5aa0a54a91dc0d0b1b0c41
+Merge: 366fdca5 bbaae8a7
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 5 14:25:30 2026 +0800
+
+    Merge pull request #49 from Elly2018/v1.0.5
+    
+    Opimization server cache flow
+
+commit bbaae8a71eca9fc780ed6cc53bd3d150e4dcf423
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 5 14:24:03 2026 +0800
+
+    Fixed copy optimization
+    Fixed name rule issue
+
+commit 66d880775e231990dab325df71d229d08e359c92
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 5 11:28:16 2026 +0800
+
+    Fixed camera list, let it using copy, prevent lock
+
+commit 9d6173a87e0775259b5f0a412a057436af8e3c22
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue May 5 10:35:02 2026 +0800
+
+    Fixed clone
+
+commit d0560a5c5a3aaf62b937fbf19642d234b30f31ec
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Mon May 4 16:29:56 2026 +0800
+
+    First Commit
+
+commit 366fdca56df06d2b485737ed4197b60d24c21539
+Merge: dd7a7b73 2afcf199
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Mon May 4 13:59:55 2026 +0800
+
+    Merge pull request #48 from Elly2018/v1.0.4
+    
+    Camera item name rule And Denosie option
+
+commit 2afcf199e0928e1046813e8ab81a4adf257ab983
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Mon May 4 13:58:01 2026 +0800
+
+    Added denoise option for model 13
+
+commit 04a8d3bc31cebfe8687c5cbbd3778fda349e929a
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Mon May 4 13:51:39 2026 +0800
+
+    Added denoise option
+
+commit bb0ac518ef3f125e7fa3435cd9b5e1bd3a04d6a8
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Mon May 4 13:38:20 2026 +0800
+
+    Update filename updater
+
+commit 32f33f41e65947da8e127ecc27971162b281e53e
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Mon May 4 10:36:20 2026 +0800
+
+    Update download media argument to a struct
+
+commit 84ecfd8a6f40ed0e578d6f742658045ed60f0b0f
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Mon May 4 10:13:35 2026 +0800
+
+    Added media download name rule type
+
+commit 7f000e9dc9fec8c1e4c8e3dd5fcd6d6efbb0daaa
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Mon May 4 09:25:41 2026 +0800
+
+    First commit
+
+commit dd7a7b73aa6915c4174a7609adceb9b3604db740
+Merge: 0536ca94 aa10b43d
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu Apr 30 15:28:11 2026 +0800
+
+    Merge pull request #43 from Elly2018/v1.0.3
+    
+    Sleep mode and cancel apply all
+
+commit aa10b43d4d496b03eb407e74e334e27d93ebfd19
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu Apr 30 15:27:29 2026 +0800
+
+    Added quick apply skipping boolean in server side
+
+commit 4f4f6964ae9682d41bed693e1689bb95ae16fdca
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu Apr 30 14:49:12 2026 +0800
+
+    Update roadmap in readme
+
+commit cbe44a83353aa53228ad8d70c3a6ee0bbe3e03a4
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu Apr 30 14:43:23 2026 +0800
+
+    Tryinf to fixed FPS issue again..
+
+commit 2feab32473e13c8da7106887a650962f27ccae93
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu Apr 30 14:11:28 2026 +0800
+
+    Added keep alive command at last_media query
+
+commit a9c0080fbced192ba0edecc8ff09d98d79e847cd
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu Apr 30 10:41:31 2026 +0800
+
+    First commit
+
+commit 0536ca942158922e1e36e32ddd1cfd0bd2b10872
+Merge: c91d5986 976a7356
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu Apr 30 10:35:42 2026 +0800
+
+    Merge pull request #41 from Elly2018/v1.0.2
+    
+    Cross apply preset, model 13 and model 12
+
+commit 976a7356df96aa840d7bf19ae2a4f122deb4fc29
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu Apr 30 10:33:05 2026 +0800
+
+    Master fixed the process message filter for query:get
+
+commit 1ed72aa0d481397d0a9681717d7f5699d328ba2d
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu Apr 30 10:00:53 2026 +0800
+
+    Fixed
+
+commit 3db64c814e5b5863e25540f17edb9ec517f589ab
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Apr 29 17:16:42 2026 +0800
+
+    First Commit
+
+commit c91d598616243d6af2788304b1c85cbdaf86a3ef
+Merge: fffa55fe d0c378a3
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Apr 29 17:15:53 2026 +0800
+
+    Merge pull request #40 from Elly2018/v1.0.1
+    
+    IP Conflict and disconnect crash fixing branch
+
+commit d0c378a38a7b09c5bdb92cd41c9c9a25f96c0fb3
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Apr 29 16:36:19 2026 +0800
+
+    Update replaceCameraFromServer
+
+commit 476be6c8299208a16a0d7ef3bde2e925a1d0f55c
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Apr 29 16:27:11 2026 +0800
+
+    Remove hosts
+
+commit bb298047240478b93a96d4061b12b62eaaed90c7
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Apr 29 16:25:45 2026 +0800
+
+    update onclose part
+
+commit 687aa3561b8eabfaeb795ffed8c7fecea1ed19c0
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Apr 29 16:07:11 2026 +0800
+
+    Fixed master findCamera return probably -1 issue in process message method
+
+commit db77e5ed9dcff7e6364e2819d89eb2f48054e898
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Apr 29 15:58:46 2026 +0800
+
+    Update find camera method
+
+commit f5cee130e4afb9d5501157493ace27afef2cdb42
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Apr 29 15:52:09 2026 +0800
+
+    First commit
+
+commit fffa55fea227bfc18404f9fa1084c57686d12a75
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Wed Apr 29 14:02:51 2026 +0800
+
+    test
+
+commit 682ac597e2a9053bce8846c0f23e432161b5d5a9
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Wed Apr 29 14:01:03 2026 +0800
+
+    test
+
+commit 6575d9bc784bf8ee668b3b19523e51b8e00f5d39
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Wed Apr 29 14:00:51 2026 +0800
+
+    dd
+
+commit d057527675e23d3cc0eec8f2f89f7e9b6a7fad0e
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Wed Apr 29 13:59:23 2026 +0800
+
+    update
+
+commit 43e05f7fc7cf92e8d5662f95a3126268736cb51e
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Wed Apr 29 13:57:08 2026 +0800
+
+    TEST
+
+commit 7727493be53421d40a549954b3bc52a9c33f26e2
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Wed Apr 29 13:56:37 2026 +0800
+
+    update account
+
+commit 4c2783a81751f66ccd51ed91c4d7ab1672b1e213
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Wed Apr 29 13:54:54 2026 +0800
+
+    Test
+
+commit 94d911a0caa79bb207c07e82f74b03db7070232e
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Tue Apr 28 11:43:50 2026 +0800
+
+    First commit
+
+commit 77a870d4e31cae80d54d64100c16919649bb3a71
+Merge: 61e97c4a 82973bfd
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue Apr 28 11:27:51 2026 +0800
+
+    Merge pull request #3 from Elly2018/develop
+    
+    Group Control Update
+
+commit 82973bfdeb1ea73d520dcd2aee5121022cd6d601
+Merge: 1395e1b7 ebe4c185
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue Apr 28 11:27:01 2026 +0800
+
+    Merge pull request #28 from Elly2018/v0.1.3
+    
+    V0.1.3 Major update
+
+commit ebe4c185069ddf6015eef9ea42f3ef1dd75f77fb
+Merge: 7c60f694 9b34b26b
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue Apr 28 11:25:59 2026 +0800
+
+    Merge pull request #33 from Elly2018/v0.1.3.6
+    
+    Fix UI glitch when connect multiple GoPro Camera Machine
+
+commit 9b34b26b2082c8348d0aa4bd3c5e23198615b63a
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Tue Apr 28 11:01:59 2026 +0800
+
+    update
+
+commit f2cfe2ece1f2d342e9cabb7e31b36cfc64fbb1d6
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Tue Apr 28 10:54:55 2026 +0800
+
+    Fixed more
+
+commit 323f5d0d1f46f799a33a0aa60cd312cb3de26a72
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Tue Apr 28 09:40:19 2026 +0800
+
+    Update section
+
+commit aefb6c91d6e7b631fe7dd40c8f02aa7b4df3cc15
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 17:36:51 2026 +0800
+
+    Added debug information database in cmakelist.txt
+
+commit 4ffa5c7643a4c02e67193bd10d7c927b37fd09d0
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 17:34:49 2026 +0800
+
+    Update try catch => to json::accpet format
+
+commit 50a3988045e3fd3ad25940d196d3c84bb538c506
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 17:20:10 2026 +0800
+
+    Update
+
+commit 19ad4aa8513078bf443c1c77008c15adb4833be6
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 17:06:22 2026 +0800
+
+    update
+
+commit 159a0929737b15c3c611eb1f77253990d25bfb25
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 17:04:12 2026 +0800
+
+    update catch
+
+commit 58367ff2e25a2892e5b0887045f091fc3dbf675d
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 16:53:24 2026 +0800
+
+    update
+
+commit fdaa6e9b49475964618e415138ab4554060cdf81
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 16:50:54 2026 +0800
+
+    Update
+
+commit 491808dd92bb0ca0624b943194d6c7db3aba5122
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 16:42:52 2026 +0800
+
+    Added try catch json parse
+
+commit e361881f4db5ead0796c508eabc0158ec58540d3
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 16:40:28 2026 +0800
+
+    Update
+
+commit 287975d14f17b63073595aa9409a492070ce1744
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 16:31:05 2026 +0800
+
+    Update other func
+
+commit 8c62ea2e7f4587d7d65a0bf6cfb45caa9a18e88b
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 16:24:16 2026 +0800
+
+    Added variable for utility method in the common libs
+
+commit bf0311c37b3f3c5e9887140300cf88931aaac2fe
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 16:19:32 2026 +0800
+
+    Added exception information
+
+commit f622afff74d6a792680d1e4103abb48b06912dea
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 16:16:34 2026 +0800
+
+    Added init value for exec
+
+commit 520079e2d1fc0d2ea01e5192d3c9b5fd785f1b35
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 16:15:22 2026 +0800
+
+    Update public methods part of server handle object
+
+commit 4f8cc84a060342f5aa023fbed1eec964e39caad6
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 15:40:07 2026 +0800
+
+    Update
+
+commit bd3ca542480e0f36862f364559bee0f2aaa4cd4e
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 15:37:43 2026 +0800
+
+    update comments
+
+commit 68fd75c48de9c62dd5c5ab510e99e190666ba20e
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 15:16:40 2026 +0800
+
+    Update comments
+
+commit 8e78928403a0757729507badb4abfe747de6b2c6
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 14:36:56 2026 +0800
+
+    Added more log, trying to catch the exception.
+
+commit 3375af333c3ef2a5f2909beab2f759fd31e2e305
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 14:31:16 2026 +0800
+
+    Focus on setall server side core function, error happened during the response stage
+
+commit dcf11ae66a5e7d14366210c45ac80486aa1c7930
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 14:20:21 2026 +0800
+
+    Added err output for server
+
+commit ab812a5974c31a7bd140cbfac50ee792268baef5
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 14:18:51 2026 +0800
+
+    fixed typo
+
+commit 2f0a7f35903ebf1aee3ec8a11c574631e460df1d
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 14:16:05 2026 +0800
+
+    Fixed setSettingAll server side
+
+commit 876e9f893734b350f7ccb30221a4205796ae2d70
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 14:13:41 2026 +0800
+
+    Added init value for setall server codebase
+
+commit 81cfb4e96ea1753a2c9f403db70f753bf7df2452
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 14:01:38 2026 +0800
+
+    Added suffix
+
+commit 8af33108d0cddf53e610f4043b40731b4a0be4cb
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 13:56:19 2026 +0800
+
+    homedir change from / to blank
+
+commit 6a0fe37b6121731c90854e7847840501cf03865d
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 13:49:55 2026 +0800
+
+    homedir remove WS_ROOT
+
+commit bbbe9a3949fa92a5b7f705c123e9dcdcc6920609
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 13:40:26 2026 +0800
+
+    Fixed apply all preset filter
+
+commit d3b4014429f43d57ac9619b87f9971b613303c4e
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 11:59:37 2026 +0800
+
+    Update preset source
+
+commit 5df8f86ad28f7ba20d0ab64b80bb6001d2414eac
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 11:56:49 2026 +0800
+
+    Update state for inspector disabled GUI state
+
+commit 3940c476bfb6c421fc4f3f46316f9a88cd3a9266
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 11:52:15 2026 +0800
+
+    Update server casting value
+
+commit a9ee288b60228b3a8c67343d6c139e5486e086c1
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 11:50:38 2026 +0800
+
+    Added log for _setAllSetting function
+
+commit 22fa32dc4150c5e5171629e7c645f1401e9411dc
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 11:10:52 2026 +0800
+
+    Update comments
+
+commit 89ee111b26424e1e6fb623e18894680f7990751b
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 11:10:25 2026 +0800
+
+    Added res_clean command for server websocket side
+
+commit b198d3d9cfa46cf2c63edc0d267d8db3ba9247db
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 11:07:52 2026 +0800
+
+    Fixed popup state for apply_all notification
+
+commit ae23283ca8d67e2ae73c21fa66a68b8fb2663804
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 10:51:26 2026 +0800
+
+    Update query setall lock reference to copy method  prevent blocking
+
+commit c8981c6ac569de0c5436f97f322854da1ea7393a
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 10:49:11 2026 +0800
+
+    server fixed setall lock issue
+
+commit d344a0f48607155bb9500100712c592c22209abd
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 10:46:25 2026 +0800
+
+    Fixed master inspector applying_all in setting part
+
+commit 79216fd1e8d6a0a41cce7601f0401c7edaae944c
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 10:11:51 2026 +0800
+
+    Update last media issue
+
+commit f822f6db61ca4e1c2573fbf01d9201125afd5409
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 09:59:46 2026 +0800
+
+    Update
+
+commit d88c6e8057d1c7d757e7f1bdb702ce70f334b2ce
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 09:48:26 2026 +0800
+
+    Update comments
+
+commit 9142956aaabba8dfe9409fdab086b7e903113184
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Mon Apr 27 09:17:34 2026 +0800
+
+    remov
+
+commit 44757705af9d1f8fe8508406e311d4e53aaf1a1a
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Sat Apr 25 21:13:00 2026 +0800
+
+    Remove ESP stuff...
+
+commit 765ac0bacf1b9cb22de1ed58b61ec4539efc7b8b
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Sat Apr 25 21:12:41 2026 +0800
+
+    Update comments
+
+commit 4155eaf857e4624a094ed21ad034d8b2476e96b2
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Sat Apr 25 20:59:43 2026 +0800
+
+    Added more comments
+
+commit f57a25c7d1473d2795eea5bfcf7084a51d9ef881
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Sat Apr 25 20:51:33 2026 +0800
+
+    Added mroe comments in server codebase
+
+commit e57cd917a753feabfedc2caede74bb53cc9c14b9
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Sat Apr 25 20:10:28 2026 +0800
+
+    Reduce log output in media download method, and put catch a return empty string as well
+
+commit 4e5537a229f5f52a49cf9fd465e8c609af66dff7
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Sat Apr 25 20:06:29 2026 +0800
+
+    Trying fixed the mutex issue on the server side
+
+commit 3283751e186b80cbd44d9d569d80541210825196
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Fri Apr 24 17:31:36 2026 +0800
+
+    Update
+
+commit 18ff32c4b9079f30ad5a9af7331ae2a38b2ee2a2
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Fri Apr 24 15:18:53 2026 +0800
+
+    From thread to queue download media
+
+commit 7caf2ea9a0a9feeaad5df3df7bde78360fe497af
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Fri Apr 24 14:50:24 2026 +0800
+
+    Handle download media methods
+
+commit 6489b8492a1ec8c69ad469ea0632195e751b598c
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Fri Apr 24 11:48:11 2026 +0800
+
+    Added single download media button
+
+commit f9a41a26a7e1997dfd945eac228a3baa1297ee03
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Fri Apr 24 11:23:40 2026 +0800
+
+    Handle download
+
+commit 08d6e9d40a20753f58340329707dbc90e2ae2fe1
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Fri Apr 24 11:15:25 2026 +0800
+
+    Add more log for server
+
+commit 1f3578389414291c586b121c7aabd26e5d87b1ab
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Fri Apr 24 11:07:08 2026 +0800
+
+    Fixed const method prevent lock guard in master clone camera info object array
+
+commit 5ee051c99f6962b196b53f17ed5561a3883e6c45
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Fri Apr 24 11:02:07 2026 +0800
+
+    Update download remote file method
+
+commit 211fdf90b94ce677431ba073ca5a3ad2188b7d06
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Fri Apr 24 10:48:53 2026 +0800
+
+    Update logger to server
+
+commit d429f8be42fa7f20d020f19ef580c4cae6dc3159
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Fri Apr 24 10:47:00 2026 +0800
+
+    Remove ping information
+
+commit a99e880f06e86465bb5cf8197be7539a5d756990
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Fri Apr 24 09:33:59 2026 +0800
+
+    Update
+
+commit 921d054dd9217d66b60d6e0695e8cd8f3624cdb9
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu Apr 23 20:51:44 2026 +0800
+
+    Update mutex
+
+commit 84e989bec1ce4c2bfc934d38bc0637a2310abc05
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu Apr 23 20:46:50 2026 +0800
+
+    Fixed mutex issue
+
+commit b2a30de1eb8e22480c9f56e9088992f83b933bdf
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Thu Apr 23 17:43:54 2026 +0800
+
+    ...
+
+commit 8a7cdb1d662e3afc535fa87bdfef4c4de4916cfb
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Thu Apr 23 17:37:25 2026 +0800
+
+    Update c++ language version
+
+commit aa648d35ab9be731eaeedb28c2295608ecb54dda
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Thu Apr 23 17:32:46 2026 +0800
+
+    Update crash log helper
+
+commit 8d16b6e2f1a3a3ddc167e7b894c580b28ccdf41b
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Thu Apr 23 17:29:33 2026 +0800
+
+    Added crash log addon
+
+commit e948ca667a5cccececd848b18651a66193f228dc
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Thu Apr 23 17:23:39 2026 +0800
+
+    Replace all query or action to alive connection
+
+commit 823c6243899bc191da9d33390545903c688762c2
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Thu Apr 23 16:52:54 2026 +0800
+
+    added try parse
+
+commit d834bee681a0ecff8bb6e26cb0e49fc4337dbf76
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Thu Apr 23 13:31:28 2026 +0800
+
+    update
+
+commit 0e6babf8f93618b7a7611b8fdf2df22f9e6b429b
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Thu Apr 23 13:30:56 2026 +0800
+
+    Prepare ISO virtual
+
+commit 79a135c8eb690e1e17576c828874aa6c843645e4
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Thu Apr 23 10:50:47 2026 +0800
+
+    Fixed button width issue
+
+commit 704468c406878267f85b40b655bbd2a1ff65133c
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Thu Apr 23 10:41:24 2026 +0800
+
+    Fixed two photo setting ID conflict
+
+commit 732a14812e497bb245cc37b089e8d42eb88ee3c4
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Thu Apr 23 10:15:36 2026 +0800
+
+    Fixed display ISO Burst and Camera viewer ISO and Shutter speed ID issue
+
+commit 300346f1f80eca3d8c2504d7c367d26a97e4988c
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Thu Apr 23 09:49:29 2026 +0800
+
+    Update setting
+
+commit 3cfa5e12b5ed4c5a064debfe50e2ae4e10617574
+Author: Zhu_Elly <chu.elly@funique.tv>
+Date:   Thu Apr 23 09:34:14 2026 +0800
+
+    Added shift + F4 = Burst mode
+
+commit 13cc2611e8d0903353f9d146fe6de19aa3f9ac7e
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Apr 22 20:24:00 2026 +0800
+
+    Update master method for fetch media file
+
+commit fe08ee06a1e26c2de578343d16495c942f8ba760
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Apr 22 20:16:23 2026 +0800
+
+    Update master media inspector buttons
+
+commit 0325298dbe7c1e56ec3be80b89a4a5ed07baa5be
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Apr 22 20:14:10 2026 +0800
+
+    Update server last media getter
+
+commit 099dfc3fe043dd4bdff64cb2880c2ed900885533
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 21 15:17:45 2026 +0800
+
+    Fixed should_disabled local variable in inspector window
+
+commit 3bb2ed683ab22f26c33d9699612b2dc6f1fcf162
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 21 14:57:08 2026 +0800
+
+    First Commit
+
+commit 7c60f6945c1865a193e1154c3267c09b9f4f1a05
+Merge: 0e5fb763 c02e52df
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue Apr 21 14:55:31 2026 +0800
+
+    Merge pull request #32 from Elly2018/v0.1.3.5
+    
+    Implement one machine apply all feature
+
+commit c02e52dfecb4714c3259ffb780126f8320a7d141
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 21 14:52:12 2026 +0800
+
+    Fixed notification will appear on back of the model window
+
+commit e094a0c08e4d99bbd22e01ca239a7a34f1d1e9f0
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 21 14:10:57 2026 +0800
+
+    Update preset manager popup window layout and delete button functionality
+
+commit 810c7d1a8306b4b7711daedf8c4c8c4f24d05d56
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 21 14:00:49 2026 +0800
+
+    Added preset manager
+
+commit d2b8c7e9ea814cc101447b93a27733c56b4a57f7
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 21 11:42:00 2026 +0800
+
+    Finish add_preset popup
+
+commit 5d2e293eb559ae23caacb506f484503b815ed97a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 21 11:28:11 2026 +0800
+
+    Detect hotkey and text input state issue fixed
+
+commit d7d9b9496ff3cc068a32ad7b5a167bf37ce33d08
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 21 11:16:23 2026 +0800
+
+    Added docs, and fimplement SDL3 file folder dialog system
+
+commit 437ce6bf17ec11ca6d2414c60e601a8b78cb1381
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 21 09:51:38 2026 +0800
+
+    Fixed the typo for the display method in camera list
+
+commit 36ede42c163da0a6a709acc4d6e527212d281322
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 21 09:48:12 2026 +0800
+
+    Update display method for camera list window
+
+commit 6f130d913f92f003b7f3b74842ae63adefc0f0cd
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 21 09:38:10 2026 +0800
+
+    Video len display switch base on preset mode
+
+commit 6b4c1a8e9deed006335259467337b1c79236702d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 17:19:17 2026 +0800
+
+    Update package file line break issue
+
+commit 19240660321e68ccdfbfa78e2cc79ee4afd483a9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 17:10:11 2026 +0800
+
+    Fixed fetch not alive camera cause lag issue
+
+commit 8879780788503a94cc5bcaf1f828841d8073c08d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 16:20:13 2026 +0800
+
+    Update comments
+
+commit a91b66f8ac79a285f30fa580463c1b6b84e21822
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 16:13:52 2026 +0800
+
+    Added cancel in preset manager just in case
+
+commit a8a7dc263dd0fb2284a8f1d3da78ba69adad28c8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 16:12:56 2026 +0800
+
+    Add preset popup window linking
+    Master manager class with preset CRUD features
+
+commit aa50e37b00cac5a6330d3bedbc5faec4cb9efef0
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 16:11:24 2026 +0800
+
+    Added preset releated functions
+
+commit c5cf3fa6456276d8ee7741677317694ab5d874d1
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 15:45:39 2026 +0800
+
+    Remove delay
+
+commit b09c8387114245d0cb5dc27f25136c1b764bf3d5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 15:44:46 2026 +0800
+
+    Added popup in preview for apply all
+
+commit b33dda42353d52a85175952ed038324b99fb2f63
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 15:39:49 2026 +0800
+
+    Added more notifycation
+
+commit ddb4b94c9bc81b2623b963b1359151102db08c6e
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 15:32:01 2026 +0800
+
+    Successfully call quick apply all
+
+commit defe7993a304f403bff53afeea778f152fdaa23d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 14:47:52 2026 +0800
+
+    Added more delay for it
+
+commit 71a9b17f5e202d10c7a03f8efd1fa48a60222676
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 14:39:03 2026 +0800
+
+    Apply to all is working but the async send is too quick to keep up. it needs a heavy pipeline control script
+
+commit c292cb4e87ca33f35c677a520e31901d8d2056f3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 14:18:48 2026 +0800
+
+    Update default theme setup
+
+commit 7dc0401084eab0e1706e963f28d765076fa90be3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 14:01:02 2026 +0800
+
+    register preset related popup command events
+
+commit aacaff1af301ed888efc04d9f7d87a4be01c777f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 12:01:02 2026 +0800
+
+    Added macro
+
+commit bf6eb01f6afc0f919939fcb4592ad0129bf276de
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 11:42:28 2026 +0800
+
+    Update the setting apply all in the server side of the codebase
+
+commit e0379316cf266344bdbdd62c943515cc6cf9c8b2
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 11:04:41 2026 +0800
+
+    Update setting apply structure
+
+commit 89b00d5286aa94ca1dda238336c266f5ed015239
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 10:52:19 2026 +0800
+
+    Attach quick apply all function to window classes
+
+commit f4603d025da45e85d4e63bbc052ae431d55e70eb
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 10:45:11 2026 +0800
+
+    Added popup for preset manager
+
+commit 790e3bdaab0cba7e1ff9295ae4cbef86e6ed76bb
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 10:43:14 2026 +0800
+
+    Successfully added notify component in the master part of the codebase
+
+commit f1e73d119953ca35d028a1810bc20823f27c15ae
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 10:16:17 2026 +0800
+
+    Update preset workflow and class variables
+
+commit fdf443b937a33e365a59a46cb997c065fa4e9b2d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 10:02:02 2026 +0800
+
+    Update
+
+commit fa23241308dbc3477e46e4575dd2608f11059dd5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 09:58:49 2026 +0800
+
+    Added preset popup iwndow class (Still blank)
+
+commit efdb4d26a062f2df89dd928613e9ee9ec204976c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 09:51:21 2026 +0800
+
+    Added server select event in window camera_list win
+
+commit 0d5031c9ce0de7c14be7d7e0f0db3798b454c05e
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 09:45:44 2026 +0800
+
+    Added nfd to cmake program
+
+commit a1bbdcd3c3d982109400113bbf777b82012de36c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 20 09:36:06 2026 +0800
+
+    Added NFD for file dialog compoents
+
+commit f6513e9be51f829133cabd55ee3500ced8cb2332
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 15:51:12 2026 +0800
+
+    Added docs screenshot for wiki references
+
+commit 6e8d6e2c1d5f44d20248e598a125bc53bbd2540e
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 15:44:11 2026 +0800
+
+    remove this...
+
+commit 0ceecf1cc03e5c27e2e749cc3c222fa05e065fb8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 15:43:56 2026 +0800
+
+    Update readme
+
+commit 78e5faaef3b835c5e5c2b6ef9c82c45a5a3642a1
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 15:17:00 2026 +0800
+
+    update Readme
+
+commit 9793774c8ca782688be43a770fcf65d3e9fd486c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 15:16:48 2026 +0800
+
+    Update readme
+
+commit 5342fca0983875ba0d16c893cce9faf941efec9a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 14:15:39 2026 +0800
+
+    First Commit
+
+commit 0e5fb7635daa1a00ee7e930a66396ef190805eaf
+Merge: 940edd18 a838166c
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Apr 15 14:13:17 2026 +0800
+
+    Merge pull request #30 from Elly2018/v0.1.3.4
+    
+    UI Change
+
+commit a838166cf9581f9f333f955cedb70f74002cadbd
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 14:04:29 2026 +0800
+
+    Update readme
+
+commit 59a2f516d67627df8a043a82e6ced3db8502f19e
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 13:51:31 2026 +0800
+
+    d
+
+commit b8ca8069dafdb3d877d93a8fc07f8b12a04b0f3c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 13:51:01 2026 +0800
+
+    update
+
+commit 5ce543ab485ad63395fac6cd6f95d8da7a7cf7b4
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 13:49:44 2026 +0800
+
+    Added
+
+commit fb31b707f49c33db91db7ef423e31114ade3f7af
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 13:47:54 2026 +0800
+
+    Added font to master window iss
+
+commit 79d8e9f6d452c9b6ac718e9cb9a697460f179817
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 13:44:43 2026 +0800
+
+    s
+
+commit cc97c51ed78f4056a5f8ad2159c0f9fd725acf17
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 13:43:23 2026 +0800
+
+    Test relative path
+
+commit 0358029ad44c2019fccc3a50d2ff6dec7e4253e5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 13:41:25 2026 +0800
+
+    Fixed typo
+
+commit 76789183456d8c7d636a0ec1e2e71686e12c25f7
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 13:35:11 2026 +0800
+
+    s
+
+commit 30c16d0b73622e72a6af09f9ea4e33545be3cad5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 13:24:14 2026 +0800
+
+    Added inno setup command into build process
+
+commit 101a244f8f472db3c3096ee3fbcdae6843743da5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 13:19:33 2026 +0800
+
+    Update package for window x64 build file
+
+commit ab65d06f682313a2e61a74b937d1e9380e4c5a9c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 13:15:46 2026 +0800
+
+    Added iss files for inno setup
+
+commit 61636628fd8e4d54cd75b754a52b70adc6e40ba7
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 11:16:53 2026 +0800
+
+    Update builder
+
+commit e8782d05b2ea69f1bc66b576d284b293a73f86a5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 11:08:39 2026 +0800
+
+    s
+
+commit 6dbf09dc59170db726bae64698be7e8be3304336
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 11:07:36 2026 +0800
+
+    fixed typo
+
+commit 3a77fe3202e0c03963bb055b51953769347ed54c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 11:06:23 2026 +0800
+
+    Added window package script
+
+commit 71a122b44c3faa06948046a8fffb8421c3856d5a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 10:52:38 2026 +0800
+
+    Change font placement for master
+
+commit 71bcf01f32dec3244c212e01f83306659bc0bae5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 10:43:42 2026 +0800
+
+    change the typo for package script file
+
+commit 4e90ebe82576f0af4cde02e0f03ea967caeef1f2
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 10:40:23 2026 +0800
+
+    Modify debian installer build script
+
+commit 26c2b605f0ec54e417081074ef29a120f048d0dc
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 10:23:46 2026 +0800
+
+    Fixed typo in build script
+
+commit 7b64f37f5ad090627b5fa4bd15c164892e17ffd0
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 10:21:36 2026 +0800
+
+    Update gitignore and building script
+    Added more label to the name prevent confusion
+
+commit f30af75c1b90f88e50f9202c022fd1c809f7edc3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 15 09:33:20 2026 +0800
+
+    Sorting methods to different small files
+
+commit f11e24ec555e3156f62267984a93e3a2769d1ce9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 14 15:48:50 2026 +0800
+
+    Fixed core build for MSVC
+
+commit 109f67a3f52b4404a483012741075455578e18b2
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 14 15:42:57 2026 +0800
+
+    Fixed function error in server
+
+commit 4bdd30c935cc16a7086f29347fa5250ec7d29b72
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 14 15:40:46 2026 +0800
+
+    Update function return error
+
+commit 7168b6e1d50f4869d3d139cb1a9da78c46d1a4a6
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 14 15:35:09 2026 +0800
+
+    Update stuff for build files
+
+commit 05988545892a54604832203531cdc74f9a5a417c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 14 14:58:16 2026 +0800
+
+    Added 64 server bash files
+
+commit 47aefe46728e867ae0c27905f69b87ee13ec0ee3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 14 14:57:13 2026 +0800
+
+    Update build and package bash files name
+
+commit 39ea7dd6a53b1b41a4ff273ba02eb54730bde495
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 14 14:28:15 2026 +0800
+
+    Added focus hotkey
+
+commit 748a7213fe1d223a29ab471d0aacc8c29fa6d17a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 14 14:16:55 2026 +0800
+
+    Update style setting title text
+
+commit 0cc130bbfeef34c46130becab33862f78f85cf89
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 14 14:15:14 2026 +0800
+
+    Added to fields for style
+
+commit cee44fe185072cc23454785480a4f331cea66bab
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 14 14:06:30 2026 +0800
+
+    Added style field into store value
+
+commit 13a92a5d800d7d21b72140b2330de64fa1d90a6d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 14 13:41:31 2026 +0800
+
+    Update media header in inspector window
+
+commit 74d47cf5d0889bffdf60d1cedace0384d94f824c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 14 11:30:02 2026 +0800
+
+    Added docs photo and added studio popup
+
+commit dbe4adca86f32b72e3d2604e5e8d4abd0715dea3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 17:56:28 2026 +0800
+
+    Fixed slider field in camera_list window does not store in the server.json when changed value.
+
+commit 63e03c5e2ee62f3aae66e9ffd8297dae4e2c4c16
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 17:45:14 2026 +0800
+
+    Give up camera_list same line
+
+commit b117d122d5139aca2215c447bcde90ea598121b7
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 17:41:07 2026 +0800
+
+    Added search field in camera_list window
+
+commit c826b75ada52508f8b7fb32c284e1deb5fcd17ca
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 17:32:34 2026 +0800
+
+    Remove style use buffer variable
+
+commit 31c70199f458108ee1b75212df2593bfda32a707
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 17:24:45 2026 +0800
+
+    Apply theme setting
+
+commit 7545e205ce34b5c08df43610cb06f903478661be
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 17:14:41 2026 +0800
+
+    Update style window io and render method
+
+commit 26cc818873143247f49e32d604f915abda558f06
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 17:04:34 2026 +0800
+
+    Update  color id filter for LOG preset
+
+commit d6a972aa0f5b437fcf08a831b9bd33d7cdf1d31b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 16:42:54 2026 +0800
+
+    Fixed typo
+
+commit 54ac12ea501e34fcbc3ba885c7f6075fb28ed0ff
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 16:42:33 2026 +0800
+
+    Update color option filter
+
+commit ea8851fb902e4580cb5b5e0ad8d6907aad5d1683
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 16:36:11 2026 +0800
+
+    Update inspector render
+
+commit 364cbb63073da2bba6af62db3e7ad3ed56ea7da5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 16:04:56 2026 +0800
+
+    Fixed status getter function typo
+
+commit 566d2e2fadeb6c4d09eaad0f6ba94aa60e47510b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 16:00:56 2026 +0800
+
+    Update inspector status render
+
+commit 869d9b0d9b8484f92f58381eb5929f7a7e5f131d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 15:41:47 2026 +0800
+
+    Attempt to increase function count in order to sepeate status draw functions in inspector window class.
+
+commit 0d2fdaae617a8bbe2afafe84b0c5a52b101194ec
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 15:39:05 2026 +0800
+
+    Update status category array
+
+commit c1965c7122d0dcf8c74813d4c82f943c69839f64
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 15:25:37 2026 +0800
+
+    Added ava method for status
+
+commit d2714144e297bd5c02069831d658a8cd3e1ecd2a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 15:24:33 2026 +0800
+
+    Update status
+
+commit a9fb4946defe22b8b6df98f5a2b0c72bb18eeb7a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 15:22:21 2026 +0800
+
+    Finish ava
+
+commit 0c0d6e2226d6750532915fbb8e8b0284c6fe1b8c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 15:09:40 2026 +0800
+
+    Update status ava
+
+commit 970a1c34da3806b1fdbbb35299858d6fc26acd30
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 15:07:07 2026 +0800
+
+    Added ava for the status
+
+commit 61ee7e0e89562352c1e2e53c5f34d3c9f75b2abd
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 15:02:23 2026 +0800
+
+    Added camera namefor MAX2 model
+
+commit 2987810f483ea33bac6dc233f9ac6f730115c784
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 14:47:03 2026 +0800
+
+    First Commit
+
+commit 940edd18515282406bd1e4848264281f81cb2d98
+Merge: d120c3ee 78f47629
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Mon Apr 13 14:43:20 2026 +0800
+
+    Merge pull request #29 from Elly2018/v0.1.3.3
+    
+    Optimized the preview pipeline, And increase error tolerate
+
+commit 78f47629f9992ac7a600c2ad6839b215b55638d7
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 14:42:10 2026 +0800
+
+    Finish adjust position of the preview frame
+
+commit 2fd81aeda4c94a5dda8d26c4ffce770b80f92873
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 14:35:41 2026 +0800
+
+    Adjust ui size and position
+
+commit 91058f8ff3bc62aa2b030f642c22f8a6e86bed1b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 14:28:26 2026 +0800
+
+    Added setting and protune in the preview popup window right side panel.
+
+commit 285ddc6e4a303d0c7c8f3e89ca5438528f687750
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 11:59:17 2026 +0800
+
+    Added child panel both side
+
+commit b49d34f89dc2c0dcd380a9323474639df92ae525
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 11:52:39 2026 +0800
+
+    Added child to that
+
+commit 904d38bd523e5c05042d011be1144f35299a6d92
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 11:28:18 2026 +0800
+
+    Fixed
+
+commit 718857bd9f6d2a220584fd21135670d0ba3a1339
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 11:10:04 2026 +0800
+
+    Fixed preview position, Moved to the center so leave the button on both side
+
+commit 17c27609a7e723121ad54105da38870bee47cfaa
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 11:06:01 2026 +0800
+
+    Fixed rotating scale issue
+
+commit 315cb09987147a736def22de3ebaf16b0e8f80c2
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 10:55:18 2026 +0800
+
+    Fixed bug when stream is rotate the decode thread is end
+
+commit e11edabb267a5b1317cb31fc10164044e547fc9e
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 10:38:12 2026 +0800
+
+    Retry button only appear when video capture is down
+
+commit f0e52109f38a5ef98ee41aa57691476973b675fa
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 10:37:01 2026 +0800
+
+    Fixed rotating preview stream cause feed stop bug
+
+commit 5e52919404a12c442b0fbff3e412d63dacccccaf
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 09:56:58 2026 +0800
+
+    Added some quirky comment
+
+commit c43ed6d16cd693cd3d023bfa0e1d91f940241f5d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 09:54:25 2026 +0800
+
+    Fixed fault tolerate issue for the preview stream.
+    We do not use try, We just wait to grab frame and when failed just close the thread. this will not block the thread and crash, and it's eaiser to tells
+
+commit da22ddfdf566e13a2717460945a40bbf29634130
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Apr 13 09:30:37 2026 +0800
+
+    Added comments and move camera_list cpp to folder
+
+commit bdaf672d445ccdaea2aa43f169be704da4877fa0
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 18:02:27 2026 +0800
+
+    update buffer
+
+commit fe1088fa6c5ff13f0832ff7b37d38d97b176b731
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 17:59:40 2026 +0800
+
+    Get a model checker in preview
+
+commit 306ec3dfdc0b08af50437e6a1046a5cef5bb5a74
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 17:49:18 2026 +0800
+
+    Update tooltip content in the window of camera_list
+
+commit a31c1e7a4c2ffb291fda876f09d9e071f743b149
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 17:34:12 2026 +0800
+
+    Fixed pipeline issue
+
+commit da955d740c7004d03fa2043d4c9bac2834444ad6
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 17:31:29 2026 +0800
+
+    Fixed pipeline
+
+commit 4779fbfcbb043b05644886f04577570fe872bff4
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 16:56:38 2026 +0800
+
+    shutdown command fix
+
+commit 804de82561e12fcac268aebf126001b6a817557c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 16:06:15 2026 +0800
+
+    First commit
+
+commit d120c3eec7fabe38b2d7f1774e27217d61cc6742
+Merge: 6c439d16 c2eab486
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Fri Apr 10 16:03:47 2026 +0800
+
+    Merge pull request #27 from Elly2018/v0.1.3.2
+    
+    Implement support data structure
+
+commit c2eab48601d10d8159bb0bb72245ee86b6414d35
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 16:01:36 2026 +0800
+
+    Fixed Video Lens LOG issue
+
+commit d6647860391848a1b8d70e154d156eb6b03f44bd
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 15:28:03 2026 +0800
+
+    Fixed profile issue
+
+commit fd9cdf267708722b62176823721b31e6b95d0eca
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 15:25:55 2026 +0800
+
+    Update profile option names
+
+commit e27047af8c142ac9c74ab0201b86eef72e7cd6f8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 12:08:37 2026 +0800
+
+    profile issue
+
+commit a6474d220c2e63d9233027624b1a77539975e396
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 11:38:42 2026 +0800
+
+    HLG setting added
+
+commit 73f4abb4469878070fe8d87483ac2e271ee44fc6
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 10:54:17 2026 +0800
+
+    Added photo protune filter
+
+commit cbdbe3a8de7b7f6b67c647c5fb2f8e3eba9b388a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 10:43:41 2026 +0800
+
+    Finish video len in LOG profile filter
+
+commit cb3634f8bf760b6dd535280875020d3ecaf89f44
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 10:36:31 2026 +0800
+
+    Finish the video lens filter to HDR
+
+commit 7178062066845d01b87852f39348a0df20cfd59c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 10:28:58 2026 +0800
+
+    Start doing filter in video len
+
+commit 8efa9f154794e1263a1ea90d25aa0b7b29ce85d4
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 10:18:36 2026 +0800
+
+    Added serial number in the inspector header part
+
+commit 76c4bfa266f206394625893307ddca995c2934ac
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 10:08:46 2026 +0800
+
+    Added command tabs in inspector and fixed some table imgui issue.
+
+commit 6e7b44bfb4b04b80171a819ec1702f88c9373ef5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 09:44:33 2026 +0800
+
+    Change the program structure. so inspector.h have more cpp files attach to it. but more clear which feature is in which file
+
+commit 8596a480a33a60b6a4423452d26ca13b031026de
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Apr 10 09:35:44 2026 +0800
+
+    Remove command window
+
+commit dc4ebf149dae0eada59d99ba729e4e7a4eb0564d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Apr 9 16:02:25 2026 +0800
+
+    Added color variable
+
+commit b35e0dc0380a147c2d34894bfae86dc033cda3e1
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Apr 9 16:00:29 2026 +0800
+
+    Fixed model define issue
+
+commit 1124a673b2c1d356c369b76e1853068a4644af2d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Apr 9 15:14:21 2026 +0800
+
+    Start at video len
+
+commit 47c55cdc31998e3df5370c02d98db6a99326df55
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Apr 9 15:10:09 2026 +0800
+
+    Added photo mode filter
+
+commit 773f0dc5b844a95d2ac58104d429b040fea0603d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Apr 9 15:00:29 2026 +0800
+
+    Finish FPS Log and HDR filter
+
+commit 3ff531f9fbcce386ea544ea761f428845dd69c41
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Apr 9 14:27:26 2026 +0800
+
+    Added FPS filter
+
+commit da00884c1250dde451a916455fe338232a5b6f11
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Apr 9 14:20:59 2026 +0800
+
+    Update FPS filter
+
+commit 1a07c1172b396bbf80250d68477a206effdff8d8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Apr 9 14:10:26 2026 +0800
+
+    Filter out by resolution ready
+
+commit a9ab8491dd0ad573423a7ec430163ba2c231b9f6
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Apr 9 11:57:37 2026 +0800
+
+    Video profile filter attempt to implement it
+
+commit eddbd7f0384171b05c622aeee4469a663ef0d22c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Apr 9 11:34:32 2026 +0800
+
+    s
+
+commit 98c44e564da6b569a9ab12fdc6516bd593e8e3a0
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Apr 9 11:34:02 2026 +0800
+
+    Added to all setting blueprint
+
+commit 2a9ed6bf50a25d4fec4ac493cb5c30cf7fd8026d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Apr 9 11:30:33 2026 +0800
+
+    Update default options
+
+commit 72ff8a95e203c462cd4b791ac8029cd5fdc58545
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Apr 9 11:18:06 2026 +0800
+
+    Added shutter speed filter rule and fixed typo
+
+commit c5f5eb063935b879aba96e8d3d58a096c1acddfc
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Apr 9 10:42:10 2026 +0800
+
+    Added schedule time calculation function for future use
+
+commit 6b1e4d5e1cea9d12b2a51bbd2a0b16e45bfe0dfc
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 8 17:54:16 2026 +0800
+
+    Added common use config for control more build environment variables. this will be much easier to manage
+
+commit 22dc50e4173d9e8d37fda9e4fa003f7b42146a99
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 8 17:44:45 2026 +0800
+
+    Get shutter speed options
+
+commit 9ce82df45e11f3166f55e6174c0b51616a8e0cf4
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 8 17:29:58 2026 +0800
+
+    First commit
+
+commit 6c439d166d17eda128699dc2c4137ff645ac8649
+Merge: 0560c009 546e553b
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Apr 8 17:27:01 2026 +0800
+
+    Merge pull request #18 from Elly2018/v0.1.3.1
+    
+    Fixing model support data structure
+
+commit 546e553becdecd774299d3be42d028bfb72c4b3f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 8 17:21:55 2026 +0800
+
+    Discover cache issue with setting apply, when one of the camera offline. it will cause lag
+
+commit 5ad22d72ca91361ca99bb3558b05b78d97cabc7f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 8 15:51:14 2026 +0800
+
+    Added filter for model
+
+commit 6eee878a114743c59be7755b0b9430bce0717065
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 8 15:06:09 2026 +0800
+
+    Update inspector list records
+
+commit dd2524c5d0a1ca135266c97cd5d6fe6dad1772f8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 8 14:45:31 2026 +0800
+
+    Update gopro controoler readme file
+
+commit f1d28bc48b72c85f752283099f9d0e4123dc5b07
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 8 14:39:45 2026 +0800
+
+    Attempt to apply the setting field in inspector window
+
+commit 25bb79ada58278196625faa5f52e32ac3191d3dd
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 8 14:18:15 2026 +0800
+
+    Fixed camera list group rounding width calculation
+
+commit 58367684407a88650728511d8c87bfd5dd87dad4
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 8 14:10:02 2026 +0800
+
+    Update setting ui
+
+commit 1dfa55563b96cc21980ba14b79ad357429bac491
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 8 13:54:06 2026 +0800
+
+    Fixed build error, and some typo.
+
+commit 9e4dfeef918302f9749b8f7f0bf98031d60174e8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 8 13:39:22 2026 +0800
+
+    Fix typo
+
+commit ec60f34e5ee7e3c3050ac17e84adb7f40ed260cb
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 8 12:07:58 2026 +0800
+
+    Finish gpControl hack setting part, and apply in the camera_code.h
+
+commit 88aa8c8f2ee4bbd38e71aee1cc4e10346ebe590b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 8 10:09:13 2026 +0800
+
+    Added hw json field in the master side camera data structure
+
+commit b3b6769a4e152950d94be0eb0f156e8202a44e8c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Apr 8 10:06:26 2026 +0800
+
+    Trying modify the query state in the server side, so it support hardware information query function. and combine it with normal status response json object
+
+commit f4d3ad2fcfe26da307ac97b00b32d1ea73aa3c93
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 7 15:34:27 2026 +0800
+
+    Added reference
+
+commit eda7365e76af092ea977cf69d4e7b8d53d4de67f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 7 15:33:28 2026 +0800
+
+    Moving extra setting to bottom of the files
+
+commit 4fa6d6ae3774e6c601527e512b7f2474d320da5b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 7 15:29:13 2026 +0800
+
+    Added wifi one, max2 last one setting
+
+commit 3fcab32fd8fef320d8c5270235d25dc8f5a49079
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 7 15:28:04 2026 +0800
+
+    Finish 234 setting the end
+
+commit bd5f9ee7a54cea880a03d0bc9478d74806d74a56
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 7 15:06:34 2026 +0800
+
+    Update to framing which is ID 193
+    And fixed defined string typo
+
+commit ec06254e56fdf0b610372891c8003247bdc56e1b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 7 14:30:13 2026 +0800
+
+    Update setting to video performance mode (id 173)
+
+commit 11585d410517154e531bbbfc8468233f3c581983
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 7 14:06:08 2026 +0800
+
+    Update too media format setting (id 128)
+
+commit e82c24c9aa546eb5efe05965ee05ae7392ea6090
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 7 13:53:06 2026 +0800
+
+    Update readme
+
+commit d185530e2d79351eb94fe0be283ce16be26de0fa
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 7 11:17:36 2026 +0800
+
+    First commit
+
+commit 0560c0099add9777b238acf0533032ead6ae85e9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 7 11:13:15 2026 +0800
+
+    Migrating
+
+commit 24fde605dc10c8b58b635165b658e9153eeb85ee
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 7 10:14:59 2026 +0800
+
+    Added model suuport enum attempting...
+
+commit cc0d79a1e99ffb92747f906d21520e9a184976b7
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Apr 7 09:43:59 2026 +0800
+
+    Added resolution support structure
+
+commit 338be8f94cc23d11ced8d4795fc37395eaffdfcf
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 31 18:16:28 2026 +0800
+
+    update
+
+commit e80461ed6f0d91579054085b70772b25fe95a75a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 31 17:31:10 2026 +0800
+
+    Added first setting macro
+
+commit db22de7f4b4a1f9468079b7f0b5a60e362dfec8f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 31 17:25:26 2026 +0800
+
+    Added model update
+
+commit 8b3a997c63167aeed36c730532429c879896d58b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 25 15:26:14 2026 +0800
+
+    update
+
+commit 03f9a2d4ccac3a8e76eccfe510109567ebcd7ed5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 25 14:59:26 2026 +0800
+
+    Update
+
+commit d90b62418a89bcb40748a9fd7603ad258b0dace2
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 25 14:46:21 2026 +0800
+
+    Update
+
+commit 1395e1b79276fe21f0a79660d312fe56b12042b3
+Merge: 7af1d482 51d0f27e
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue Mar 24 15:18:58 2026 +0800
+
+    Merge pull request #15 from Funique2022/v0.1.3
+    
+    V0.1.3
+
+commit 51d0f27e4c94bfc9d13d122127c92dfb2b832573
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 24 15:17:39 2026 +0800
+
+    Fixed server libc bug
+
+commit e41e249d21891fc0d4bf3befc0338cf21184640b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Mar 20 13:57:10 2026 +0800
+
+    Added locate features
+
+commit 4bf66abd7fd057f3b8fad3e45ea609138f336f0e
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Mar 20 11:35:45 2026 +0800
+
+    Update batch for packaging built files
+
+commit 22182a836b6fd29f98d4c7263a5fc4d73cfa9405
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 19 16:31:53 2026 +0800
+
+    update gitignore
+
+commit 7af1d482a4075daa8f2271268e4347afda780678
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 19 16:31:08 2026 +0800
+
+    update
+
+commit 316a6201cba0d9745b0af60c2f87cc91fcffc2b4
+Merge: ff8f12be 6ec9e6e0
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Thu Mar 19 16:29:56 2026 +0800
+
+    Merge pull request #14 from Funique2022/v0.1.2
+    
+    V0.1.2
+
+commit 6ec9e6e0afe49fcc8cfe00c5e81e70254222317f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 19 16:28:58 2026 +0800
+
+    package bash file created
+
+commit ee56619c1428e343b734c5abe016090aef332a58
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 19 16:14:06 2026 +0800
+
+    Added download method
+
+commit 224e97131221dfe76474dea33b9102fbf5b898bc
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 19 16:08:26 2026 +0800
+
+    fix typo
+
+commit 5586d94f54d1d8ec232e2807695ff2455ef1751b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 19 16:07:54 2026 +0800
+
+    added finish file logic
+
+commit ae5dc7ef523f51d8b506d26438f8d8e1afd68abd
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 19 16:05:27 2026 +0800
+
+    Update button size
+
+commit 30377f7f06c41e22e2df618c3fdd2081fb89cf72
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 19 16:02:37 2026 +0800
+
+    Added put finish toggle
+
+commit a4a23a54cb3106a9e9e311bb8ad4cc034694cfae
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 19 15:16:55 2026 +0800
+
+    Added date time folder create setting
+
+commit ea73dc8e82fa2b19c85ad9214be080e9798a2363
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 19 14:05:35 2026 +0800
+
+    Added extension
+
+commit a3df1d7f4b6e38c3d994c0255d9f28f43f9ea8c8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 19 10:50:56 2026 +0800
+
+    YES
+
+commit 84f8070bda6c58017b62b31669819a8a42d519c9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 19 10:05:41 2026 +0800
+
+    Added media download location input field
+
+commit 9cb910d0aea52d4972aa8c9feea4e66af34ebe80
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 19 09:30:57 2026 +0800
+
+    debug output for media download
+
+commit 8a82e64a6b059c54832d92f292c8d065bde89bfc
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 17 09:40:39 2026 +0800
+
+    Added library
+
+commit a2a7ee0f95c8c49577345c17c75ab95cc5b4744a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 16 09:54:07 2026 +0800
+
+    Added popup tooltip  for media options
+
+commit 8db371b2dfd5fa21d9ae33b126facfe50c8a107b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Mar 13 13:55:00 2026 +0800
+
+    Added format for timecode
+
+commit ff8f12be75049532def78cef60c1990668a2607c
+Merge: 297c5216 5dbf658e
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 11 14:23:14 2026 +0800
+
+    Merge pull request #13 from Funique2022/v0.1.2
+    
+    V0.1.2
+
+commit 5dbf658e431a147badbc2877b7ea6e5cf82c288a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 11 13:58:00 2026 +0800
+
+    Remove extra stuff
+
+commit 40ad8d15730560d57fa7bf020f3897ee2ab65060
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 11 10:33:00 2026 +0800
+
+    update cmake
+
+commit 9c7cd346d830e892f4d068511cf8266ac7a84d63
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 11 10:28:20 2026 +0800
+
+    Update
+
+commit 084e93d3db1ec5726c7225a1b44031db9019f554
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 11 10:27:01 2026 +0800
+
+    Update cmake for copy otf
+
+commit bb8535ac7bbe8c926e81ee5a26b7136897d5ab4e
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 11 10:24:27 2026 +0800
+
+    trying to fix compile error
+
+commit 297c521616407ce0628e54456b40ff56435e6233
+Merge: 44eb62fe 61318a6b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 11 10:20:55 2026 +0800
+
+    Merge pull request #12 from Funique2022/v0.1.2
+    
+    V0.1.2
+
+commit 61318a6be48db64ee57c83f28357db737a6b12ec
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 11 10:10:23 2026 +0800
+
+    Added media open target
+
+commit 3caf85510d3b616e803e6b4c6cd674ecdf7767c1
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 11 10:00:06 2026 +0800
+
+    Support chinese and font update, bash update, imgui init update, Added media path update
+
+commit f5691ccaac08559cc70f24d5196e7c6bb8b5e413
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 11 09:38:31 2026 +0800
+
+    Font dynamic
+
+commit 1ee423fe188c59ddeff9401c15d033d5483f527d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 11 09:12:18 2026 +0800
+
+    Update camera list group  content
+
+commit 6f02104be4182e91f95aa685405ca5819db85a5f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 17:52:37 2026 +0800
+
+    Update
+
+commit ee50dbbffea050703bbe2cb48061199eeb10c711
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 17:49:09 2026 +0800
+
+    Added style win
+
+commit 4f74ad5f720c0435f2eaebed59e859bc0c0f0ae8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 17:46:35 2026 +0800
+
+    Remove alpha setting
+
+commit 09eab7067cb4ca031698e2c72b4c5a1a111eaf36
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 16:14:01 2026 +0800
+
+    Update camera value getter
+
+commit aec8a7ae7f6e7ab687a084709ca6360777ff0aff
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 16:12:49 2026 +0800
+
+    Added style setting
+
+commit 930b08a9bb822718d4073622bb98fc3bdab44bb1
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 15:56:24 2026 +0800
+
+    Fixed display issue
+
+commit e239f065ccbce7febf3a8b0e5cb6c168a9f9517c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 15:55:13 2026 +0800
+
+    Fixed photo burst ID issue
+
+commit b4e3b1246f99cfb693a788f30df9031cbebf41a8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 14:30:19 2026 +0800
+
+    Fixed func in style win
+
+commit 49d44adb5d5205fff6fc884d9d5054f2f2d9dfed
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 14:28:40 2026 +0800
+
+    Update
+
+commit 0598b6ae5deac999dbf15be876eb88cc39886775
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 14:15:44 2026 +0800
+
+    update style win context
+
+commit b60f4c0455c54c6e8799d0897627be2e1ca93cab
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 13:37:06 2026 +0800
+
+    update
+
+commit 9253d023ac0ca3014145eec40fa43afad70900e5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 13:36:20 2026 +0800
+
+    update readme
+
+commit de39ec9bfe9a50ea8dc3a9be4c597bb57df56eb7
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 13:25:07 2026 +0800
+
+    u
+
+commit a23fd743d40ffe7baf5c9bcdff819c9c02f313ed
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 13:22:42 2026 +0800
+
+    u
+
+commit 8773e369f228940af4f0a2e74b7599e6dbea09f3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 13:21:51 2026 +0800
+
+    u
+
+commit 05d949ff3b63c44a516276136a5fabb187384c8f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 13:15:23 2026 +0800
+
+    remove
+
+commit 568dff68472e4965d78dc60ffbf302ea52751a4f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 13:15:07 2026 +0800
+
+    update
+
+commit dc06db35aebaca780b9258103372f716e1cc0fa4
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 13:12:28 2026 +0800
+
+    u
+
+commit 7adb8b650142de681b284026f6a5dedd549c0105
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 13:10:48 2026 +0800
+
+    update
+
+commit 31f89e8141552a3cebe189bbb613d573b2fc4436
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 13:06:07 2026 +0800
+
+    u
+
+commit e6fbc791c41fcffb704f2152126e0bb7d400fb2c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 13:02:02 2026 +0800
+
+    Added video
+
+commit 2e61f148633a69d1f0cf60c660a964eed078c854
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 13:00:56 2026 +0800
+
+    u
+
+commit b362d8f53896e9482d0bfaa93033e9123850913a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 12:58:05 2026 +0800
+
+    r
+
+commit 1ac8d06ba51151222e16b77483f9b2d1822864e3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 12:56:52 2026 +0800
+
+    update
+
+commit 651326bd3df7106cf37835c98ba5b4c7c6fdde79
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 11:59:11 2026 +0800
+
+    Added dll copy command
+
+commit dda8715cbbe36cec63b2e963b75fc13f5a5f368f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 11:49:50 2026 +0800
+
+    Update popup for preview, win and linux preprocessor
+
+commit 2536e8bf6b0244ad4fa056a9465a5153ff46cc3f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 11:42:55 2026 +0800
+
+    Remove that
+
+commit 0bafdf756598253900cd20d19c282ef20c633d2c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 11:36:58 2026 +0800
+
+    Update
+
+commit 3a5faf7bf71170e682270a865b5dea926d9f69b9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 11:36:45 2026 +0800
+
+    update
+
+commit 476cf1e6bcfac1f11182ea0a2ebacc43ec8a182a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 11:28:10 2026 +0800
+
+    Update
+
+commit e2800b9ed0b0a8f2aaa52e83cc7a63303c1ca6c4
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 11:24:10 2026 +0800
+
+    Update
+
+commit 58ac6df66ccdb83de85198f05cbc169612581db2
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 11:20:05 2026 +0800
+
+    Update
+
+commit da948c532531665a8dfd1524c77dd3b88418ccf5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 11:18:40 2026 +0800
+
+    Update
+
+commit 16ec03bd1d6fd3d35788726a17e28c0a60182f61
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 11:13:25 2026 +0800
+
+    Added gstreamer
+
+commit c2e0f043d33dc67d34e2ef41d99b080fab31b01a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 11:08:12 2026 +0800
+
+    Update cmake
+
+commit 5ba870f4468ee1a55e2c03565f963adcf1794573
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 10:55:48 2026 +0800
+
+    Update
+
+commit 8f7800cd7ca1f4b181df383117c082193e7af77f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 10:52:24 2026 +0800
+
+    Update
+
+commit d5973f03b25ce010b5a4b6a0be76bd04f52da04d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 10:50:34 2026 +0800
+
+    Trying fixing multi viewport
+
+commit f97f3a73225001c52a11408aadc138c2b27a01e1
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 10:45:32 2026 +0800
+
+    Fixed windows event
+
+commit f8444abc42f3c0d7c9a1c240d8e89ed2f3114c1a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 09:57:48 2026 +0800
+
+    Update
+
+commit e6b483f62db0b91704091cc5b469c2a6c10c69f9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 09:53:05 2026 +0800
+
+    Update batch
+
+commit 43cc302e791300e40bd580a04be41b3a85753ec5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 09:48:36 2026 +0800
+
+    update
+
+commit 857639c4b95ecb3586f8487f33eebf67c541187a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 09:46:40 2026 +0800
+
+    Give up turn off imgcodec
+
+commit 63a7b0bdb2bc8ca77f917832c5418563ee78fad5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 09:37:23 2026 +0800
+
+    Update
+
+commit cb088c7401e18d6abe8fffe69d6fcde617ad1f44
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 09:28:30 2026 +0800
+
+    Turn off codec
+
+commit 7677f4bf72487c198248680bee505cb35d1715d6
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 09:23:47 2026 +0800
+
+    Update cmake
+
+commit 329f1e8b539bb86bc9e534aafd1ea2a0aecca2ad
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 09:14:48 2026 +0800
+
+    Added zlib
+
+commit 950994bdd4c6afcb74bd3a27814c4655092954c9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 10 09:10:43 2026 +0800
+
+    update
+
+commit a21850312992bc3f3ca38635c1262939db36449e
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 18:01:34 2026 +0800
+
+    u
+
+commit 1169b49ad5a5b14de62495ad970d261db018f9d9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 18:00:54 2026 +0800
+
+    update
+
+commit 8b55f20073a97fbef41d3ef9d8c5c64ce3f7ecaa
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 17:58:14 2026 +0800
+
+    update
+
+commit 51ad8bd3f7e6889f6dd577396be720a9bf92cf9a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 17:51:53 2026 +0800
+
+    up
+
+commit a5e472f095074d4fcb01257cd81dce538f388baa
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 17:50:06 2026 +0800
+
+    i
+
+commit e09a819ab82d4cce8236d054a505d9f0305aa10f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 17:49:48 2026 +0800
+
+    s
+
+commit d5d941243ecf05158571d0005197b60cc19769c2
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 17:48:51 2026 +0800
+
+    s
+
+commit 136d70c0210ab93fbc27e5d2be4839f1152a7ff7
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 17:46:53 2026 +0800
+
+    u
+
+commit adeda199a61c08a372bd02efd1a26b6d8769f640
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 17:45:50 2026 +0800
+
+    Update
+
+commit 5d04173f67aaf60b98cf9904b41b7846da782af5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 17:27:00 2026 +0800
+
+    Update
+
+commit b1ecdcc82665655a80a4705b28581ed4c745e01c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 17:10:28 2026 +0800
+
+    update
+
+commit 20ede8e8b7957b7d9d8ca43b525b334d6c215d0c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 17:05:51 2026 +0800
+
+    update
+
+commit 684c6076e39292cfc736605a0b5619842b98200a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 16:59:19 2026 +0800
+
+    added src
+
+commit 65e2a1da059b554ed022de0f83811b8adf930f0f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 16:50:33 2026 +0800
+
+    update
+
+commit 891409cf283837c645a88553dca3aa98a9797e72
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 16:41:48 2026 +0800
+
+    Update
+
+commit 4f9fe53497f99dd01bc6ae4f4385000ad5847784
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 16:40:37 2026 +0800
+
+    Update
+
+commit 271b7a90481374eff14741f646e910f8e89c38c0
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 16:29:45 2026 +0800
+
+    update
+
+commit 100571435eb7d5dfe0be66996f5eb01657f66996
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 16:27:53 2026 +0800
+
+    Remove error
+
+commit 9f127471af68763ebe115cd7df35dec61ceb0486
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 16:23:04 2026 +0800
+
+    Added message
+
+commit 7df58570af5e8dd867adf7e274ff84e8d5cead3d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 16:21:18 2026 +0800
+
+    Update
+
+commit 7306c47d9d61d1838f24cae5859b163adf778d7e
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 16:19:07 2026 +0800
+
+    Update
+
+commit 37657bfe81623a517e3ac4edb6ffad38bc950163
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 16:17:29 2026 +0800
+
+    update
+
+commit 9b2bc4513d6a43dc8e1aaf47d731ff5fc84631d2
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 16:13:08 2026 +0800
+
+    update
+
+commit 93e4c7563d85f40e3fa51a05f1b515b59560c202
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 16:08:57 2026 +0800
+
+    Update
+
+commit 191a59879b7ea0c7e7d0ce5ad42cc37f58a6950f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 16:06:27 2026 +0800
+
+    Added opencv source
+
+commit 4c5df284ec45638d8b59a45ed1f5df14c17b8a5a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 15:40:16 2026 +0800
+
+    Update and it will print the getBuildInformation for it now
+
+commit 8d19aa9e4f4baa4cbbb9234066e3b26cec25c205
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 15:33:55 2026 +0800
+
+    s
+
+commit 98e05cceea4ee5e1d29108409e943fa045093a29
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 15:33:21 2026 +0800
+
+    update
+
+commit 906665e58546f96a1a155cec1071ac5ae4cffc0a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 15:32:52 2026 +0800
+
+    Remove {0} for opencv pipeline
+
+commit 1bb6eed87b2d7580c1b7af3753dba758e236adb9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 15:29:58 2026 +0800
+
+    update
+
+commit 4e2fcfe4bec6779c018010946e63a1ba417b4405
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 15:28:12 2026 +0800
+
+    Print pipeline
+
+commit fa566c635cf5c36bd390a2852337eeba463d32bf
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 15:24:47 2026 +0800
+
+    Uopdate
+
+commit 3f26e2972da9af9781a891600875315f49b5b39c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 15:21:55 2026 +0800
+
+    Uopdate
+
+commit 6ad83141bdaea0be93438c8273f16b7f0b7c2727
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 15:04:30 2026 +0800
+
+    update
+
+commit df0f3aef2d70af147f176a17e130a987292bfc21
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 14:26:35 2026 +0800
+
+    Update
+
+commit c4351a5fe14c201ff7327afb336301b681fc90d2
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 14:25:12 2026 +0800
+
+    update
+
+commit 74dd5c00450a26741843730f7d7273763b0cc4e5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 14:10:59 2026 +0800
+
+    Update multicast
+
+commit bdf1abec67041b274fafb8eb0b7d55afb1ad75aa
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 13:13:31 2026 +0800
+
+    Update sender
+
+commit f26061b33aa873c05efbd2bdd46c5baa489aa5ef
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 11:59:10 2026 +0800
+
+    Update codebase typo
+
+commit d750e31fbb300b5fac6846a8827f997fc0b6a93b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 11:56:20 2026 +0800
+
+    Trying to update
+
+commit 642299f22516dd7fb61d42c9a02563b322c8a459
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 11:42:03 2026 +0800
+
+    Trying to added peer udp instead of multicast
+
+commit 44eb62fe0fad05f3e30f3a96d2af339d6c14c60c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 10:31:06 2026 +0800
+
+    Update
+
+commit 3ca80c30042b43241fae4f34abb65e580e53a7f8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 10:16:51 2026 +0800
+
+    Added init value
+
+commit 4c869fb6545bef68fb0bb91f0f5cf5692629a3b3
+Merge: 2d56318f a6c1c9e6
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 10:11:51 2026 +0800
+
+    Merge pull request #11 from Funique2022/v0.1.1
+    
+    V0.1.1
+
+commit a6c1c9e6f6e6b8f52b627297c5d4562b85931bbe
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 09:47:47 2026 +0800
+
+    Added lib import
+
+commit fb3c3475bd9c0609ee3ea1ca77164797f93636a9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 09:46:03 2026 +0800
+
+    Update
+
+commit 646f2fd03d6aaa6ccdd5597ace5fe4e6b510f4d0
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 09:44:03 2026 +0800
+
+    Update include
+
+commit 617a139ad71c20be5f05342ad1191b6d739fa3e6
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 09:39:17 2026 +0800
+
+    Update
+
+commit 445f88bcfa493f5edb698a832c2ef3358472835f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 09:38:10 2026 +0800
+
+    Update
+
+commit e220cd1c16f87857e60330d902bf4123841d0f15
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 09:32:19 2026 +0800
+
+    Update
+
+commit 945ee5950932aa4d4311d041edd111d065b65d37
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 09:27:49 2026 +0800
+
+    Update lib imports
+
+commit 1d0788180c65721f5f0ce7cbfdadc6c02b849910
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 09:26:33 2026 +0800
+
+    Update lib import
+
+commit c5a8c95f2e20811bc9e887e32fbdf620bb88de33
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 09:21:05 2026 +0800
+
+    update
+
+commit 02b76bf69767cc8c0b4075d8eebf834c5eb5188b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 09:16:26 2026 +0800
+
+    update
+
+commit 6b0ddee3d155b23f285e6f69512894acd917f64b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 9 09:11:56 2026 +0800
+
+    Update
+
+commit 220f4b9771fe60dc304a162ee0815f7b956a7e35
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Mar 6 18:05:32 2026 +0800
+
+    update cmake
+
+commit 846c35690709b2b06f43ee37f53b10fcd033d433
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Mar 6 18:04:23 2026 +0800
+
+    update
+
+commit 2d56318f3ffd05be9d0818b5fc7965cf8a6121ca
+Merge: 017ca8a8 63b34277
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Mar 6 17:52:28 2026 +0800
+
+    Merge pull request #9 from Funique2022/v0.1.1
+    
+    V0.1.1
+
+commit 63b342772410a16a842239174e791637ab48f5fe
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Mar 6 17:50:49 2026 +0800
+
+    Finish rotation function
+
+commit 0b5b27adccf852487e7050ebffd346a50bec026c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Mar 6 17:16:34 2026 +0800
+
+    Trying to make rotating window in preview popup
+
+commit a0e329587ffd7eb75cbd8a95f0573a7b53f5cfe9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Mar 6 15:29:53 2026 +0800
+
+    Fixed memory curroption in popwin class structure
+
+commit 017213e38e160952519131c4079711197c3d9060
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Mar 6 15:26:16 2026 +0800
+
+    Fixed moving issue in inspector UI design
+
+commit ecfe0ccb2cf75a33eefcd6998f14d7354ee21605
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 5 18:06:23 2026 +0800
+
+    Update state inspector drag drop event
+
+commit 9d8eccd417c38735314b00ab82f512cc2c804bfc
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 5 17:58:42 2026 +0800
+
+    Added style setter
+
+commit 3338f25d99e2cb53317b5d24cdb772eb2104bab1
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 5 17:10:05 2026 +0800
+
+    Added style setting menu
+
+commit ea5b648b68b41ff81b26c03d12ff67e909a411a3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 5 16:05:43 2026 +0800
+
+    Update filter UI
+
+commit 92fdc138656f1ca4874964e91f1c31280b89124c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 5 15:55:09 2026 +0800
+
+    Added camera list filter and sort option
+
+commit 70ed54d202f179aaa0ae8f3eea0f2ff2f0135d30
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 5 14:49:17 2026 +0800
+
+    Remove some al slop and added style menu
+
+commit b341a56b2440619412c8e50ac99c8556803245d2
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Mar 5 10:14:06 2026 +0800
+
+    Added macro for win init and added style setting win
+
+commit 321dca79e63cce8012d2f2f98f2908c0d7a4aee3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 14:19:24 2026 +0800
+
+    Update multiple viewport setup
+
+commit 7f219175fa4421ea4d5b2681741e13b88f164210
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 14:16:27 2026 +0800
+
+    Fixed builder issue for msvc
+
+commit c8d6ac7ac01d03e02ddff4f16445bc2d2429a0a0
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 14:14:23 2026 +0800
+
+    Update Post Build policy
+
+commit b6102ff953a0f7b44d44d9982a13a10d96d8127f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 14:03:20 2026 +0800
+
+    Update
+
+commit 9cbafb64a2947e382cbbfd8f5c1087f0a781c8b4
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 13:39:01 2026 +0800
+
+    update
+
+commit 73da266bd8ea289a31ded2ad4b03a3dce8ac0468
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 12:50:02 2026 +0800
+
+    s
+
+commit 813a4a1eb028e60ed8cd43f0d842347ec5959b25
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 12:48:27 2026 +0800
+
+    update bash file
+
+commit b07fdc6565d4e8695ff4edd5274ae5558aa2a3b3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 12:45:55 2026 +0800
+
+    update link lib
+
+commit 4c066985ad985e668c962d7bb8bf7a2f2c092570
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 12:45:15 2026 +0800
+
+    s
+
+commit 84aaa42527af202a0982a7a31aec2b0fb5afa448
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 12:42:53 2026 +0800
+
+    update
+
+commit c7a7bfbb95f51119c74c76516d7aba32eff39a52
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 12:40:17 2026 +0800
+
+    update
+
+commit 80d4e8f039e948b5c617d4ea23ff089c99aa0d1f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 12:28:45 2026 +0800
+
+    update
+
+commit 5e31faa01f6d58f49d96bbfb062de3c00190b78b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 12:09:07 2026 +0800
+
+    s
+
+commit 354867b05a0e326726e90aa8e25dba58cfee9478
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 12:05:51 2026 +0800
+
+    s
+
+commit 2a9a1f701d42bef8570966adcdc135e4ebd3132c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 12:04:36 2026 +0800
+
+    uopp
+
+commit 9506bedf4011a758a1cb5a49293f3f5b4bf4427b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 12:01:58 2026 +0800
+
+    update
+
+commit 781979155bf4addceef5620f0200c0f8f234922c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:56:37 2026 +0800
+
+    update
+
+commit db3ac13f36e1e74e89622961cbf4167893a399c9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:54:17 2026 +0800
+
+    s
+
+commit fb1efbcc5a476f22af9c693c6bfdf9ab60bfbb88
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:54:07 2026 +0800
+
+    update standard
+
+commit 87f24e6c20a2651a603c20ffa7dbaa7808f50fe8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:52:44 2026 +0800
+
+    Update cmake
+
+commit ce20d5b470bb3dd2c4931c0e0e4d659b1172fd53
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:49:14 2026 +0800
+
+    Update cmake
+
+commit 92f71fbcd5dba48a62c6bddefb892b094b411aa2
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:39:29 2026 +0800
+
+    Update lib list
+
+commit a47034bbaebe8c0a0af8f0b1b2846fa0f967afac
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:38:08 2026 +0800
+
+    u
+
+commit 74f0555b6cc457a48cfe74d7cc4528a429af7fbe
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:36:46 2026 +0800
+
+    Update lib list
+
+commit 6bd0fe874597914113475271f756d37cccf43a11
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:35:44 2026 +0800
+
+    Update mdns declear
+
+commit af447cca31ce17ad3d846730d8a5f5b0a2820c1e
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:32:25 2026 +0800
+
+    Update lib list
+
+commit 21e154b4144716e07896b4a3b0d801fed172d7b3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:30:41 2026 +0800
+
+    Update
+
+commit 55e5bf75d4c3a1287faf8f4982b004090b7bc0eb
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:29:55 2026 +0800
+
+    Update lib req
+
+commit 943c794f108b8e2e0d0d8b78791d897f89eb70ef
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:27:11 2026 +0800
+
+    Uopdate
+
+commit 84ed9f42d322c356fe0d84e1ad49e9f6439b3f88
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:23:58 2026 +0800
+
+    Update
+
+commit 6cf5ffc7ab2c7011a0ea34b139031381b5d82d11
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:20:43 2026 +0800
+
+    Update
+
+commit b7babf0cb6cf3c96857445b200f11b7d3e56b61d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:13:12 2026 +0800
+
+    update
+
+commit 0aa10af86448bdd2db85eb9a0368163d796ec003
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:10:51 2026 +0800
+
+    update
+
+commit 4dea729f265c8ceb126d7bec7ab6b5d341e6c667
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:07:28 2026 +0800
+
+    Added extern C
+
+commit 00b69473ccffbb7220ea297a20e64c4709259420
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:05:13 2026 +0800
+
+    s
+
+commit a72d2183a33fac24a3e2e022e27382727a7b160e
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 11:03:01 2026 +0800
+
+    Update lib
+
+commit eb6173bf476e2aaba9f991c8c0511d7aa4b29e22
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 10:49:44 2026 +0800
+
+    s
+
+commit 7fec8533cfe21bf452d072df25bc63bca98a0f7c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 10:48:57 2026 +0800
+
+    Trying to fixed code
+
+commit 7b308c447596bf7b0199c9f4c9850ca8b31ed0b9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 10:37:05 2026 +0800
+
+    Fixed corss platform issue
+
+commit 44c30a5f499aa8fdd433ed268e3ae56a7095a9a7
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 10:34:49 2026 +0800
+
+    update
+
+commit b8cad4c7e0b4d4fe10881a7cee67395a3aa8f5e3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 10:27:55 2026 +0800
+
+    Remove code #ifndef issue
+
+commit 229e08c1964eac42c5b2fc0ed647cb08c285212a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Mar 4 09:08:12 2026 +0800
+
+    Trying to fix gl.h error
+
+commit a895aa471908378e4d6e4e9f12624fe826d332c5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 18:04:27 2026 +0800
+
+    Added locate
+
+commit 6f4cf2107467aeb935ffd8f4980f2b217125784a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 17:51:37 2026 +0800
+
+    Update padding content
+
+commit 0ca0689b00b996d93b783ec0106532a34c4d08ab
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 17:46:18 2026 +0800
+
+    Update preset
+
+commit 42017467ad8a45cc9eddb074c515d96b00a93f65
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 17:42:07 2026 +0800
+
+    Preset setting
+
+commit 02a226666e21d7584b3146dd20f15d3fd4762a27
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 17:21:10 2026 +0800
+
+    Update Camera list UI
+
+commit 49854a6521bf496812f7f1858198d868092fb784
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 17:11:52 2026 +0800
+
+    Update
+
+commit 938ae7d0a4eeec564064e463750465cf7a8f0356
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 16:45:57 2026 +0800
+
+    Fixed setting getter in common place
+
+commit 6b6ecb5ae651a846bbe8f0b2d60f6258c3495387
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 16:14:52 2026 +0800
+
+    Fixed some bug
+
+commit f53a35a8c6a6157a2957f5f71cc764faea85e4a6
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 14:54:22 2026 +0800
+
+    Fixed break line group camera
+
+commit 4bfa2e79d58084a76f6fd1ecda6680184ebbb570
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 14:42:14 2026 +0800
+
+    Update
+
+commit e21cef410d8642ee9898b0990e7bb5ada1f1859d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 14:38:41 2026 +0800
+
+    Fix include
+
+commit c28b55ac5227ecf6505f494dcd5b6f727b178c7f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 14:36:59 2026 +0800
+
+    Remove extern "C" prevent corss platform msvc build issue
+
+commit 2b18bab36e06f170318dc322cc6e9f7e5feedb14
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 14:33:34 2026 +0800
+
+    Update the sdl process init and end
+
+commit 856f7105940ff40c232c893118ae5f4bfc727743
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 14:27:26 2026 +0800
+
+    Update
+
+commit 92bb7ac7bb7dda6fd71b96b9816526f3b859811a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 13:59:23 2026 +0800
+
+    Update
+
+commit 0f63bdd4f78438c8174eba895e5689cde260def2
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 13:54:00 2026 +0800
+
+    Update
+
+commit 400dd26cc702cadcc20330671b3ac9e674e832f6
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 13:41:18 2026 +0800
+
+    Fixed cmake libraries
+
+commit 9a21dd4fbd190e447554d700ad4759dbeb5703f6
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 13:39:54 2026 +0800
+
+    Fix include from window.h to windows.h
+
+commit 06c1bab6a9c4af8a3b71e8a0ac86ed9b92c9c8fd
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 13:38:10 2026 +0800
+
+    Update
+
+commit 757c2abe8f705025fa9a77278e3ea34d0c271d1e
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 11:58:05 2026 +0800
+
+    Update sdl3 source code
+
+commit 10a6ce15d322bd754feb545f1f604a819bdb6047
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 11:45:55 2026 +0800
+
+    Added SDL3 source code
+
+commit d4b0cba1c8da9d711185ff95ad48874cc6ffbb61
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 11:37:40 2026 +0800
+
+    Update opencv import pths
+
+commit 2a4c0bb74aabfa76540e83de946e898470debba9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 11:20:53 2026 +0800
+
+    Update
+
+commit 5e232a2fa02a887ebe268889a5735c0dca4fa027
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 11:03:19 2026 +0800
+
+    Update opencv
+
+commit 704eced9c13ed8f28d415f5ff18660a5757a6da4
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 10:56:25 2026 +0800
+
+    Update build script for msvc build
+
+commit 805b70a46cb7a86ec31b6318c30f7808fec2e90f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 10:47:40 2026 +0800
+
+    Precompiled header issue
+
+commit b3fd52015f4c7c3b7ec236f7549b2c17ed2051a1
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 10:37:08 2026 +0800
+
+    Added gitignore for opencv folder
+
+commit 3c09a54764a752794a715eed096ae5836bffc398
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 10:35:57 2026 +0800
+
+    Update opencv import
+
+commit d30b0f21e91018032e1103f2bc3ccfda0832abd9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 10:26:41 2026 +0800
+
+    Update readme for 7z requirement
+
+commit c5f906a0ae5112f5cfd5a6c7231ad28e4bf3a982
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 10:23:54 2026 +0800
+
+    Update
+
+commit 2b18316ff67c6e4e954aec81ef5141017bf94b86
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 10:21:58 2026 +0800
+
+    Update
+
+commit a8c2e8a0795bc8e6c690fccdf0fa48932feac853
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 10:15:54 2026 +0800
+
+    We switch from DX12 DX11 include cmake for SDL3 to OPENGL only
+
+commit 8eaa394f0c6678306080a7a5a505b9ce98f9110f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 10:09:15 2026 +0800
+
+    Remove build all
+
+commit 90e633cb5a5a3e71bb49f6e1fe771e72f9e2579c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 10:08:00 2026 +0800
+
+    Remove gcc flag for msvc build script
+
+commit 990c12c6d95d26a906eddc92ffa42de4d69acaab
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 10:04:13 2026 +0800
+
+    Update readme and script update
+
+commit 69f5ec0036a19f33380ac1fbd51fc818b8b7ba3a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 09:37:21 2026 +0800
+
+    Added cmake file for windows
+
+commit 620c8f6e77934e546b3f81c170d2e15af7a49c79
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Mar 3 09:35:24 2026 +0800
+
+    Update cmake files
+
+commit 017ca8a8c87be12d7cb3c733d84f1ae648e835e5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 2 17:36:12 2026 +0800
+
+    Update build script
+
+commit b086b0af29c540b6d5b48e79ed46f8fe115268af
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 2 17:34:31 2026 +0800
+
+    Replace build script from sh to bat
+
+commit 72e1b5050c302bdd0ec775c1f91ef34de25434b7
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 2 17:27:58 2026 +0800
+
+    Update toolchain
+
+commit ad97a413b8da17825c95ab35c76cb5898cd4155b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 2 17:14:38 2026 +0800
+
+    Update build script
+
+commit 0357a16bb4bd52393943d6672ae18ec458e146d4
+Merge: 2b44f87a 92f83b07
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 2 16:45:23 2026 +0800
+
+    Merge pull request #8 from Funique2022/v0.1.0
+    
+    V0.1.0
+
+commit 92f83b07e01e8743ef6e582a78a333afbe2dce31
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 2 16:44:56 2026 +0800
+
+    Update build
+
+commit 6926b0cef421b38cf3498ef100976c43a294c37e
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 2 16:28:23 2026 +0800
+
+    Update build script
+
+commit cd2561ff1d69be7ebcef5ee38af323e0bd2e714d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 2 15:54:57 2026 +0800
+
+    From find package opencv to content declear
+
+commit 221f4697274054f766a0bb78cc4647fcf7bc9726
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 2 15:07:21 2026 +0800
+
+    Added build all script
+
+commit 2b44f87aa95a7226fd1b38d1aee64954f0e2742c
+Merge: 8284aea7 95f17d5d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 2 14:51:03 2026 +0800
+
+    Merge pull request #7 from Funique2022/v0.1.0
+    
+    V0.1.0
+
+commit 95f17d5d05fa372664edb0df62b94140bdf94dbc
+Merge: b4e28cb5 8284aea7
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 2 14:50:55 2026 +0800
+
+    Merge branch 'develop' into v0.1.0
+
+commit b4e28cb59bfe792eba94b67ffb9105d3fdcc93f2
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 2 14:49:07 2026 +0800
+
+    Moving UI to tab
+
+commit 3dd3acd9bca1f9bae4c7ad75dd967f99d0853db1
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 2 14:46:37 2026 +0800
+
+    Moving meida action to  tab page content
+
+commit df319056cd3b532d326c49134c324644f1b85905
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Mar 2 14:25:25 2026 +0800
+
+    Update apply setting button and feedback menu
+
+commit d104bf17400c98f2d7c7d221a7a10cc8b544b942
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 26 15:50:35 2026 +0800
+
+    Fixed style for camera list element
+
+commit e0871ef0ab1cf371984f98315738a1accfaa4ea3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Feb 25 15:42:45 2026 +0800
+
+    Update display for center text information for camera list
+
+commit cfe5779970d4c9b5a78fcb21a335466a6ccf0f9d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Feb 25 14:04:49 2026 +0800
+
+    Update camera list ui
+
+commit 2f50778313416949734a5585d8e075e5b483cfe7
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Feb 25 11:25:33 2026 +0800
+
+    Update camera list
+
+commit 49969cdb69f4d118406f5bdb60903ae57c82eb73
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Feb 25 11:08:46 2026 +0800
+
+    Added sd card stuff
+
+commit b795ef6173851d917a7e77f2ca1582bddb67f419
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Feb 25 10:36:14 2026 +0800
+
+    Update status display on camera list view
+
+commit 58a77b649a07458e7e2bf9ca70646eb82448dad6
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Feb 24 18:08:55 2026 +0800
+
+    Update codebase
+
+commit ff02e56ac7f44cced6718063e7123bac4d8122d3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Feb 24 18:05:08 2026 +0800
+
+    Added status display
+
+commit dd5668927034d68db85df5d7ac14d540a00934e2
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Feb 24 17:51:58 2026 +0800
+
+    Added status option getter
+
+commit 4d35e1bf26c3cc1b426414f363618bcad4bf9d8a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Feb 24 17:37:11 2026 +0800
+
+    Update inspector, prepare
+
+commit 0dafe304054189bf914fe793a6be85063bbcf822
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Feb 24 17:35:56 2026 +0800
+
+    Added name getter
+
+commit 7a144a6a9718c5bfffc908d0396ae504e3cb112a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Feb 24 17:34:18 2026 +0800
+
+    Update status contents and get status type function in common script
+
+commit 3050a4e0da8d65c893e64620d34496fec1ce503d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Feb 24 17:14:17 2026 +0800
+
+    Finish all the option for status
+
+commit 480c0058293f84e292af8711c1ab8959af4180a0
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Feb 24 16:33:05 2026 +0800
+
+    Addeding font and fixed preview issue
+    Update interface UI setup
+    Fixed preview window loop issue
+    Added status enum and difinition
+
+commit 8ad84f02976b229064727ad2e42df0ea39759060
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Feb 23 15:50:56 2026 +0800
+
+    Fixed ts demux issue
+
+commit 106e643fcc43f5a8ecab396fc2dcda08f6410e6b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Feb 23 09:57:29 2026 +0800
+
+    Fixed AI typo
+
+commit d27710447960ec12be926f7364e9e523fd466a47
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Wed Feb 18 18:50:58 2026 +0800
+
+    Added resolution
+
+commit ab540360aaee1c55f92997a54d5d99af14faee84
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue Feb 17 21:53:52 2026 +0800
+
+    Successfully fetch ffmpeg udp output
+
+commit 0a59f934635503a591c73703600b59cc8afe5cd2
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue Feb 17 21:22:59 2026 +0800
+
+    Fixed the preview render part.
+
+commit df75878b43e63a756c2132bfe1c81d3587557ced
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue Feb 17 20:55:03 2026 +0800
+
+    Remove copy master command from build script.
+
+commit ff1c91637a1f0c1364960d0033d4e5d6539f6221
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue Feb 17 20:49:05 2026 +0800
+
+    Fixed server cannot save record.txt deadlock issue
+    Update camera_list grid item size
+
+commit 83bbc295bebc55a03680d332bd38452fe2398b4a
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue Feb 17 19:03:48 2026 +0800
+
+    Added opencv from linux env
+
+commit d6b6dbaaf4c9552e9f4698e9e8c1fd877bb9d54d
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue Feb 17 00:45:50 2026 +0800
+
+    Update preview code
+
+commit 6bb0e7252697c9ae3453f9c355bff22555ffa96e
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Tue Feb 17 00:28:35 2026 +0800
+
+    Update size change
+
+commit 975cd2124edb7f26514c2305f457f4da8d8f713e
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Mon Feb 16 23:23:34 2026 +0800
+
+    Update popup and macro error
+    Added opencv lib
+    Sorting cmake and build script issue
+    Sorting macro and codebase
+
+commit 3fe89cc08aee6e46da5e63d8bfa596ace067a237
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Mon Feb 16 21:05:27 2026 +0800
+
+    Sorting UI style
+
+commit 50476bd99aeace1375f84bde9feaedef1bf4a023
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Mon Feb 16 21:01:48 2026 +0800
+
+    Sorting master codebase
+
+commit 8a4ea3710f722b1bfe1b82b405828e9d33d37bfa
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Mon Feb 16 00:38:43 2026 +0800
+
+    Header code sorting
+
+commit cc4cff03545bff5158000c2e523b649dc67a901b
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Mon Feb 16 00:35:55 2026 +0800
+
+    Added UDP broadcasting method
+
+commit 0876d12e9dd98c440f4937f02da08a811564ed9a
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Sun Feb 15 23:45:11 2026 +0800
+
+    Added mutex for websocket server ip lock guard
+    Update teadme
+
+commit 7f4fe7d696372ecda2c019ace29b3eef69ed8b07
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Sun Feb 15 23:31:21 2026 +0800
+
+    Fixed compile complaining stuff
+
+commit b5556f5939038a91717925ac7d651da78d80c723
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Sun Feb 15 23:24:58 2026 +0800
+
+    Sorting websocket server methods content
+
+commit 32a8bc4c17a904e91ab06a8baddfeeeb46636f8c
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Sun Feb 15 21:51:39 2026 +0800
+
+    Seperate the private scope of the websocket server for better code quality management
+
+commit 3c741418aff5774462ab64ae81b95a59c5df2107
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 13 14:50:25 2026 +0800
+
+    Update imgui UI
+
+commit 07386c35d9dc4cee8e934ba339d187abe56d83e9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 13 12:02:06 2026 +0800
+
+    Added draw
+
+commit ac260f6abc2a03262289ad26840056890812f2e8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 13 11:43:22 2026 +0800
+
+    Remove buggy lib
+    Fixed the popup window issue
+    Added add_camera window combo option for easier selection
+    Added fault detection for add camera popup window
+
+commit 271020c26c69abc6ce9e04e1ef2481c31faf62f3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 13 11:19:53 2026 +0800
+
+    Sorting the master and server code, for memory safety issue
+    
+    And sorting the multiple windows into one windows such as command window with global and local categories.
+    
+    added main pipeline control
+
+commit c9c42c998b3e01b2b2a5baaca0dee6b4b400526d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 18:11:00 2026 +0800
+
+    Update null checker
+
+commit 5289a1df5f4b1007ba078b1c88d0dd81b520e7e6
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 18:10:18 2026 +0800
+
+    Fixed argu issue
+
+commit c17cc65829257dc93865bf0c695456d8804f9762
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 18:04:56 2026 +0800
+
+    Fixed the share ptr temp issue
+
+commit cece21f195bcfc76c0a377e7b89ee1ab8c6a987b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 16:22:32 2026 +0800
+
+    Remove execute popup
+
+commit 97be07e8046db443890cf3d20b4867cad1178542
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 16:14:58 2026 +0800
+
+    Update popup content
+
+commit 58d8a30e02e5c74c481571b77672a7bf2b38ccf7
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 15:58:37 2026 +0800
+
+    Slowly update popup class content
+
+commit 9f080d4fb6d6121157b92b0508fa6a5cd839ddd0
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 15:47:31 2026 +0800
+
+    Added code license part
+
+commit d14e004780dcd443bcc696d255cad2d477fbfdb3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 15:45:05 2026 +0800
+
+    Start update pop window part
+
+commit 51d96f84525c321e4947a36c8487e5b5583d3961
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 15:38:02 2026 +0800
+
+    Added popup windows class files
+    Sorting stuff
+
+commit 31e1fd111fdf554e09896f43b3f4cd2082615f6f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 15:12:13 2026 +0800
+
+    Added software license
+
+commit 546ba5bd88f62931a981b4fd02dbe425f78a36c8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 15:04:29 2026 +0800
+
+    Seperate the logic to different class files
+    Moving main.cpp logic out.
+    
+    Setup imgui and sdl utility function (extern c)
+
+commit 185cb159190f3529d44705bdab593bfd3f7c0c72
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 11:55:47 2026 +0800
+
+    Added f11 fullscreen switch
+
+commit 1a705c2607509ebeefcc80a1d93546255d9594a8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 11:39:41 2026 +0800
+
+    Create global state struct
+
+commit ed45f1b474cd7ba0e0e9fb800b91c6c6fa903467
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 11:10:44 2026 +0800
+
+    Added control
+
+commit 7a9d1076087cb01508af6ea38ee60db0efa30bf1
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 11:00:22 2026 +0800
+
+    Added window class files
+
+commit 9ede0a8f896f2e180e307de88cff1eb57898ac97
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 10:58:19 2026 +0800
+
+    Added status ids
+
+commit aeedb031afcd397ae27e796041364dcc1dadd79c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 12 09:29:59 2026 +0800
+
+    Update setting ID desine
+
+commit efe8383abeeaf125b523d591073f7c9bdc006382
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Feb 9 18:18:08 2026 +0800
+
+    Update lost setting id
+
+commit 3770b7c25b0b36cfe748a2eac5eb924f3db543d9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Feb 9 14:42:06 2026 +0800
+
+    Fixed cmake buggy, and added media query, update inspector UI
+
+commit a50975e8efa75cbbc6e19f6bf5291a0a138903cb
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Feb 9 11:43:01 2026 +0800
+
+    Added master monitor and fixed build issue for ubuntu
+
+commit 67615bc14d52253a796bbeac6b694941cca58f73
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Feb 9 10:39:34 2026 +0800
+
+    Fixed the cmake build for window issue
+    Fixed by using static build by force
+
+commit 01d513393fa33f5c383f15327bcea8515d067dcb
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Feb 9 09:31:59 2026 +0800
+
+    Update
+
+commit 8284aea773cf37c478fd888164478ebe5f2c4a4c
+Merge: 315136b7 c8e88afb
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Sun Feb 8 11:05:20 2026 +0800
+
+    Merge pull request #6 from Funique2022/Elly2018-patch-1
+    
+    Update README.md
+
+commit c8e88afb4e876d7b9082ea7a34da8cf9981d232e
+Author: ZhuElly <34325707+Elly2018@users.noreply.github.com>
+Date:   Sun Feb 8 11:04:31 2026 +0800
+
+    Update README.md
+
+commit 315136b73b7c10ac4d68ea23c7e38789680097b8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 6 17:14:23 2026 +0800
+
+    Trying added chunk
+
+commit 0ee4b014c4f4542adf997c6f65d1dd1efdb6ae52
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 6 16:51:39 2026 +0800
+
+    Added
+
+commit ae613c093809a3b3caff9c249bc935f4d4762099
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 6 15:31:51 2026 +0800
+
+    Update dashboard display
+
+commit 2d41ce3280f2e6406ca1813111e37046e849ca29
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 6 14:54:28 2026 +0800
+
+    Update font
+
+commit db7c6089ecca3ff2958adcfbe8a22d23fe10e056
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 6 12:48:30 2026 +0800
+
+    Added font
+
+commit 4f2e57bc69affa8e010b8a972c479e64d5a7ae11
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 6 12:00:46 2026 +0800
+
+    Trying adding popup for res commands
+
+commit edaf194411d532161f46960f4eec5096ca366c2c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 6 11:03:56 2026 +0800
+
+    Fixed race condition and update logical bugs
+
+commit 70601a189b7fd0b3e5008d7003f179de673909f5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 6 10:28:22 2026 +0800
+
+    Update tooltip
+
+commit 8ac3062cfa397edcfb8bff9ccfdc5c6aa1a8bb6d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 6 10:08:04 2026 +0800
+
+    Update style
+
+commit a95e10cdb59d677e48f98def58107a0c77aa42f3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 6 09:54:59 2026 +0800
+
+    Added UI element
+
+commit 9a362209503d4b1bde4cd33d375f66ac6fba0567
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 6 09:48:51 2026 +0800
+
+    Added replace ip function
+
+commit 76d9db3031fc5bf2d452437632288524be7a9a64
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 6 09:19:56 2026 +0800
+
+    Added comments, remove extra script
+
+commit a3082e3d95c2433ee5ed90724126ceb58b252d93
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Feb 6 09:12:17 2026 +0800
+
+    Added close tab button for windows
+
+commit 43097e12a72f1f3f7bf736756f5c11fdfe02e9b3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 5 18:02:47 2026 +0800
+
+    Fixing lock guard issue
+
+commit 8f2256f8b1567416685b5f57f36433ebcdd07bef
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 5 17:57:53 2026 +0800
+
+    Added function for all status
+
+commit 7e3112b478d0c569432a5f1a3fe829001de197dd
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 5 17:54:20 2026 +0800
+
+    Fixed the lock is in the loop, so it might causing error
+
+commit eb79627ac0dca154ae725ec86733a72fea6ffb52
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 5 17:04:58 2026 +0800
+
+    Fixed assign by ID feature
+
+commit b5c19c53add036e974167f496f57d78e43b995d9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 5 14:28:24 2026 +0800
+
+    Added apply single and apply all setting features
+
+commit 7390a428387877536375e93036175869a47060fc
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 5 13:45:18 2026 +0800
+
+    Fixed preset always 0 setting error
+
+commit 33c41284a4560812669bafeda1ae071f5b3cc4fd
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 5 11:53:19 2026 +0800
+
+    Added windows build toolchain scripts
+    Added preset switch feature
+
+commit 092c902e04dc4326ac4cd9449edb18e331733020
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Feb 5 11:07:37 2026 +0800
+
+    Added other nad webcam start part
+
+commit da8f66e1c47259eec99841bacefd3010b0adb479
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Feb 4 18:10:47 2026 +0800
+
+    Update
+
+commit 5c5d8c0a41d1920beca988996e57fdecc3d1e3c7
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Feb 4 17:45:33 2026 +0800
+
+    Trying to fixing the crash issue
+
+commit 390670dec690bbd454f5a90bcc8cda4aa8f700a8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Feb 4 17:25:14 2026 +0800
+
+    Fixed inspector panel display crash issue
+    And added error handling for all kinds of scenario.
+
+commit f59006b4343bb3ae81db859cdf8caf9efed71bd6
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Feb 4 15:52:46 2026 +0800
+
+    Update readme
+
+commit 0b65a43178133934eb5b6c73a998a8e8bc0bfe5c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Feb 4 15:37:36 2026 +0800
+
+    Fixing some threading bug and fixing home dir create record.txt bug for amd64 server build
+
+commit 8e3d914589eca1423ce4260d115d42642c1c410b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Feb 4 14:20:06 2026 +0800
+
+    Fixed bug unsync camera state between server and master
+
+commit 06bcc438a9084a8d9dff752d0fa9f845625450ff
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Feb 4 11:55:43 2026 +0800
+
+    Update disconnect causing crash issue
+
+commit 94911a3afd221a9e21d05760710ecc91ee051695
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Feb 4 11:02:39 2026 +0800
+
+    Added exception and thread for websocket client message handler.
+
+commit 731f5d2b4381a9d826a3c9672b255cb4f0c223d2
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Feb 4 10:57:33 2026 +0800
+
+    Fixed on message threading blocking issue and readme.md the raspberry setup guide.
+    
+    Added reference photo for adjustment for the raspberry pi model system configuration.
+
+commit eae76df4251dff6e10b6786db770f30d3094b7c8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Feb 3 17:26:57 2026 +0800
+
+    Update cmake
+
+commit 21e6f6f8537d6856a8f1d3c47557280a11e99c7e
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Feb 3 16:40:57 2026 +0800
+
+    trying to fixed performance issues
+
+commit 84d1fa2ecc1f02e429e0c95f016a6c0d8f7c1177
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Feb 3 13:49:10 2026 +0800
+
+    Update server
+
+commit 3e9208a1e40d0a7b4c28c168a75191d6e4b94583
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Feb 3 11:42:24 2026 +0800
+
+    Update apply all method
+
+commit 23f9eb23d4f5b371f5dcd45585459ad621f6e287
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Feb 3 11:21:28 2026 +0800
+
+    Update go pro library part
+
+commit a9d58a7da3afeeb73c73abef877290453285fd8c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Feb 2 18:11:35 2026 +0800
+
+    Fixed scroll bar issue
+
+commit bca8e63d58e38d689de3c3a76b6eaff3c40eae96
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Feb 2 18:08:58 2026 +0800
+
+    State update
+
+commit a74812d42b5ecaa6e5657f09efdc53ab4e4bac91
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Feb 2 17:16:36 2026 +0800
+
+    Update const
+
+commit a141bfe2ed2dacec082d996ff3fcb760143b52aa
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Feb 2 16:01:13 2026 +0800
+
+    Update readme
+
+commit 4beb593d728a0ebbfe772d661712e4eb94d633fb
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Jan 30 17:39:46 2026 +0800
+
+    Added license information
+
+commit 03bafe78ec057fa7ee403021353f2822575ff8c0
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Jan 30 17:34:11 2026 +0800
+
+    Setting structure pharser update
+
+commit 03f0e7788e523195dbf1ad8bff13b4de85b1fc26
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Jan 30 17:24:47 2026 +0800
+
+    Update build script with debug symbol attachment. so i can use gdb to get the debug information
+
+commit 57b390c9497d7286618cfe802c811ecc2942a0a9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Jan 30 16:39:28 2026 +0800
+
+    Update GUI and structure and json sio setting.
+
+commit 53f7b7f528ac03b7f54dbdcc34b21300265a5db1
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Jan 30 15:04:09 2026 +0800
+
+    Finish structure for go pro camera status
+
+commit 2b1756ae622d81865947952812ca5e8311600e54
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Jan 30 14:42:01 2026 +0800
+
+    Update state getter
+
+commit 590c7c69690ce4829047efb7c2049d5d4aaff5e5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Jan 30 14:30:50 2026 +0800
+
+    Update structure
+
+commit 5a9ac8923555680c7c24adde8bb62488556c8903
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Jan 30 14:07:19 2026 +0800
+
+    Added structure
+
+commit a94a0d4dcf6a991a47fcd303a2e4d3134cb0e978
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Jan 29 17:24:39 2026 +0800
+
+    Added more control for master
+
+commit 4c781e6b1779369006577a0562ac918791decb1f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Jan 28 09:17:04 2026 +0800
+
+    Update
+
+commit 74a75dd0e67387bd6b5c717c1a1b89afabec5dda
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 27 17:57:53 2026 +0800
+
+    update master gui
+
+commit e399321dd9bb6d665163e8ba9f76217b3f11e9a9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 27 16:35:56 2026 +0800
+
+    Added popup flags
+
+commit 0d263d585acfdcf4bc9e269f0f1b9168ae2f2ce7
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 27 16:27:28 2026 +0800
+
+    Start imple on the master side
+
+commit 61e97c4a8eeefaab32d6906267d8f33338364445
+Merge: 4b3c2eba 5db934ce
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 27 15:18:25 2026 +0800
+
+    Merge pull request #1 from Funique2022/develop
+    
+    Develop
+
+commit 5db934cefc15fbcd48ab1efe6073604c9223653f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 27 15:03:03 2026 +0800
+
+    Update readme
+
+commit 9c7bc845db00cce0b9f602fa5219a3d94da6b1da
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 27 14:26:16 2026 +0800
+
+    Update controller private method return value and fixed the imple
+
+commit ca47fcd7cc7a04870a069f4aa914d3d729fbc50a
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 27 14:22:22 2026 +0800
+
+    Fixed query get array methods
+    Error prevent crash and async imple
+
+commit 3709eca7a28234704e8954c95852e5510b48ded8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 27 11:13:01 2026 +0800
+
+    Update webcam part of the code
+
+commit d9555e7e730c47412f9e18750d08a7db4b1b9bb9
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 27 10:12:19 2026 +0800
+
+    Update Readme
+
+commit 7d3d101a86778218f4128012abd9afe46f79d76f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 27 10:05:39 2026 +0800
+
+    Fixed include issue
+
+commit 78604284ec522de1167f3ec34e15f8e0662d9615
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Jan 26 17:23:31 2026 +0800
+
+    Update websocket imple
+
+commit e2d07ba853da6e86dcf3105cec191299e7db6685
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Jan 26 14:37:06 2026 +0800
+
+    Update
+
+commit e951e671ca4e454ca1dac8d538c3d572d7cb63fc
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Jan 26 14:36:15 2026 +0800
+
+    update
+
+commit 9dd0b9ae0b5abdc43cb0fc383ca3be0585de510d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Jan 26 14:31:57 2026 +0800
+
+    Update query route for websocket server worker
+
+commit 6590863a59ce0748aea41b181a132aff0c93c522
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Jan 26 14:17:42 2026 +0800
+
+    temp update
+
+commit 3fde12dd35029254f1ea28de21cc088a4178dd7f
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Mon Jan 26 14:16:17 2026 +0800
+
+    Update command method and add response
+
+commit e7d47216e56bb26768c299b6b28dabf2dd095233
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Jan 23 18:07:44 2026 +0800
+
+    Update main for websocket control methods
+
+commit 900fde8d4d3ee21ebd3ce285f38d6913fa72a420
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Jan 22 16:10:48 2026 +0800
+
+    Update gitignore
+
+commit da78a9e6bc1424755859ee75c336f59c977859c0
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Jan 22 16:09:44 2026 +0800
+
+    update
+
+commit c19e5735a6bbe8c84c53b6e196b83b920fe7d05d
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Jan 22 16:09:17 2026 +0800
+
+    Update cmake script and readme
+    Added mdns discovery mode, for quick search for service
+
+commit e45ed2b8e393048919929a5ec8aa450e3da20279
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Jan 22 13:04:26 2026 +0800
+
+    Update logic for project server
+
+commit 60af1d12f9805e8e2e67bbc27310ed1cf32ea0f2
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Jan 22 12:23:24 2026 +0800
+
+    Scan use async thread
+
+commit 98596d1ea77df13b0d0954829b4a59b0cec5fff8
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Jan 22 10:16:58 2026 +0800
+
+    Update script for ARM64 build and update README for more details
+
+commit 4a3e9dcc5e732f51b2637e64d5b4dce1c1722d06
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Jan 21 16:57:29 2026 +0800
+
+    Added ARM64 build for cmake
+
+commit 834ec3da3f51dc86a0d26652938411dc8b7dcb3c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Jan 21 10:49:16 2026 +0800
+
+    Added ignore
+
+commit b23dc5fa1e0d01aed4009aa43a10be7a4d172df6
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Jan 21 10:47:08 2026 +0800
+
+    First iteration
+
+commit 80d6f227caf61be9e58dda23a8664cbdbc5918ef
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Jan 21 10:43:58 2026 +0800
+
+    Feat: Complete Server and Master implementation with WebSocket and ImGui
+
+commit d726f246b84273df521d04808b8f9bd1f01549c3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Jan 21 10:34:35 2026 +0800
+
+    Refactor: Split project into server and master, add libhv
+
+commit 4b3c2eba0c3ddcd64d03962c4fa5e4b5625fcf03
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 20 16:37:37 2026 +0800
+
+    Update imgui.ini
+
+commit 972f5f945b69618de9e5d60e4887cbea32d03c6b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 20 15:34:03 2026 +0800
+
+    Update
+
+commit a340cffb2f72d031f2d1f065a385e152998c0e0b
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 20 15:06:00 2026 +0800
+
+    remove gl3w library
+
+commit 915dbf98a28cd19a24b03d22815c129dd9fd448c
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 20 15:05:36 2026 +0800
+
+    Update
+
+commit 9abdc9e13b28f33d782170a32206860e03872fa3
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 20 14:50:51 2026 +0800
+
+    Setup imgui for opengl3 SDL3 c++ project
+    This is the base of the application
+
+commit c198a54b6bb5bd9511bc1907fcaefed06f36ce69
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Fri Jan 16 12:03:34 2026 +0800
+
+    Update camera list UI
+
+commit 93c3d20bbede8b7bcfe5c5226051e84a43df7fd5
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Thu Jan 15 16:59:05 2026 +0800
+
+    Update storage and turn off network security.
+
+commit 30803ac276386a5f075d3b8886e2c41cbc1d6083
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Wed Jan 14 14:09:11 2026 +0800
+
+    Migrate the entire project to electron forge with vite setup, and use express backend for communication.
+
+commit f172853b4003d58001b487b07e16f6ce5c50b956
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 13 18:02:46 2026 +0800
+
+    Fixed dialog issue
+
+commit 5305ff77c08eeafcf8a328714f7bb8709b48c5d1
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 13 17:57:52 2026 +0800
+
+    Update UI content
+
+commit 866fca64b922e888bedb1f0359dbfdcb7c529334
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 13 15:36:28 2026 +0800
+
+    Update
+
+commit f5eb33bee3edb327ec9ddf61fb57ab3522567f42
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 13 14:47:16 2026 +0800
+
+    Added a simple electron-vue project for it
+
+commit 9f3f1bb990543303ff149678cbcfc8c01d0b0864
+Author: elly-funique <chu.elly@funique.tv>
+Date:   Tue Jan 13 14:38:32 2026 +0800
+
+    Initial commit

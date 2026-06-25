@@ -4,27 +4,28 @@
  * This software is licensed under the [MIT License].
  * See the LICENSE file in the project root for more information.
 */
-#include "../GoProController.h"
+#include "../gopro_controller_local.h"
+#include "../gopro_controller.h"
 #include <vector>
 #include <string>
 
-void GoProController::_webcamAllMode(std::vector<std::string> targets){
-    _getAllResponse(targets, "/gopro/webcam/preview");
+void gopro_controller_local_webcam_mode(gopro_controller& controller, const std::vector<std::string> targets){
+    gopro_controller_local_get_responses(controller, targets, "/gopro/webcam/preview");
 }
 
-void GoProController::_webcamMode(std::string target){
-    _getSingleResponse(target, "/gopro/webcam/preview");
+void gopro_controller_local_webcam_mode(gopro_controller& controller, const std::string target){
+    gopro_controller_local_get_response(controller, target, "/gopro/webcam/preview");
 }
 
-void GoProController::_webcamAllUnMode(std::vector<std::string> targets){
-    _getAllResponse(targets, "/gopro/webcam/exit");
+void gopro_controller_local_webcam_mode_off(gopro_controller& controller, const std::vector<std::string> targets){
+    gopro_controller_local_get_responses(controller, targets, "/gopro/webcam/exit");
 }
 
-void GoProController::_webcamUnMode(std::string target){
-    _getSingleResponse(target, "/gopro/webcam/exit");
+void gopro_controller_local_webcam_mode_off(gopro_controller& controller, const std::string target){
+    gopro_controller_local_get_response(controller, target, "/gopro/webcam/exit");
 }
 
-void GoProController::_webcamAllOn(std::vector<std::string> targets, int32_t startPort, int32_t res, int32_t fov, bool TS){
+void gopro_controller_local_webcam_on(gopro_controller& controller, const std::vector<std::string> targets, const int32_t startPort, const int32_t res, const int32_t fov, const bool TS){
     std::string url = "/gopro/webcam/start?res=";
     url += std::to_string(res);
     url += "&fov=";
@@ -36,10 +37,10 @@ void GoProController::_webcamAllOn(std::vector<std::string> targets, int32_t sta
     }else{
         url += "&protocol=RTSP";
     }
-    _getAllResponse(targets, url);
+    gopro_controller_local_get_responses(controller, targets, url);
 }
 
-void GoProController::_webcamOn(std::string target, int32_t startPort, int32_t res, int32_t fov, bool TS){
+void gopro_controller_local_webcam_on(gopro_controller& controller, const std::string target, const int32_t startPort, const int32_t res, const int32_t fov, const bool TS){
     std::string url = "/gopro/webcam/start?res=";
     url += std::to_string(res);
     url += "&fov=";
@@ -51,21 +52,21 @@ void GoProController::_webcamOn(std::string target, int32_t startPort, int32_t r
     }else{
         url += "&protocol=RTSP";
     }
-    _getSingleResponse(target, url);
+    gopro_controller_local_get_response(controller, target, url);
 }
 
-void GoProController::_webcamAllOff(std::vector<std::string> targets){
-    _getAllResponse(targets, "/gopro/webcam/stop");
+void gopro_controller_local_webcam_off(gopro_controller& controller, const std::vector<std::string> targets){
+    gopro_controller_local_get_responses(controller, targets, "/gopro/webcam/stop");
 }
 
-void GoProController::_webcamOff(std::string target){
-    _getSingleResponse(target, "/gopro/webcam/stop");
+void gopro_controller_local_webcam_off(gopro_controller& controller, const std::string target){
+    gopro_controller_local_get_response(controller, target, "/gopro/webcam/stop");
 }
 
-std::pair<std::string, std::string> GoProController::_webcamStatus(std::string target){
-    return _getSingleResponse(target, "/gopro/webcam/status");
+SingleResponse gopro_controller_local_webcam_status(gopro_controller& controller, const std::string target){
+    return gopro_controller_local_get_response(controller, target, "/gopro/webcam/status");
 }
 
-std::pair<std::string, std::string> GoProController::_webcamVersion(std::string target){
-    return _getSingleResponse(target, "/gopro/webcam/version");
+SingleResponse gopro_controller_local_webcam_version(gopro_controller& controller, const std::string target){
+    return gopro_controller_local_get_response(controller, target, "/gopro/webcam/version");
 }

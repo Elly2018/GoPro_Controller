@@ -12,7 +12,9 @@
 #include <mutex>
 #include "../common/thread_safe_queue.h"
 #include "gopro_controller.h"
-#include "WebSocketServer.h"
+#include "hv/WebSocketServer.h"
+
+using hv::WebSocketChannelPtr;
 
 struct SenderStruct
 {
@@ -25,7 +27,7 @@ struct SenderStruct
 };
 
 struct InboundEvent {
-    hv::WebSocketChannelPtr channel;
+    WebSocketChannelPtr channel;
     std::string payload;
 };
 
@@ -35,7 +37,7 @@ struct AppData
     bool should_quit;
     std::mutex download_mtx;
     std::mutex broadcast_mtx;
-    std::thread_safe_queue<InboundEvent> message_queue;
+    thread_safe_queue<InboundEvent> message_queue;
     std::array<SenderStruct, 10> broadcast_addrs = std::array<SenderStruct, 10>();
 };
 

@@ -20,7 +20,7 @@ bool gopro_controller_local_element_exist(gopro_controller& controller, const st
 
 int32_t gopro_controller_local_element_add(gopro_controller& controller, const std::string ip) {
     for(int32_t i = 0; i < controller.client_limit; i++){
-        const gopro_element &e = controller.camera_elements.at(i);
+        gopro_element &e = controller.camera_elements.at(i);
         if(e.exist) continue;
 
         uint64_t len = ip.copy(e.ip, sizeof(e.ip) - 1);
@@ -34,7 +34,7 @@ int32_t gopro_controller_local_element_add(gopro_controller& controller, const s
 
 bool gopro_controller_local_element_remove(gopro_controller& controller, const std::string ip) {
     for(int32_t i = 0; i < controller.client_limit; i++){
-        const gopro_element &e = controller.camera_elements.at(i);
+        gopro_element &e = controller.camera_elements.at(i);
         if(!e.exist) continue;
         if(e.ip == ip) {
             e.alive = false;
@@ -47,7 +47,7 @@ bool gopro_controller_local_element_remove(gopro_controller& controller, const s
 
 bool gopro_controller_local_element_clean(gopro_controller& controller) {
     for(int32_t i = 0; i < controller.client_limit; i++){
-        const gopro_element &e = controller.camera_elements.at(i);
+        gopro_element &e = controller.camera_elements.at(i);
         e.exist = false;
     }
     return true;
@@ -104,5 +104,3 @@ json gopro_controller_local_element_get_hw(gopro_controller& controller, const s
 
     return json::parse(buff);
 }
-
-#endif

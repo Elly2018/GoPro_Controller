@@ -100,12 +100,14 @@ std::string gopro_controller_get_fetch_URL(gopro_controller& controller, const s
         t++;
     }
     std::cout << "[last_media] try download " << gopro_url.c_str() << std::endl;
+    std::chrono::_V2::system_clock::time_point start;
+    std::chrono::_V2::system_clock::time_point end;
     if (SERVER_MEDIA_DOWNLOAD_LOG){
-        auto start = std::chrono::high_resolution_clock::now();
+        start = std::chrono::high_resolution_clock::now();
     }
     size_t size = requests::downloadFile(gopro_url.c_str(), ("res/" + download_path).c_str(), [&target_ip, &start](size_t received_bytes, size_t total_bytes){
         if (SERVER_MEDIA_DOWNLOAD_LOG){
-            auto end = std::chrono::high_resolution_clock::now();
+            end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double> elapsed = end - start;
             if(elapsed.count() >= SERVER_MEDIA_DOWNLOAD_PERIOD){
                 start = end;
@@ -206,7 +208,7 @@ std::string gopro_controller_get_thumbnail_data(gopro_controller& controller, co
     }
 
     const std::vector<uint8_t> res = exec_byte("http://" + target_ip + ":8080/gopro/media/screennail?path=" + path);
-    std::string result = base64_encode(res);
+    std::string result = gopro_controller_local_base64_encode(controller, res);
     return result;
 }
 

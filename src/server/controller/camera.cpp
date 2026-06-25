@@ -22,7 +22,7 @@ void gopro_controller_scanCameras(gopro_controller& controller) {
                 const bool find = gopro_controller_local_element_exist(controller, p);
                 if(gopro_controller_local_element_have_slot(controller) >= 0) {
                     gopro_controller_local_element_add(controller, p);
-                    gopro_controller_local_updateRecord(controller);
+                    gopro_controller_local_update_record(controller);
                 }
             }
         };
@@ -33,7 +33,7 @@ void gopro_controller_scanCameras(gopro_controller& controller) {
     if(controller.scan_thread_state == Thread_state::PROCESSING) return;
     controller.scan_thread_state = Thread_state::PROCESSING;
     controller.scan_thread = std::thread([&controller](){
-        mdns.executeDiscovery();
+        controller.mdns.executeDiscovery();
         controller.scan_thread_state = Thread_state::FINISHED;
     });
 }
@@ -47,12 +47,12 @@ void gopro_controller_renameCameras(gopro_controller& controller, const std::str
     if (gopro_controller_local_element_have_slot(controller) >= 0) {
         int32_t index = gopro_controller_local_element_add(controller, ip);
         if(index >= 0){
-            const gopro_element &e = controller.camera_elements.at(index);
+            gopro_element &e = controller.camera_elements.at(index);
             
             uint64_t len = name.copy(e.name, sizeof(e.name) -1);
             e.name[len] = '\0';
 
-            gopro_controller_local_updateRecord(controller);
+            gopro_controller_local_update_record(controller);
         }
     }
 }
@@ -63,7 +63,7 @@ void gopro_controller_addCameras(gopro_controller& controller, const std::string
         if(!gopro_controller_local_element_exist(controller, p)){
             if(gopro_controller_local_element_have_slot(controller) >= 0) {
                 gopro_controller_local_element_add(controller, p);
-                gopro_controller_local_updateRecord(controller);
+                gopro_controller_local_update_record(controller);
             }
         }
     }

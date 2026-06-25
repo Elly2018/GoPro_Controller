@@ -4,38 +4,49 @@
  * This software is licensed under the [MIT License].
  * See the LICENSE file in the project root for more information.
 */
-#include "../GoProController.h"
+#include "../gopro_controller_local.h"
+#include "../gopro_controller.h"
 #include <vector>
 #include <string>
 #include <thread>
 #include <chrono>
 #include "../../common/camera_code.h"
 
-#define SETTING_UTILITY_CALL(r,a,buffer,size,field) \
-buffer = std::vector<int32_t>(size); \
-for(int32_t i = 0; i < size; i++){ \
-    buffer[i] = field[i]; \
-} \
-a = _setSetting_utility(target, res, buffer); \
-r.insert(r.end(), a.begin(), a.end()); \
-
-std::vector<SingleResponse> GoProController::_queryAllStatus(std::vector<std::string> targets){
-    return _getAllResponse(targets, "/gopro/camera/state");
+static void setting_utility_call(
+    gopro_controller& controller,
+    std::vector<SingleResponse>& r, 
+    std::vector<SingleResponse>& a, 
+    std::vector<int32_t>& buffer, 
+    int32_t size, 
+    const int32_t field[],
+    std::string target, 
+    json res
+) {
+    buffer.clear();
+    for(int32_t i = 0; i < size; i++){ 
+        buffer[i] = field[i]; 
+    } 
+    a = gopro_controller_local_set_setting_utility(controller, target, res, buffer); 
+    r.insert(r.end(), a.begin(), a.end()); 
 }
 
-SingleResponse GoProController::_queryStatus(std::string target){
-    return _getSingleResponse(target, "/gopro/camera/state");
+std::vector<SingleResponse> gopro_controller_local_query_status(gopro_controller& controller, const std::vector<std::string> targets){
+    return gopro_controller_local_get_responses(controller, targets, "/gopro/camera/state");
 }
 
-std::vector<SingleResponse> GoProController::_queryAllHW(std::vector<std::string> targets){
-    return _getAllResponse(targets, "/gopro/camera/info");
+SingleResponse gopro_controller_local_query_status(gopro_controller& controller, const std::string target){
+    return gopro_controller_local_get_response(controller, target, "/gopro/camera/state");
 }
 
-SingleResponse GoProController::_queryHW(std::string target){
-    return _getSingleResponse(target, "/gopro/camera/info");
+std::vector<SingleResponse> gopro_controller_local_query_HW(gopro_controller& controller, std::vector<std::string> targets){
+    return gopro_controller_local_get_responses(controller, targets, "/gopro/camera/info");
 }
 
-std::vector<SingleResponse> GoProController::_setAllSetting(std::vector<std::string> targets, int32_t preset, json res){
+SingleResponse gopro_controller_local_query_HW(gopro_controller& controller, std::string target){
+    return gopro_controller_local_get_response(controller, target, "/gopro/camera/info");
+}
+
+std::vector<SingleResponse> gopro_controller_local_set_setting_preset(gopro_controller& controller, const std::vector<std::string> targets, const int32_t preset, json res){
     std::vector<SingleResponse> r = std::vector<SingleResponse>();
     std::vector<SingleResponse> a = std::vector<SingleResponse>();
     std::vector<int32_t> buffer = std::vector<int32_t>();
@@ -59,23 +70,23 @@ std::vector<SingleResponse> GoProController::_setAllSetting(std::vector<std::str
     return r;
 }
 
-std::vector<SingleResponse> GoProController::_setSetting(std::string target, int32_t preset, json res){
+std::vector<SingleResponse> gopro_controller_local_set_setting_preset(gopro_controller& controller, const std::string target, const int32_t preset, json res){
     std::cout << "Set setting json: " << target << ", " << preset << std::endl;
     std::vector<SingleResponse> r = std::vector<SingleResponse>();
     std::vector<SingleResponse> a = std::vector<SingleResponse>();
     std::vector<int32_t> buffer = std::vector<int32_t>();
     
     if(preset == 65538){ // Burst
-        SETTING_UTILITY_CALL(r, a, buffer, GOPRO_BURST_SETTING_SIZE, GOPRO_BURST_SETTING_IDS);
-        SETTING_UTILITY_CALL(r, a, buffer, GOPRO_BURST_PROTUNE_SETTING_SIZE, GOPRO_BURST_PROTUNE_SETTING_IDS);
+        setting_utility_call(controller, r, a, buffer, GOPRO_BURST_SETTING_SIZE, GOPRO_BURST_SETTING_IDS, target, res);
+        setting_utility_call(controller, r, a, buffer, GOPRO_BURST_PROTUNE_SETTING_SIZE, GOPRO_BURST_PROTUNE_SETTING_IDS, target, res);
     }else if(preset == 65536){ // Photo
-        SETTING_UTILITY_CALL(r, a, buffer, GOPRO_PHOTO_SETTING_SIZE, GOPRO_PHOTO_SETTING_IDS);
-        SETTING_UTILITY_CALL(r, a, buffer, GOPRO_PHOTO_PROTUNE_SETTING_SIZE, GOPRO_PHOTO_PROTUNE_SETTING_IDS);
+        setting_utility_call(controller, r, a, buffer, GOPRO_PHOTO_SETTING_SIZE, GOPRO_PHOTO_SETTING_IDS, target, res);
+        setting_utility_call(controller, r, a, buffer, GOPRO_PHOTO_PROTUNE_SETTING_SIZE, GOPRO_PHOTO_PROTUNE_SETTING_IDS, target, res);
     }else{
-        SETTING_UTILITY_CALL(r, a, buffer, GOPRO_VIDEO_SETTING_SIZE, GOPRO_VIDEO_SETTING_IDS);
-        SETTING_UTILITY_CALL(r, a, buffer, GOPRO_VIDEO_PROTUNE_SETTING_SIZE, GOPRO_VIDEO_PROTUNE_SETTING_IDS);
+        setting_utility_call(controller, r, a, buffer, GOPRO_VIDEO_SETTING_SIZE, GOPRO_VIDEO_SETTING_IDS, target, res);
+        setting_utility_call(controller, r, a, buffer, GOPRO_VIDEO_PROTUNE_SETTING_SIZE, GOPRO_VIDEO_PROTUNE_SETTING_IDS, target, res);
     }
-    SETTING_UTILITY_CALL(r, a, buffer, GOPRO_SYSTEM_SETTING_SIZE, GOPRO_SYSTEM_SETTING_IDS);
+    setting_utility_call(controller, r, a, buffer, GOPRO_SYSTEM_SETTING_SIZE, GOPRO_SYSTEM_SETTING_IDS, target, res);
 
     return r;
 }
