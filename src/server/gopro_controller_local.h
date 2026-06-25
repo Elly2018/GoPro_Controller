@@ -51,18 +51,18 @@ void gopro_controller_local_webcam_off(gopro_controller& controller, std::string
 SingleResponse gopro_controller_local_webcamStatus(gopro_controller& controller, std::string target);
 SingleResponse gopro_controller_local_webcamVersion(gopro_controller& controller, std::string target);
 
-void gopro_controller_local_preview_on(gopro_controller& controller, std::vector<std::string> targets, int32_t port);
-void gopro_controller_local_preview_on(gopro_controller& controller, std::string target, int32_t port);
-void gopro_controller_local_preview_off(gopro_controller& controller, std::vector<std::string> targets);
-void gopro_controller_local_preview_off(gopro_controller& controller, std::string target);
+void gopro_controller_local_preview_on(gopro_controller& controller, const std::vector<std::string> targets, const int32_t port);
+void gopro_controller_local_preview_on(gopro_controller& controller, const std::string target, const int32_t port);
+void gopro_controller_local_preview_off(gopro_controller& controller, const std::vector<std::string> targets);
+void gopro_controller_local_preview_off(gopro_controller& controller, const std::string target);
 
-std::vector<SingleResponse> gopro_controller_local_getAllMediaList(gopro_controller& controller, std::vector<std::string> targets);
-SingleResponse gopro_controller_local_getMediaList(gopro_controller& controller, std::string target);
-std::vector<SingleResponse> gopro_controller_local_getAllLastMedia(gopro_controller& controller, std::vector<std::string> targets);
-SingleResponse gopro_controller_local_getLastMedia(gopro_controller& controller, std::string target);
+std::vector<SingleResponse> gopro_controller_local_get_media_list(gopro_controller& controller, const std::vector<std::string> targets);
+SingleResponse gopro_controller_local_get_media_list(gopro_controller& controller, const std::string target);
+std::vector<SingleResponse> gopro_controller_local_get_last_media(gopro_controller& controller, const std::vector<std::string> targets);
+SingleResponse gopro_controller_local_get_last_media(gopro_controller& controller, const std::string target);
 
-SingleResponse gopro_controller_local_getSingleResponse(gopro_controller& controller, std::string target, std::string suffix);
-std::vector<SingleResponse> gopro_controller_local_getAllResponse(gopro_controller& controller, std::vector<std::string> targets, std::string suffix);
+SingleResponse gopro_controller_local_get_response(gopro_controller& controller, const std::string target, const std::string suffix);
+std::vector<SingleResponse> gopro_controller_local_get_responses(gopro_controller& controller, const std::vector<std::string> targets, const std::string suffix);
 std::string gopro_controller_local_base64_encode(gopro_controller& controller, const std::vector<u_char> &data);
 int32_t gopro_controller_local_get_current_model(gopro_controller& controller, json hwinfo);
 

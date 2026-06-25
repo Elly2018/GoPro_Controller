@@ -22,8 +22,11 @@
 #include <sstream>
 #include <curl/curl.h>
 #include <filesystem>
+#include <nlohmann/json.hpp>
 
 namespace fs = std::filesystem;
+
+using json = nlohmann::json;
 
 struct DownloadState {
     std::string url;
@@ -229,7 +232,7 @@ inline std::string GetRemoteURLBySerial(std::string serial){
     return std::string("http://172.2") + serial[0] + std::string(".1") + serial[1] + serial[2] + std::string(".51:8080");
 }
 
-inline std::string GetRemoteURLByIP(std::string IP){
+inline std::string get_remote_URL_by_IP(const std::string IP){
     if(IP.size() < 12){
         std::cerr << "The IP string size must larger than 12" << "\n";
         return "";
@@ -238,11 +241,7 @@ inline std::string GetRemoteURLByIP(std::string IP){
     return std::string("http://") + IP + std::string(":8080");
 }
 
-///
-/// Execute a single command and get its value
-/// If timeout, it will return empty string
-///
-inline std::string exec(std::string cmd, int64_t timeout = 1500L, int64_t connection_timeout = 1000L) {
+inline json exec(std::string cmd, int64_t timeout = 1500L, int64_t connection_timeout = 1000L) {
     CURL* curl = curl_easy_init();
     std::string result = "";
 
@@ -259,7 +258,11 @@ inline std::string exec(std::string cmd, int64_t timeout = 1500L, int64_t connec
         std::cerr << "[Error] iphelper.h, Curl init failed" << std::endl;
     }
 
-    return result;
+    if(json::accept(result)){
+        return json::parse(result);
+    }else{
+        return result;
+    }
 }
 
 inline std::vector<u_char> exec_byte(std::string cmd, int64_t timeout = 1500L, int64_t connection_timeout = 1000L){

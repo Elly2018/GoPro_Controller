@@ -6,6 +6,7 @@
 */
 #include "../gopro_controller_local.h"
 #include "../gopro_controller.h"
+#include <string>
 
 bool gopro_controller_local_element_exist(gopro_controller& controller, const std::string ip, bool should_be_alive) {
     for(int32_t i = 0; i < controller.client_limit; i++){

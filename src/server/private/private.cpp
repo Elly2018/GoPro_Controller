@@ -16,13 +16,15 @@ void gopro_controller_local_load_record(gopro_controller& controller) {
     std::ifstream inFile(SERVER_CLIENT_RECORD_FILENAME);
 
     if (!inFile.is_open()) {
-        std::cerr << "Error: Could not open the file: " << homedir << std::endl;
+        std::cerr << "Error: Could not open the file: " << SERVER_CLIENT_RECORD_FILENAME << std::endl;
         return;
     }
 
     std::string line;
 
     while (std::getline(inFile, line)) {
+        if(!gopro_controller_local_element_have_slot(controller)) break;
+
         std::vector<std::string> words = std::vector<std::string>();
         std::stringstream ss(line);
         std::string word;
@@ -30,49 +32,48 @@ void gopro_controller_local_load_record(gopro_controller& controller) {
             words.push_back(word);
         }
         if(words.size() > 0){
-            camera_ips.push_back(words[0]);
+            gopro_controller_local_element_add(controller, words[0]);
         }
         if(words.size() > 1){
-            camera_name.insert_or_assign(words[0], words[1]);
+            int32_t index = gopro_controller_local_element_add(controller, words[0]);
+            gopro_controller_renameCameras(controller, words[0], words[1]);
         }
     }
     inFile.close();
 }
 
 void gopro_controller_local_update_record(gopro_controller& controller) {
-    std::string homedir = "";
-    homedir += "record.txt";
-    std::cout << "Trying export data to: " << homedir << std::endl;
-    std::ofstream outFile( homedir.c_str() );
+    std::cout << "Trying export data to: " << SERVER_CLIENT_RECORD_FILENAME << std::endl;
+    std::ofstream outFile( SERVER_CLIENT_RECORD_FILENAME );
     
     if (!outFile.is_open()) {
-        std::cerr << "Error: Could not open the file." << homedir << std::endl;
-        return; // Return with an error code
+        std::cerr << "Error: Could not open the file." << SERVER_CLIENT_RECORD_FILENAME << std::endl;
+        return;
     }
-    for(int32_t i = 0; i < camera_ips.size(); i++){
-        std::string& c = camera_ips.at(i);
+    for(int32_t i = 0; i < controller.client_limit; i++){
+        const gopro_element &e = controller.camera_elements.at(i);
         if(camera_name.count(c)){
-            outFile << c << " " << camera_name.at(c)  << "\n";
-            std::cout << "  Export " << c << " with name " << camera_name.at(c) << std::endl;
+            outFile << e.ip << " " << e.name  << "\n";
+            std::cout << "  Export " << e.ip << " with name " << e.name << std::endl;
         }else{
-            outFile << c << "\n";
-            std::cout << "  Export " << c << std::endl;
+            outFile << e.ip << "\n";
+            std::cout << "  Export " << e.ip << std::endl;
         }
     }
     outFile.close();
 }
 
-SingleResponse GoProController::_getSingleResponse(std::string target, std::string suffix){
-    std::string url = GetRemoteURLByIP(target) + suffix;
+SingleResponse gopro_controller_local_get_response(gopro_controller& controller, const std::string target, const std::string suffix){
+    std::string url = get_remote_URL_by_IP(target) + suffix;
     std::cout << "CURL: " << url << std::endl;
     return SingleResponse(target, exec(url));
 }
 
-std::vector<SingleResponse> GoProController::_getAllResponse(std::vector<std::string> targets, std::string suffix){
+std::vector<SingleResponse> gopro_controller_local_get_responses(gopro_controller& controller, const std::vector<std::string> targets, const std::string suffix){
     std::vector<std::string> urls = std::vector<std::string>();
     std::vector<SingleResponse> result = std::vector<SingleResponse>();
     for(int32_t i = 0; i < targets.size(); i++){
-        urls.push_back(GetRemoteURLByIP(targets[i]) + suffix);
+        urls.push_back(get_remote_URL_by_IP(targets[i]) + suffix);
     }
     std::vector<std::string> res = execs(urls);
     std::cout << "query all: " << res.size() << "/" << targets.size() << " " << suffix.c_str() << std::endl;;
@@ -88,12 +89,11 @@ std::vector<SingleResponse> GoProController::_getAllResponse(std::vector<std::st
     return result;
 }
 
-std::string GoProController::base64_encode(const std::vector<u_char>& data) {
+std::string gopro_controller_local_base64_encode(gopro_controller& controller, const std::vector<u_char> &data) {
     static const std::string base64_chars = 
-             "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-             "abcdefghijklmnopqrstuvwxyz"
-             "0123456789+/";
-             
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "abcdefghijklmnopqrstuvwxyz"
+        "0123456789+/";
     std::string out;
     int val = 0, valb = -6;
     for (u_char c : data) {
