@@ -99,10 +99,20 @@ std::vector<SingleResponse> gopro_controller_local_set_setting_utility(gopro_con
     int32_t target_model;
     json setting;
     json target_hw;
-    if(camera_hw.count(target)){
-        target_hw = camera_hw.at(target);
-        target_model = _get_current_model(target_hw);
+    int32_t index = gopro_controller_local_element_find(controller, target);
+    if(index == -1){
+        return r;
     }
+
+    gopro_element &e = controller.camera_elements.at(index);
+    std::string_view sv = e.hw;
+    if(!json::accept(sv)) {
+        return r;
+    }
+
+    target_hw = json::parse(sv);
+    target_model = gopro_controller_local_get_current_model(controller, target_hw);
+    
     if(res["model"].is_number()){
         model = res["model"].get<int32_t>();
     }
@@ -124,7 +134,7 @@ std::vector<SingleResponse> gopro_controller_local_set_setting_utility(gopro_con
         std::string suburl = url + std::to_string(options[value]);
         suburl += "&setting=";
         suburl += std::to_string(id);
-        r.push_back(_getSingleResponse(target, suburl));
+        r.push_back(gopro_controller_local_get_response(controller, target, suburl));
         //std::this_thread::sleep_for(std::chrono::milliseconds(350));
     }
 

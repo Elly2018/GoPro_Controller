@@ -101,13 +101,12 @@ std::string gopro_controller_get_fetch_URL(gopro_controller& controller, const s
     }
     std::cout << "[last_media] try download " << gopro_url.c_str() << std::endl;
     std::chrono::_V2::system_clock::time_point start;
-    std::chrono::_V2::system_clock::time_point end;
     if (SERVER_MEDIA_DOWNLOAD_LOG){
         start = std::chrono::high_resolution_clock::now();
     }
     size_t size = requests::downloadFile(gopro_url.c_str(), ("res/" + download_path).c_str(), [&target_ip, &start](size_t received_bytes, size_t total_bytes){
         if (SERVER_MEDIA_DOWNLOAD_LOG){
-            end = std::chrono::high_resolution_clock::now();
+            auto end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double> elapsed = end - start;
             if(elapsed.count() >= SERVER_MEDIA_DOWNLOAD_PERIOD){
                 start = end;
@@ -140,13 +139,12 @@ std::string gopro_controller_get_filename_fetch_URL(gopro_controller& controller
         }
         std::cout << "[last_media] try download " << gopro_url.c_str() << std::endl;
         std::chrono::_V2::system_clock::time_point start;
-        std::chrono::_V2::system_clock::time_point end;
         if(SERVER_MEDIA_DOWNLOAD_LOG){
             start = std::chrono::high_resolution_clock::now();
         }
         size_t size = requests::downloadFile(gopro_url.c_str(), ("res/" + download_path).c_str(), [&target_ip, &start](size_t received_bytes, size_t total_bytes){
             if(SERVER_MEDIA_DOWNLOAD_LOG){
-                end = std::chrono::high_resolution_clock::now();
+                auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double> elapsed = end - start;
                 if(elapsed.count() >= SERVER_MEDIA_DOWNLOAD_PERIOD){
                     start = end;
@@ -164,7 +162,7 @@ std::vector<SingleResponse> gopro_controller_get_filename_fetch_IRL(gopro_contro
 
     if (target_ip.empty()) {
         std::cerr << "[all_media] " << target_ip << " Missing ip parameter" << std::endl;
-        return std::vector<std::pair<std::string, std::string>>();
+        return std::vector<SingleResponse>();
     }
     
     std::vector<SingleResponse> results = std::vector<SingleResponse>();
@@ -181,18 +179,17 @@ std::vector<SingleResponse> gopro_controller_get_filename_fetch_IRL(gopro_contro
                 t++;
             }
             std::cout << "[last_media] try download " << gopro_url.c_str() << std::endl;
-#ifdef SERVER_MEDIA_DOWNLOAD_LOG
-            auto start = std::chrono::high_resolution_clock::now();
-#endif
+            std::chrono::_V2::system_clock::time_point start;
+            if(SERVER_MEDIA_DOWNLOAD_LOG) {
+                start = std::chrono::high_resolution_clock::now();
+            }
             size_t size = requests::downloadFile(gopro_url.c_str(), ("res/" + download_path).c_str(), [&target_ip, &start](size_t received_bytes, size_t total_bytes){
-#ifdef SERVER_MEDIA_DOWNLOAD_LOG
                 auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double> elapsed = end - start;
                 if(elapsed.count() >= SERVER_MEDIA_DOWNLOAD_PERIOD){
                     start = end;
                     std::cout << "[last_media] download " << target_ip << " " << received_bytes << " / " << total_bytes << std::endl;
                 }
-#endif
             });
             std::cout << "[last_media] return value: " << target_ip << " => " << download_path << std::endl;
             results.push_back(std::make_pair(filename, download_path));

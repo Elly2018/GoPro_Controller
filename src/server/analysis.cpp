@@ -65,7 +65,7 @@ void Execute_command(gopro_controller& controller, const WebSocketChannelPtr &ch
     r["data"] = json::object();
     channel->send(Get_packet("command:locate_on", r));
   } else if (name == "locate_off") {
-    controller.locate(target, false);
+    gopro_controller_locate(controller, target, false);
     r["data"] = json::object();
     channel->send(Get_packet("command:locate_off", r));
   } else if (name == "res_clean") {
@@ -192,10 +192,10 @@ void Webcam_action(gopro_controller& controller, const WebSocketChannelPtr &chan
     gopro_controller_webcam_off(controller, target);
     channel->send(Get_packet("webcam:stop", r));
   } else if (name == "status") {
-    r["data"] = controller.gopro_controller_webcam_status(controller, target);
+    r["data"] = gopro_controller_webcam_status(controller, target);
     channel->send(Get_packet("webcam:status", r));
   } else if (name == "version") {
-    r["data"] = controller.gopro_controller_webcam_version(controller, target);
+    r["data"] = gopro_controller_webcam_version(controller, target);
     channel->send(Get_packet("webcam:version", r));
   } else {
     channel->send(Get_packet("webcam:unknown", r));
@@ -272,7 +272,7 @@ void Media_action(gopro_controller& controller, AppData& data, const WebSocketCh
   }
 
   if (name == "lastmedia") {
-    controller.keep_alive("");
+    gopro_controller_keep_alive(controller, "");
     resultText = gopro_controller_get_last_media(controller, target);
     if (json::accept(resultText)) {
       r["data"] = json::parse(resultText);

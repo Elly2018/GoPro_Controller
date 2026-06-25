@@ -52,7 +52,7 @@ void gopro_controller_local_update_record(gopro_controller& controller) {
     }
     for(int32_t i = 0; i < controller.client_limit; i++){
         const gopro_element &e = controller.camera_elements.at(i);
-        if(camera_name.count(c)){
+        if(strlen(e.name) > 0){
             outFile << e.ip << " " << e.name  << "\n";
             std::cout << "  Export " << e.ip << " with name " << e.name << std::endl;
         }else{

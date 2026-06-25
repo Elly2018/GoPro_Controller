@@ -11,12 +11,13 @@
 #include <vector>
 #include <thread>
 #include <future>
+#include <functional>
 #include "icmplib.h"
 
 void gopro_controller_init(gopro_controller& controller) {
     curl_global_init(CURL_GLOBAL_DEFAULT);
-    controller.ping_thread = std::thread(gopro_controller_ping, controller);
     controller.ping_thread_state = Thread_state::PROCESSING;
+    controller.ping_thread = std::thread(gopro_controller_ping, std::ref(controller));
     gopro_controller_local_load_record(controller);
 }
 

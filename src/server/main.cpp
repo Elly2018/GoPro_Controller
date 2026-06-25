@@ -46,6 +46,14 @@ void Websocket_server(AppData &data)
 		
 		if (f == -1)
 		{
+			int32_t push_index = -1;
+			for (int32_t i = 0; i < data.broadcast_addrs.size(); i++) {
+				if(!data.broadcast_addrs.at(i).vaild){
+					push_index = i;
+					break;
+				}
+			}
+
 			Sender_struct sss = Sender_struct();
 			std::string addd = channel->peeraddr().c_str();
 			while (addd.at(addd.size() - 1) != ':')
@@ -55,7 +63,7 @@ void Websocket_server(AppData &data)
 			addd.pop_back();
 			
 			sss.websocket_ip = channel->peeraddr().c_str();
-			uint64_t len = addd.copy(sss.host_ip, size(sss.host_ip)- 1);
+			uint64_t len = addd.copy(sss.host_ip, sizeof(sss.host_ip)- 1);
 			sss.host_ip[len] = '\0';
 			
 			sss.sock_fd = socket(AF_INET, SOCK_DGRAM, 0);
@@ -65,7 +73,7 @@ void Websocket_server(AppData &data)
 			sss.bcsa.sin_addr.s_addr = inet_addr(addd.c_str());
 			sss.vaild = true;
 			
-			data.broadcast_addrs.push_back((sss));
+			data.broadcast_addrs[push_index] = sss;
 		}
 	};
 	ws.onmessage = [&](const WebSocketChannelPtr &channel, const std::string &msg)

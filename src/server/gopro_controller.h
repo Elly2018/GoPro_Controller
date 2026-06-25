@@ -109,7 +109,7 @@ json gopro_controller_get_media_list(gopro_controller& controller, const std::st
 json gopro_controller_get_last_media(gopro_controller& controller, const std::string target);
 std::string gopro_controller_get_fetch_URL(gopro_controller& controller, const std::string target_ip, const bool is_local);
 std::string gopro_controller_get_filename_fetch_URL(gopro_controller& controller, const std::string target_ip, const std::string filename, const bool is_local);
-std::vector<SingleResponse> gopro_controller_get_filename_fetch_IRL(gopro_controller& controller, const std::string target_ip, const std::vector<std::string> filenames, const bool is_local);
+std::vector<SingleResponse> gopro_controller_get_filename_fetch_URL(gopro_controller& controller, const std::string target_ip, const std::vector<std::string> filenames, const bool is_local);
 std::string gopro_controller_get_thumbnail_data(gopro_controller& controller, const std::string target_ip, const std::string path, const bool is_local);
 std::string gopro_controller_get_media_info_data(gopro_controller& controller, const std::string target_ip, const std::string path, const bool is_local);
 
