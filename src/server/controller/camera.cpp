@@ -9,7 +9,7 @@
 #include <string>
 #include <thread>
 
-void gopro_controller_scanCameras(gopro_controller& controller) {
+void gopro_controller_scan_cameras(gopro_controller& controller) {
     if(!controller.mdns_event_registered){
         controller.mdns_event_registered = true;
 
@@ -38,12 +38,12 @@ void gopro_controller_scanCameras(gopro_controller& controller) {
     });
 }
 
-void gopro_controller_cleanCameras(gopro_controller& controller){
+void gopro_controller_clean_cameras(gopro_controller& controller){
     gopro_controller_local_element_clean(controller);
     gopro_controller_local_updateRecord(controller);
 }
 
-void gopro_controller_renameCameras(gopro_controller& controller, const std::string ip, const std::string name) {
+void gopro_controller_rename_cameras(gopro_controller& controller, const std::string ip, const std::string name) {
     if (gopro_controller_local_element_have_slot(controller) >= 0) {
         int32_t index = gopro_controller_local_element_add(controller, ip);
         if(index >= 0){
@@ -57,7 +57,7 @@ void gopro_controller_renameCameras(gopro_controller& controller, const std::str
     }
 }
 
-void gopro_controller_addCameras(gopro_controller& controller, const std::string serial) {
+void gopro_controller_add_cameras(gopro_controller& controller, const std::string serial) {
     if(serial.size() >= 3){
         const std::string p = GetRemoteIPBySerial(serial);
         if(!gopro_controller_local_element_exist(controller, p)){
@@ -69,6 +69,6 @@ void gopro_controller_addCameras(gopro_controller& controller, const std::string
     }
 }
 
-void gopro_controller_deleteCameras(gopro_controller& controller, const std::string ip) {
+void gopro_controller_delete_cameras(gopro_controller& controller, const std::string ip) {
     gopro_controller_local_element_remove(controller, ip);
 }

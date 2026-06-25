@@ -91,23 +91,7 @@ std::vector<SingleResponse> gopro_controller_local_set_setting_preset(gopro_cont
     return r;
 }
 
-std::vector<SingleResponse> GoProController::_setAllSetting(std::vector<std::string> targets, int32_t ID, std::string value){
-    std::string url = "/gopro/camera/setting?option=";
-    url += value;
-    url += "&setting=";
-    url += std::to_string(ID);
-    return _getAllResponse(targets, url);
-}
-
-SingleResponse GoProController::_setSetting(std::string target, int32_t ID, std::string value){
-    std::string url = "/gopro/camera/setting?option=";
-    url += value;
-    url += "&setting=";
-    url += std::to_string(ID);
-    return _getSingleResponse(target, url);
-}
-
-std::vector<SingleResponse> GoProController::_setSetting_utility(std::string target, json res, std::vector<int32_t> setting_ids){
+std::vector<SingleResponse> gopro_controller_local_set_setting_utility(gopro_controller& controller, const std::string target, json res, const std::vector<int32_t> setting_ids){
     std::vector<SingleResponse> r = std::vector<SingleResponse>();
     std::string url = "/gopro/camera/setting?option=";
 
@@ -147,7 +131,23 @@ std::vector<SingleResponse> GoProController::_setSetting_utility(std::string tar
     return r;
 }
 
-int32_t GoProController::_get_current_model(json hwinfo){
+std::vector<SingleResponse> gopro_controller_local_set_setting(gopro_controller& controller, const std::vector<std::string> targets, const int32_t ID, const std::string value){
+    std::string url = "/gopro/camera/setting?option=";
+    url += value;
+    url += "&setting=";
+    url += std::to_string(ID);
+    return gopro_controller_local_get_responses(controller, targets, url);
+}
+
+SingleResponse gopro_controller_local_set_setting(gopro_controller& controller, const std::string target, const int32_t ID, const std::string value){
+    std::string url = "/gopro/camera/setting?option=";
+    url += value;
+    url += "&setting=";
+    url += std::to_string(ID);
+    return gopro_controller_local_get_response(controller, target, url);
+}
+
+int32_t gopro_controller_local_get_current_model(gopro_controller& controller, json hwinfo){
     if(hwinfo["model_name"].is_string()){
         std::string model_name = hwinfo["model_name"].get<std::string>();
         if(model_name == "MAX 2") return MODEL_MAX2;

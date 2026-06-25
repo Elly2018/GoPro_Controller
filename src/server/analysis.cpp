@@ -31,44 +31,37 @@ void Execute_command(gopro_controller& controller, const WebSocketChannelPtr &ch
   }
 
   if (name == "reboot") {
-    controller.reboot(target);
+    gopro_controller_reboot(controller, target);
     channel->send(Get_packet("command:reboot", r));
   } else if (name == "shutdown") {
-    controller.shutdown(target);
+    gopro_controller_shutdown(controller, target);
     channel->send(Get_packet("command:shutdown", r));
   } else if (name == "keep_alive") {
-    controller.keep_alive(target);
+    gopro_controller_keep_alive(controller, target);
     channel->send(Get_packet("command:keep_alive", r));
   } else if (name == "usb_on") {
-    controller.usb(target, true);
+    gopro_controller_usb(controller, target, true);
     channel->send(Get_packet("command:usb_on", r));
   } else if (name == "usb_off") {
-    controller.usb(target, false);
+    gopro_controller_usb(controller, target, false);
     channel->send(Get_packet("command:usb_off", r));
   } else if (name == "datetime") {
-    controller.datetime(target);
+    gopro_controller_datetime(controller, target);
     channel->send(Get_packet("command:datetime", r));
   } else if (name == "zoom") {
-    controller.zoom(target, ivalue);
+    gopro_controller_zoom(controller, target, ivalue);
     channel->send(Get_packet("command:zoom", r));
   } else if (name == "shutter_on") {
-    controller.shutter(target, true);
+    gopro_controller_shutter(controller, target, true);
     channel->send(Get_packet("command:shutter", r));
   } else if (name == "shutter_off") {
-    controller.shutter(target, false);
+    gopro_controller_shutter(controller, target, false);
     channel->send(Get_packet("command:shutter_off", r));
   } else if (name == "ip") {
-    resultText = controller.getAllIP();
-    if (json::accept(resultText)) {
-      r["data"] = json::parse(resultText);
-    } else {
-      std::cerr << "[ERROR] ExecuteCommand ip before response: " << resultText
-                << std::endl;
-      r["data"] = json::array();
-    }
+    r["data"] = gopro_controller_get_IPs(controller);
     channel->send(Get_packet("command:ip", r));
   } else if (name == "locate_on") {
-    controller.locate(target, true);
+    gopro_controller_locate(controller, target, true);
     r["data"] = json::object();
     channel->send(Get_packet("command:locate_on", r));
   } else if (name == "locate_off") {
@@ -82,19 +75,19 @@ void Execute_command(gopro_controller& controller, const WebSocketChannelPtr &ch
     fs::create_directory("res");
     channel->send(Get_packet("command:res_clean", r));
   } else if (name == "scan") {
-    controller.scanCameras();
+    gopro_controller_scan_cameras(controller);
     channel->send(Get_packet("command:scan", r));
   } else if (name == "clean") {
-    controller.cleanCameras();
+    gopro_controller_clean_cameras(controller);
     channel->send(Get_packet("command:clean", r));
   } else if (name == "add" && target.size() >= 3) {
-    controller.addCameras(target);
+    gopro_controller_add_cameras(controller, target);
     channel->send(Get_packet("command:add", r));
   } else if (name == "delete" && target.size() >= 3) {
-    controller.deleteCameras(target);
+    gopro_controller_delete_cameras(controller, target);
     channel->send(Get_packet("command:delete", r));
   } else if (name == "rename" && target.size() >= 3) {
-    controller.renameCameras(target, value);
+    gopro_controller_rename_cameras(controller, target, value);
     channel->send(Get_packet("command:rename", r));
   } else {
     channel->send(Get_packet("command:unknown", r));
@@ -257,7 +250,7 @@ void Mode_action(gopro_controller& controller, const WebSocketChannelPtr &channe
     channel->send(Get_packet("webcam:unknown", r));
   }
 }
-void Media_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j) {
+void Media_action(gopro_controller& controller, AppData& data, const WebSocketChannelPtr &channel, json j) {
   std::string resultText = "";
   std::string target = "";
   std::string name = "";
@@ -313,20 +306,15 @@ void Media_action(gopro_controller& controller, const WebSocketChannelPtr &chann
     channel->send(Get_packet("media:lastmedia", r));
   } else if (name == "url") {
     // Download the media one at the time... thanks
-    std::lock_guard<std::mutex> lock(download_mtx);
+    std::lock_guard<std::mutex> lock(data.download_mtx);
     r["local"] = local;
     r["item"] = item;
     r["dir"] = dir;
     r["filename"] = filename;
-    r["path"] = controller.getFetchURL(ip, local);
+    r["path"] = gopro_controller_get_fetch_URL(controller, ip, local);
     channel->send(Get_packet("media:url", r));
   } else if (name == "list") {
-    resultText = controller.getMediaList(target);
-    if (json::accept(resultText)) {
-      r["data"] = json::parse(resultText);
-    } else {
-      r["data"] = json::array();
-    }
+    r["data"] = gopro_controller_get_media_list(controller, target);
     channel->send(Get_packet("media:list", r));
   } else if (name == "thumbnail") {
     r["local"] = local;
@@ -381,10 +369,10 @@ void Preview_action(gopro_controller& controller, const WebSocketChannelPtr &cha
   }
 
   if (name == "start") {
-    controller.previewOn(target, port);
+    gopro_controller_preview_on(controller, target, port);
     channel->send(Get_packet("preview:start", r));
   } else if (name == "stop") {
-    controller.previewOff(target);
+    gopro_controller_preview_off(controller, target);
     channel->send(Get_packet("preview:stop", r));
   } else {
     channel->send(Get_packet("preview:unknown", r));

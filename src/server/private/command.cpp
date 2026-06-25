@@ -15,7 +15,7 @@
 #include <ctime>
 #include "../../common/timezone.h"
 
-void gopro_controller_local_set_preset(gopro_controller& controller, const std::vector<std::string> target, const int32_t mode) {
+void gopro_controller_local_set_preset(gopro_controller& controller, const std::vector<std::string> targets, const int32_t mode) {
     gopro_controller_local_get_responses(controller, targets, "/gp/gpControl/command/system/reset");
 }
 

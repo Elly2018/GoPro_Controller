@@ -7,21 +7,19 @@
 #pragma once
 #ifndef DATA_H
 #define DATA_H
+#include "hv/WebSocketServer.h"
 #include <cinttypes>
 #include <string>
 #include <mutex>
 #include "../common/thread_safe_queue.h"
 #include "gopro_controller.h"
-#include "hv/WebSocketServer.h"
 
-using hv::WebSocketChannelPtr;
-
-struct SenderStruct
+struct Sender_struct
 {
     static constexpr uint64_t ip_str_length = 24UL;
     bool vaild;
-    std::array<char, ip_str_length> host_ip;
-    std::array<char, ip_str_length> websocket_ip;
+    char host_ip[ip_str_length];
+    char websocket_ip[ip_str_length];
     int32_t sock_fd;
     struct sockaddr_in bcsa;
 };
@@ -38,7 +36,7 @@ struct AppData
     std::mutex download_mtx;
     std::mutex broadcast_mtx;
     thread_safe_queue<InboundEvent> message_queue;
-    std::array<SenderStruct, 10> broadcast_addrs = std::array<SenderStruct, 10>();
+    std::array<Sender_struct, 10> broadcast_addrs = std::array<Sender_struct, 10>();
 };
 
 constexpr int32_t listen_port = 8556;

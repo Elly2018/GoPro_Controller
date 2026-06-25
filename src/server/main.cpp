@@ -35,7 +35,7 @@ void Websocket_server(AppData &data)
 		int32_t f = -1;
 		for (int32_t i = 0; i < data.broadcast_addrs.size(); i++)
 		{
-			SenderStruct& sss = data.broadcast_addrs.at(i);
+			Sender_struct& sss = data.broadcast_addrs.at(i);
 			if(!sss.vaild) continue;
 
 			if (data.broadcast_addrs.at(i).websocket_ip == channel->peeraddr().c_str())
@@ -47,7 +47,7 @@ void Websocket_server(AppData &data)
 		
 		if (f == -1)
 		{
-			SenderStruct sss = SenderStruct();
+			Sender_struct sss = Sender_struct();
 			std::string addd = channel->peeraddr().c_str();
 			while (addd.at(addd.size() - 1) != ':')
 			{
@@ -56,13 +56,13 @@ void Websocket_server(AppData &data)
 			addd.pop_back();
 			
 			sss.websocket_ip = channel->peeraddr().c_str();
-			uint64_t len = addd.copy(sss.host_ip, sizeof(sss.host_ip) - 1);
+			uint64_t len = addd.copy(sss.host_ip, size(sss.host_ip)- 1);
 			sss.host_ip[len] = '\0';
 			
 			sss.sock_fd = socket(AF_INET, SOCK_DGRAM, 0);
 			memset(&sss.bcsa, 0, sizeof(sss.bcsa));
 			sss.bcsa.sin_family = AF_INET;
-			sss.bcsa.sin_port = htons(data.broadcast_port);
+			sss.bcsa.sin_port = htons(broadcast_port);
 			sss.bcsa.sin_addr.s_addr = inet_addr(addd.c_str());
 			sss.vaild = true;
 			
@@ -76,13 +76,13 @@ void Websocket_server(AppData &data)
 	};
 	ws.onclose = [&](const WebSocketChannelPtr &channel)
 	{
-		std::lock_guard<std::mutex> lock(broadcast_mtx);
+		std::lock_guard<std::mutex> lock(data.broadcast_mtx);
 		printf("Client disconnected: %s\n", channel->peeraddr().c_str());
 		
 		int32_t f = -1;
 		for (int32_t i = 0; i < data.broadcast_addrs.size(); i++)
 		{
-			SenderStruct& sss = data.broadcast_addrs.at(i);
+			Sender_struct& sss = data.broadcast_addrs.at(i);
 			if(!sss.vaild) continue;
 
 			if (sss.websocket_ip == channel->peeraddr().c_str())
@@ -93,7 +93,7 @@ void Websocket_server(AppData &data)
 		}
 		if (f >= 0)
 		{
-			SenderStruct &sss = data.broadcast_addrs.at(f);
+			Sender_struct &sss = data.broadcast_addrs.at(f);
 			closesocket(sss.sock_fd);
 			sss.vaild = false;
 		}
@@ -149,7 +149,7 @@ void UDP_proxy_server(AppData &data)
 	
 	us.onMessage = [&](const hv::SocketChannelPtr &channel, hv::Buffer *buf)
 	{
-		std::lock_guard<std::mutex> lock(controller.broadcast_mtx);
+		std::lock_guard<std::mutex> lock(data.broadcast_mtx);
 		for (auto &sss : data.broadcast_addrs)
 		{
 			#ifdef _WIN32
@@ -219,7 +219,7 @@ int main() {
 				}
 				else if (j["key"].get<std::string>() == "media")
 				{
-					Media_action(data.controller, channel, j["value"]);
+					Media_action(data.controller, data, channel, j["value"]);
 				}
 				else if (j["key"].get<std::string>() == "preview")
 				{

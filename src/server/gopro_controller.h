@@ -73,11 +73,11 @@ void gopro_controller_dispose(gopro_controller& controller);
 void gopro_controller_update(gopro_controller& controller);
 void gopro_controller_ping(gopro_controller& controller);
 
-void gopro_controller_scanCameras(gopro_controller& controller);
-void gopro_controller_cleanCameras(gopro_controller& controller);
-void gopro_controller_renameCameras(gopro_controller& controller, const std::string ip, const std::string name);
-void gopro_controller_addCameras(gopro_controller& controller, const std::string serial);
-void gopro_controller_deleteCameras(gopro_controller& controller, const std::string ip);
+void gopro_controller_scan_cameras(gopro_controller& controller);
+void gopro_controller_clean_cameras(gopro_controller& controller);
+void gopro_controller_rename_cameras(gopro_controller& controller, const std::string ip, const std::string name);
+void gopro_controller_add_cameras(gopro_controller& controller, const std::string serial);
+void gopro_controller_delete_cameras(gopro_controller& controller, const std::string ip);
 
 void gopro_controller_set_preset(gopro_controller& controller, const std::string target, const int32_t mode);
 void gopro_controller_reboot(gopro_controller& controller, const std::string target);
@@ -108,7 +108,7 @@ void gopro_controller_preview_off(gopro_controller& controller, const std::strin
 json gopro_controller_get_media_list(gopro_controller& controller, const std::string target);
 json gopro_controller_get_last_media(gopro_controller& controller, const std::string target);
 std::string gopro_controller_get_fetch_URL(gopro_controller& controller, const std::string target_ip, const bool is_local);
-std::string gopro_controller_get_filename_fetch_URL(gopro_controller& controller, const std::string target_ip, const std::string filename, bool is_local);
+std::string gopro_controller_get_filename_fetch_URL(gopro_controller& controller, const std::string target_ip, const std::string filename, const bool is_local);
 std::vector<SingleResponse> gopro_controller_get_filename_fetch_IRL(gopro_controller& controller, const std::string target_ip, const std::vector<std::string> filenames, const bool is_local);
 std::string gopro_controller_get_thumbnail_data(gopro_controller& controller, const std::string target_ip, const std::string path, const bool is_local);
 std::string gopro_controller_get_media_info_data(gopro_controller& controller, const std::string target_ip, const std::string path, const bool is_local);

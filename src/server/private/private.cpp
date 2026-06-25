@@ -36,7 +36,7 @@ void gopro_controller_local_load_record(gopro_controller& controller) {
         }
         if(words.size() > 1){
             int32_t index = gopro_controller_local_element_add(controller, words[0]);
-            gopro_controller_renameCameras(controller, words[0], words[1]);
+            gopro_controller_rename_cameras(controller, words[0], words[1]);
         }
     }
     inFile.close();

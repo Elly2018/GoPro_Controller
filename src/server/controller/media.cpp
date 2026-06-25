@@ -119,7 +119,7 @@ std::string gopro_controller_get_fetch_URL(gopro_controller& controller, const s
     return download_path;
 }
 
-json gopro_controller_get_filename_fetch_URL(gopro_controller& controller, const std::string target_ip, const std::string filename, bool is_local) {
+std::string gopro_controller_get_filename_fetch_URL(gopro_controller& controller, const std::string target_ip, const std::string filename, const bool is_local) {
     std::cout << "Http GET /single_media " << target_ip << ", " << is_local << std::endl;
 
     if (target_ip.empty()) {
@@ -139,12 +139,14 @@ json gopro_controller_get_filename_fetch_URL(gopro_controller& controller, const
             t++;
         }
         std::cout << "[last_media] try download " << gopro_url.c_str() << std::endl;
+        std::chrono::_V2::system_clock::time_point start;
+        std::chrono::_V2::system_clock::time_point end;
         if(SERVER_MEDIA_DOWNLOAD_LOG){
-            auto start = std::chrono::high_resolution_clock::now();
+            start = std::chrono::high_resolution_clock::now();
         }
         size_t size = requests::downloadFile(gopro_url.c_str(), ("res/" + download_path).c_str(), [&target_ip, &start](size_t received_bytes, size_t total_bytes){
             if(SERVER_MEDIA_DOWNLOAD_LOG){
-                auto end = std::chrono::high_resolution_clock::now();
+                end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double> elapsed = end - start;
                 if(elapsed.count() >= SERVER_MEDIA_DOWNLOAD_PERIOD){
                     start = end;
@@ -165,7 +167,7 @@ std::vector<SingleResponse> gopro_controller_get_filename_fetch_IRL(gopro_contro
         return std::vector<std::pair<std::string, std::string>>();
     }
     
-    std::vector<std::pair<std::string, std::string>> results = std::vector<std::pair<std::string, std::string>>();
+    std::vector<SingleResponse> results = std::vector<SingleResponse>();
     for(auto filename : filenames){
         std::string gopro_url = "http://" + target_ip + ":8080/videos/DCIM/" + filename + "?download=true";
         if(is_local){

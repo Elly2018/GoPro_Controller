@@ -11,7 +11,7 @@
 
 void gopro_controller_set_preset(gopro_controller& controller, const std::string target, const int32_t mode) {
     if(target.size() > 0){
-        gopro_controller_local_set_sreset(controller, target, mode);
+        gopro_controller_local_set_preset(controller, target, mode);
         return;
     }
     std::vector<std::string> buffer = gopro_controller_local_element_alives(controller);
@@ -83,7 +83,7 @@ void gopro_controller_shutter(gopro_controller& controller, const std::string ta
 
 void gopro_controller_locate(gopro_controller& controller, const std::string target, const bool is_on) {
     if(target.size() > 0) {
-        gopro_controller_local_locate(target, is_on); 
+        gopro_controller_local_locate(controller, target, is_on); 
     }
 }
 

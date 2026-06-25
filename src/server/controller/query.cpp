@@ -15,7 +15,7 @@ json gopro_controller_query_status(gopro_controller& controller, const std::stri
     json arr = json::array();
     if(target.size() > 0){
         SingleResponse status_result = gopro_controller_local_query_status(controller, target);
-        SingleResponse hw_result = gopro_controller_local_query_hw(controller, target);
+        SingleResponse hw_result = gopro_controller_local_query_HW(controller, target);
         json buff = json::object();
         buff["ip"] = status_result.first;
         buff["status"] = status_result.second;
@@ -26,13 +26,13 @@ json gopro_controller_query_status(gopro_controller& controller, const std::stri
     else{
         std::vector<std::string> buffer = gopro_controller_local_element_alives(controller);
         std::vector<SingleResponse> status_result = gopro_controller_local_query_status(controller, buffer);
-        std::vector<SingleResponse> hw_result = gopro_controller_local_query_hw(controller, buffer);
+        std::vector<SingleResponse> hw_result = gopro_controller_local_query_HW(controller, buffer);
         for(int32_t i = 0; i < status_result.size(); i++){
             json buff = json::object();
             buff["ip"] = status_result[i].first;
             buff["status"] = status_result[i].second;
             buff["hw"] = hw_result[i].second;
-            gopro_controller_local_element_set_hw(controller, status_result.first, hw_result.second);
+            gopro_controller_local_element_set_HW(controller, status_result.first, hw_result.second);
             arr.push_back(buff);
         }
     }
@@ -66,7 +66,7 @@ json gopro_controller_set_setting_preset(gopro_controller& controller, const std
     if(target.size() > 0){ 
         std::vector<SingleResponse> results = gopro_controller_local_set_setting_preset(controller, target, preset, value);
         for(int32_t i = 0; i < results.size(); i++){
-            if(applying_cancel) continue;
+            if(controller.applying_cancel) continue;
             json buff = json::object();
             buff["ip"] = results[i].first;
             buff["status"] = results[i].second;

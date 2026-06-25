@@ -11,7 +11,7 @@
 
 void gopro_controller_local_load_record(gopro_controller& controller);
 void gopro_controller_local_update_record(gopro_controller& controller);
-void gopro_controller_local_set_preset(gopro_controller& controller, const std::vector<std::string> target, const int32_t mode);
+void gopro_controller_local_set_preset(gopro_controller& controller, const std::vector<std::string> targets, const int32_t mode);
 void gopro_controller_local_set_preset(gopro_controller& controller, const std::string target, const int32_t mode);
 void gopro_controller_local_reboot(gopro_controller& controller, const std::vector<std::string> targets);
 void gopro_controller_local_reboot(gopro_controller& controller, const std::string target);
@@ -33,11 +33,12 @@ std::vector<SingleResponse> gopro_controller_local_query_status(gopro_controller
 SingleResponse gopro_controller_local_query_status(gopro_controller& controller, const std::string target);
 std::vector<SingleResponse> gopro_controller_local_query_HW(gopro_controller& controller, std::vector<std::string> targets);
 SingleResponse gopro_controller_local_query_HW(gopro_controller& controller, std::string target);
-std::vector<SingleResponse> gopro_controller_local_set_setting(gopro_controller& controller, const std::vector<std::string> targets, const int32_t ID, const std::string value);
-SingleResponse gopro_controller_local_set_setting(gopro_controller& controller, const std::string target, const int32_t ID, const std::string value);
 std::vector<SingleResponse> gopro_controller_local_set_setting_preset(gopro_controller& controller, const std::vector<std::string> targets, const int32_t preset, json res);
 std::vector<SingleResponse> gopro_controller_local_set_setting_preset(gopro_controller& controller, const std::string target, const int32_t preset, json res);
 std::vector<SingleResponse> gopro_controller_local_set_setting_utility(gopro_controller& controller, const std::string target, json res, const std::vector<int32_t> setting_ids);
+std::vector<SingleResponse> gopro_controller_local_set_setting(gopro_controller& controller, const std::vector<std::string> targets, const int32_t ID, const std::string value);
+SingleResponse gopro_controller_local_set_setting(gopro_controller& controller, const std::string target, const int32_t ID, const std::string value);
+int32_t gopro_controller_local_get_current_model(gopro_controller& controller, json hwinfo);
 
 void gopro_controller_local_webcam_mode(gopro_controller& controller, const std::vector<std::string> targets);
 void gopro_controller_local_webcam_mode(gopro_controller& controller, const std::string target);
@@ -63,7 +64,6 @@ SingleResponse gopro_controller_local_get_last_media(gopro_controller& controlle
 SingleResponse gopro_controller_local_get_response(gopro_controller& controller, const std::string target, const std::string suffix);
 std::vector<SingleResponse> gopro_controller_local_get_responses(gopro_controller& controller, const std::vector<std::string> targets, const std::string suffix);
 std::string gopro_controller_local_base64_encode(gopro_controller& controller, const std::vector<u_char> &data);
-int32_t gopro_controller_local_get_current_model(gopro_controller& controller, json hwinfo);
 
 bool gopro_controller_local_element_exist(gopro_controller& controller, const std::string ip, bool should_be_alive = false);
 int32_t gopro_controller_local_element_add(gopro_controller& controller, const std::string ip);
