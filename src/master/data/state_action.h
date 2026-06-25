@@ -5,6 +5,8 @@
  * See the LICENSE file in the project root for more information.
 */
 #pragma once
+#ifndef DATA_STATE_ACTION_H
+#define DATA_STATE_ACTION_H
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
@@ -24,3 +26,5 @@ extern "C" void init_state_setup(
 );
 extern "C" json get_global_state_data(struct GlobalState& data);
 extern "C" void set_global_state_data(struct GlobalState& data, json refs);
+
+#endif

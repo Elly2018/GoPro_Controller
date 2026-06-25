@@ -11,7 +11,7 @@
 #include <thread>
 #include "GoProMaster.h"
 #include "io.h"
-#include "data/state_action.h"
+#include "data/app.h"
 #include "../common/camera_code.h"
 #include "windows/wins.h"
 #include "popup/popwins.h"
@@ -25,32 +25,6 @@ c[d] = a; \
 #define WIN_INIT2(a, b, r, c, d) \
 a = std::make_shared<b>(r, gui, global_state, master); \
 c[d] = a; \
-
-std::queue<std::string> command_queue = std::queue<std::string>();
-std::shared_ptr<GoProMaster> master = std::make_shared<GoProMaster>();
-std::shared_ptr<json> gui;
-std::shared_ptr<json> servers;
-std::shared_ptr<json> presets;
-std::shared_ptr<GlobalState> global_state = std::make_shared<GlobalState>();
-
-std::shared_ptr<CameraListWindow> camera_list_win;
-std::shared_ptr<InspectorWindow> inspector_win;
-std::shared_ptr<WebsocketWindow> websocket_win;
-std::shared_ptr<StyleSetting> style_setting_win;
-std::shared_ptr<BaseWindow> windows_array[4];
-
-std::shared_ptr<AddCameraPopup> add_camera_popwin;
-std::shared_ptr<ScanCameraPopup> scan_camera_popwin;
-std::shared_ptr<StartWebcamPopup> start_webcam_popwin;
-std::shared_ptr<PreviewPopup> preview_popwin;
-std::shared_ptr<AddPresetPopup> add_preset_popwin;
-std::shared_ptr<PresetManagerPopup> preset_manager_popwin;
-std::shared_ptr<MediaBrowserPopup> media_browser_popwin;
-std::shared_ptr<BasePopWindow> pop_windows_array[7];
-
-// All the window flags
-ExecutionType execution_type = ExecutionType::SetAll;
-std::unordered_map<std::string, std::string> execution_logs = std::unordered_map<std::string, std::string>();
 
 // The secondary thread handle the background update
 // This will automatically retry connect to server every 10 seconds.
@@ -173,6 +147,8 @@ void pushCommand(const char* cmd){
 
 int main(int, char**)
 {
+    AppData data = AppData();
+    
     setvbuf(stdout, NULL, _IONBF, 0);
     setvbuf(stderr, NULL, _IONBF, 0);
     
