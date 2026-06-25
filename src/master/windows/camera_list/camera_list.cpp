@@ -11,6 +11,7 @@
 #include <string>
 #include <sstream>
 #include "../../data/camera_info.h"
+#include "../../GoProMaster.h"
 #include <algorithm>
 #include <functional> 
 
@@ -38,7 +39,8 @@ void camera_list_window_set_window_data(Camera_list_window& win, const json& dat
         win.filter_connect = data["filter_connect"].get<bool>();
     }
     if(data["filter_ip"].is_string()){
-        win.filter_ip = data["filter_ip"].get<std::string>();
+        std::string buff = data["filter_ip"].get<std::string>();;
+        buff.copy(win.filter_ip, sizeof(win.filter_ip) - 1);
     }
 }
 
@@ -127,9 +129,9 @@ void camera_list_window_render(Camera_list_window& win){
     }
 }
 
-void CameraListWindow::draw_line(const CameraInfo& c){
+void camera_list_window_draw_line(Camera_list_window& win, const CameraInfo& c) {
     bool selected = c.ip == state->current_camera_item && c.server == state->current_camera_server;
-    std::string plusStatus = master->getBarInfo(c);
+    std::string plusStatus = win.base.master.getBarInfo(c);
     std::string plusID = plusStatus + "##CameraList_" + c.ip;
     if(ImGui::Selectable(plusID.c_str(), selected)){
         // User select interaction
@@ -138,7 +140,7 @@ void CameraListWindow::draw_line(const CameraInfo& c){
     item_event(c);
 }
 
-void CameraListWindow::item_event(const CameraInfo& c){
+void camera_list_window_item_event(Camera_list_window& win, const CameraInfo& c){
     if(ImGui::IsItemClicked(ImGuiMouseButton_Left) && ImGui::IsItemHovered()){
         onClick(c);
     }
@@ -185,7 +187,7 @@ void CameraListWindow::item_event(const CameraInfo& c){
     }
 }
 
-void CameraListWindow::onClick(const CameraInfo& c){
+void camera_list_window_onClick(Camera_list_window& win, const CameraInfo& c){
     state->current_setting_items_bind = false;
     state->current_camera_item = c.ip;
     state->current_camera_server = c.server;

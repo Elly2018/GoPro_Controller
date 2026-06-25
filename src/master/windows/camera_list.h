@@ -33,17 +33,18 @@ json camera_list_window_get_window_data(Camera_list_window& win);
 void camera_list_window_set_window_data(Camera_list_window& win, const json& data);
 void camera_list_window_render(Camera_list_window& win);
 
-virtual void draw_line(const CameraInfo& c);
-virtual void draw_group_state(const CameraInfo& c);
-virtual void draw_group_header(const CameraInfo& c);
-virtual void item_event(const CameraInfo& c);
-void onClick(const CameraInfo& c);
+void camera_list_window_draw_line(Camera_list_window& win, const CameraInfo& c);
+void camera_list_window_item_event(Camera_list_window& win, const CameraInfo& c);
+void camera_list_window_onClick(Camera_list_window& win, const CameraInfo& c);
 
-ImVec2 camera_list_window_get_rect_size();
-std::vector<CameraInfo> get_filtering_result();
-std::string get_filter_string(FilterType type);
-std::string get_sort_string(SortType type);
-std::string toTimeCode(int32_t timer);
-std::string bytesToGbString(long bytes);
+ImVec2 camera_list_window_get_rect_size(Camera_list_window& win);
+std::vector<CameraInfo> camera_list_window_get_filtering_result(Camera_list_window& win);
+std::string camera_list_window_get_filter_string(Camera_list_window& win, FilterType type);
+std::string camera_list_window_get_sort_string(Camera_list_window& win, SortType type);
+std::string camera_list_window_toTimeCode(Camera_list_window& win, int32_t timer);
+std::string camera_list_window_bytesToGbString(Camera_list_window& win, long bytes);
+
+void camera_list_window_draw_group_state(Camera_list_window& win, const CameraInfo& c);
+void camera_list_window_draw_group_header(Camera_list_window& win, const CameraInfo& c);
 
 #endif
