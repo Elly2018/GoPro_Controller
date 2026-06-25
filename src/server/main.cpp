@@ -14,10 +14,10 @@
 #include "data.h"
 #include "analysis.h"
 #include "../common/config.h"
-#include "hv/UdpClient.h"
-#include "hv/UdpServer.h"
-#include "hv/EventLoop.h"
 #include "hv/WebSocketServer.h"
+#include "hv/EventLoop.h"
+#include "hv/UdpServer.h"
+#include "hv/UdpClient.h"
 #include "hv/hsocket.h"
 #include <iostream>
 #include <vector>
@@ -37,7 +37,7 @@ void Websocket_server(AppData &data)
 			Sender_struct& sss = data.broadcast_addrs.at(i);
 			if(!sss.vaild) continue;
 
-			if (data.broadcast_addrs.at(i).websocket_ip == channel->peeraddr().c_str())
+			if (strcmp(data.broadcast_addrs.at(i).websocket_ip, channel->peeraddr().c_str()) == 0)
 			{
 				f = i;
 				break;
@@ -62,7 +62,8 @@ void Websocket_server(AppData &data)
 			}
 			addd.pop_back();
 			
-			sss.websocket_ip = channel->peeraddr().c_str();
+			strncpy(sss.websocket_ip, channel->peeraddr().c_str(), sizeof(sss.websocket_ip));
+			sss.websocket_ip[sizeof(sss.websocket_ip) - 1] = '\0';
 			uint64_t len = addd.copy(sss.host_ip, sizeof(sss.host_ip)- 1);
 			sss.host_ip[len] = '\0';
 			
@@ -214,27 +215,27 @@ int main() {
 				
 				if (j["key"].get<std::string>() == "command")
 				{
-					Execute_command(data.controller, channel, j["value"]);
+					Execute_command(data.controller, p.channel, j["value"]);
 				}
 				else if (j["key"].get<std::string>() == "query")
 				{
-					Query_action(data.controller, channel, j["value"]);
+					Query_action(data.controller, p.channel, j["value"]);
 				}
 				else if (j["key"].get<std::string>() == "webcam")
 				{
-					Webcam_action(data.controller, channel, j["value"]);
+					Webcam_action(data.controller, p.channel, j["value"]);
 				}
 				else if (j["key"].get<std::string>() == "media")
 				{
-					Media_action(data.controller, data, channel, j["value"]);
+					Media_action(data.controller, data, p.channel, j["value"]);
 				}
 				else if (j["key"].get<std::string>() == "preview")
 				{
-					Preview_action(data.controller, channel, j["value"]);
+					Preview_action(data.controller, p.channel, j["value"]);
 				}
 				else if (j["key"].get<std::string>() == "preset")
 				{
-					Mode_action(data.controller, channel, j["value"]);
+					Mode_action(data.controller, p.channel, j["value"]);
 				}
 			}
 		}

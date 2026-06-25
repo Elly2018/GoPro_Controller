@@ -17,7 +17,7 @@ void Execute_command(gopro_controller& controller, const WebSocketChannelPtr &ch
 void Query_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j);
 void Webcam_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j);
 void Mode_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j);
-void Media_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j);
+void Media_action(gopro_controller& controller, AppData& data, const WebSocketChannelPtr &channel, json j);
 void Preview_action(gopro_controller& controller, const WebSocketChannelPtr &channel, json j);
 
 #endif

@@ -157,7 +157,7 @@ std::string gopro_controller_get_filename_fetch_URL(gopro_controller& controller
     }
 }
 
-std::vector<SingleResponse> gopro_controller_get_filename_fetch_IRL(gopro_controller& controller, const std::string target_ip, const std::vector<std::string> filenames, const bool is_local) {
+std::vector<SingleResponse> gopro_controller_get_filename_fetch_URL(gopro_controller& controller, const std::string target_ip, const std::vector<std::string> filenames, const bool is_local) {
     std::cout << "Http GET /all_media " << target_ip << ", " << is_local << std::endl;
 
     if (target_ip.empty()) {

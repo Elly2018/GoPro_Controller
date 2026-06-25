@@ -80,7 +80,7 @@ std::vector<std::string> gopro_controller_local_element_alives(gopro_controller&
     return buffer;
 }
 
-void gopro_controller_local_element_set_hw(gopro_controller& controller, const std::string ip, json value) {
+void gopro_controller_local_element_set_HW(gopro_controller& controller, const std::string ip, json value) {
     int32_t index = gopro_controller_local_element_find(controller, ip);
     if(index == -1) return;
 
@@ -92,7 +92,7 @@ void gopro_controller_local_element_set_hw(gopro_controller& controller, const s
     e.hw[len] = '\0';
 }
 
-json gopro_controller_local_element_get_hw(gopro_controller& controller, const std::string ip) {
+json gopro_controller_local_element_get_HW(gopro_controller& controller, const std::string ip) {
     int32_t index = gopro_controller_local_element_find(controller, ip);
     if(index == -1) return json::object();
 
