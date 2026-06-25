@@ -40,7 +40,7 @@ void gopro_controller_scan_cameras(gopro_controller& controller) {
 
 void gopro_controller_clean_cameras(gopro_controller& controller){
     gopro_controller_local_element_clean(controller);
-    gopro_controller_local_updateRecord(controller);
+    gopro_controller_local_update_record(controller);
 }
 
 void gopro_controller_rename_cameras(gopro_controller& controller, const std::string ip, const std::string name) {

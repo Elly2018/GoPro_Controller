@@ -48,7 +48,9 @@ void gopro_controller_local_webcam_on(gopro_controller& controller, const std::v
 void gopro_controller_local_webcam_on(gopro_controller& controller, const std::string target, const int32_t startPort, const int32_t res, const int32_t fov, const bool TS);
 void gopro_controller_local_webcam_off(gopro_controller& controller, const std::vector<std::string> targets);
 void gopro_controller_local_webcam_off(gopro_controller& controller, const std::string target);
+std::vector<SingleResponse> gopro_controller_local_webcam_status(gopro_controller& controller, const std::vector<std::string> targets);
 SingleResponse gopro_controller_local_webcam_status(gopro_controller& controller, const std::string target);
+std::vector<SingleResponse> gopro_controller_local_webcam_version(gopro_controller& controller, const std::vector<std::string> targets);
 SingleResponse gopro_controller_local_webcam_version(gopro_controller& controller, const std::string target);
 
 void gopro_controller_local_preview_on(gopro_controller& controller, const std::vector<std::string> targets, const int32_t port);
@@ -72,7 +74,7 @@ bool gopro_controller_local_element_clean(gopro_controller& controller);
 int32_t gopro_controller_local_element_have_slot(gopro_controller& controller);
 int32_t gopro_controller_local_element_find(gopro_controller& controller, const std::string ip);
 std::vector<std::string> gopro_controller_local_element_alives(gopro_controller& controller);
-void gopro_controller_local_element_set_hw(gopro_controller& controller, const std::string ip, json value);
-json gopro_controller_local_element_get_hw(gopro_controller& controller, const std::string ip);
+void gopro_controller_local_element_set_HW(gopro_controller& controller, const std::string ip, json value);
+json gopro_controller_local_element_get_HW(gopro_controller& controller, const std::string ip);
 
 #endif

@@ -7,7 +7,9 @@
 #pragma once
 #ifndef DATA_H
 #define DATA_H
+#include "hv/EventLoop.h"
 #include "hv/WebSocketServer.h"
+#include "hv/hsocket.h"
 #include <cinttypes>
 #include <string>
 #include <mutex>

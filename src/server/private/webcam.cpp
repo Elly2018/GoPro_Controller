@@ -63,8 +63,16 @@ void gopro_controller_local_webcam_off(gopro_controller& controller, const std::
     gopro_controller_local_get_response(controller, target, "/gopro/webcam/stop");
 }
 
+std::vector<SingleResponse> gopro_controller_local_webcam_status(gopro_controller& controller, const std::vector<std::string> targets) {
+    return gopro_controller_local_get_responses(controller, targets, "/gopro/webcam/status");
+}
+
 SingleResponse gopro_controller_local_webcam_status(gopro_controller& controller, const std::string target){
     return gopro_controller_local_get_response(controller, target, "/gopro/webcam/status");
+}
+
+std::vector<SingleResponse> gopro_controller_local_webcam_version(gopro_controller& controller, const std::vector<std::string> targets) {
+    return gopro_controller_local_get_responses(controller, targets, "/gopro/webcam/version");
 }
 
 SingleResponse gopro_controller_local_webcam_version(gopro_controller& controller, const std::string target){

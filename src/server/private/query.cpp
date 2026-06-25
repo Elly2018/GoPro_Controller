@@ -54,16 +54,16 @@ std::vector<SingleResponse> gopro_controller_local_set_setting_preset(gopro_cont
     for(auto& target : targets){
         std::cout << "Set setting json: " << target << ", " << preset << std::endl;
         if(preset == 65538){ // Burst
-            SETTING_UTILITY_CALL(r, a, buffer, GOPRO_BURST_SETTING_SIZE, GOPRO_BURST_SETTING_IDS);
-            SETTING_UTILITY_CALL(r, a, buffer, GOPRO_BURST_PROTUNE_SETTING_SIZE, GOPRO_BURST_PROTUNE_SETTING_IDS);
+            setting_utility_call(controller, r, a, buffer, GOPRO_BURST_SETTING_SIZE, GOPRO_BURST_SETTING_IDS, target, res);
+            setting_utility_call(controller, r, a, buffer, GOPRO_BURST_PROTUNE_SETTING_SIZE, GOPRO_BURST_PROTUNE_SETTING_IDS, target, res);
         }else if(preset == 65536){ // Photo
-            SETTING_UTILITY_CALL(r, a, buffer, GOPRO_PHOTO_SETTING_SIZE, GOPRO_PHOTO_SETTING_IDS);
-            SETTING_UTILITY_CALL(r, a, buffer, GOPRO_PHOTO_PROTUNE_SETTING_SIZE, GOPRO_PHOTO_PROTUNE_SETTING_IDS);
+            setting_utility_call(controller, r, a, buffer, GOPRO_PHOTO_SETTING_SIZE, GOPRO_PHOTO_SETTING_IDS, target, res);
+            setting_utility_call(controller, r, a, buffer, GOPRO_PHOTO_PROTUNE_SETTING_SIZE, GOPRO_PHOTO_PROTUNE_SETTING_IDS, target, res);
         }else{ // Video
-            SETTING_UTILITY_CALL(r, a, buffer, GOPRO_VIDEO_SETTING_SIZE, GOPRO_VIDEO_SETTING_IDS);
-            SETTING_UTILITY_CALL(r, a, buffer, GOPRO_VIDEO_PROTUNE_SETTING_SIZE, GOPRO_VIDEO_PROTUNE_SETTING_IDS);
+            setting_utility_call(controller, r, a, buffer, GOPRO_VIDEO_SETTING_SIZE, GOPRO_VIDEO_SETTING_IDS, target, res);
+            setting_utility_call(controller, r, a, buffer, GOPRO_VIDEO_PROTUNE_SETTING_SIZE, GOPRO_VIDEO_PROTUNE_SETTING_IDS, target, res);
         }
-        SETTING_UTILITY_CALL(r, a, buffer, GOPRO_SYSTEM_SETTING_SIZE, GOPRO_SYSTEM_SETTING_IDS);
+        setting_utility_call(controller, r, a, buffer, GOPRO_SYSTEM_SETTING_SIZE, GOPRO_SYSTEM_SETTING_IDS, target, res);
     }
     std::cout << "[LOG] end of _setAllSetting" << std::endl;
 
