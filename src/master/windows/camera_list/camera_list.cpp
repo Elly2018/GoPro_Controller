@@ -14,48 +14,35 @@
 #include <algorithm>
 #include <functional> 
 
-CameraListWindow::CameraListWindow(
-    std::shared_ptr<json> _setting, 
-    std::shared_ptr<GlobalState> _state, 
-    std::shared_ptr<GoProMaster> _master
-) 
-    : BaseWindow(_setting, _state, _master) {
-    title = "Camera Dashboard";
+json camera_list_window_get_window_data(Camera_list_window& win) {
+    json buff = json::object();
+    buff["size"] = win.size;
+    buff["filter"] = (int32_t)win.filter;
+    buff["sort"] = (int32_t)win.sort;
+    buff["filter_ip"] = win.filter_ip;
+    buff["filter_connect"] = win.filter_connect;
+    return buff;
 }
 
-CameraListWindow::~CameraListWindow(){
-    
-}
-
-json CameraListWindow::get_window_data() {
-    json d = json::object();
-    d["size"] = size;
-    d["filter"] = (int32_t)filter;
-    d["sort"] = (int32_t)sort;
-    d["filter_ip"] = filter_ip;
-    d["filter_connect"] = filter_connect;
-    return d;
-}
-
-void CameraListWindow::set_window_data(json data){
+void camera_list_window_set_window_data(Camera_list_window& win, const json& data){
     if(data["size"].is_number()){
-        size = data["size"].get<int32_t>();
+        win.size = data["size"].get<int32_t>();
     }
     if(data["filter"].is_number()){
-        filter = (FilterType)data["filter"].get<int32_t>();
+        win.filter = (FilterType)data["filter"].get<int32_t>();
     }
     if(data["sort"].is_number()){
-        sort = (SortType)data["sort"].get<int32_t>();
+        win.sort = (SortType)data["sort"].get<int32_t>();
     }
     if(data["filter_connect"].is_boolean()){
-        filter_connect = data["filter_connect"].get<bool>();
+        win.filter_connect = data["filter_connect"].get<bool>();
     }
     if(data["filter_ip"].is_string()){
-        filter_ip = data["filter_ip"].get<std::string>();
+        win.filter_ip = data["filter_ip"].get<std::string>();
     }
 }
 
-void CameraListWindow::render(){
+void camera_list_window_render(Camera_list_window& win){
     bool changed = false;
     ImGui::Begin(title.c_str(), &enable, w_flag);
     {

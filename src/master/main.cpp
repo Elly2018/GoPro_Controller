@@ -18,16 +18,6 @@
 #include "imgui_helper.h"
 #include "src/imgui_notify.h"
 
-#define WIN_INIT(a, b, c, d) \
-a = std::make_shared<b>(gui, global_state, master); \
-c[d] = a; \
-
-#define WIN_INIT2(a, b, r, c, d) \
-a = std::make_shared<b>(r, gui, global_state, master); \
-c[d] = a; \
-
-// The secondary thread handle the background update
-// This will automatically retry connect to server every 10 seconds.
 void background_worker(){
     while(!global_state->done){
         while(!command_queue.empty()){
@@ -171,12 +161,17 @@ int main(int, char**)
     data.servers = loadServerList();
     data.gui = loadGUI();
     data.presets= loadPresetList();
-    // Win
-    WIN_INIT(websocket_win, WebsocketWindow, windows_array, 0);
-    WIN_INIT(camera_list_win, CameraListWindow, windows_array, 1);
-    WIN_INIT(inspector_win, InspectorWindow, windows_array, 2);
-    WIN_INIT(style_setting_win, StyleSetting, windows_array, 3);
-    // Popup
+    
+    data.websocket_window_base = { data.servers, data.global_state, data.master, "Websocket" };
+    data.camera_list_window_base = { data.servers, data.global_state, data.master, "Cameras" };
+    data.inspector_window_base = { data.servers, data.global_state, data.master, "Inspector" };
+    data.style_window_base = { data.servers, data.global_state, data.master, "Style" };
+
+    data.windows_array[0] = data.websocket_window_base;
+    data.windows_array[1] = data.camera_list_window_base;
+    data.windows_array[2] = data.inspector_window_base;
+    data.windows_array[3] = data.style_window_base;
+    
     WIN_INIT(add_camera_popwin, AddCameraPopup, pop_windows_array, 0);
     WIN_INIT(scan_camera_popwin, ScanCameraPopup, pop_windows_array, 1);
     WIN_INIT(start_webcam_popwin, StartWebcamPopup, pop_windows_array, 2);

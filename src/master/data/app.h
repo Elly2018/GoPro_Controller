@@ -24,16 +24,16 @@ struct AppData
     json presets;
 
     union {
+        Websocket_window websocket_window;
+        Gopro_master_window websocket_window_base;
+    };
+    union {
         Camera_list_window camera_list_window;
         Gopro_master_window camera_list_window_base;
     };
     union {
         Inspector_window inspector_window;
         Gopro_master_window inspector_window_base;
-    };
-    union {
-        Websocket_window websocket_window;
-        Gopro_master_window websocket_window_base;
     };
     union {
         Style_window style_window;
@@ -44,14 +44,32 @@ struct AppData
     union {
         Add_camera_popup add_camera_popup_window;
         Gopro_master_popup_window add_camera_popup_window_base;
-    }
-    ScanCameraPopup scan_camera_popwin;
-    StartWebcamPopup start_webcam_popwin;
-    PreviewPopup preview_popwin;
-    AddPresetPopup add_preset_popwin;
-    PresetManagerPopup preset_manager_popwin;
-    MediaBrowserPopup media_browser_popwin;
-    BasePopWindow pop_windows_array[7];
+    };
+    union {
+        Scan_camera_popup scan_camera_popup_window;
+        Gopro_master_popup_window scan_camera_popup_window_base;
+    };
+    union {
+        Start_webcam_popup start_webcam_popup_window;
+        Gopro_master_popup_window start_webcam_popup_window_base;
+    };
+    union {
+        Preview_popup preview_popup_window;
+        Gopro_master_popup_window preview_popup_window_base;
+    };
+    union {
+        Add_preset_popup add_preset_popup_window;
+        Gopro_master_popup_window add_preset_popup_window_base;
+    };
+    union {
+        Preset_manager_popup preset_manager_popup_window;
+        Gopro_master_popup_window preset_manager_popup_window_base;
+    };
+    union {
+        Media_browser_popup media_browser_popup_window;
+        Gopro_master_popup_window media_browser_popup_window_base;
+    };
+    Gopro_master_popup_window* pop_windows_array[7];
 
     ExecutionType execution_type = ExecutionType::SetAll;
     std::unordered_map<std::string, std::string> execution_logs = std::unordered_map<std::string, std::string>();
