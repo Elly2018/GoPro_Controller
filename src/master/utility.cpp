@@ -29,6 +29,37 @@ static void setting_getter_feedback(AppData& data, const std::string ip, const j
     }
 }
 
+static void status_getter_feedback(AppData& data, const std::string ip, const json status){
+    if(global_state->current_camera_item == ip){
+        global_state->current_status_items = status;
+        global_state->current_status_items_bind = true;
+    }
+}
+
+static void HW_getter_feedback(AppData& data, const std::string ip, const json hw){
+    if(global_state->current_camera_item == ip){
+        global_state->current_hw_items = hw;
+        global_state->current_hw_items_bind = true;
+    }
+}
+
+static void assign_log(AppData& data, const std::string key, const std::string value){
+    if(execution_logs.count(key)){
+        std::string b = execution_logs.at(key);
+        execution_logs.insert_or_assign(key, b + "\n" + value);
+    }else{
+        execution_logs.insert_or_assign(key, value);
+    }
+}
+
+void apply_feedbacks(AppData& data){
+    data.global_state.applying_all_count++;
+    if(data.global_state.applying_all_count >= data.master->getServerCount()){
+        data.global_state.applying_all = false;
+    }
+}
+
+
 static void background_worker(AppData& data){
     while(!data.should_quit){
         while(!command_queue.empty()){
@@ -231,12 +262,12 @@ void init(AppData& data){
     
     data.master.feedback_camera_media_list = update_media_list;
     data.master.feedback_camera_setting = setting_getter_feedback;
-    data.master->registerCameraStatusFeedback(statusGetterFeedback);
-    data.master->registerCameraHWFeedback(hwGetterFeedback);
-    data.master->registerCameraLogFeedback(assign_log);
+    data.master.feedback_camera_status = status_getter_feedback;
+    data.master.feedback_camera_hw = HW_getter_feedback;
+    data.master.feedback_camera_log = assign_log;
     data.master->registerSavePreset(updatePresetList);
     data.master->set_preset_data(presets);
-    data.master->registerApplyAllFeedback(applyAllFeedback);
+    data.master.feedback_camera_apply_all = apply_feedbacks;
     data.preview_popup_window.register_setting_drawer(InspectorWindow::global_draw_setting);
     data.preview_popup_window.register_protune_drawer(InspectorWindow::global_draw_protune);
     data.global_state.update_event = background_worker;

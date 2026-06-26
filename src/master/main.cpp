@@ -18,36 +18,6 @@
 #include "imgui_helper.h"
 #include "src/imgui_notify.h"
 
-void assign_log(std::string key, std::string value){
-    if(execution_logs.count(key)){
-        std::string b = execution_logs.at(key);
-        execution_logs.insert_or_assign(key, b + "\n" + value);
-    }else{
-        execution_logs.insert_or_assign(key, value);
-    }
-}
-
-void status_getter_feedback(std::string ip, json status){
-    if(global_state->current_camera_item == ip){
-        global_state->current_status_items = status;
-        global_state->current_status_items_bind = true;
-    }
-}
-
-void HW_getter_feedback(std::string ip, json hw){
-    if(global_state->current_camera_item == ip){
-        global_state->current_hw_items = hw;
-        global_state->current_hw_items_bind = true;
-    }
-}
-
-void apply_feedbacks(){
-    global_state->applying_all_count++;
-    if(global_state->applying_all_count >= master->getServerCount()){
-        global_state->applying_all = false;
-    }
-}
-
 void main_menubar(AppData& data) {
     ImGui::BeginMainMenuBar();
     if (ImGui::BeginMenu("Windows")) {
