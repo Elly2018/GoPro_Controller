@@ -10,7 +10,7 @@
 #include <vector>
 #include <thread>
 #include "GoProMaster.h"
-#include "io.h"
+#include "utility.h"
 #include "data/app.h"
 #include "../common/camera_code.h"
 #include "windows/wins.h"
@@ -135,53 +135,6 @@ void push_command(const char* cmd){
     command_queue.push(cmd);
 }
 
-void init(AppData& data){
-    data.servers = loadServerList();
-    data.gui = loadGUI();
-    data.presets= loadPresetList();
-    
-    data.websocket_window_base = { data.servers, data.global_state, data.master, "Websocket" };
-    data.camera_list_window_base = { data.servers, data.global_state, data.master, "Cameras" };
-    data.inspector_window_base = { data.servers, data.global_state, data.master, "Inspector" };
-    data.style_window_base = { data.servers, data.global_state, data.master, "Style" };
-
-    data.windows_array[0] = &data.websocket_window_base;
-    data.windows_array[1] = &data.camera_list_window_base;
-    data.windows_array[2] = &data.inspector_window_base;
-    data.windows_array[3] = &data.style_window_base;
-
-    data.add_camera_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
-    data.scan_camera_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
-    data.start_webcam_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
-    data.preview_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
-    data.add_preset_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
-    data.preset_manager_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
-    data.media_browser_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
-
-    data.pop_windows_array[0] = &data.add_camera_popup_window_base;
-    data.pop_windows_array[1] = &data.scan_camera_popup_window_base;
-    data.pop_windows_array[2] = &data.start_webcam_popup_window_base;
-    data.pop_windows_array[3] = &data.preview_popup_window_base;
-    data.pop_windows_array[4] = &data.add_preset_popup_window_base;
-    data.pop_windows_array[5] = &data.preset_manager_popup_window_base;
-    data.pop_windows_array[6] = &data.media_browser_popup_window_base;
-    
-    data.master->registerCameraMediaListFeedback(updateMediaList);
-    data.master->registerCameraSettingFeedback(settingGetterFeedback);
-    data.master->registerCameraStatusFeedback(statusGetterFeedback);
-    data.master->registerCameraHWFeedback(hwGetterFeedback);
-    data.master->registerCameraLogFeedback(assign_log);
-    data.master->registerSavePreset(updatePresetList);
-    data.master->set_preset_data(presets);
-    data.master->registerApplyAllFeedback(applyAllFeedback);
-    data.preview_popup_window.register_setting_drawer(InspectorWindow::global_draw_setting);
-    data.preview_popup_window.register_protune_drawer(InspectorWindow::global_draw_protune);
-    data.global_state.update_server = update_server_list;
-    data.global_state.update_preset = update_preset_list;
-    data.global_state.command_sender = push_command;
-    std::thread bg_thread(background_worker);
-}
-
 int main(int, char**) {
     AppData data = AppData();
     
@@ -204,14 +157,11 @@ int main(int, char**) {
     data.global_state.m_renderer = SDL_CreateRenderer(window, NULL);
 
     init(data);
-
     setup_imgui();
-
-    // Init the windows
-    init_state_setup(servers, gui, global_state, master, windows_array, pop_windows_array);
+    init_state_setup(data);
+    
     ImGuiIO& io = ImGui::GetIO(); (void)io;
 
-    // Setup Platform/Renderer backends
     begin_imgui(window, gl_context, glsl_version);
 
     // Main loop

@@ -1,0 +1,204 @@
+/*
+ * Copyright (c) [2026] [Elly/Funique]
+ *
+ * This software is licensed under the [MIT License].
+ * See the LICENSE file in the project root for more information.
+*/
+#include "utility.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include "windows/base_window.h"
+#include "popup/base_pop_window.h"
+#include "imgui_helper.h"
+
+static constexpr char* SERVER_LIST_PATH = "servers.json";
+static constexpr char* GUI_PATH = "gui.json";
+static constexpr char* PRESETS_PATH = "presets.json";
+
+void saveServerList(json data){
+    std::ofstream file(SERVER_LIST_PATH);
+    if(file.is_open()){
+        file << data.dump();
+        file.close();
+    }
+}
+
+void saveGUI(json data){
+    std::ofstream file(GUI_PATH);
+    if(file.is_open()){
+        file << data.dump();
+        file.close();
+    }
+}
+
+void savePresetList(json data){
+    std::ofstream file(PRESETS_PATH);
+    if(file.is_open()){
+        file << data.dump();
+        file.close();
+    }
+}
+
+json loadServerList() {
+    std::ifstream file(SERVER_LIST_PATH);
+    if(!file.is_open()){
+        std::cerr << "No server config found" << std::endl;
+        return json::object();
+    }
+
+    std::stringstream buffer;
+    std::string fileContents;
+
+    buffer << file.rdbuf();
+    fileContents = buffer.str();
+
+    file.close();
+
+    return json::parse(fileContents);
+}
+
+json loadGUI() {
+    std::ifstream file(GUI_PATH);
+    if(!file.is_open()){
+        std::cerr << "No gui config found" << std::endl;
+        return json::object();
+    }
+
+    std::stringstream buffer;
+    std::string fileContents;
+
+    buffer << file.rdbuf();
+    fileContents = buffer.str();
+
+    file.close();
+
+    return json::parse(fileContents);
+}
+
+json loadPresetList(){
+    std::ifstream file(PRESETS_PATH);
+    if(!file.is_open()){
+        std::cerr << "No presets config found" << std::endl;
+        return json::object();
+    }
+
+    std::stringstream buffer;
+    std::string fileContents;
+
+    buffer << file.rdbuf();
+    fileContents = buffer.str();
+
+    file.close();
+
+    return json::parse(fileContents);
+}
+
+void init(AppData& data){
+    data.servers = loadServerList();
+    data.gui = loadGUI();
+    data.presets= loadPresetList();
+    
+    data.websocket_window_base = { data.servers, data.global_state, data.master, "Websocket" };
+    data.camera_list_window_base = { data.servers, data.global_state, data.master, "Cameras" };
+    data.inspector_window_base = { data.servers, data.global_state, data.master, "Inspector" };
+    data.style_window_base = { data.servers, data.global_state, data.master, "Style" };
+
+    data.windows_array[0] = &data.websocket_window_base;
+    data.windows_array[1] = &data.camera_list_window_base;
+    data.windows_array[2] = &data.inspector_window_base;
+    data.windows_array[3] = &data.style_window_base;
+
+    data.add_camera_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
+    data.scan_camera_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
+    data.start_webcam_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
+    data.preview_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
+    data.add_preset_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
+    data.preset_manager_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
+    data.media_browser_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
+
+    data.pop_windows_array[0] = &data.add_camera_popup_window_base;
+    data.pop_windows_array[1] = &data.scan_camera_popup_window_base;
+    data.pop_windows_array[2] = &data.start_webcam_popup_window_base;
+    data.pop_windows_array[3] = &data.preview_popup_window_base;
+    data.pop_windows_array[4] = &data.add_preset_popup_window_base;
+    data.pop_windows_array[5] = &data.preset_manager_popup_window_base;
+    data.pop_windows_array[6] = &data.media_browser_popup_window_base;
+    
+    data.master->registerCameraMediaListFeedback(updateMediaList);
+    data.master->registerCameraSettingFeedback(settingGetterFeedback);
+    data.master->registerCameraStatusFeedback(statusGetterFeedback);
+    data.master->registerCameraHWFeedback(hwGetterFeedback);
+    data.master->registerCameraLogFeedback(assign_log);
+    data.master->registerSavePreset(updatePresetList);
+    data.master->set_preset_data(presets);
+    data.master->registerApplyAllFeedback(applyAllFeedback);
+    data.preview_popup_window.register_setting_drawer(InspectorWindow::global_draw_setting);
+    data.preview_popup_window.register_protune_drawer(InspectorWindow::global_draw_protune);
+    data.global_state.update_server = update_server_list;
+    data.global_state.update_preset = update_preset_list;
+    data.global_state.command_sender = push_command;
+    std::thread bg_thread(background_worker);
+}
+
+void init_state_setup(AppData& data){
+    if(data.servers["data"].is_array()){     
+        for(int i = 0; i < data.servers["data"].size(); i++){
+            if(data.servers["data"].at(i).is_string()){
+                std::string buffer_ip = data.servers["data"].at(i).get<std::string>();
+                std::string ip =  master->addServer(buffer_ip);
+                data.master.
+                master->reconnect(ip);
+            }
+        }
+    }
+    if(data.servers["global"].is_object()){
+        set_global_state_data(*global_state, data.servers["global"]);
+    }
+    if(data.servers["window"].is_object()){
+        json websocket_win_json = data.servers["window"]["websocket_win"];
+        if(websocket_win_json.is_object()){
+            windows[0]->set_window_data(websocket_win_json);
+        }
+        json camera_list_win_json = data.servers["window"]["camera_list_win"];
+        if(camera_list_win_json.is_object()){
+            windows[1]->set_window_data(camera_list_win_json);
+        }
+        json inspector_win_json = data.servers["window"]["inspector_win"];
+        if(inspector_win_json.is_object()){
+            windows[2]->set_window_data(inspector_win_json);
+        }
+        json style_setting_win_win_json = data.servers["window"]["style_setting_win"];
+        if(style_setting_win_win_json["colors"].is_null() || style_setting_win_win_json["fields"].is_null()){
+            std::cout << "Apply default theme" << std::endl;
+            setup_catppuccin_mocha_theme();
+        }else{
+            std::cout << "Apply loaded theme" << std::endl;
+            windows[3]->set_window_data(style_setting_win_win_json);
+        }
+    }else{
+        std::cout << "Apply default theme" << std::endl;
+        setup_catppuccin_mocha_theme();
+    }
+    if(data.servers["popwin"].is_object()){
+        json preview_popwin_json = data.servers["popwin"]["preview_popwin"];
+        if(preview_popwin_json.is_object()){
+            popwins[3]->set_window_data(preview_popwin_json);
+        }
+    }
+
+    if(data.gui["websocket_server_window"].is_boolean() && data.gui["websocket_server_window"].get<bool>()){
+        windows[0]->trigger(true);
+        std::cout << "Detect websocket_server_window gui is on" << std::endl;
+    }
+    if(data.gui["camera_list_win"].is_boolean() && data.gui["camera_list_win"].get<bool>()){
+        windows[1]->trigger(true);
+    }
+    if(data.gui["inspector_win"].is_boolean() && data.gui["inspector_win"].get<bool>()){
+        windows[2]->trigger(true);
+    }
+    if(data.gui["style_setting_win"].is_boolean() && data.gui["style_setting_win"].get<bool>()){
+        windows[3]->trigger(true);
+    }
+}

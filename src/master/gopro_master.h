@@ -33,6 +33,64 @@ struct DownloadMediaParameters {
     int32_t c_count;
 };
 
+struct Gopro_master {
+    /**
+     * Camera list multithread lock guard
+     * This will prevent race condition
+     */
+    std::mutex camera_mtx;
+    std::mutex locate_mtx;
+    std::mutex server_mtx;
+    /** 
+     * All cameras record for master
+    */
+    std::vector<std::shared_ptr<CameraInfo>> cameras;
+    /** 
+     * All websocket servers record for master
+    */
+    std::vector<std::shared_ptr<ServerConnection>> servers;
+    /**
+     * All the locate records
+     */
+    std::vector<std::pair<std::string, std::string>> locates;
+    /**
+     * Basically a update thread, THere is a while true loop in it,
+     * And when done is true, it automatically escape the loop
+     */
+    std::thread t1;
+    /**
+     * Tells thread, if this websocket finish the ip query
+     * This prevent command stacking, when last ip fetch is not finish yet
+     */
+    std::unordered_map<std::string, bool> ipQueryFinish = std::unordered_map<std::string, bool>();
+    /**
+     * Tells thread, if this websocket finish the state query
+     * This prevent command stacking, when last state fetch is not finish yet
+     */
+    std::unordered_map<std::string, bool> stateQueryFinish = std::unordered_map<std::string, bool>();
+    std::unordered_map<std::string, bool> mediaQueryFinish = std::unordered_map<std::string, bool>();
+    camera_media_list_feedback _camera_media_list_feedback = NULL;
+    camera_setting_feedback _camera_setting_feedback = NULL;
+    camera_status_feedback _camera_status_feedback = NULL;
+    camera_hw_feedback _camera_hw_feedback = NULL;
+    camera_log_feedback _camera_log_feedback = NULL;
+    camera_preset_save _camera_preset_save = NULL;
+    camera_apply_all_feedback _camera_apply_all_feedback = NULL;
+    std::shared_ptr<json> preset_ptr = NULL;
+    /**
+     * Is app exit or not flag
+     */
+    bool done = false;
+    /**
+     * 0: Off
+     * 1: On (no finish txt)
+     * 2: On (with finish txt)
+     */
+    std::atomic_char32_t downloading_media_flag = 0;
+    std::atomic_char32_t downloading_media_total;
+    std::atomic_char32_t downloading_media_done;
+};
+
 ///
 /// GoPro Master Worker
 /// Use this hub stuff to control multiple websocket server or camera
@@ -134,13 +192,7 @@ public:
     bool get_preset(const std::string name, json& data);
     bool remove_preset(const std::string name);
     std::vector<std::string> get_preset_names();
-    /**
-     * Camera list multithread lock guard
-     * This will prevent race condition
-     */
-    std::mutex camera_mtx;
-    std::mutex locate_mtx;
-    std::mutex server_mtx;
+    
 
     // ----------------------------------------------------------
     //
@@ -163,54 +215,7 @@ public:
     const std::vector<ServerConnection> getServers_Clone();
     const ServerConnection getServer_Clone(int32_t index);
 private:
-    /** 
-     * All cameras record for master
-    */
-    std::vector<std::shared_ptr<CameraInfo>> cameras;
-    /** 
-     * All websocket servers record for master
-    */
-    std::vector<std::shared_ptr<ServerConnection>> servers;
-    /**
-     * All the locate records
-     */
-    std::vector<std::pair<std::string, std::string>> locates;
-    /**
-     * Basically a update thread, THere is a while true loop in it,
-     * And when done is true, it automatically escape the loop
-     */
-    std::thread t1;
-    /**
-     * Tells thread, if this websocket finish the ip query
-     * This prevent command stacking, when last ip fetch is not finish yet
-     */
-    std::unordered_map<std::string, bool> ipQueryFinish = std::unordered_map<std::string, bool>();
-    /**
-     * Tells thread, if this websocket finish the state query
-     * This prevent command stacking, when last state fetch is not finish yet
-     */
-    std::unordered_map<std::string, bool> stateQueryFinish = std::unordered_map<std::string, bool>();
-    std::unordered_map<std::string, bool> mediaQueryFinish = std::unordered_map<std::string, bool>();
-    camera_media_list_feedback _camera_media_list_feedback = NULL;
-    camera_setting_feedback _camera_setting_feedback = NULL;
-    camera_status_feedback _camera_status_feedback = NULL;
-    camera_hw_feedback _camera_hw_feedback = NULL;
-    camera_log_feedback _camera_log_feedback = NULL;
-    camera_preset_save _camera_preset_save = NULL;
-    camera_apply_all_feedback _camera_apply_all_feedback = NULL;
-    std::shared_ptr<json> preset_ptr = NULL;
-    /**
-     * Is app exit or not flag
-     */
-    bool done = false;
-    /**
-     * 0: Off
-     * 1: On (no finish txt)
-     * 2: On (with finish txt)
-     */
-    std::atomic_char32_t downloading_media_flag = 0;
-    std::atomic_char32_t downloading_media_total;
-    std::atomic_char32_t downloading_media_done;
+    
 
     /**
      * The background thread for fetch update from all websocket server and update etc...

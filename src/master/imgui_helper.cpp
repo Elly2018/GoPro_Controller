@@ -54,10 +54,6 @@
 
 namespace fs = std::filesystem;
 
-/**
- * Helping setup the imgui context
- * Such as style or theme stuff
- */
 void setup_imgui(){
     float main_scale = SDL_GetDisplayContentScale(SDL_GetPrimaryDisplay());
     // Setup Dear ImGui context

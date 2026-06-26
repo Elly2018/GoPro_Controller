@@ -4,7 +4,7 @@
  * This software is licensed under the [MIT License].
  * See the LICENSE file in the project root for more information.
 */
-#include "GoProMaster.h"
+#include "gopro_master.h"
 #include <iostream>
 #include <filesystem>
 #include "hv/requests.h"
