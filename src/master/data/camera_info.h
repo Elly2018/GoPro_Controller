@@ -9,26 +9,14 @@
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
-/**
- * Basically holds the information of the camera
- * And which websocket server its from
- */
-struct CameraInfo {
-    std::string name;
-    std::string last_media;
-    std::string serial;
-    /**
-     * Camera IP
-     */
-    std::string ip;
-    /**
-     * Websocket server ip
-     */
-    std::string server;
+
+struct Camera_info {
+    char name[64];
+    char last_media[128];
+    char serial[64];
+    char ip[32];
+    char server[32];
     bool connected;
-    /**
-     * The json states
-     */
-    json state = json::object();
-    json hw = json::object();
+    json state;
+    json hw;
 };

@@ -17,6 +17,18 @@ static constexpr char* SERVER_LIST_PATH = "servers.json";
 static constexpr char* GUI_PATH = "gui.json";
 static constexpr char* PRESETS_PATH = "presets.json";
 
+static void update_media_list(AppData& data, const std::vector<MediaInfo> data){
+    std::lock_guard<std::mutex> lock(data.global_state->media_list_mtx);
+    data.global_state.current_media_list = data;
+}
+
+static void setting_getter_feedback(AppData& data, const std::string ip, const json setting){
+    if(data.global_state->current_camera_item == ip){
+        data.global_state.current_setting_items = = setting;
+        data.global_state.current_setting_items_bind = true;
+    }
+}
+
 static void background_worker(AppData& data){
     while(!data.should_quit){
         while(!command_queue.empty()){
@@ -201,8 +213,8 @@ void init(AppData& data){
     data.pop_windows_array[5] = &data.preset_manager_popup_window_base;
     data.pop_windows_array[6] = &data.media_browser_popup_window_base;
     
-    data.master->registerCameraMediaListFeedback(updateMediaList);
-    data.master->registerCameraSettingFeedback(settingGetterFeedback);
+    data.master.feedback_camera_media_list = update_media_list;
+    data.master.feedback_camera_setting = setting_getter_feedback;
     data.master->registerCameraStatusFeedback(statusGetterFeedback);
     data.master->registerCameraHWFeedback(hwGetterFeedback);
     data.master->registerCameraLogFeedback(assign_log);

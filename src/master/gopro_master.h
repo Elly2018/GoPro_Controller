@@ -18,13 +18,15 @@
 #include "data/camera_info.h"
 #include "data/server_connection.h"
 
-typedef void (*camera_media_list_feedback)(std::vector<MediaInfo> media_list);
-typedef void (*camera_setting_feedback)(std::string ip, json setting);
-typedef void (*camera_status_feedback)(std::string ip, json status);
-typedef void (*camera_hw_feedback)(std::string ip, json hw);
-typedef void (*camera_log_feedback)(std::string key, std::string value);
-typedef void (*camera_preset_save)();
-typedef void (*camera_apply_all_feedback)();
+typedef struct AppData;
+
+typedef void (*camera_media_list_feedback)(AppData& data, const std::vector<MediaInfo> media_list);
+typedef void (*camera_setting_feedback)(AppData& data, const std::string ip, const json setting);
+typedef void (*camera_status_feedback)(AppData& data, const std::string ip, const json status);
+typedef void (*camera_hw_feedback)(AppData& data, const std::string ip, const json hw);
+typedef void (*camera_log_feedback)(AppData& data, const std::string key, const std::string value);
+typedef void (*camera_preset_save)(AppData& data);
+typedef void (*camera_apply_all_feedback)(AppData& data);
 
 struct DownloadMediaParameters {
     std::string dir;
@@ -69,13 +71,13 @@ struct Gopro_master {
      */
     std::unordered_map<std::string, bool> stateQueryFinish = std::unordered_map<std::string, bool>();
     std::unordered_map<std::string, bool> mediaQueryFinish = std::unordered_map<std::string, bool>();
-    camera_media_list_feedback _camera_media_list_feedback = NULL;
-    camera_setting_feedback _camera_setting_feedback = NULL;
-    camera_status_feedback _camera_status_feedback = NULL;
-    camera_hw_feedback _camera_hw_feedback = NULL;
-    camera_log_feedback _camera_log_feedback = NULL;
-    camera_preset_save _camera_preset_save = NULL;
-    camera_apply_all_feedback _camera_apply_all_feedback = NULL;
+    camera_media_list_feedback feedback_camera_media_list = NULL;
+    camera_setting_feedback feedback_camera_setting = NULL;
+    camera_status_feedback feedback_camera_status = NULL;
+    camera_hw_feedback feedback_camera_hw = NULL;
+    camera_log_feedback feedback_camera_log = NULL;
+    camera_preset_save feedback_camera_preset_save = NULL;
+    camera_apply_all_feedback feedback_camera_apply_all = NULL;
     std::shared_ptr<json> preset_ptr = NULL;
     /**
      * Is app exit or not flag
@@ -97,7 +99,7 @@ struct Gopro_master {
 /// And handles the message sender and process
 /// It also use multithread to decode the message from the websocket instancess
 ///
-class Gopro_master {
+class Gopro_master_Old {
 public:
     GoProMaster();
     /// 

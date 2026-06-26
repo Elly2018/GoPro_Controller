@@ -8,24 +8,8 @@
 #include <string>
 #include "hv/WebSocketClient.h"
 
-/**
- * Basically holds the Websocket instance
- */
-struct ServerConnection {
-    /**
-     * Websocket IP
-     */
-    std::string ip;
-    /**
-     * The libhv websocket client
-     */
-    std::shared_ptr<hv::WebSocketClient> client;
-    /**
-     * Current connection state
-     */
+struct Server_connection {
+    char ip [32];
     bool connected = false;
-    /**
-     * last message received from the server
-     */
-    std::string last_message;
+    hv::WebSocketClient client;
 };

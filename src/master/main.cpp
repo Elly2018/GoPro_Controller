@@ -27,13 +27,6 @@ void assign_log(std::string key, std::string value){
     }
 }
 
-void setting_getter_feedback(std::string ip, json setting){
-    if(global_state->current_camera_item == ip){
-        global_state->current_setting_items = setting;
-        global_state->current_setting_items_bind = true;
-    }
-}
-
 void status_getter_feedback(std::string ip, json status){
     if(global_state->current_camera_item == ip){
         global_state->current_status_items = status;
@@ -53,11 +46,6 @@ void apply_feedbacks(){
     if(global_state->applying_all_count >= master->getServerCount()){
         global_state->applying_all = false;
     }
-}
-
-void update_media_list(std::vector<MediaInfo> data){
-    std::lock_guard<std::mutex> lock(global_state->media_list_mtx);
-    global_state->current_media_list = data;
 }
 
 void main_menubar(AppData& data) {
@@ -84,6 +72,7 @@ void main_menubar(AppData& data) {
         ImGui::Separator();
         
         ImGui::EndMenu();
+
         if(update_menu){
             data.global_state.update_GUI(data);
         }
