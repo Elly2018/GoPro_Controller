@@ -11,6 +11,8 @@
 #include <nlohmann/json.hpp>
 #include "state.h"
 #include "state_action.h"
+#include "windows/wins.h"
+#include "popup/popwins.h"
 
 using json = nlohmann::json;
 

@@ -1,60 +1,27 @@
+/*
+ * Copyright (c) [2026] [Elly/Funique]
+ *
+ * This software is licensed under the [MIT License].
+ * See the LICENSE file in the project root for more information.
+*/
 #pragma once
-#include <chrono>
-#include <mutex>
-#include <thread>
-#include <nlohmann/json.hpp>
+#ifndef POPUP_BASE_POP_WINDOW_H
+#define POPUP_BASE_POP_WINDOW_H
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui.h"
-#include "imgui_impl_sdl3.h"
-#include "imgui_impl_opengl3.h"
-#include "misc/cpp/imgui_stdlib.h"
-#include "../GoProMaster.h"
-#include "../data/state.h"
+#include "../windows/base_window.h"
 
-using json = nlohmann::json;
+static constexpr uint32_t wp_flag = ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_AlwaysAutoResize;
 
-#define wp_flag ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_AlwaysAutoResize
 #ifdef _WIN32
-    #define wp_cond ImGuiCond_FirstUseEver
+    static constexpr uint32_t wp_cond = ImGuiCond_FirstUseEver;
 #else
-    #define wp_cond ImGuiCond_Always
+    static constexpr uint32_t wp_cond = ImGuiCond_Always;
 #endif
 
-class BasePopWindow {
-public:
-    BasePopWindow(
-        std::shared_ptr<json> _setting, 
-        std::shared_ptr<GlobalState> _state, 
-        std::shared_ptr<GoProMaster> _master);
-    ~BasePopWindow();
+struct Gopro_master_popup_window {
+    Gopro_master_window base;
+    bool isopen;
+}
 
-    virtual json get_window_data();
-    virtual void set_window_data(json data);
-
-    /**
-     * Does anyone call open popup right at this frame
-     */
-    std::string get_title();
-    bool is_enable();
-    bool is_open();
-    /**
-     * Is enable being triiger right now
-     */
-    virtual void trigger(bool value);
-    virtual void update();
-    /**
-     * Render the imgui window
-     */
-    virtual void render();
-    /**
-     * 
-     */
-    virtual void detect();
-protected:
-    bool enable = false;
-    bool isopen = false;
-    std::shared_ptr<json> setting;
-    std::shared_ptr<GlobalState> state;
-    std::shared_ptr<GoProMaster> master;
-    std::string title = "";
-};
+#endif

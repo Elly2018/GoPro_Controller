@@ -134,7 +134,7 @@ void Http_server(AppData &data)
 void UDP_proxy_server(AppData &data) 
 {
 	std::cout << "Starting GoPro UDP Proxy Server (RPi)..." << std::endl;
-	int32_t bindfd = us.createsocket(listen_port);
+	int32_t bindfd = data.us.createsocket(listen_port);
 	if (bindfd == -1)
 	{
 		std::cerr << "Failed to create socket for recevier: " << std::endl;
@@ -184,10 +184,22 @@ int main() {
 		std::cout << "Create udp server" << std::endl;
 		UDP_proxy_server(data); 
 	};
+
+	auto a4 = [&data] () {
+		std::cout << "Press 'q' to exit... \n";
+		while(!data.should_quit) {
+			char ch = std::cin.get();
+			if(ch == 'q') {
+				data.should_quit = true;
+				std::cout << "\nDetected 'q'! Exiting...\n";
+			}
+		}
+	};
 	
 	std::thread t1 = std::thread(a1);
 	std::thread t2 = std::thread(a2);
 	std::thread t3 = std::thread(a3);
+	std::thread t4 = std::thread(a4);
 	
 	while (!data.should_quit) {
 		
@@ -234,10 +246,13 @@ int main() {
 		gopro_controller_update(data.controller);
 	}
 
+	std::cout << "Server shutdown\n";
+
 	data.server.stop();
 	data.http_server.stop();
 	data.us.stop();
 
+	t4.join();
 	t3.join();
 	t2.join();
 	t1.join();
