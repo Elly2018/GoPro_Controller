@@ -52,6 +52,14 @@ static void assign_log(AppData& data, const std::string key, const std::string v
     }
 }
 
+static void savePresetList(json data){
+    std::ofstream file(PRESETS_PATH);
+    if(file.is_open()){
+        file << data.dump();
+        file.close();
+    }
+}
+
 static void apply_feedbacks(AppData& data){
     data.global_state.applying_all_count++;
     if(data.global_state.applying_all_count >= data.master->getServerCount()){
@@ -144,14 +152,6 @@ void saveServerList(json data){
 
 void saveGUI(json data){
     std::ofstream file(GUI_PATH);
-    if(file.is_open()){
-        file << data.dump();
-        file.close();
-    }
-}
-
-void savePresetList(json data){
-    std::ofstream file(PRESETS_PATH);
     if(file.is_open()){
         file << data.dump();
         file.close();
@@ -264,7 +264,7 @@ void init(AppData& data){
     data.master.feedback_camera_status = status_getter_feedback;
     data.master.feedback_camera_hw = HW_getter_feedback;
     data.master.feedback_camera_log = assign_log;
-    data.master->registerSavePreset(updatePresetList);
+    data.master.feedback_camera_preset_save = update_preset_list;
     data.master->set_preset_data(presets);
     data.master.feedback_camera_apply_all = apply_feedbacks;
     data.preview_popup_window.register_setting_drawer(InspectorWindow::global_draw_setting);
