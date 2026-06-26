@@ -17,6 +17,7 @@
 #include "data/state.h"
 #include "data/camera_info.h"
 #include "data/server_connection.h"
+#include "data/app.h"
 
 typedef struct AppData;
 
@@ -28,47 +29,30 @@ typedef void (*camera_log_feedback)(AppData& data, const std::string key, const 
 typedef void (*camera_preset_save)(AppData& data);
 typedef void (*camera_apply_all_feedback)(AppData& data);
 
-struct DownloadMediaParameters {
-    std::string dir;
+struct Locate_data {
+    char server[32];
+    char ip[32];
+    bool vaild;
+}
+
+struct Download_media_parameters {
     bool put_finish;
     int32_t type;
     int32_t c_count;
+    char dir[512];
 };
 
 struct Gopro_master {
-    /**
-     * Camera list multithread lock guard
-     * This will prevent race condition
-     */
     std::mutex camera_mtx;
     std::mutex locate_mtx;
     std::mutex server_mtx;
-    /** 
-     * All cameras record for master
-    */
-    std::vector<std::shared_ptr<CameraInfo>> cameras;
-    /** 
-     * All websocket servers record for master
-    */
-    std::vector<std::shared_ptr<ServerConnection>> servers;
-    /**
-     * All the locate records
-     */
-    std::vector<std::pair<std::string, std::string>> locates;
-    /**
-     * Basically a update thread, THere is a while true loop in it,
-     * And when done is true, it automatically escape the loop
-     */
-    std::thread t1;
-    /**
-     * Tells thread, if this websocket finish the ip query
-     * This prevent command stacking, when last ip fetch is not finish yet
-     */
+
+    Locate_data locates;
+    
+    std::vector<Camera_info> cameras = std::vector<Camera_info>(1024);
+    std::vector<Server_connection> servers = std::vector<Server_connection>(32);
+    
     std::unordered_map<std::string, bool> ipQueryFinish = std::unordered_map<std::string, bool>();
-    /**
-     * Tells thread, if this websocket finish the state query
-     * This prevent command stacking, when last state fetch is not finish yet
-     */
     std::unordered_map<std::string, bool> stateQueryFinish = std::unordered_map<std::string, bool>();
     std::unordered_map<std::string, bool> mediaQueryFinish = std::unordered_map<std::string, bool>();
     camera_media_list_feedback feedback_camera_media_list = NULL;
@@ -79,19 +63,13 @@ struct Gopro_master {
     camera_preset_save feedback_camera_preset_save = NULL;
     camera_apply_all_feedback feedback_camera_apply_all = NULL;
     std::shared_ptr<json> preset_ptr = NULL;
-    /**
-     * Is app exit or not flag
-     */
-    bool done = false;
-    /**
-     * 0: Off
-     * 1: On (no finish txt)
-     * 2: On (with finish txt)
-     */
+
     std::atomic_char32_t downloading_media_flag = 0;
     std::atomic_char32_t downloading_media_total;
     std::atomic_char32_t downloading_media_done;
 };
+
+void gopro_master_update(AppData& data);
 
 ///
 /// GoPro Master Worker

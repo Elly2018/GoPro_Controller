@@ -10,6 +10,7 @@
 #include "hv/requests.h"
 #include "windows/inspector.h"
 #include "src/imgui_notify.h"
+#include "data/app.h"
 
 namespace fs = std::filesystem;
 
@@ -735,58 +736,6 @@ const ServerConnection GoProMaster::getServer_Clone(int32_t index) {
     sc.last_message = i->last_message;
     sc.client = i->client;
     return sc;
-}
-
-void GoProMaster::update(){
-    while (!done) {
-        for (auto& s : servers) {
-            if (!s->connected) continue;
-            if (ipQueryFinish.count(s->ip) && ipQueryFinish.at(s->ip)) continue;
-            json get_status = json::object();
-            get_status["key"] = "command";
-            get_status["value"] = json::object();
-            get_status["value"]["name"] = "ip";
-            ipQueryFinish.insert_or_assign(s->ip, true);
-            s->client->send(get_status.dump());
-        }
-
-        for (auto& s : servers) {
-            if (!s->connected) continue;
-            if (stateQueryFinish.count(s->ip) && stateQueryFinish.at(s->ip)) continue;
-            json get_status = json::object();
-            get_status["key"] = "query";
-            get_status["value"] = json::object();
-            get_status["value"]["name"] = "getall";
-            stateQueryFinish.insert_or_assign(s->ip, true);
-            s->client->send(get_status.dump());
-        }
-
-        for (auto& s : servers) {
-            if (!s->connected) continue;
-            if (mediaQueryFinish.count(s->ip) && mediaQueryFinish.at(s->ip)) continue;
-            json get_status = json::object();
-            get_status["key"] = "media";
-            get_status["value"] = json::object();
-            get_status["value"]["name"] = "lastmedia";
-            mediaQueryFinish.insert_or_assign(s->ip, true);
-            s->client->send(get_status.dump());
-        }
-
-        std::lock_guard<std::mutex> lock(locate_mtx);
-        for (auto& s : locates) {
-            int32_t index = findCamera(s.first, s.second);
-            if(index == -1) continue;
-            auto& c = getCameras().at(index);
-            json status;
-            if(getStatusFromCamera(*c, status)){
-                if(status[std::to_string(PRESET_ID)].is_number()){
-                    presetSwitch(s.first, s.second, status[std::to_string(PRESET_ID)].get<int32_t>());
-                }
-            }
-        }
-        
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    }
 }
 
 void GoProMaster::processMessage(const std::string& server, const std::string& msg){

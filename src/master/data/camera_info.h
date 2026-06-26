@@ -17,6 +17,7 @@ struct Camera_info {
     char ip[32];
     char server[32];
     bool connected;
+    bool vaild;
     json state;
     json hw;
 };
