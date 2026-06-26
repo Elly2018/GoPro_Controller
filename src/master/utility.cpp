@@ -52,13 +52,12 @@ static void assign_log(AppData& data, const std::string key, const std::string v
     }
 }
 
-void apply_feedbacks(AppData& data){
+static void apply_feedbacks(AppData& data){
     data.global_state.applying_all_count++;
     if(data.global_state.applying_all_count >= data.master->getServerCount()){
         data.global_state.applying_all = false;
     }
 }
-
 
 static void background_worker(AppData& data){
     while(!data.should_quit){
