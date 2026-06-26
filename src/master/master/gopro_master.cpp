@@ -10,18 +10,21 @@
 
 void gopro_master_update(AppData& data) {
     for (Server_connection& s : data.master.servers) {
+        if (!s.vaild) continue;
         if (!s.connected) continue;
-        if (ipQueryFinish.count(s->ip) && ipQueryFinish.at(s->ip)) continue;
-        json get_status = json::object();
-        get_status["key"] = "command";
-        get_status["value"] = json::object();
-        get_status["value"]["name"] = "ip";
-        ipQueryFinish.insert_or_assign(s->ip, true);
-        s->client->send(get_status.dump());
+        if (ipQueryFinish.count(std::string(s.ip)) && ipQueryFinish.at(std::string(s.ip))) continue;
+
+        json buff = json::object();
+        buff["key"] = "command";
+        buff["value"] = json::object();
+        buff["value"]["name"] = "ip";
+        ipQueryFinish.insert_or_assign(std::string(s.ip), true);
+        s.client.send(buff.dump());
     }
 
     for (auto& s : servers) {
-        if (!s->connected) continue;
+        if (!s.vaild) continue;
+        if (!s.connected) continue;
         if (stateQueryFinish.count(s->ip) && stateQueryFinish.at(s->ip)) continue;
         json get_status = json::object();
         get_status["key"] = "query";
@@ -32,7 +35,8 @@ void gopro_master_update(AppData& data) {
     }
 
     for (auto& s : servers) {
-        if (!s->connected) continue;
+        if (!s.vaild) continue;
+        if (!s.connected) continue;
         if (mediaQueryFinish.count(s->ip) && mediaQueryFinish.at(s->ip)) continue;
         json get_status = json::object();
         get_status["key"] = "media";

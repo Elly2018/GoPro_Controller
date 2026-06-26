@@ -55,6 +55,7 @@ struct Gopro_master {
     std::unordered_map<std::string, bool> ipQueryFinish = std::unordered_map<std::string, bool>();
     std::unordered_map<std::string, bool> stateQueryFinish = std::unordered_map<std::string, bool>();
     std::unordered_map<std::string, bool> mediaQueryFinish = std::unordered_map<std::string, bool>();
+
     camera_media_list_feedback feedback_camera_media_list = NULL;
     camera_setting_feedback feedback_camera_setting = NULL;
     camera_status_feedback feedback_camera_status = NULL;
