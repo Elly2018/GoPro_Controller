@@ -265,7 +265,7 @@ void init(AppData& data){
     data.master.feedback_camera_hw = HW_getter_feedback;
     data.master.feedback_camera_log = assign_log;
     data.master.feedback_camera_preset_save = update_preset_list;
-    data.master->set_preset_data(presets);
+    data.master->set_preset_data(data.presets);
     data.master.feedback_camera_apply_all = apply_feedbacks;
     data.preview_popup_window.register_setting_drawer(InspectorWindow::global_draw_setting);
     data.preview_popup_window.register_protune_drawer(InspectorWindow::global_draw_protune);
