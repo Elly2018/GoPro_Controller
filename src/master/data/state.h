@@ -62,6 +62,7 @@ struct Global_state {
     ActionFunc update_event;
     ActionFunc update_server;
     ActionFunc update_preset;
+    ActionFunc update_GUI;
     // Inspector
     InspectorObjectType iot = InspectorObjectType::Camera;
 };

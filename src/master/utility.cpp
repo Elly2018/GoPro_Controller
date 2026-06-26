@@ -84,14 +84,13 @@ static void update_preset_list(AppData& data){
 }
 
 static void update_GUI_list(AppData& data){
-    (*gui)["websocket_server_window"] = websocket_win->is_enable();
-    (*gui)["camera_list_win"] = camera_list_win->is_enable();
-    (*gui)["inspector_win"] = inspector_win->is_enable();
-    (*gui)["style_setting_win"] = style_setting_win->is_enable();
+    data.gui["websocket_server_window"] = websocket_win->is_enable();
+    data.gui["camera_list_win"] = camera_list_win->is_enable();
+    data.gui["inspector_win"] = inspector_win->is_enable();
+    data.gui["style_setting_win"] = style_setting_win->is_enable();
     saveGUI(*gui);
     ImGui::SaveIniSettingsToDisk("imgui.ini");
 }
-
 
 void saveServerList(json data){
     std::ofstream file(SERVER_LIST_PATH);
@@ -215,6 +214,7 @@ void init(AppData& data){
     data.global_state.update_event = background_worker;
     data.global_state.update_server = update_server_list;
     data.global_state.update_preset = update_preset_list;
+    data.global_state.update_GUI = update_GUI_list;
     data.global_state.command_sender = push_command;
 }
 
