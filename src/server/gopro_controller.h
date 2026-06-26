@@ -38,20 +38,17 @@ struct gopro_element {
   static constexpr uint64_t ip_str_length = 24UL;
   static constexpr uint64_t name_str_length = 256UL;
 
-  bool exist;
-  bool alive;
   char ip[ip_str_length];
   char name[name_str_length];
   json hw;
+
+  bool exist;
+  bool alive;
 };
 
 struct gopro_controller {
   static constexpr uint64_t client_limit = 128UL;
-
-  bool shutdown;
-  bool applying_cancel;
   mdns_cpp::mDNS mdns;
-  bool mdns_event_registered;
   std::thread scan_thread;
   Thread_state scan_thread_state;
   std::thread ping_thread;
@@ -64,7 +61,11 @@ struct gopro_controller {
   std::mutex ips_mutex;
   std::mutex ips_alive_mutex;
   std::unordered_map<std::string, json> camera_hw;
+
+  bool mdns_event_registered;
   bool scanning;
+  bool shutdown;
+  bool applying_cancel;
 };
 
 void gopro_controller_init(gopro_controller& controller);

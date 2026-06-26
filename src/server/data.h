@@ -21,11 +21,11 @@
 struct Sender_struct
 {
     static constexpr uint64_t ip_str_length = 24UL;
-    bool vaild;
     char host_ip[ip_str_length];
     char websocket_ip[ip_str_length];
     int32_t sock_fd;
     struct sockaddr_in bcsa;
+    bool vaild;
 };
 
 struct InboundEvent {
@@ -36,14 +36,18 @@ struct InboundEvent {
 struct AppData
 {
     gopro_controller controller;
+
     hv::WebSocketServer server;
     hv::HttpServer http_server;
     hv::UdpServer us;
-    bool should_quit;
+
     std::mutex download_mtx;
     std::mutex broadcast_mtx;
+
     thread_safe_queue<InboundEvent> message_queue;
     std::array<Sender_struct, 10> broadcast_addrs = std::array<Sender_struct, 10>();
+
+    bool should_quit;
 };
 
 constexpr int32_t listen_port = 8556;

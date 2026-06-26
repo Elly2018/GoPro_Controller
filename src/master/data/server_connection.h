@@ -10,9 +10,10 @@
 
 struct Server_connection {
     char ip [32];
-    bool connected = false;
+    hv::WebSocketClient client;
+    bool connected;
+    bool vaild;
     bool query_ip;
     bool query_get_all;
     bool query_last_media;
-    hv::WebSocketClient client;
 };

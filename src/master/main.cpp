@@ -184,6 +184,8 @@ void mainloop(AppData& data){
         }
     }
 
+    gopro_master_update(data);
+
     begin_loop();
 
     main_menubar(data);
