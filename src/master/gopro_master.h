@@ -21,7 +21,7 @@
 
 typedef struct AppData;
 
-typedef void (*camera_media_list_feedback)(AppData& data, const std::vector<MediaInfo> media_list);
+typedef void (*camera_media_list_feedback)(AppData& data, const std::vector<Media_info> media_list);
 typedef void (*camera_setting_feedback)(AppData& data, const std::string ip, const json setting);
 typedef void (*camera_status_feedback)(AppData& data, const std::string ip, const json status);
 typedef void (*camera_hw_feedback)(AppData& data, const std::string ip, const json hw);
@@ -80,60 +80,29 @@ void gopro_master_disconnect(AppData& data, const std::string& ip);
 void gopro_master_clean(AppData& data);
 void gopro_master_clean(AppData& data, const std::string& ip);
 
+void gopro_master_packet_sender(AppData& data, const std::string key, const std::string server, const std::string command, const std::string target, const std::string value = "");
+void gopro_master_command_only(AppData& data, const std::string command, const std::string target = "");
+void gopro_master_command_only(AppData& data, const std::string server, const std::string command, const std::string target = "");
+void gopro_master_command_with_value(AppData& data, const std::string command, std::string target, const std::string value);
+void gopro_master_query_only(AppData& data, const std::string command, const std::string target = "");
+void gopro_master_query_only(AppData& data, const std::string server, const std::string command, const std::string target = "");
+void gopro_master_webcam_only(AppData& data, const std::string command, const std::string target = "");
+void gopro_master_webcam_only(AppData& data, const std::string server, const std::string command, const std::string target = "");
+void gopro_master_webcam_start(AppData& data, const std::string server);
+void gopro_master_preview_start(AppData& data, const std::string server, const std::string target);
+void gopro_master_preview_end(AppData& data, const std::string server, const std::string target);
+void gopro_master_media_only(AppData& data, const std::string command, std::string target = "");
+void gopro_master_download_last_media(AppData& data, const std::string ip, const DownloadMediaParameters params);
+void gopro_master_download_all_media(AppData& data, const std::string server, const std::string ip, const std::string folder, const std::vector<Media_info> media_list);
+void gopro_master_download_single_media(AppData& data, const std::string server, const std::string ip, const std::string filepath, const Media_info media);
+void gopro_master_get_media_info(AppData& data, const std::string server, const std::string ip, const std::string path);
+void gopro_master_get_media_list(AppData& data, const std::string server, const std::string ip);
+
 void gopro_master_process_message(AppData& data, const std::string& ip, const std::string& msg);
 void gopro_master_send_2_all(AppData& data, const std::string& msg);
 
-///
-/// GoPro Master Worker
-/// Use this hub stuff to control multiple websocket server or camera
-/// And handles the message sender and process
-/// It also use multithread to decode the message from the websocket instancess
-///
-class Gopro_master_Old {
-public:
-    GoProMaster();
-    /// 
-    /// Destroy the threadings and release the resource under.
-    /// 
-    ~GoProMaster();
 
-    // ----------------------------------------------------------
-    //
-    //       Websocket Server Action
-    //
-    // ----------------------------------------------------------
-    /**
-     * Menually add websocket server and connect to it
-     */
-    std::string addServer(const std::string& ip);
-    void reconnectAll();
-    void disconnectAll();
-    void cleanAll();
-    void reconnect(const std::string& ip);
-    void disconnect(const std::string& ip);
-    void clean(const std::string& ip);
 
-    // ----------------------------------------------------------
-    //
-    //       Websocket Server Sending Signal
-    //
-    // ----------------------------------------------------------
-    void command_only(const std::string command, std::string target = "");
-    void command_only(const std::string server, const std::string command, std::string target = "");
-    void command_with_value(const std::string command, std::string target, std::string value);
-    void query_only(const std::string command, std::string target = "");
-    void query_only(const std::string server, const std::string command, std::string target = "");
-    void webcam_only(const std::string command, std::string target = "");
-    void webcam_only(const std::string server, const std::string command, std::string target = "");
-    void webcam_start(const std::string server);
-    void preview_start(std::string server, std::string target);
-    void preview_end(std::string server, std::string target);
-    void media_only(const std::string command, std::string target = "");
-    void download_last_media(const std::string ip, const DownloadMediaParameters params);
-    void download_all_media(const std::string server, const std::string ip, const std::string folder, std::vector<MediaInfo> media_list);
-    void download_single_media(const std::string server, const std::string ip, const std::string filepath, MediaInfo media);
-    void get_media_info(const std::string server, const std::string ip, const std::string path);
-    void get_media_list(const std::string server, const std::string ip);
 
     void presetSwitch(const std::string server, const std::string target, int32_t mode);
     void locate(const std::string server, const std::string target);
