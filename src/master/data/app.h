@@ -25,6 +25,7 @@ struct AppData
     json gui;
     json servers;
     json presets;
+    bool should_quit;
 
     union {
         Websocket_window websocket_window;

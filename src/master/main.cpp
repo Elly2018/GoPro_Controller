@@ -18,44 +18,6 @@
 #include "imgui_helper.h"
 #include "src/imgui_notify.h"
 
-void background_worker(){
-    while(!global_state->done){
-        while(!command_queue.empty()){
-            std::string cmd = command_queue.front();
-            command_queue.pop();
-            if(cmd == "add_camera"){
-                add_camera_popwin->trigger(true);
-                std::cout << "Detect add_camera popup" << std::endl;
-            }
-            else if(cmd == "scan_camera"){
-                scan_camera_popwin->trigger(true);
-                std::cout << "Detect scan_camera popup" << std::endl;
-            }
-            else if(cmd == "start_webcam"){
-                start_webcam_popwin->trigger(true);
-                std::cout << "Detect start_webcam popup" << std::endl;
-            }
-            else if(cmd == "preview_start"){
-                preview_popwin->trigger(true);
-                std::cout << "Detect preview popup" << std::endl;
-            }
-            else if(cmd == "add_preset"){
-                add_preset_popwin->trigger(true);
-                std::cout << "Detect add_preset popup" << std::endl;
-            }
-            else if(cmd == "preset_manager"){
-                preset_manager_popwin->trigger(true);
-                std::cout << "Detect preset_manager popup" << std::endl;
-            }
-            else if(cmd == "media_browser"){
-                media_browser_popwin->trigger(true);
-                std::cout << "Detect media_browser popup" << std::endl;
-            }
-        }
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
-    }
-}
-
 void assign_log(std::string key, std::string value){
     if(execution_logs.count(key)){
         std::string b = execution_logs.at(key);
@@ -98,43 +60,6 @@ void update_media_list(std::vector<MediaInfo> data){
     global_state->current_media_list = data;
 }
 
-void update_server_list(){
-    std::cout << "updateServerList" << std::endl;
-    json data = json::object();
-    data["data"] = json::array();
-    for(const auto& s : master->getServers()){
-        if(s){
-            data["data"].push_back(s->ip);
-        }
-    }
-    data["global"] = get_global_state_data(*global_state);
-    data["window"] = json::object();
-    data["window"]["camera_list_win"] = camera_list_win->get_window_data();
-    data["window"]["inspector_win"] = inspector_win->get_window_data();
-    data["window"]["websocket_win"] = websocket_win->get_window_data();
-    data["window"]["style_setting_win"] = style_setting_win->get_window_data();
-    data["popwin"]["preview_popwin"] = preview_popwin->get_window_data();
-    saveServerList(data);
-    servers->swap(data);
-}
-
-void update_GUI_list(){
-    (*gui)["websocket_server_window"] = websocket_win->is_enable();
-    (*gui)["camera_list_win"] = camera_list_win->is_enable();
-    (*gui)["inspector_win"] = inspector_win->is_enable();
-    (*gui)["style_setting_win"] = style_setting_win->is_enable();
-    saveGUI(*gui);
-    ImGui::SaveIniSettingsToDisk("imgui.ini");
-}
-
-void update_preset_list(){
-    savePresetList(*presets);
-}
-
-void push_command(const char* cmd){
-    command_queue.push(cmd);
-}
-
 int main(int, char**) {
     AppData data = AppData();
     
@@ -148,9 +73,11 @@ int main(int, char**) {
     {
         std::tuple<SDL_Window*, const char*> sdl_ctx;
         begin_sdl(sdl_ctx);
+        
         window = std::get<0>(sdl_ctx);
-        gl_context = SDL_GL_CreateContext(window);
         glsl_version = std::get<1>(sdl_ctx);
+
+        gl_context = SDL_GL_CreateContext(window);
         SDL_GL_MakeCurrent(window, gl_context);
     }
     
@@ -159,24 +86,21 @@ int main(int, char**) {
     init(data);
     setup_imgui();
     init_state_setup(data);
-    
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-
     begin_imgui(window, gl_context, glsl_version);
 
-    // Main loop
-    while (!global_state->done)
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+    while (!data.should_quit)
     {
         int focus = -1;
-        // Poll and handle events
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
             ImGui_ImplSDL3_ProcessEvent(&event);
             if (event.type == SDL_EVENT_QUIT)
-                global_state->done = true;
+                data.should_quit = true;
             if (event.type == SDL_EVENT_WINDOW_CLOSE_REQUESTED && event.window.windowID == SDL_GetWindowID(window))
-                global_state->done = true;
+                data.should_quit = true;
             
             // Hotkeys
             if (event.type == SDL_EVENT_KEY_DOWN) {
@@ -248,6 +172,7 @@ int main(int, char**) {
                 }
             }
         }
+        data.global_state.update_event(data);
 
         for(auto& w : windows_array){
             if(w && w->is_enable()){

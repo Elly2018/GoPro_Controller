@@ -17,6 +17,82 @@ static constexpr char* SERVER_LIST_PATH = "servers.json";
 static constexpr char* GUI_PATH = "gui.json";
 static constexpr char* PRESETS_PATH = "presets.json";
 
+static void background_worker(AppData& data){
+    while(!data.should_quit){
+        while(!command_queue.empty()){
+            std::string cmd = command_queue.front();
+            command_queue.pop();
+            if(cmd == "add_camera"){
+                add_camera_popwin->trigger(true);
+                std::cout << "Detect add_camera popup" << std::endl;
+            }
+            else if(cmd == "scan_camera"){
+                scan_camera_popwin->trigger(true);
+                std::cout << "Detect scan_camera popup" << std::endl;
+            }
+            else if(cmd == "start_webcam"){
+                start_webcam_popwin->trigger(true);
+                std::cout << "Detect start_webcam popup" << std::endl;
+            }
+            else if(cmd == "preview_start"){
+                preview_popwin->trigger(true);
+                std::cout << "Detect preview popup" << std::endl;
+            }
+            else if(cmd == "add_preset"){
+                add_preset_popwin->trigger(true);
+                std::cout << "Detect add_preset popup" << std::endl;
+            }
+            else if(cmd == "preset_manager"){
+                preset_manager_popwin->trigger(true);
+                std::cout << "Detect preset_manager popup" << std::endl;
+            }
+            else if(cmd == "media_browser"){
+                media_browser_popwin->trigger(true);
+                std::cout << "Detect media_browser popup" << std::endl;
+            }
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+}
+
+static void push_command(AppData& data, const char* cmd){
+    data.command_queue.push(cmd);
+}
+
+static void update_server_list(AppData& data){
+    std::cout << "updateServerList" << std::endl;
+    json data = json::object();
+    data["data"] = json::array();
+    for(const auto& s : master->getServers()){
+        if(s){
+            data["data"].push_back(s->ip);
+        }
+    }
+    data["global"] = get_global_state_data(*global_state);
+    data["window"] = json::object();
+    data["window"]["camera_list_win"] = camera_list_win->get_window_data();
+    data["window"]["inspector_win"] = inspector_win->get_window_data();
+    data["window"]["websocket_win"] = websocket_win->get_window_data();
+    data["window"]["style_setting_win"] = style_setting_win->get_window_data();
+    data["popwin"]["preview_popwin"] = preview_popwin->get_window_data();
+    saveServerList(data);
+    servers->swap(data);
+}
+
+static void update_preset_list(AppData& data){
+    savePresetList(*presets);
+}
+
+static void update_GUI_list(AppData& data){
+    (*gui)["websocket_server_window"] = websocket_win->is_enable();
+    (*gui)["camera_list_win"] = camera_list_win->is_enable();
+    (*gui)["inspector_win"] = inspector_win->is_enable();
+    (*gui)["style_setting_win"] = style_setting_win->is_enable();
+    saveGUI(*gui);
+    ImGui::SaveIniSettingsToDisk("imgui.ini");
+}
+
+
 void saveServerList(json data){
     std::ofstream file(SERVER_LIST_PATH);
     if(file.is_open()){
@@ -136,10 +212,10 @@ void init(AppData& data){
     data.master->registerApplyAllFeedback(applyAllFeedback);
     data.preview_popup_window.register_setting_drawer(InspectorWindow::global_draw_setting);
     data.preview_popup_window.register_protune_drawer(InspectorWindow::global_draw_protune);
+    data.global_state.update_event = background_worker;
     data.global_state.update_server = update_server_list;
     data.global_state.update_preset = update_preset_list;
     data.global_state.command_sender = push_command;
-    std::thread bg_thread(background_worker);
 }
 
 void init_state_setup(AppData& data){
