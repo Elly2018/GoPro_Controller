@@ -7,8 +7,10 @@
 #pragma once
 #ifndef DATA_H
 #define DATA_H
-#include "hv/EventLoop.h"
 #include "hv/WebSocketServer.h"
+#include "hv/EventLoop.h"
+#include "hv/UdpServer.h"
+#include "hv/UdpClient.h"
 #include "hv/hsocket.h"
 #include <cinttypes>
 #include <string>
@@ -34,6 +36,9 @@ struct InboundEvent {
 struct AppData
 {
     gopro_controller controller;
+    hv::WebSocketServer server;
+    hv::HttpServer http_server;
+    hv::UdpServer us;
     bool should_quit;
     std::mutex download_mtx;
     std::mutex broadcast_mtx;

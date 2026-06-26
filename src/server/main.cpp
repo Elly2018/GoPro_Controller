@@ -14,11 +14,6 @@
 #include "data.h"
 #include "analysis.h"
 #include "../common/config.h"
-#include "hv/WebSocketServer.h"
-#include "hv/EventLoop.h"
-#include "hv/UdpServer.h"
-#include "hv/UdpClient.h"
-#include "hv/hsocket.h"
 #include <iostream>
 #include <vector>
 
@@ -107,12 +102,11 @@ void Websocket_server(AppData &data)
 		}
 	};
 	
-	hv::WebSocketServer server;
-	server.registerWebSocketService(&ws);
-	server.setPort(9090);
+	data.server.registerWebSocketService(&ws);
+	data.server.setPort(9090);
 	
 	std::cout << "WebSocket Server listening on port 9090..." << std::endl;
-	server.run();
+	data.server.run();
 }
 
 void Http_server(AppData &data) 
@@ -128,20 +122,18 @@ void Http_server(AppData &data)
 	fs::create_directory("res");
 	router.Static("/res", "./res");
 	
-	hv::HttpServer http_server;
-	http_server.registerHttpService(&router);
-	http_server.setPort(8080);
-	http_server.setThreadNum(4);
+	data.http_server.registerHttpService(&router);
+	data.http_server.setPort(8080);
+	data.http_server.setThreadNum(4);
 	
 	std::cout << "Http Server listening on port 8080..." << std::endl;
 	
-	http_server.run();
+	data.http_server.run();
 }
 
 void UDP_proxy_server(AppData &data) 
 {
 	std::cout << "Starting GoPro UDP Proxy Server (RPi)..." << std::endl;
-	static hv::UdpServer us;
 	int32_t bindfd = us.createsocket(listen_port);
 	if (bindfd == -1)
 	{
@@ -155,7 +147,7 @@ void UDP_proxy_server(AppData &data)
 	std::cout << "  Broadcasting to: " << broadcast_port << " (to all Masters)"
 	<< std::endl;
 	
-	us.onMessage = [&](const hv::SocketChannelPtr &channel, hv::Buffer *buf)
+	data.us.onMessage = [&](const hv::SocketChannelPtr &channel, hv::Buffer *buf)
 	{
 		std::lock_guard<std::mutex> lock(data.broadcast_mtx);
 		for (auto &sss : data.broadcast_addrs)
@@ -169,7 +161,7 @@ void UDP_proxy_server(AppData &data)
 			#endif
 		}
 	};
-	us.start();
+	data.us.start();
 }
 
 int main() {
@@ -241,6 +233,10 @@ int main() {
 		}
 		gopro_controller_update(data.controller);
 	}
+
+	data.server.stop();
+	data.http_server.stop();
+	data.us.stop();
 
 	t3.join();
 	t2.join();
