@@ -30,6 +30,7 @@ struct Media_info {
 
 struct Global_state {
     SDL_Renderer* m_renderer;
+    AppData* appdata;
     bool applying_all;
     int32_t applying_all_count;
     

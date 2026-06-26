@@ -1,6 +1,7 @@
 #include "style_setting.h"
 #include <imgui.h>
 #include "../imgui_helper.h"
+#include "../data/state.h"
 
 #define GET_DATA_COLOR4(x, y, z) x["colors"][#z]=json::object();\
 store_vec4(x["colors"][#z],y[z]);\
@@ -37,20 +38,52 @@ void fetch_vec2(json& j, ImVec2& value){
     value.y = j["y"];
 }
 
-StyleSetting::StyleSetting(
-    std::shared_ptr<json> _setting, 
-    std::shared_ptr<GlobalState> _state, 
-    std::shared_ptr<GoProMaster> _master
-) 
-    : BaseWindow(_setting, _state, _master) {
-    title = "Style";
+
+void style_window_render(Style_window& win) {
+    ImGuiStyle& style = ImGui::GetStyle();
+    ImVec4* colors = style.Colors;
+    bool changed = false;
+
+    ImGui::Begin(title.c_str(), &enable, w_flag);
+    {
+        if(ImGui::BeginCombo("Theme##style_themes", "")){
+            if(ImGui::Selectable("Dark Theme")){
+                ImGui::StyleColorsDark();
+                changed = true;
+            }
+            if(ImGui::Selectable("Light Theme")){
+                ImGui::StyleColorsLight();
+                changed = true;
+            }
+            if(ImGui::Selectable("Mocha Theme")){
+                setup_catppuccin_mocha_theme();
+                changed = true;
+            }
+            ImGui::EndCombo();
+        }
+
+        ImGui::Separator();
+        
+        if(ImGui::BeginTabBar("Style Fields##style_win")){
+            if(ImGui::BeginTabItem("Colors##style_win")){
+                changed = changed | style_window_render_colors(win);
+                ImGui::EndTabItem();
+            }
+            if(ImGui::BeginTabItem("Fields##style_win")){
+                changed = style_window_render_fields(win);
+                ImGui::EndTabItem();
+            }
+            if(changed){
+                style_window_update_style(win);
+                changed = false;
+            }
+            ImGui::EndTabBar();
+        }
+    }
+    ImGui::End();
 }
 
-StyleSetting::~StyleSetting(){
-    
-}
-
-json StyleSetting::get_window_data() {
+json style_window_get_window_data(Style_window& win) {
     ImGuiStyle& style = ImGui::GetStyle();
     ImVec4* colors = style.Colors;
     json buffer = json::object();
@@ -141,7 +174,7 @@ json StyleSetting::get_window_data() {
     return buffer;
 }
 
-void StyleSetting::set_window_data(json data) {
+void style_window_set_window_data(Style_window& win, const json& data) {
     ImGuiStyle& style = ImGui::GetStyle();
     ImVec4* colors = style.Colors;
 
@@ -227,51 +260,7 @@ void StyleSetting::set_window_data(json data) {
     SET_DATA_FLOAT(data, style, TabRounding);
 }
 
-void StyleSetting::render(){
-    ImGuiStyle& style = ImGui::GetStyle();
-    ImVec4* colors = style.Colors;
-    bool changed = false;
-
-    ImGui::Begin(title.c_str(), &enable, w_flag);
-    {
-        if(ImGui::BeginCombo("Theme##style_themes", "")){
-            if(ImGui::Selectable("Dark Theme")){
-                ImGui::StyleColorsDark();
-                changed = true;
-            }
-            if(ImGui::Selectable("Light Theme")){
-                ImGui::StyleColorsLight();
-                changed = true;
-            }
-            if(ImGui::Selectable("Mocha Theme")){
-                setup_catppuccin_mocha_theme();
-                changed = true;
-            }
-            ImGui::EndCombo();
-        }
-
-        ImGui::Separator();
-        
-        if(ImGui::BeginTabBar("Style Fields##style_win")){
-            if(ImGui::BeginTabItem("Colors##style_win")){
-                changed = changed | render_colors();
-                ImGui::EndTabItem();
-            }
-            if(ImGui::BeginTabItem("Fields##style_win")){
-                changed = render_fields();
-                ImGui::EndTabItem();
-            }
-            if(changed){
-                update_style();
-                changed = false;
-            }
-            ImGui::EndTabBar();
-        }
-    }
-    ImGui::End();
-}
-
-bool StyleSetting::render_colors(){
+bool style_window_render_colors(Style_window& win) {
     ImGuiStyle& style = ImGui::GetStyle();
     ImVec4* colors = style.Colors;
     bool changed = false;
@@ -333,7 +322,7 @@ bool StyleSetting::render_colors(){
     return changed;
 }
 
-bool StyleSetting::render_fields(){
+bool style_window_render_fields(Style_window& win) {
     ImGuiStyle& style = ImGui::GetStyle();
     ImVec4* colors = style.Colors;
     bool changed = false;
@@ -372,7 +361,7 @@ bool StyleSetting::render_fields(){
     return changed;
 }
 
-bool StyleSetting::update_style(){
-    state->update_server();
+bool style_window_update_style(Style_window& win){
+    win.base.state.update_server(&win.base.state.appdata);
     return true;
 }

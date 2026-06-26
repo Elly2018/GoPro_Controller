@@ -24,6 +24,7 @@ struct Gopro_master_window {
     Gopro_master& master;
     char title[64];
     bool enable;
+    bool enable_last;
 };
 
 #endif

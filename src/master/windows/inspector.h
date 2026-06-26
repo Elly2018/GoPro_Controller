@@ -7,6 +7,33 @@
 #pragma once
 #include "base_window.h"
 
+struct Inspector_window {
+    Gopro_master_window base;
+    
+    int32_t system_list_ordered;
+    
+    int32_t video_setting_list_ordered;
+    int32_t video_protune_list_ordered;
+    int32_t photo_setting_list_ordered;
+    int32_t photo_protune_list_ordered;
+    int32_t burst_setting_list_ordered;
+    int32_t burst_protune_list_ordered;
+    
+    int32_t status_software_list_ordered;
+    int32_t status_hardware_list_ordered;
+    int32_t status_encode_list_ordered;
+    int32_t status_network_list_ordered;
+    int32_t status_media_list_ordered;
+
+    bool create_date_folder;
+    bool put_finish;
+    bool should_disabled;
+    bool applying_all_last;
+    
+    int32_t media_name_rule_type;
+    int32_t media_name_character_count;
+};
+
 class InspectorWindow : public BaseWindow {
 public:
     InspectorWindow(
@@ -48,29 +75,4 @@ protected:
 
     void open_dialog_for_folder_selection();
 private:
-    static std::vector<int32_t> system_list_ordered;
-    // Setting
-    static std::vector<int32_t> video_setting_list_ordered;
-    static std::vector<int32_t> video_protune_list_ordered;
-    static std::vector<int32_t> photo_setting_list_ordered;
-    static std::vector<int32_t> photo_protune_list_ordered;
-    static std::vector<int32_t> burst_setting_list_ordered;
-    static std::vector<int32_t> burst_protune_list_ordered;
-    // Status
-    static std::vector<int32_t> status_software_list_ordered;
-    static std::vector<int32_t> status_hardware_list_ordered;
-    static std::vector<int32_t> status_encode_list_ordered;
-    static std::vector<int32_t> status_network_list_ordered;
-    static std::vector<int32_t> status_media_list_ordered;
-    bool create_date_folder;
-    bool put_finish;
-    bool should_disabled;
-    bool applying_all_last;
-    ///
-    /// 0: None
-    /// 1: Front Characters
-    /// 2: Back Characters
-    ///
-    int32_t media_name_rule_type = 0;
-    int32_t media_name_character_count = 0;
 };

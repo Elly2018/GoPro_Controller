@@ -190,19 +190,24 @@ void mainloop(AppData& data){
 
     main_menubar(data);
 
-    int counter = 0;
-    for(auto& w : data.windows_array){
-        if(focus != -1 && focus == counter){
-            ImGui::SetNextWindowFocus();
-        }
-        if(w && w->is_enable()){
-            w->render();
-            if(w->is_close()){
-                w->trigger(false);
-                updateGUIList();
-            }
-        }
-        counter++;
+    bool should_update_GUI = false;
+
+    if(focus == 0) ImGui::SetNextWindowFocus();
+    data.websocket_window.render(data.websocket_window);
+    if(data.websocket_window_base.enable != data.websocket_window_base.enable_last){
+        data.websocket_window_base.enable_last = data.websocket_window_base.enable;
+        should_update_GUI = true;
+    }
+
+    if(focus == 3) ImGui::SetNextWindowFocus();
+    data.style_window_base.render(data.style_window);
+    if(data.style_window_base.enable != data.style_window_base.enable_last){
+        data.style_window_base.enable_last = data.style_window_base.enable;
+        should_update_GUI = true;
+    }
+
+    if(should_update_GUI){
+        data.global_state.update_GUI(data);
     }
 
     for(Gopro_master_popup_window& w : data.pop_windows_array){

@@ -183,6 +183,7 @@ json loadPresetList(){
 }
 
 void init(AppData& data){
+    data.global_state.appdata = data;
     data.servers = loadServerList();
     data.gui = loadGUI();
     data.presets= loadPresetList();
@@ -191,6 +192,9 @@ void init(AppData& data){
     data.camera_list_window_base = { data.servers, data.global_state, data.master, "Cameras" };
     data.inspector_window_base = { data.servers, data.global_state, data.master, "Inspector" };
     data.style_window_base = { data.servers, data.global_state, data.master, "Style" };
+
+    data.websocket_window.render = websocket_window_render;
+    data.style_window.render = style_window_render;
 
     data.windows_array[0] = &data.websocket_window_base;
     data.windows_array[1] = &data.camera_list_window_base;

@@ -5,18 +5,21 @@
  * See the LICENSE file in the project root for more information.
 */
 #pragma once
+#ifndef WINDOWS_WEBSOCKET_SERVER_H
+#define WINDOWS_WEBSOCKET_SERVER_H
 #include "base_window.h"
 
-class WebsocketWindow : public BaseWindow {
-public:
-    WebsocketWindow(
-        std::shared_ptr<json> _setting, 
-        std::shared_ptr<GlobalState> _state, 
-        std::shared_ptr<GoProMaster> _master);
-    virtual ~WebsocketWindow();
+struct Websocket_window;
+typedef void (*Websocket_window_render_func)(Websocket_window& win);
 
-    virtual void render() override;
+struct Websocket_window {
+    Gopro_master_window base;
 
-private:
-    std::string server_ip_buf = "127.0.0.1";
+    Websocket_window_render_func render;
+
+    char server_ip_buf[32];
 };
+
+void websocket_window_render(Websocket_window& win);
+
+#endif
