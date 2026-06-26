@@ -6,18 +6,14 @@
 */
 #include "base_pop_window.h"
 
-BasePopWindow::BasePopWindow(
-    std::shared_ptr<json> _setting, 
-    std::shared_ptr<GlobalState> _state, 
-    std::shared_ptr<GoProMaster> _master
-){
-    setting = _setting;
-    state = _state;
-    master = _master;
-}
-
-BasePopWindow::~BasePopWindow(){
-
+void gopro_master_popup_detect(Gopro_master_popup_window& win) {
+    if(win.base.enable){
+        win.base.enable = false;
+        win.isopen = true;
+        ImGui::OpenPopup(win.base.title);
+        ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+        ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    }
 }
 
 json BasePopWindow::get_window_data() {

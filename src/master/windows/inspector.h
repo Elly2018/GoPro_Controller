@@ -5,11 +5,18 @@
  * See the LICENSE file in the project root for more information.
 */
 #pragma once
+#ifndef WINDOWS_INSPECTOR_H
+#define WINDOWS_INSPECTOR_H
 #include "base_window.h"
+
+struct Inspector_window;
+typedef void (*Inspector_window_render_func)(Inspector_window& win);
 
 struct Inspector_window {
     Gopro_master_window base;
-    
+
+    Inspector_window_render_func render;
+
     int32_t system_list_ordered;
     
     int32_t video_setting_list_ordered;
@@ -33,6 +40,8 @@ struct Inspector_window {
     int32_t media_name_rule_type;
     int32_t media_name_character_count;
 };
+
+void inspector_window_render(Inspector_window& win);
 
 class InspectorWindow : public BaseWindow {
 public:

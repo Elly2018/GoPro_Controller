@@ -9,6 +9,9 @@
 #define WINDOWS_CAMERA_LIST
 #include "base_window.h"
 
+struct Camera_list_window;
+typedef void (*Camera_list_window_render_func)(Camera_list_window& win);
+
 enum class FilterType {
     None, Connect, Server
 };
@@ -19,6 +22,8 @@ enum class SortType {
 
 struct Camera_list_window {
     Gopro_master_window base;
+
+    Camera_list_window_render_func render;
 
     int32_t size = 1;
     FilterType filter = FilterType::None;

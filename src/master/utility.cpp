@@ -194,6 +194,8 @@ void init(AppData& data){
     data.style_window_base = { data.servers, data.global_state, data.master, "Style" };
 
     data.websocket_window.render = websocket_window_render;
+    data.camera_list_window.render = camera_list_window_render;
+    data.inspector_window.render = inspector_window_render;
     data.style_window.render = style_window_render;
 
     data.windows_array[0] = &data.websocket_window_base;
@@ -208,6 +210,16 @@ void init(AppData& data){
     data.add_preset_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
     data.preset_manager_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
     data.media_browser_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
+
+    data.add_camera_popup_window_base.detect = gopro_master_popup_detect;
+    data.scan_camera_popup_window_base = gopro_master_popup_detect;
+    data.start_webcam_popup_window_base = gopro_master_popup_detect;
+    data.preview_popup_window_base = gopro_master_popup_detect;
+    data.add_preset_popup_window_base = gopro_master_popup_detect;
+    data.preset_manager_popup_window_base = gopro_master_popup_detect;
+    data.media_browser_popup_window_base = gopro_master_popup_detect;
+
+    data.add_camera_popup_window.render = add_camera_popup_render;
 
     data.pop_windows_array[0] = &data.add_camera_popup_window_base;
     data.pop_windows_array[1] = &data.scan_camera_popup_window_base;
