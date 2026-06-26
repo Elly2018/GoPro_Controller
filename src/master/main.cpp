@@ -378,7 +378,5 @@ int main(int, char**)
     end_imgui();
     SDL_GL_DestroyContext(gl_context);
     end_sdl(window);
-
-    return 0;
 }
 
