@@ -5,6 +5,8 @@
  * See the LICENSE file in the project root for more information.
 */
 #pragma once
+#ifndef DATA_SERVER_CONNECTION_H
+#define DATA_SERVER_CONNECTION_H
 #include <string>
 #include "hv/WebSocketClient.h"
 
@@ -17,3 +19,5 @@ struct Server_connection {
     bool query_get_all;
     bool query_last_media;
 };
+
+#endif 

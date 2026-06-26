@@ -87,7 +87,6 @@ void GoProMaster::reconnectAll() {
     for (auto& s : servers) {
         if (!s->connected) {
             std::cout << "Connecting to " << s->ip << "..." << std::endl;
-            // Assuming ws://ip:9090 based on server implementation
             std::string url = "ws://" + s->ip + ":9090";
             s->client->open(url.c_str());
         }

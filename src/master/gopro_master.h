@@ -72,6 +72,17 @@ struct Gopro_master {
 
 void gopro_master_update(AppData& data);
 
+void gopro_master_add_server(AppData& data, const std::string& ip);
+void gopro_master_reconnect(AppData& data);
+void gopro_master_reconnect(AppData& data, const std::string& ip);
+void gopro_master_disconnect(AppData& data);
+void gopro_master_disconnect(AppData& data, const std::string& ip);
+void gopro_master_clean(AppData& data);
+void gopro_master_clean(AppData& data, const std::string& ip);
+
+void gopro_master_process_message(AppData& data, const std::string& ip, const std::string& msg);
+void gopro_master_send_2_all(AppData& data, const std::string& msg);
+
 ///
 /// GoPro Master Worker
 /// Use this hub stuff to control multiple websocket server or camera
@@ -95,29 +106,11 @@ public:
      * Menually add websocket server and connect to it
      */
     std::string addServer(const std::string& ip);
-    /**
-     * Reconnect all the exists websocket server record
-     */
     void reconnectAll();
-    /**
-     * Disconnect all the exists websocket server record
-     */
     void disconnectAll();
-    /**
-     * Remove all the disconnected websocket server record
-     */
     void cleanAll();
-    /**
-     * Reconnect server by ip, If not found: do nothing
-     */
     void reconnect(const std::string& ip);
-    /**
-     * Disconnect server by ip, If not found: do nothing
-     */
     void disconnect(const std::string& ip);
-    /**
-     * Remove server by ip, If not found: do nothing
-     */
     void clean(const std::string& ip);
 
     // ----------------------------------------------------------
@@ -152,21 +145,6 @@ public:
 
     bool directoryExists(const std::string& path);
 
-    void registerCameraMediaListFeedback(camera_media_list_feedback v);
-    ///
-    /// Register the feedback event
-    /// Called when fetch inspector setting data
-    ///
-    void registerCameraSettingFeedback(camera_setting_feedback v);
-    ///
-    /// Register the feedback event
-    /// Called when fetch Monitor data
-    ///
-    void registerCameraStatusFeedback(camera_status_feedback v);
-    void registerCameraHWFeedback(camera_hw_feedback v);
-    void registerCameraLogFeedback(camera_log_feedback v);
-    void registerApplyAllFeedback(camera_apply_all_feedback v);
-    void registerSavePreset(camera_preset_save v);
     void set_preset_data(std::shared_ptr<json> _preset);
 
     int32_t add_preset(const std::string name, json data);
