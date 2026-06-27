@@ -38,6 +38,45 @@
 #include <opencv2/opencv.hpp>
 #include "base_pop_window.h"
 
+struct Preview_popup;
+typedef void (*Preview_popup_render_func)(Preview_popup& win);
+
+struct Preview_popup {
+
+    constexpr uint64_t MAX_QUEUE_SIZE = 10UL;
+    constexpr uint64_t MAX_REDECODE = 2UL;
+    constexpr uint64_t MAX_ATTEMPT = 300UL;
+
+    Gopro_master_popup_window base;
+
+    Preview_popup_render_func render;
+
+    std::function<void(std::shared_ptr<GlobalState>& state, std::shared_ptr<GoProMaster>& master, const CameraInfo& c)> setting_drawer;
+    std::function<void(std::shared_ptr<GlobalState>& state, std::shared_ptr<GoProMaster>& master, const CameraInfo& c)> protune_drawer;
+    cv::VideoCapture cap;
+    std::string pipeline;
+    std::queue<cv::Mat> frame_queue;
+    std::mutex queue_mutex;
+    std::thread reader;
+    
+    int32_t dir = 0;
+    
+    GLuint gl_texture = 0;
+    SDL_Renderer* renderer = NULL;
+    int32_t texture_width = 1920;
+    int32_t texture_height = 1080;
+
+    bool first = true;
+    bool applying_all_last;
+    bool trying = false;
+    bool remap = false;
+    bool stream_open = false;
+};
+
+cv::Mat get_latest_frame();
+void ConvertTexture(cv::Mat& mat);
+void DirChange(bool increase);
+
 /**
  * Display camera feed from select camera
  */
@@ -107,7 +146,5 @@ private:
     int32_t texture_width = 1920;
     int32_t texture_height = 1080;
 
-    cv::Mat get_latest_frame();
-    void ConvertTexture(cv::Mat& mat);
-    void DirChange(bool increase);
+    
 };

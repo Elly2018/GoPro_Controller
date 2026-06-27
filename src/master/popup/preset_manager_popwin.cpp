@@ -3,26 +3,58 @@
 #include "imgui.h"
 #include "src/imgui_notify.h"
 
-PresetManagerPopup::PresetManagerPopup(
-    std::shared_ptr<json> _setting, 
-    std::shared_ptr<GlobalState> _state, 
-    std::shared_ptr<GoProMaster> _master
-) 
-    : BasePopWindow(_setting, _state, _master) {
-    title = "Preset Manager##Popup";
+static void PresetManagerPopup::draw_preset_list(){
+    ImGui::Text("%s", "Presets: ");
+    ImGui::Separator();
+    for(std::string& n : master->get_preset_names()){
+        if(ImGui::Selectable((n + "##Preset_Manager_Item").c_str(), n == preset_select)){
+            if(n == preset_select){
+                preset_select = "";
+            }else{
+                preset_select = n;
+            }
+        }
+    }
 }
 
+static void PresetManagerPopup::draw_preset_detail(){
+    ImGui::Text("%s", "Detail: ");
+    ImGui::Separator();
+    if(preset_select.size() == 0) return;
+    json data;
+    if(!master->get_preset(preset_select, data)) return;
+    if(data["name"].is_string()){
+        ImGui::LabelText("Name", "%s", data["name"].get<std::string>().c_str());
+    }
+    if(data["model"].is_number_integer()){
+        ImGui::LabelText("Model", "%i", data["model"].get<int32_t>());
+    }
+    if(data["preset"].is_number_integer()){
+        ImGui::LabelText("Preset", "%i", data["preset"].get<int32_t>());
+    }
+    ImGui::Separator();
+    ImGui::Indent(5.0F);
+    if(data["setting"].is_object()){
+        for(auto item = data["setting"].begin(); item != data["setting"].end(); item++){
+            int32_t id = std::atoi(item.key().c_str());
+            if(!item->is_number()) continue;
+            int32_t value = item->get<int32_t>();
+            std::string name = GET_SETTING_NAME_BY_ID(id);
+            size_t size = GET_SETTING_SIZE_BY_ID(id);
+            if(value >= size) continue;
+            std::string display = GET_SETTING_STRING_BY_ID(id)[value];
+            ImGui::LabelText(name.c_str(), "%s", display.c_str());
+        }
+    }
+    ImGui::Indent(-5.0F);
+}
 
-PresetManagerPopup::~PresetManagerPopup(){
+void preset_manager_popup_render(Preset_manager_popup& win) {
     
-}
+    if(win.base.base.enable != win.base.base.enable_last) {
+        win.preset_select = "";
+    }
 
-void PresetManagerPopup::trigger(bool value){
-    BasePopWindow::trigger(value);
-    if(value) preset_select = "";
-}
-
-void PresetManagerPopup::render(){
     ImGuiIO& io = ImGui::GetIO();
     ImGuiStyle& style = ImGui::GetStyle();
     ImVec2 display_size = io.DisplaySize;
@@ -83,48 +115,3 @@ void PresetManagerPopup::render(){
     }
 }
 
-void PresetManagerPopup::draw_preset_list(){
-    ImGui::Text("%s", "Presets: ");
-    ImGui::Separator();
-    for(std::string& n : master->get_preset_names()){
-        if(ImGui::Selectable((n + "##Preset_Manager_Item").c_str(), n == preset_select)){
-            if(n == preset_select){
-                preset_select = "";
-            }else{
-                preset_select = n;
-            }
-        }
-    }
-}
-
-void PresetManagerPopup::draw_preset_detail(){
-    ImGui::Text("%s", "Detail: ");
-    ImGui::Separator();
-    if(preset_select.size() == 0) return;
-    json data;
-    if(!master->get_preset(preset_select, data)) return;
-    if(data["name"].is_string()){
-        ImGui::LabelText("Name", "%s", data["name"].get<std::string>().c_str());
-    }
-    if(data["model"].is_number_integer()){
-        ImGui::LabelText("Model", "%i", data["model"].get<int32_t>());
-    }
-    if(data["preset"].is_number_integer()){
-        ImGui::LabelText("Preset", "%i", data["preset"].get<int32_t>());
-    }
-    ImGui::Separator();
-    ImGui::Indent(5.0F);
-    if(data["setting"].is_object()){
-        for(auto item = data["setting"].begin(); item != data["setting"].end(); item++){
-            int32_t id = std::atoi(item.key().c_str());
-            if(!item->is_number()) continue;
-            int32_t value = item->get<int32_t>();
-            std::string name = GET_SETTING_NAME_BY_ID(id);
-            size_t size = GET_SETTING_SIZE_BY_ID(id);
-            if(value >= size) continue;
-            std::string display = GET_SETTING_STRING_BY_ID(id)[value];
-            ImGui::LabelText(name.c_str(), "%s", display.c_str());
-        }
-    }
-    ImGui::Indent(-5.0F);
-}

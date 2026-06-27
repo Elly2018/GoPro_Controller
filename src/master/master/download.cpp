@@ -8,6 +8,46 @@
 #include "../data/server_connection.h"
 #include "../data/app.h"
 
+static void gopro_master_download_x_media(AppData& data, const std::string tag, const std::string server, const std::string ip, const std::string filepath, const std::vector<Media_info> media_list) {
+    data.master.downloading_media_total = 0;
+    data.master.downloading_media_done = 0;
+
+    int32_t index = gopro_master_find_camera(data, server, ip);
+    if (index == -1) {
+        downloading_media_flag = 0;
+        return;
+    }
+    const Camera_info c = Camera_info(data.master.cameras.at(index));
+    std::string ext = fs::path(c.last_media).extension().string();
+    bool islocal = c.server == "127.0.0.1";
+
+    fs::path p(filepath);
+    json data = json::object();
+    data["key"] = "media";
+    data["value"] = json::object();
+    data["value"]["name"] = tag;
+    data["value"]["item"] = c.name;
+    data["value"]["ip"] = c.ip;
+    data["value"]["local"] = islocal;
+    data["value"]["dir"] = p.parent_path().string();
+    data["value"]["filenames"] = json::array();
+
+    for(const Media_info& m : media_list){
+        data["value"]["filenames"].push_back(m.filename);
+    }
+
+    for(Server_connection& s : data.master.servers){
+        if(!s.vaild) continue;
+        if(c.server == s.ip && s.connected){
+            s.client.send(data.dump());
+            downloading_media_total++;
+            break;
+        }
+    }
+    
+    data.master.downloading_media_flag = 0;
+}
+
 void gopro_master_media_only(AppData& data, const std::string command, std::string target = "") {
 
 }
@@ -83,49 +123,13 @@ void gopro_master_download_last_media(AppData& data, const std::string ip, const
     });
 }
 
-void gopro_master_download_all_media(AppData& data, const std::string server, const std::string ip, const std::string folder, const std::vector<Media_info> media_list) {
+void gopro_master_download_all_media(AppData& data, const std::string server, const std::string ip, const std::string filepath, const std::vector<Media_info> media_list) {
     if(data.master.downloading_media_flag > 0) return;
 
     data.master.downloading_media_flag = 1;
 
-    data.master.downloading_thread = std::thread([&](){
-        data.master.downloading_media_total = 0;
-        data.master.downloading_media_done = 0;
-
-        int32_t index = gopro_master_find_camera(data, server, ip);
-        if (index == -1) {
-            downloading_media_flag = 0;
-            return;
-        }
-        const Camera_info c = Camera_info(data.master.cameras.at(index));
-        std::string ext = fs::path(c.last_media).extension().string();
-        bool islocal = c.server == "127.0.0.1";
-
-        json data = json::object();
-        data["key"] = "media";
-        data["value"] = json::object();
-        data["value"]["name"] = "d_all";
-        data["value"]["item"] = c.name;
-        data["value"]["ip"] = c.ip;
-        data["value"]["local"] = islocal;
-        data["value"]["dir"] = folder;
-        data["value"]["filenames"] = json::array();
-
-        for(const Media_info& m : media_list){
-            data["value"]["filenames"].push_back(m.filename);
-        }
-        
-        for(Server_connection& s : data.master.servers){
-            if(!s.vaild) continue;
-            if(c.server == s.ip && s.connected){
-                s.client.send(data.dump());
-                downloading_media_total++;
-                break;
-            }
-        }
-
-        downloading_media_flag = 0;
-
+    data.master.downloading_thread = std::thread([=](){
+        gopro_master_download_x_media(data, "d_single", server, ip, filepath, media_list);
     });
 }
 
@@ -134,40 +138,9 @@ void gopro_master_download_single_media(AppData& data, const std::string server,
 
     data.master.downloading_media_flag = 1;
 
-    data.master.downloading_thread = std::thread([&](){
-        data.master.downloading_media_total = 0;
-        data.master.downloading_media_done = 0;
-
-        int32_t index = gopro_master_find_camera(data, server, ip);
-        if (index == -1) {
-            downloading_media_flag = 0;
-            return;
-        }
-        const Camera_info c = Camera_info(data.master.cameras.at(index));
-        std::string ext = fs::path(c.last_media).extension().string();
-        bool islocal = c.server == "127.0.0.1";
-
-        fs::path p(filepath);
-        json data = json::object();
-        data["key"] = "media";
-        data["value"] = json::object();
-        data["value"]["name"] = "d_single";
-        data["value"]["item"] = c.name;
-        data["value"]["ip"] = c.ip;
-        data["value"]["local"] = islocal;
-        data["value"]["dir"] = p.parent_path().string();
-        data["value"]["filename"] = p.filename().string();
-
-        for(Server_connection& s : data.master.servers){
-            if(!s.vaild) continue;
-            if(c.server == s.ip && s.connected){
-                s.client.send(data.dump());
-                downloading_media_total++;
-                break;
-            }
-        }
-        
-        data.master.downloading_media_flag = 0;
-
+    data.master.downloading_thread = std::thread([=](){
+        std::vector<Media_info> media_list;
+        media_list.push_back(media);
+        gopro_master_download_x_media(data, "d_single", server, ip, filepath, media_list);
     });
 }

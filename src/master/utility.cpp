@@ -218,10 +218,10 @@ void init(AppData& data){
     data.gui = loadGUI();
     data.presets= loadPresetList();
     
-    data.websocket_window_base = { data.servers, data.global_state, data.master, "Websocket" };
-    data.camera_list_window_base = { data.servers, data.global_state, data.master, "Cameras" };
-    data.inspector_window_base = { data.servers, data.global_state, data.master, "Inspector" };
-    data.style_window_base = { data.servers, data.global_state, data.master, "Style" };
+    data.websocket_window_base = { data.servers, data.global_state, data.master, "Websocket##Win" };
+    data.camera_list_window_base = { data.servers, data.global_state, data.master, "Cameras##Win" };
+    data.inspector_window_base = { data.servers, data.global_state, data.master, "Inspector##Win" };
+    data.style_window_base = { data.servers, data.global_state, data.master, "Style##Win" };
 
     data.websocket_window.render = websocket_window_render;
     data.camera_list_window.render = camera_list_window_render;
@@ -233,21 +233,13 @@ void init(AppData& data){
     data.windows_array[2] = &data.inspector_window_base;
     data.windows_array[3] = &data.style_window_base;
 
-    data.add_camera_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
-    data.scan_camera_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
-    data.start_webcam_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
-    data.preview_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
-    data.add_preset_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
-    data.preset_manager_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
-    data.media_browser_popup_window_base = { data.servers, data.global_state, data.master, "Websocket" };
-
-    data.add_camera_popup_window_base.detect = gopro_master_popup_detect;
-    data.scan_camera_popup_window_base = gopro_master_popup_detect;
-    data.start_webcam_popup_window_base = gopro_master_popup_detect;
-    data.preview_popup_window_base = gopro_master_popup_detect;
-    data.add_preset_popup_window_base = gopro_master_popup_detect;
-    data.preset_manager_popup_window_base = gopro_master_popup_detect;
-    data.media_browser_popup_window_base = gopro_master_popup_detect;
+    data.add_camera_popup_window_base = { data.servers, data.global_state, data.master, "Scan Camera##Popup" };
+    data.scan_camera_popup_window_base = { data.servers, data.global_state, data.master, "Add Camera##Popup" };
+    data.start_webcam_popup_window_base = { data.servers, data.global_state, data.master, "Start Webcam##Popup" };
+    data.preview_popup_window_base = { data.servers, data.global_state, data.master, "Preview##Popup" };
+    data.add_preset_popup_window_base = { data.servers, data.global_state, data.master, "Add Preset##Popup" };
+    data.preset_manager_popup_window_base = { data.servers, data.global_state, data.master, "Preset Manager##Popup" };
+    data.media_browser_popup_window_base = { data.servers, data.global_state, data.master, "Media Browser##Popup" };
 
     data.add_camera_popup_window.render = add_camera_popup_render;
 
@@ -259,16 +251,18 @@ void init(AppData& data){
     data.pop_windows_array[5] = &data.preset_manager_popup_window_base;
     data.pop_windows_array[6] = &data.media_browser_popup_window_base;
     
+    data.preview_popup_window.register_setting_drawer(InspectorWindow::global_draw_setting);
+    data.preview_popup_window.register_protune_drawer(InspectorWindow::global_draw_protune);
+
     data.master.feedback_camera_media_list = update_media_list;
     data.master.feedback_camera_setting = setting_getter_feedback;
     data.master.feedback_camera_status = status_getter_feedback;
     data.master.feedback_camera_hw = HW_getter_feedback;
     data.master.feedback_camera_log = assign_log;
     data.master.feedback_camera_preset_save = update_preset_list;
-    data.master->set_preset_data(data.presets);
+    data.master.preset_ptr = data.presets;
     data.master.feedback_camera_apply_all = apply_feedbacks;
-    data.preview_popup_window.register_setting_drawer(InspectorWindow::global_draw_setting);
-    data.preview_popup_window.register_protune_drawer(InspectorWindow::global_draw_protune);
+
     data.global_state.update_event = background_worker;
     data.global_state.update_server = update_server_list;
     data.global_state.update_preset = update_preset_list;

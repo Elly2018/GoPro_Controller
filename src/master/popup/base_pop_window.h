@@ -19,17 +19,9 @@ static constexpr uint32_t wp_flag = ImGuiWindowFlags_NoSavedSettings | ImGuiWind
     static constexpr uint32_t wp_cond = ImGuiCond_Always;
 #endif
 
-struct Gopro_master_popup_window;
-typedef void (*Gopro_master_popup_window_detect_func)(Gopro_master_popup_window& win);
-
 struct Gopro_master_popup_window {
     Gopro_master_window base;
-
-    Gopro_master_popup_window_detect_func detect;
-
     bool isopen;
 }
-
-void gopro_master_popup_detect(Gopro_master_popup_window& win);
 
 #endif

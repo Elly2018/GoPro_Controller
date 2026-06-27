@@ -1,22 +1,16 @@
+/*
+ * Copyright (c) [2026] [Elly/Funique]
+ *
+ * This software is licensed under the [MIT License].
+ * See the LICENSE file in the project root for more information.
+*/
 #include "scan_camera_popwin.h"
+#include "../gopro_master.h"
 
-ScanCameraPopup::ScanCameraPopup(
-    std::shared_ptr<json> _setting, 
-    std::shared_ptr<GlobalState> _state, 
-    std::shared_ptr<GoProMaster> _master
-) 
-    : BasePopWindow(_setting, _state, _master) {
-    title = "Scan Camera##Popup";
-}
-
-ScanCameraPopup::~ScanCameraPopup(){
-    
-}
-
-void ScanCameraPopup::render(){
-    if(ImGui::BeginPopupModal(title.c_str(), NULL, wp_flag)){
+void scan_camera_popup_render(Scan_camera_popup& win) {
+    if(ImGui::BeginPopupModal(win.base.base.title, NULL, wp_flag)){
         bool updated = false;
-        updated = ImGui::InputText("Server IP", &server_ip_buf);
+        updated = ImGui::InputText("Server IP", &win.server_ip_buf, sizeof(win.server_ip_buf));
         ImGui::Text("You can leave it empty for broadcast to all websocket server");
         ImGui::TextColored(ImVec4(1, 0, 0, 1), "%s", error.c_str());
         if(updated){
@@ -24,16 +18,17 @@ void ScanCameraPopup::render(){
         }
         if (ImGui::Button("Confirm")) {
             bool pass = true;
-            if(master->findServer(server_ip_buf) == -1 && sizeof(server_ip_buf) == 0){
-                error = "Server does not exist.";
+            int32_t fs = gopro_master_find_server(win.base.base.state.appdata, std::string(win.server_ip_buf));
+            if(fs == -1 && strlen(win.server_ip_buf) == 0){
+                win.error = "Server does not exist.";
                 pass = false;
             }
 
             if(pass){
-                if(sizeof(server_ip_buf) == 0){
+                if(strlen(win.server_ip_buf) == 0){
                     master->command_only("scan");
                 }else{
-                    master->command_only(server_ip_buf, "scan", "");
+                    master->command_only(std::string(win.server_ip_buf), "scan", "");
                 }
             }
         }

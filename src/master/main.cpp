@@ -18,7 +18,74 @@
 #include "imgui_helper.h"
 #include "src/imgui_notify.h"
 
-void main_menubar(AppData& data) {
+static bool window_render_base (Gopro_master_window& target) {
+    if(target.enable != target.enable_last){
+        target.enable_last = target.enable;
+        return true
+    }
+    return false;
+}
+
+static void popup_render_base (Gopro_master_popup_window& target) {
+    if(target.base.enable != target.base.enable_last){
+        if(!target.base.enable) {
+            ImGui::CloseCurrentPopup();
+        }else{
+            ImGui::OpenPopup(&target.base.title);
+            ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+            ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+        }
+        target.isopen = target.base.enable;
+        target.base.enable_last = target.base.enable;
+    }
+}
+
+static bool window_render (AppData& data, int32_t focus) {
+    bool a = false;
+
+    if(focus == 0) ImGui::SetNextWindowFocus();
+    data.websocket_window.render(data.websocket_window);
+    a = a || window_render_base(data.websocket_window_base);
+
+    if(focus == 1) ImGui::SetNextWindowFocus();
+    data.camera_list_window.render(data.camera_list_window);
+    a = a || window_render_base(data.camera_list_window_base);
+
+    if(focus == 2) ImGui::SetNextWindowFocus();
+    data.inspector_window.render(data.inspector_window);
+    a = a || window_render_base(data.inspector_window_base);
+
+    if(focus == 3) ImGui::SetNextWindowFocus();
+    data.style_window.render(data.style_window);
+    a = a || window_render_base(data.style_window_base);
+
+    return a;
+}
+
+static void popup_render (AppData& data) {
+    data.add_camera_popup_window.render(data.add_camera_popup_window);
+    popup_render_base(data.add_camera_popup_window_base);
+
+    data.scan_camera_popup_window.render(data.scan_camera_popup_window);
+    popup_render_base(data.scan_camera_popup_window_base);
+
+    data.start_webcam_popup_window.render(data.start_webcam_popup_window);
+    popup_render_base(data.start_webcam_popup_window_base);
+
+    data.preview_popup_window.render(data.preview_popup_window);
+    popup_render_base(data.preview_popup_window_base);
+
+    data.add_preset_popup_window.render(data.add_preset_popup_window);
+    popup_render_base(data.add_preset_popup_window_base);
+
+    data.preset_manager_popup_window.render(data.preset_manager_popup_window);
+    popup_render_base(data.preset_manager_popup_window_base);
+
+    data.media_browser_popup_window.render(data.media_browser_popup_window);
+    popup_render_base(data.media_browser_popup_window_base);
+}
+
+static void main_menubar(AppData& data) {
     ImGui::BeginMainMenuBar();
     if (ImGui::BeginMenu("Windows")) {
         bool update_menu = false;
@@ -50,7 +117,7 @@ void main_menubar(AppData& data) {
     ImGui::EndMainMenuBar();
 }
 
-void event_poll(AppData& data, int32_t &focus) {
+static void event_poll(AppData& data, int32_t &focus) {
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     SDL_Event event;
     while (SDL_PollEvent(&event))
@@ -139,20 +206,10 @@ void event_poll(AppData& data, int32_t &focus) {
     data.global_state.update_event(data);
 }
 
-void mainloop(AppData& data){
+static void mainloop(AppData& data){
     int focus = -1;
-    event_poll(data, focus);
 
-    for(Gopro_master_window& w : data.windows_array){
-        if(w.enable){
-            w->update();
-        }
-    }
-    for(Gopro_master_popup_window& w : data.pop_windows_array){
-        if(w.isopen){
-            w->update();
-        }
-    }
+    event_poll(data, focus);
 
     gopro_master_update(data);
 
@@ -160,41 +217,18 @@ void mainloop(AppData& data){
 
     main_menubar(data);
 
-    bool should_update_GUI = false;
-
-    if(focus == 0) ImGui::SetNextWindowFocus();
-    data.websocket_window.render(data.websocket_window);
-    if(data.websocket_window_base.enable != data.websocket_window_base.enable_last){
-        data.websocket_window_base.enable_last = data.websocket_window_base.enable;
-        should_update_GUI = true;
-    }
-
-    if(focus == 3) ImGui::SetNextWindowFocus();
-    data.style_window_base.render(data.style_window);
-    if(data.style_window_base.enable != data.style_window_base.enable_last){
-        data.style_window_base.enable_last = data.style_window_base.enable;
-        should_update_GUI = true;
-    }
+    bool should_update_GUI = window_render(data, focus);
 
     if(should_update_GUI){
         data.global_state.update_GUI(data);
     }
 
-    for(Gopro_master_popup_window& w : data.pop_windows_array){
-        w.detect();
-    }
+    popup_render();
 
-    for(Gopro_master_popup_window& w : data.pop_windows_array){
-        w.render();
-    }
-
-    // Render toasts on top of everything, at the end of your code!
-    // You should push style vars here
     ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 5.f);
     ImGui::RenderNotifications();
-    ImGui::PopStyleVar(1); // Don't forget to Pop()
+    ImGui::PopStyleVar(1);
 
-    // Rendering
     ImGui::Render();
     end_loop(window, io);
 }

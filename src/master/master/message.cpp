@@ -15,7 +15,7 @@ static void media_thumbnail_parse (AppData& appdata, const std::string& ip, cons
         return;
     }
 
-    std::vector<u_char> raw_data = decodeBase64(data["value"]["data"].get<std::string>());
+    std::vector<u_char> raw_data = gopro_master_decode_base64(data["value"]["data"].get<std::string>());
 }
 
 static void media_list_parse (AppData& appdata, const std::string& ip, const json& data) {

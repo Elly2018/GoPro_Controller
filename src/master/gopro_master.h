@@ -100,7 +100,7 @@ void gopro_master_preview_start(AppData& data, const std::string server, const s
 void gopro_master_preview_end(AppData& data, const std::string server, const std::string target);
 void gopro_master_media_only(AppData& data, const std::string command, std::string target = "");
 void gopro_master_download_last_media(AppData& data, const std::string ip, const Download_media_parameters params);
-void gopro_master_download_all_media(AppData& data, const std::string server, const std::string ip, const std::string folder, const std::vector<Media_info> media_list);
+void gopro_master_download_all_media(AppData& data, const std::string server, const std::string ip, const std::string filepath, const std::vector<Media_info> media_list);
 void gopro_master_download_single_media(AppData& data, const std::string server, const std::string ip, const std::string filepath, const Media_info media);
 void gopro_master_get_media_info(AppData& data, const std::string server, const std::string ip, const std::string path);
 void gopro_master_get_media_list(AppData& data, const std::string server, const std::string ip);

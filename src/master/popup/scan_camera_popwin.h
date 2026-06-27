@@ -1,16 +1,27 @@
+/*
+ * Copyright (c) [2026] [Elly/Funique]
+ *
+ * This software is licensed under the [MIT License].
+ * See the LICENSE file in the project root for more information.
+*/
 #pragma once
+#ifndef POPUP_SCAN_CAMERA_POPWIN_H
+#define 
 #include "base_pop_window.h"
 
-class ScanCameraPopup : public BasePopWindow {
-public:
-    ScanCameraPopup(
-        std::shared_ptr<json> _setting, 
-        std::shared_ptr<GlobalState> _state, 
-        std::shared_ptr<GoProMaster> _master);
-    ~ScanCameraPopup();
+struct Scan_camera_popup;
+typedef void (*Scan_camera_popup_render_func)(Scan_camera_popup& win);
 
-    virtual void render() override;
-private:
-    std::string server_ip_buf = "127.0.0.1";
-    std::string error = "";
+struct Scan_camera_popup {
+
+    Gopro_master_popup_window base;
+
+    Scan_camera_popup_func render;
+
+    char server_ip_buf[64];
+    char error[64];
 };
+
+void scan_camera_popup_render(Scan_camera_popup& win);
+
+#endif
