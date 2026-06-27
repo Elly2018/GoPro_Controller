@@ -94,11 +94,13 @@ bool gopro_master_directory_exists(const std::string& path) {
 }
 
 int32_t gopro_master_add_preset(AppData& data, const std::string name, json data) {
-    if(!(*preset_ptr)["data"].is_array()) {
-        (*preset_ptr)["data"] = json::array();
+    json& preset_ptr = data.master.preset_ptr;
+
+    if(!preset_ptr["data"].is_array()) {
+        preset_ptr["data"] = json::array();
     }else{
-        for(int32_t i = 0; i < (*preset_ptr)["data"].size(); i++){
-            json item = (*preset_ptr)["data"].at(i);
+        for(int32_t i = 0; i < preset_ptr["data"].size(); i++){
+            json item = preset_ptr["data"].at(i);
             if(item["name"].is_string()){
                 if(item["name"].get<std::string>() == name){
                     // Name repeat
@@ -107,7 +109,7 @@ int32_t gopro_master_add_preset(AppData& data, const std::string name, json data
             }
         }
     }
-    (*preset_ptr)["data"].push_back(data);
+    preset_ptr["data"].push_back(data);
     return 0;
 }
 

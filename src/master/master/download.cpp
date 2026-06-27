@@ -130,39 +130,44 @@ void gopro_master_download_all_media(AppData& data, const std::string server, co
 }
 
 void gopro_master_download_single_media(AppData& data, const std::string server, const std::string ip, const std::string filepath, const Media_info media) {
-    if(downloading_media_flag > 0) return;
-    std::thread([=](){
-        downloading_media_flag = 1;
-        downloading_media_total = 0;
-        downloading_media_done = 0;
+    if(data.master.downloading_media_flag > 0) return;
 
-        int32_t index = findCamera(server, ip);
-        if(index >= 0){
-            const CameraInfo s = getCamera_Clone(index);
-            std::string ext = fs::path(s.last_media).extension().string();
-            bool islocal = s.server == "127.0.0.1";
+    data.master.downloading_media_flag = 1;
 
-            fs::path p(filepath);
-            json data = json::object();
-            data["key"] = "media";
-            data["value"] = json::object();
-            data["value"]["name"] = "d_single";
-            data["value"]["item"] = s.name;
-            data["value"]["ip"] = s.ip;
-            data["value"]["local"] = islocal;
-            data["value"]["dir"] = p.parent_path().string();
-            data["value"]["filename"] = p.filename().string();
+    data.master.downloading_thread = std::thread([&](){
+        data.master.downloading_media_total = 0;
+        data.master.downloading_media_done = 0;
 
-            for(auto ss : servers){
-                if(s.server == ss->ip && ss->connected){
-                    ss->client->send(data.dump());
-                    downloading_media_total++;
-                    break;
-                }
+        int32_t index = gopro_master_find_camera(data, server, ip);
+        if (index == -1) {
+            downloading_media_flag = 0;
+            return;
+        }
+        const Camera_info c = Camera_info(data.master.cameras.at(index));
+        std::string ext = fs::path(c.last_media).extension().string();
+        bool islocal = c.server == "127.0.0.1";
+
+        fs::path p(filepath);
+        json data = json::object();
+        data["key"] = "media";
+        data["value"] = json::object();
+        data["value"]["name"] = "d_single";
+        data["value"]["item"] = c.name;
+        data["value"]["ip"] = c.ip;
+        data["value"]["local"] = islocal;
+        data["value"]["dir"] = p.parent_path().string();
+        data["value"]["filename"] = p.filename().string();
+
+        for(Server_connection& s : data.master.servers){
+            if(!s.vaild) continue;
+            if(c.server == s.ip && s.connected){
+                s.client.send(data.dump());
+                downloading_media_total++;
+                break;
             }
         }
-        if(downloading_media_total == 0){
-            downloading_media_flag = 0;
-        }
-    }).detach();
+        
+        data.master.downloading_media_flag = 0;
+
+    });
 }
