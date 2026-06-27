@@ -108,80 +108,24 @@ void gopro_master_get_media_list(AppData& data, const std::string server, const 
 void gopro_master_process_message(AppData& data, const std::string& ip, const std::string& msg);
 void gopro_master_send_2_all(AppData& data, const std::string& msg);
 
+void gopro_master_preset_switch(AppData& data, const std::string server, const std::string target, int32_t mode);
+void gopro_master_locate(AppData& data, const std::string server, const std::string target);
+int32_t gopro_master_has_locate(AppData& data, const std::string server, const std::string target);
+void gopro_master_apply(AppData& data, const std::string& ip, const std::string& target, const int32_t id, const int32_t value);
+void gopro_master_apply(AppData& data, const std::string& ip, const json& res);
+void gopro_master_quick_apply(AppData& data, const CameraInfo& target);
+void gopro_master_stop_apply(AppData& data, const CameraInfo& target);
+bool gopro_master_directory_exists(AppData& data, const std::string& path);
+void gopro_master_set_preset_data(AppData& data, json _preset);
+int32_t gopro_master_add_preset(AppData& data, const std::string name, json data);
+bool gopro_master_get_preset(AppData& data, const std::string name, json& data);
+bool gopro_master_remove_preset(AppData& data, const std::string name);
+std::vector<std::string> gopro_master_get_preset_names(AppData& data);
 
-
-
-    void presetSwitch(const std::string server, const std::string target, int32_t mode);
-    void locate(const std::string server, const std::string target);
-    int32_t haslocate(const std::string server, const std::string target);
-    void apply(const std::string& ip, const std::string& target, const int32_t id, const int32_t value);
-    void applyAll(const std::string& ip, const json& res);
-    void quickApplyAll(const CameraInfo& target);
-    void stopApplyAll(const CameraInfo& target);
-
-    bool directoryExists(const std::string& path);
-
-    void set_preset_data(std::shared_ptr<json> _preset);
-
-    int32_t add_preset(const std::string name, json data);
-    bool get_preset(const std::string name, json& data);
-    bool remove_preset(const std::string name);
-    std::vector<std::string> get_preset_names();
-    
-
-    // ----------------------------------------------------------
-    //
-    //       Cache Data Getter
-    //
-    // ----------------------------------------------------------
-    /**
-     * Get current camera record
-     */
-    const std::vector<std::shared_ptr<CameraInfo>>& getCameras() const;
-    /**
-     * Get current camera record (Clone, For thread optimization)
-     */
-    const std::vector<CameraInfo> getCameras_Clone();
-    const CameraInfo getCamera_Clone(int32_t index);
-    /**
-     * Get current websocket server record
-     */
-    const std::vector<std::shared_ptr<ServerConnection>>& getServers() const;
-    const std::vector<ServerConnection> getServers_Clone();
-    const ServerConnection getServer_Clone(int32_t index);
-private:
-    
-
-    /**
-     * The background thread for fetch update from all websocket server and update etc...
-     */
-    void update();
-    void processMessage(const std::string& ip, const std::string& msg);
-    void sendToAll(const std::string& msg);
-    /**
-     * Clean all cameras by server ip
-     */
-    void cleanCameraFromServer(const std::string server);
-    /**
-     * Base on the new ip list
-     * Appending new ip that dont appear old ips
-     * Remove ip that does not exists in the new ip list
-     */
-    void replaceCameraFromServer(const std::string server, const std::vector<std::string> ips);
-
-public:
-    void setdone();
-    /**
-     * We will need to convert the Value ID to index here
-     * It's easier for me to display stuff on the gui this way
-     */
-    bool getSettingsFromCamera(CameraInfo target, json& res);
-    bool getStatusFromCamera(CameraInfo target, json& res);
-    std::string getBarInfo(const std::shared_ptr<CameraInfo> &c);
-    std::string getBarInfo(const CameraInfo &c);
-
-    size_t getServerCount();
-    int32_t findServer(const std::string ip);
-    int32_t findCamera(const std::string server, const std::string ip);
-    std::vector<u_char> decodeBase64(const std::string& input);
-};
+bool gopro_master_get_settings_from_camera(AppData& data, const Camera_info& target, json& res);
+bool gopro_master_get_status_from_camera(AppData& data, const Camera_info& target, json& res);
+std::string gopro_master_get_bar_info(AppData& data, const Camera_info &c);
+uint32_t gopro_master_get_server_count(AppData& data);
+int32_t gopro_master_find_server(AppData& data, const std::string ip);
+int32_t gopro_master_find_camera(AppData& data, const std::string server, const std::string ip);
+std::vector<u_char> gopro_master_decode_base64(const std::string& input);
