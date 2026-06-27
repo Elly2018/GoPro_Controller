@@ -1,13 +1,20 @@
+/*
+ * Copyright (c) [2026] [Elly/Funique]
+ *
+ * This software is licensed under the [MIT License].
+ * See the LICENSE file in the project root for more information.
+*/
 #include "../camera_list.h"
 #include "../inspector.h"
+#include "../gopro_master.h"
 
 void camera_list_window_draw_group_header(Camera_list_window& win, const CameraInfo& c) {
     json status = json::object();
     json setting = json::object();
     int32_t model_enum = InspectorWindow::_get_current_model(c.hw);
     int preset = 0;
-    master->getStatusFromCamera(c, status);
-    master->getSettingsFromCamera(c, setting);
+    gopro_master_get_status_from_camera(win.base.state.appdata, c, status);
+    gopro_master_get_settings_from_camera(win.base.state.appdata, c, setting);
 
     ImGui::BeginGroup();
     ImGuiStyle& style = ImGui::GetStyle();

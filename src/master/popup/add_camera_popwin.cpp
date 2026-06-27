@@ -1,31 +1,13 @@
+/*
+ * Copyright (c) [2026] [Elly/Funique]
+ *
+ * This software is licensed under the [MIT License].
+ * See the LICENSE file in the project root for more information.
+*/
 #include "add_camera_popwin.h"
 
-AddCameraPopup::AddCameraPopup(
-    std::shared_ptr<json> _setting, 
-    std::shared_ptr<GlobalState> _state, 
-    std::shared_ptr<GoProMaster> _master
-) 
-    : BasePopWindow(_setting, _state, _master) {
-    title = "Add Camera##Popup";
-}
-
-
-AddCameraPopup::~AddCameraPopup(){
-    
-}
-
-void AddCameraPopup::trigger(bool value){
-    BasePopWindow::trigger(value);
-    if(value){
-        const std::vector<ServerConnection> refs = master->getServers_Clone();
-        if(refs.size() > 0){
-            server_ip_buf = refs[0].ip;
-        }
-    }
-}
-
-void AddCameraPopup::render(){
-    if(ImGui::BeginPopupModal(title.c_str(), NULL, wp_flag)){
+void add_camera_popup_render(Add_camera_popup& win) {
+    if(ImGui::BeginPopupModal(&win.base.base.title, NULL, wp_flag)){
         const std::vector<ServerConnection> all_servers = master->getServers_Clone();
         bool updated = false;
         if(ImGui::BeginCombo("Server IP", server_ip_buf.c_str())){

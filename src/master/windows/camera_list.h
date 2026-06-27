@@ -5,8 +5,8 @@
  * See the LICENSE file in the project root for more information.
 */
 #pragma once
-#ifndef WINDOWS_CAMERA_LIST
-#define WINDOWS_CAMERA_LIST
+#ifndef WINDOWS_CAMERA_LIST_H
+#define WINDOWS_CAMERA_LIST_H
 #include "base_window.h"
 
 struct Camera_list_window;

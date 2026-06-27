@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) [2026] [Elly/Funique]
+ *
+ * This software is licensed under the [MIT License].
+ * See the LICENSE file in the project root for more information.
+*/
 #pragma once
 #ifndef POPUP_ADD_CAMERA_POPUP_H
 #define POPUP_ADD_CAMERA_POPUP_H
@@ -17,21 +23,5 @@ struct Add_camera_popup {
 };
 
 void add_camera_popup_render(Add_camera_popup& win);
-
-class AddCameraPopup : public BasePopWindow {
-public:
-    AddCameraPopup(
-        std::shared_ptr<json> _setting, 
-        std::shared_ptr<GlobalState> _state, 
-        std::shared_ptr<GoProMaster> _master);
-    ~AddCameraPopup();
-
-    virtual void trigger(bool value) override;
-    virtual void render() override;
-private:
-    std::string server_ip_buf = "127.0.0.1";
-    std::string camera_serial_buf = "123";
-    std::string error = "";
-};
 
 #endif
