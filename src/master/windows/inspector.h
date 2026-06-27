@@ -85,3 +85,5 @@ protected:
     void open_dialog_for_folder_selection();
 private:
 };
+
+#endif

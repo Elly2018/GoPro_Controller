@@ -7,7 +7,7 @@
 #include "../gopro_master.h"
 #include "../data/server_connection.h"
 #include "../data/app.h"
-#include "../common/thread_safe_queue.h"
+#include "../../common/thread_safe_queue.h"
 #include <imgui.h>
 
 bool gopro_master_add_server(AppData& data, const std::string& ip) {

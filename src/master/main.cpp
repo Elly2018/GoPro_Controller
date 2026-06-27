@@ -9,7 +9,7 @@
 #include <chrono>
 #include <vector>
 #include <thread>
-#include "GoProMaster.h"
+#include "gopro_master.h"
 #include "utility.h"
 #include "data/app.h"
 #include "../common/camera_code.h"

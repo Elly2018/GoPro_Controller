@@ -7,29 +7,9 @@
 #include "add_preset_popwin.h"
 #include "src/imgui_notify.h"
 #include "../windows/inspector.h"
+#include "../../common/camera_code.h"
 
-AddPresetPopup::AddPresetPopup(
-    std::shared_ptr<json> _setting, 
-    std::shared_ptr<GlobalState> _state, 
-    std::shared_ptr<GoProMaster> _master
-) 
-    : BasePopWindow(_setting, _state, _master) {
-    title = "Add Preset##Popup";
-}
-
-
-AddPresetPopup::~AddPresetPopup(){
-    
-}
-
-void AddPresetPopup::trigger(bool value){
-    BasePopWindow::trigger(value);
-    if(value){
-        preset_name = "";
-    }
-}
-
-void AddPresetPopup::render(){
+void add_preset_popup_render(Add_preset_popup& win) {
     if(ImGui::BeginPopupModal(title.c_str(), NULL, wp_flag)){
         bool updated = ImGui::InputText("Preset Name", &preset_name);
         if(ImGui::IsItemHovered()){
@@ -47,7 +27,7 @@ void AddPresetPopup::render(){
     }
 }
 
-void AddPresetPopup::save_preset(){
+void add_preset_popup_savepreset(Add_preset_popup& win) {
     json status = json::object();
     json setting = json::object();
     json data = json::object();

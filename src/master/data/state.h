@@ -70,15 +70,15 @@ struct Global_state {
 
 
 inline int32_t global_state_try_get_setting_int32_by_id(const json& setting, const int32_t id) {
-    if(current_setting_items[std::to_string(id)].is_number()){
-        return current_setting_items[std::to_string(id)].get<int32_t>();
+    if(setting[std::to_string(id)].is_number()){
+        return setting[std::to_string(id)].get<int32_t>();
     }
     return -1;
 }
 
 inline int32_t global_state_try_get_status_int32_by_id(const json& status, const int32_t id) {
-    if(current_status_items[std::to_string(id)].is_number()){
-        return current_status_items[std::to_string(id)].get<int32_t>();
+    if(status[std::to_string(id)].is_number()){
+        return status[std::to_string(id)].get<int32_t>();
     }
     return -1;
 }

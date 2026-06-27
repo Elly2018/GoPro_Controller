@@ -15,8 +15,8 @@ using json = nlohmann::json;
 
 static constexpr uint32_t w_flag = ImGuiWindowFlags_NoCollapse;
 
-typedef struct Global_state;
-typedef struct Gopro_master;
+struct Global_state;
+struct Gopro_master;
 
 struct Gopro_master_window {
     json& setting;

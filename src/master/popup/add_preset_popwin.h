@@ -9,23 +9,20 @@
 #define POPUP_ADD_PRESET_POPUP_H
 #include "base_pop_window.h"
 
+struct Add_preset_popup;
+typedef void (*Add_preset_popup_render_func)(Add_preset_popup& win);
+
 struct Add_preset_popup {
 
+    Gopro_master_popup_window base;
+
+    Add_preset_popup_render_func render;
+
+    char preset_name[64];
+
 };
 
-class AddPresetPopup : public BasePopWindow {
-public:
-    AddPresetPopup(
-        std::shared_ptr<json> _setting, 
-        std::shared_ptr<GlobalState> _state, 
-        std::shared_ptr<GoProMaster> _master);
-    ~AddPresetPopup();
-
-    virtual void trigger(bool value) override;
-    virtual void render() override;
-    void save_preset();
-private:
-    std::string preset_name;
-};
+void add_preset_popup_render(Add_preset_popup& win);
+void add_preset_popup_savepreset(Add_preset_popup& win);
 
 #endif

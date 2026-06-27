@@ -29,3 +29,5 @@ struct Start_webcam_popup {
 };
 
 void start_webcam_popup_render(Start_webcam_popup& win);
+
+#endif

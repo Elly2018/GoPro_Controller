@@ -10,10 +10,10 @@
 #include <memory>
 #include <string>
 #include <sstream>
-#include "../../data/camera_info.h"
-#include "../../GoProMaster.h"
 #include <algorithm>
 #include <functional> 
+#include "../../data/camera_info.h"
+#include "../../gopro_master.h"
 
 json camera_list_window_get_window_data(Camera_list_window& win) {
     json buff = json::object();

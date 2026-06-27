@@ -8,7 +8,7 @@
 #include "../../common/camera_code.h"
 
 void start_webcam_popup_render(Start_webcam_popup& win) {
-    if(ImGui::BeginPopupModal(win.base.base.title, NULL, wp_flag)){
+    if(ImGui::BeginPopupModal(&win.base.base.title, NULL, wp_flag)){
         bool updated = false;
 
         updated = ImGui::InputText("Server IP", &win.server_ip_buf, sizeof(win.server_ip_buf));

@@ -1,39 +1,56 @@
 #include "style_setting.h"
-#include <imgui.h>
+#include <string_view>
 #include "../imgui_helper.h"
 #include "../data/state.h"
 
-#define GET_DATA_COLOR4(x, y, z) x["colors"][#z]=json::object();\
-store_vec4(x["colors"][#z],y[z]);\
+static void store_vec4(json& j, ImVec4& value);
+static void store_vec2(json& j, ImVec2& value);
+static void fetch_vec4(json& j, ImVec4& value);
+static void fetch_vec2(json& j, ImVec2& value);
 
-#define GET_DATA_FLOAT(x, y, z) x["fields"][#z]=y.z;\
+static void GET_DATA_COLOR4(json& jdata, const ImVec4* colors, int32_t idx, std::string_view name) {
+    jdata["colors"][name] = json::object();
+    store_vec4(jdata["colors"][name], colors[idx]);
+}
 
-#define GET_DATA_FLOAT2(x, y, z) x["fields"][#z]=json::object();\
-store_vec2(x["fields"][#z],y.z);\
+static void GET_DATA_FLOAT(json& x, float value, std::string_view name) {
+    x["fields"][name] = value;
+}
 
-#define SET_DATA_COLOR4(x, y, z) fetch_vec4(x["colors"][#z],y[z]);\
+static void GET_DATA_FLOAT2(json& x, const ImVec2& value, std::string_view name) {
+    x["fields"][name] = json::object();
+    store_vec2(x["fields"][name], value);
+}
 
-#define SET_DATA_FLOAT(x, y, z) y.z = x["fields"][#z].get<float>();\
+static void SET_DATA_COLOR4(const json& x, ImVec4* colors, int idx, std::string_view name) {
+    fetch_vec4(x["colors"][name], colors[idx]);
+}
 
-#define SET_DATA_FLOAT2(x, y, z) fetch_vec2(x["fields"][#z], y.z);\
+static void SET_DATA_FLOAT(const json& x, float& target, std::string_view name) {
+    target = x["fields"][name].get<float>();
+}
 
-void store_vec4(json& j, ImVec4& value){
+static void SET_DATA_FLOAT2(const json& x, ImVec2& target, std::string_view name) {
+    fetch_vec2(x["fields"][name], target);
+}
+
+static void store_vec4(json& j, const ImVec4& value){
     j["x"] = value.x;
     j["y"] = value.y;
     j["z"] = value.z;
     j["w"] = value.w;
 }
-void store_vec2(json& j, ImVec2& value){
+static void store_vec2(json& j, const ImVec2& value){
     j["x"] = value.x;
     j["y"] = value.y;
 }
-void fetch_vec4(json& j, ImVec4& value){
+static void fetch_vec4(json& j, const ImVec4& value){
     value.x = j["x"];
     value.y = j["y"];
     value.z = j["z"];
     value.w = j["w"];
 }
-void fetch_vec2(json& j, ImVec2& value){
+static void fetch_vec2(json& j, const ImVec2& value){
     value.x = j["x"];
     value.y = j["y"];
 }
@@ -90,61 +107,61 @@ json style_window_get_window_data(Style_window& win) {
 
     buffer["colors"] = json::object();
     buffer["fields"] = json::object();
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_WindowBg);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ChildBg);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_PopupBg);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_Border);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_BorderShadow);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_FrameBg);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_FrameBgHovered);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_FrameBgActive);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TitleBg);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TitleBgActive);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TitleBgCollapsed);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_MenuBarBg);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ScrollbarBg);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ScrollbarGrab);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ScrollbarGrabHovered);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ScrollbarGrabActive);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_CheckMark);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_SliderGrab);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_SliderGrabActive);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_Button);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ButtonHovered);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ButtonActive);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_Header);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_HeaderHovered);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_HeaderActive);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_Separator);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_SeparatorHovered);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_SeparatorActive);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ResizeGrip);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ResizeGripHovered);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ResizeGripActive);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_Tab);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TabHovered);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TabActive);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TabUnfocused);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TabUnfocusedActive);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_DockingPreview);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_DockingEmptyBg);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_PlotLines);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_PlotLinesHovered);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_PlotHistogram);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_PlotHistogramHovered);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TableHeaderBg);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TableBorderStrong);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TableBorderLight);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TableRowBg);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TableRowBgAlt);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TextSelectedBg);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_DragDropTarget);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_NavHighlight);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_NavWindowingHighlight);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_NavWindowingDimBg);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ModalWindowDimBg);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_Text);
-    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TextDisabled);
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_WindowBg, "ImGuiCol_WindowBg");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ChildBg, "ImGuiCol_ChildBg");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_PopupBg, "ImGuiCol_PopupBg");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_Border, "ImGuiCol_Border");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_BorderShadow, "ImGuiCol_BorderShadow");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_FrameBg, "ImGuiCol_FrameBg");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_FrameBgHovered, "ImGuiCol_FrameBgHovered");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_FrameBgActive, "ImGuiCol_FrameBgActive");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TitleBg, "ImGuiCol_TitleBg");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TitleBgActive, "ImGuiCol_TitleBgActive");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TitleBgCollapsed, "ImGuiCol_TitleBgCollapsed");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_MenuBarBg, "ImGuiCol_MenuBarBg");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ScrollbarBg, "ImGuiCol_ScrollbarBg");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ScrollbarGrab, "ImGuiCol_ScrollbarGrab");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ScrollbarGrabHovered, "ImGuiCol_ScrollbarGrabHovered");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ScrollbarGrabActive, "ImGuiCol_ScrollbarGrabActive");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_CheckMark, "ImGuiCol_CheckMark");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_SliderGrab, "ImGuiCol_SliderGrab");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_SliderGrabActive, "ImGuiCol_SliderGrabActive");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_Button, "ImGuiCol_Button");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ButtonHovered, "ImGuiCol_ButtonHovered");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ButtonActive, "ImGuiCol_ButtonActive");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_Header, "ImGuiCol_Header");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_HeaderHovered, "ImGuiCol_HeaderHovered");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_HeaderActive, "ImGuiCol_HeaderActive");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_Separator, "ImGuiCol_Separator");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_SeparatorHovered, "ImGuiCol_SeparatorHovered");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_SeparatorActive, "ImGuiCol_SeparatorActive");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ResizeGrip, "ImGuiCol_ResizeGrip");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ResizeGripHovered, "ImGuiCol_ResizeGripHovered");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ResizeGripActive, "ImGuiCol_ResizeGripActive");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_Tab, "ImGuiCol_Tab");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TabHovered, "ImGuiCol_TabHovered");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TabActive, "ImGuiCol_TabActive");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TabUnfocused, "ImGuiCol_TabUnfocused");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TabUnfocusedActive, "ImGuiCol_TabUnfocusedActive");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_DockingPreview, "ImGuiCol_DockingPreview");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_DockingEmptyBg, "ImGuiCol_DockingEmptyBg");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_PlotLines, "ImGuiCol_PlotLines");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_PlotLinesHovered, "ImGuiCol_PlotLinesHovered");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_PlotHistogram, "ImGuiCol_PlotHistogram");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_PlotHistogramHovered, "ImGuiCol_PlotHistogramHovered");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TableHeaderBg, "ImGuiCol_TableHeaderBg");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TableBorderStrong, "ImGuiCol_TableBorderStrong");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TableBorderLight, "ImGuiCol_TableBorderLight");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TableRowBg, "ImGuiCol_TableRowBg");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TableRowBgAlt, "ImGuiCol_TableRowBgAlt");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TextSelectedBg, "ImGuiCol_TextSelectedBg");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_DragDropTarget, "ImGuiCol_DragDropTarget");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_NavHighlight, "ImGuiCol_NavHighlight");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_NavWindowingHighlight, "ImGuiCol_NavWindowingHighlight");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_NavWindowingDimBg, "ImGuiCol_NavWindowingDimBg");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_ModalWindowDimBg, "ImGuiCol_ModalWindowDimBg");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_Text, "ImGuiCol_Text");
+    GET_DATA_COLOR4(buffer, colors, ImGuiCol_TextDisabled, "ImGuiCol_TextDisabled");
     
     GET_DATA_FLOAT(buffer, style, FontScaleMain);
 

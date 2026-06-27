@@ -13,6 +13,7 @@ struct Add_camera_popup;
 typedef void (*Add_camera_popup_render_func)(Add_camera_popup& win);
 
 struct Add_camera_popup {
+    
     Gopro_master_popup_window base;
 
     Add_camera_popup_render_func render;

@@ -6,7 +6,7 @@
 */
 #pragma once
 #ifndef POPUP_SCAN_CAMERA_POPWIN_H
-#define 
+#define POPUP_SCAN_CAMERA_POPWIN_H
 #include "base_pop_window.h"
 
 struct Scan_camera_popup;

@@ -1,64 +1,7 @@
 #include "media_browser_popwin.h"
 #include <SDL3/SDL.h>
 
-MediaBrowserPopup::MediaBrowserPopup(
-    std::shared_ptr<json> _setting, 
-    std::shared_ptr<GlobalState> _state, 
-    std::shared_ptr<GoProMaster> _master
-) 
-    : BasePopWindow(_setting, _state, _master) {
-    title = "Media Browser##Popup";
-}
-
-
-MediaBrowserPopup::~MediaBrowserPopup(){
-    
-}
-
-void MediaBrowserPopup::trigger(bool value){
-    BasePopWindow::trigger(value);
-    if(value){
-        selected = "";
-        master->get_media_list(state->current_camera_server, state->current_camera_item);
-    }
-}
-
-void MediaBrowserPopup::render(){
-    ImGuiIO& io = ImGui::GetIO();
-    ImGuiStyle& style = ImGui::GetStyle();
-    ImVec2 display_size = io.DisplaySize;
-    ImVec2 unit = ImVec2(display_size.x / 12.0f, display_size.y / 12.0f);
-    float unit_width;
-    float unit_height;
-
-    ImGui::SetNextWindowPos(ImVec2(unit.x * 1.0F, unit.y * 1.0F), wp_cond);
-    ImGui::SetNextWindowSize(ImVec2(unit.x * 10.0F, unit.y * 10.0F), wp_cond);
-    
-    unit_width = (unit.x * 10.0F) / 2.0F - style.ItemSpacing.x;
-    unit_height = unit.y * 9.0F;
-
-    if(ImGui::BeginPopupModal(title.c_str(), NULL, wp_flag)){
-        {
-            int32_t s = master->findCamera(state->current_camera_server, state->current_camera_item);
-            if(s >= 0) {
-                const CameraInfo ci = master->getCamera_Clone(s);
-                ImGui::BeginChild("Body##Media_Browser_ChildWin_Body", ImVec2(unit.x * 10.0F - (style.ItemSpacing.x * 2), unit.y * 7.5F));
-                {
-                    draw_body(ci);
-                }
-                ImGui::EndChild();
-                ImGui::BeginChild("Header##Media_Browser_ChildWin_Header", ImVec2(unit.x * 10.0F - (style.ItemSpacing.x * 2), unit.y * 1.6F));
-                {
-                    draw_header(ci);
-                }
-                ImGui::EndChild();
-            }
-        }    
-        ImGui::EndPopup();
-    }
-}
-
-void MediaBrowserPopup::draw_header(const CameraInfo& c){
+static void draw_header(const CameraInfo& c){
     bool is_enable = c.ip.size() > 0;
     bool have_select = selected.size() > 0;
     ImGui::Dummy(ImVec2(10, 10));
@@ -104,7 +47,7 @@ void MediaBrowserPopup::draw_header(const CameraInfo& c){
     ImGui::Text("Camera: %s", c.name.c_str());
 }
 
-void MediaBrowserPopup::draw_body(const CameraInfo& c){
+static void draw_body(const CameraInfo& c){
     if(c.ip.size() == 0) return;
     std::lock_guard<std::mutex> lock(state->media_list_mtx);
     std::vector<MediaInfo> media_list = state->current_media_list;
@@ -116,11 +59,11 @@ void MediaBrowserPopup::draw_body(const CameraInfo& c){
     }
 }
 
-bool MediaBrowserPopup::draw_item(const MediaInfo& mi){
+static bool draw_item(const MediaInfo& mi){
     return ImGui::Selectable(mi.filename.c_str(), selected == mi.filename);
 }
 
-void MediaBrowserPopup::open_dialog_for_download_all_folder_selection(){
+static void open_dialog_for_download_all_folder_selection(){
     SDL_Window* win = SDL_GL_GetCurrentWindow();
     SDL_ShowOpenFolderDialog([](void* userdata, const char* const* filelist, int filter){
         if (!filelist) {
@@ -140,11 +83,11 @@ void MediaBrowserPopup::open_dialog_for_download_all_folder_selection(){
     }, this, win, NULL, false);
 }
 
-void MediaBrowserPopup::open_dialog_for_download_file_selection(){
+static void open_dialog_for_download_file_selection(){
 
 }
 
-void MediaBrowserPopup::download_all_folder_callback(const std::string folder){
+static void download_all_folder_callback(const std::string folder){
     int32_t s = master->findCamera(state->current_camera_server, state->current_camera_item);
     if(s >= 0) {
         const CameraInfo ci = master->getCamera_Clone(s);
@@ -152,7 +95,7 @@ void MediaBrowserPopup::download_all_folder_callback(const std::string folder){
     }
 }
 
-void MediaBrowserPopup::download_file_callback(const std::string fullpath){
+static void download_file_callback(const std::string fullpath){
     int32_t s = master->findCamera(state->current_camera_server, state->current_camera_item);
     if(s >= 0) {
         const CameraInfo ci = master->getCamera_Clone(s);
@@ -167,20 +110,17 @@ void MediaBrowserPopup::download_file_callback(const std::string fullpath){
     }
 }
 
-void MediaBrowserPopup::add_thumbnail(const std::string filename, const std::vector<u_char> rawData, const std::pair<int32_t, int32_t> resolution){
+static void add_thumbnail(const std::string filename, const std::vector<u_char> rawData, const std::pair<int32_t, int32_t> resolution){
     thumbnail_rawData.insert_or_assign(filename, std::make_pair(rawData, resolution));
 }
 
-void MediaBrowserPopup::convert_rawData_to_texture(){
+static void convert_rawData_to_texture(){
     for(auto& i : thumbnail_rawData){
         const std::string& filename = i.first;
         const std::vector<u_char>& rawData = i.second.first;
         const std::pair<int32_t, int32_t>& resolution = i.second.second;
 
-        SDL_Texture* texture = SDL_CreateTexture(state->m_renderer, 
-                                               SDL_PIXELFORMAT_RGBA8888, 
-                                               SDL_TEXTUREACCESS_STATIC, 
-                                               resolution.first, resolution.second);
+        SDL_Texture* texture = SDL_CreateTexture(state->m_renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STATIC, resolution.first, resolution.second);
         if (texture) {
             // 2. Upload the raw pixel data
             // Pitch is the number of bytes in a row (width * 4 bytes for RGBA)
@@ -197,14 +137,49 @@ void MediaBrowserPopup::convert_rawData_to_texture(){
     thumbnail_rawData.clear();
 }
 
-void MediaBrowserPopup::clean_thumbnail(){
+static void clean_thumbnail(){
     thumbnail_rawData.clear();
 }
 
-void MediaBrowserPopup::clean_textures(){
+static clean_textures(){
     for(auto& i : thumbnail_textures){
         ImTextureID textureID = i.second;
         SDL_DestroyTexture((SDL_Texture*)textureID);
     }
     thumbnail_textures.clear();
+}
+
+void MediaBrowserPopup::render(){
+    ImGuiIO& io = ImGui::GetIO();
+    ImGuiStyle& style = ImGui::GetStyle();
+    ImVec2 display_size = io.DisplaySize;
+    ImVec2 unit = ImVec2(display_size.x / 12.0f, display_size.y / 12.0f);
+    float unit_width;
+    float unit_height;
+
+    ImGui::SetNextWindowPos(ImVec2(unit.x * 1.0F, unit.y * 1.0F), wp_cond);
+    ImGui::SetNextWindowSize(ImVec2(unit.x * 10.0F, unit.y * 10.0F), wp_cond);
+    
+    unit_width = (unit.x * 10.0F) / 2.0F - style.ItemSpacing.x;
+    unit_height = unit.y * 9.0F;
+
+    if(ImGui::BeginPopupModal(title.c_str(), NULL, wp_flag)){
+        {
+            int32_t s = master->findCamera(state->current_camera_server, state->current_camera_item);
+            if(s >= 0) {
+                const CameraInfo ci = master->getCamera_Clone(s);
+                ImGui::BeginChild("Body##Media_Browser_ChildWin_Body", ImVec2(unit.x * 10.0F - (style.ItemSpacing.x * 2), unit.y * 7.5F));
+                {
+                    draw_body(ci);
+                }
+                ImGui::EndChild();
+                ImGui::BeginChild("Header##Media_Browser_ChildWin_Header", ImVec2(unit.x * 10.0F - (style.ItemSpacing.x * 2), unit.y * 1.6F));
+                {
+                    draw_header(ci);
+                }
+                ImGui::EndChild();
+            }
+        }    
+        ImGui::EndPopup();
+    }
 }

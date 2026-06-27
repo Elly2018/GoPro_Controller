@@ -8,7 +8,7 @@
 #ifndef POPUP_BASE_POP_WINDOW_H
 #define POPUP_BASE_POP_WINDOW_H
 #define IMGUI_DEFINE_MATH_OPERATORS
-#include "imgui.h"
+#include <imgui.h>
 #include "../windows/base_window.h"
 
 static constexpr uint32_t wp_flag = ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_AlwaysAutoResize;
@@ -22,6 +22,6 @@ static constexpr uint32_t wp_flag = ImGuiWindowFlags_NoSavedSettings | ImGuiWind
 struct Gopro_master_popup_window {
     Gopro_master_window base;
     bool isopen;
-}
+};
 
 #endif

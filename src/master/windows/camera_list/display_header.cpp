@@ -6,7 +6,7 @@
 */
 #include "../camera_list.h"
 #include "../inspector.h"
-#include "../gopro_master.h"
+#include "../../gopro_master.h"
 
 void camera_list_window_draw_group_header(Camera_list_window& win, const CameraInfo& c) {
     json status = json::object();

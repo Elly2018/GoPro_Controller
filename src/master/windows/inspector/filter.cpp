@@ -1,6 +1,13 @@
+/*
+ * Copyright (c) [2026] [Elly/Funique]
+ *
+ * This software is licensed under the [MIT License].
+ * See the LICENSE file in the project root for more information.
+*/
 #include "../inspector.h"
 #include <iostream>
 #include <string>
+#include "../../../common/camera_code.h"
 
 bool InspectorWindow::conditional_filter(const std::shared_ptr<GlobalState>& state, int32_t mymodel, int32_t setting_id){
     int32_t preset = state->try_get_status_int32_by_id(PRESET_ID);
