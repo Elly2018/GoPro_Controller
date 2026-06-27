@@ -65,9 +65,38 @@ void gopro_master_preview_end(AppData& data, const std::string server, const std
 }
 
 void gopro_master_get_media_info(AppData& data, const std::string server, const std::string ip, const std::string path) {
+    json data = json::object();
+    data["key"] = "media";
+    data["value"] = json::object();
+    data["value"]["name"] = "info";
+    data["value"]["path"] = path;
+    data["value"]["target"] = ip;
 
+    for(auto s : servers){
+        if(s->ip != server) continue;
+        bool islocal = s->ip == "127.0.0.1";
+        data["value"]["local"] = islocal;
+        if((s->ip == server || server.size() == 0) && s->connected){
+            s->client->send(data.dump());
+            break;
+        }
+    }
 }
 
 void gopro_master_get_media_list(AppData& data, const std::string server, const std::string ip) {
+    json data = json::object();
+    data["key"] = "media";
+    data["value"] = json::object();
+    data["value"]["name"] = "list";
+    data["value"]["target"] = ip;
 
+    for(auto s : servers){
+        if(s->ip != server) continue;
+        bool islocal = s->ip == "127.0.0.1";
+        data["value"]["local"] = islocal;
+        if((s->ip == server || server.size() == 0) && s->connected){
+            s->client->send(data.dump());
+            break;
+        }
+    }
 }

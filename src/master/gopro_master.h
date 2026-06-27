@@ -65,7 +65,7 @@ struct Gopro_master {
     camera_log_feedback feedback_camera_log = NULL;
     camera_preset_save feedback_camera_preset_save = NULL;
     camera_apply_all_feedback feedback_camera_apply_all = NULL;
-    std::shared_ptr<json> preset_ptr = NULL;
+    json preset_ptr;
 
     std::thread downloading_thread;
     std::atomic_char32_t downloading_media_flag = 0;
@@ -110,13 +110,11 @@ void gopro_master_send_2_all(AppData& data, const std::string& msg);
 
 void gopro_master_preset_switch(AppData& data, const std::string server, const std::string target, int32_t mode);
 void gopro_master_locate(AppData& data, const std::string server, const std::string target);
-int32_t gopro_master_has_locate(AppData& data, const std::string server, const std::string target);
 void gopro_master_apply(AppData& data, const std::string& ip, const std::string& target, const int32_t id, const int32_t value);
 void gopro_master_apply(AppData& data, const std::string& ip, const json& res);
 void gopro_master_quick_apply(AppData& data, const CameraInfo& target);
 void gopro_master_stop_apply(AppData& data, const CameraInfo& target);
-bool gopro_master_directory_exists(AppData& data, const std::string& path);
-void gopro_master_set_preset_data(AppData& data, json _preset);
+bool gopro_master_directory_exists(const std::string& path);
 int32_t gopro_master_add_preset(AppData& data, const std::string name, json data);
 bool gopro_master_get_preset(AppData& data, const std::string name, json& data);
 bool gopro_master_remove_preset(AppData& data, const std::string name);
