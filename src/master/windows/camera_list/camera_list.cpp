@@ -187,21 +187,20 @@ void camera_list_window_item_event(Camera_list_window& win, const CameraInfo& c)
     }
 }
 
-void camera_list_window_onClick(Camera_list_window& win, const CameraInfo& c){
+void camera_list_window_on_click(Camera_list_window& win, const CameraInfo& c) {
     state->current_setting_items_bind = false;
     state->current_camera_item = c.ip;
     state->current_camera_server = c.server;
     state->current_camera_name = c.name;
     std::cout << "Select camera: " << c.server << "  " << c.ip << std::endl;
     master->query_only(c.server, "get", c.ip);
-    //current_setting_items_bind = master.getSettingsFromCamera(*c, current_setting_items);
 }
 
-ImVec2 CameraListWindow::get_rect_size(){
-    return ImVec2(10 * (size + 10) + 20, 10 * (size + 10) + 20);
+ImVec2 camera_list_window_get_rect_size(Camera_list_window& win) {
+    return ImVec2(10 * (win.size + 10) + 20, 10 * (win.size + 10) + 20);
 }
 
-std::vector<CameraInfo> CameraListWindow::get_filtering_result(){
+std::vector<CameraInfo> camera_list_window_get_filtering_result(Camera_list_window& win) {
     auto buffer = master->getCameras_Clone();
     auto filtered = std::vector<CameraInfo>();
 
@@ -239,7 +238,7 @@ std::vector<CameraInfo> CameraListWindow::get_filtering_result(){
     return filtered;
 }
 
-std::string CameraListWindow::get_filter_string(FilterType type){
+std::string camera_list_window_get_filter_string(const FilterType type) {
     switch(type){
         default:
         case FilterType::None: return "None";
@@ -248,7 +247,7 @@ std::string CameraListWindow::get_filter_string(FilterType type){
     }
 }
 
-std::string CameraListWindow::get_sort_string(SortType type){
+std::string camera_list_window_get_sort_string(const SortType type) {
     switch(type){
         default:
         case SortType::None: return "None";
@@ -257,7 +256,7 @@ std::string CameraListWindow::get_sort_string(SortType type){
     }
 }
 
-std::string CameraListWindow::toTimeCode(int32_t timer){
+std::string camera_list_window_toTimeCode(const int32_t timer) {
     std::string result = "";
     int32_t mins = static_cast<int32_t>(((float)timer / 60.0f));
     int32_t hours = static_cast<int32_t>(((float)mins / 60.0f));
@@ -280,17 +279,15 @@ std::string CameraListWindow::toTimeCode(int32_t timer){
     return result;
 }
 
-std::string CameraListWindow::bytesToGbString(long bytes) {
-    // Define the value of one gigabyte (1024 * 1024 * 1024 bytes)
+std::string camera_list_window_bytesToGbString(const long bytes) {
+
     const long GIGABYTE = 1024L * 1024L * 1024L; 
 
-    // Convert bytes to gigabytes as a double
     double gigabytes = static_cast<double>(bytes) / GIGABYTE;
 
-    // Use std::stringstream to format the output with desired precision
     std::stringstream ss;
+
     ss << std::fixed << std::setprecision(2) << gigabytes << " GB";
 
-    // Return the formatted string
     return ss.str();
 }

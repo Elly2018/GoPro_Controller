@@ -1,7 +1,7 @@
 #include "../camera_list.h"
 #include "../inspector.h"
 
-void CameraListWindow::draw_group_state(const CameraInfo& c){
+void camera_list_window_draw_group_state(Camera_list_window& win, const CameraInfo& c) {
     json status = json::object();
     json setting = json::object();
     int32_t model_enum = InspectorWindow::_get_current_model(c.hw);
