@@ -16,24 +16,6 @@ namespace fs = std::filesystem;
 
 extern std::shared_ptr<GlobalState> global_state;
 
-GoProMaster::GoProMaster() {
-    t1 = std::thread(&GoProMaster::update, this);
-    std::cout << "GoProMaster created" << std::endl;
-}
-
-GoProMaster::~GoProMaster() {
-    std::cout << "GoProMaster destroy" << std::endl;
-    setdone();
-    if(t1.joinable()){
-        t1.join();
-    }
-    for (auto& s : servers) {
-        s->client->close();
-        std::lock_guard<std::mutex> lock(camera_mtx);
-        cleanCameraFromServer(s->ip);
-    }
-}
-
 std::string GoProMaster::addServer(const std::string& ip) {
     for(auto & s : servers){
         if(s->ip == ip){
@@ -1062,57 +1044,6 @@ void GoProMaster::sendToAll(const std::string& msg) {
     for (auto& s : servers) {
         if (s->connected) {
             s->client->send(msg);
-        }
-    }
-}
-
-void GoProMaster::cleanCameraFromServer(const std::string server){
-    std::vector<std::shared_ptr<CameraInfo>>::iterator iter = std::find_if(cameras.begin(), cameras.end(),
-        [&](auto &s){ return ((*s).server == server); }
-    );
-
-    while(iter != cameras.end()){
-        cameras.erase(iter);
-        iter = std::find_if(cameras.begin(), cameras.end(),
-            [&](auto &s){ return ((*s).server == server); }
-        );
-    }
-}
-
-void GoProMaster::replaceCameraFromServer(const std::string server, const std::vector<std::string> ips){
-    // Remove part
-    auto it = std::remove_if(cameras.begin(), cameras.end(), [&](const std::shared_ptr<CameraInfo>& c) {
-        // Only consider cameras belonging to this specific server
-        if (c && c->server == server) {
-            // If the camera's IP is NOT found in the new 'ips' list, delete it
-            return std::find(ips.begin(), ips.end(), c->ip) == ips.end();
-        }
-        return false;
-    });
-    
-    cameras.erase(it, cameras.end());
-
-    // Append part
-    for (const auto& new_ip : ips) {
-        bool exists = false;
-        for (const auto& existing_cam : cameras) {
-            if (existing_cam && existing_cam->ip == new_ip && existing_cam->server == server) {
-                exists = true;
-                break;
-            }
-        }
-
-        if (!exists) {
-            auto new_cam = std::make_shared<CameraInfo>();
-            new_cam->server = server;
-            new_cam->ip = new_ip;
-            cameras.push_back(new_cam);
-            {
-                ImGuiToast toast(ImGuiToastType_Success, 3000);
-                toast.set_title("New IP Detected");
-                toast.set_content("Detected ip: %s, from server: %s", new_ip.c_str(), server.c_str());
-                ImGui::InsertNotification(toast);
-            }
         }
     }
 }

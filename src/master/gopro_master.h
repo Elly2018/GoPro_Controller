@@ -14,6 +14,7 @@
 #include <functional>
 #include "../common/iphelper.h"
 #include "../common/camera_code.h"
+#include "../common/thread_safe_queue.h"
 #include "data/state.h"
 #include "data/camera_info.h"
 #include "data/server_connection.h"
@@ -51,10 +52,11 @@ struct Gopro_master {
     
     std::vector<Camera_info> cameras = std::vector<Camera_info>(1024);
     std::vector<Server_connection> servers = std::vector<Server_connection>(32);
+    thread_safe_queue<std::pair<std::string, std::string>> msg_queue;
     
-    std::unordered_map<std::string, bool> ipQueryFinish = std::unordered_map<std::string, bool>();
-    std::unordered_map<std::string, bool> stateQueryFinish = std::unordered_map<std::string, bool>();
-    std::unordered_map<std::string, bool> mediaQueryFinish = std::unordered_map<std::string, bool>();
+    std::unordered_map<std::string, bool> ip_query_finish = std::unordered_map<std::string, bool>();
+    std::unordered_map<std::string, bool> state_query_finish = std::unordered_map<std::string, bool>();
+    std::unordered_map<std::string, bool> media_query_finish = std::unordered_map<std::string, bool>();
 
     camera_media_list_feedback feedback_camera_media_list = NULL;
     camera_setting_feedback feedback_camera_setting = NULL;
@@ -65,20 +67,25 @@ struct Gopro_master {
     camera_apply_all_feedback feedback_camera_apply_all = NULL;
     std::shared_ptr<json> preset_ptr = NULL;
 
+    std::thread downloading_thread;
     std::atomic_char32_t downloading_media_flag = 0;
     std::atomic_char32_t downloading_media_total;
     std::atomic_char32_t downloading_media_done;
 };
 
+void gopro_master_release(AppData& data);
 void gopro_master_update(AppData& data);
 
-void gopro_master_add_server(AppData& data, const std::string& ip);
+bool gopro_master_add_server(AppData& data, const std::string& ip);
 void gopro_master_reconnect(AppData& data);
 void gopro_master_reconnect(AppData& data, const std::string& ip);
 void gopro_master_disconnect(AppData& data);
 void gopro_master_disconnect(AppData& data, const std::string& ip);
 void gopro_master_clean(AppData& data);
 void gopro_master_clean(AppData& data, const std::string& ip);
+
+void gopro_master_clean_cameras_from_server(AppData& data, const std::string server);
+void gopro_master_replace_camera_from_server(AppData& data, const std::string server, const std::vector<std::string> ips);
 
 void gopro_master_packet_sender(AppData& data, const std::string key, const std::string server, const std::string command, const std::string target, const std::string value = "");
 void gopro_master_command_only(AppData& data, const std::string command, const std::string target = "");
@@ -92,7 +99,7 @@ void gopro_master_webcam_start(AppData& data, const std::string server);
 void gopro_master_preview_start(AppData& data, const std::string server, const std::string target);
 void gopro_master_preview_end(AppData& data, const std::string server, const std::string target);
 void gopro_master_media_only(AppData& data, const std::string command, std::string target = "");
-void gopro_master_download_last_media(AppData& data, const std::string ip, const DownloadMediaParameters params);
+void gopro_master_download_last_media(AppData& data, const std::string ip, const Download_media_parameters params);
 void gopro_master_download_all_media(AppData& data, const std::string server, const std::string ip, const std::string folder, const std::vector<Media_info> media_list);
 void gopro_master_download_single_media(AppData& data, const std::string server, const std::string ip, const std::string filepath, const Media_info media);
 void gopro_master_get_media_info(AppData& data, const std::string server, const std::string ip, const std::string path);

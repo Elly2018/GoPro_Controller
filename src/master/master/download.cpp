@@ -12,7 +12,7 @@ void gopro_master_media_only(AppData& data, const std::string command, std::stri
 
 }
 
-void gopro_master_download_last_media(AppData& data, const std::string ip, const DownloadMediaParameters params) {
+void gopro_master_download_last_media(AppData& data, const std::string ip, const Download_media_parameters params) {
 
 }
 

@@ -14,39 +14,13 @@ struct ImGuiIO;
 extern "C" {
 #endif
 
-/**
- * Helping setup the imgui context
- * Such as style or theme stuff
- */
 void setup_imgui();
-/**
- * Setup build-in theme
- */
 void setup_catppuccin_mocha_theme();
-/**
- * Create the imgui context, use it in the begining and out of the loop
- */
 void begin_imgui(struct SDL_Window *window, void *sdl_gl_context, const char *glsl_version);
-/**
- * Destory the imgui context, use it in the end and out of the loop
- */
 void end_imgui();
-/**
- * Create the SDL context
- */
 void begin_sdl(std::tuple<struct SDL_Window*, const char*>& r);
-/**
- * Destory the SDL context
- */
 void end_sdl(struct SDL_Window *window);
-/**
- * Loop begin
- */
 void begin_loop();
-/**
- * Loop end
- * Clear color and swap the chain and stuff
- */
 void end_loop(struct SDL_Window* window, struct ImGuiIO &io);
 
 #ifdef __cplusplus

@@ -8,7 +8,22 @@
 #include "../data/server_connection.h"
 #include "../data/app.h"
 
+void gopro_master_release(AppData& data) {
+    data.should_quit = true;
+
+    if(data.master.downloading_thread.joinable()){
+        data.master.downloading_thread.join();
+    }
+
+    for (Server_connection& s : data.master.servers) {
+        s.client.close();
+        gopro_master_clean_cameras_from_server(data, s.ip);
+    }
+}
+
 void gopro_master_update(AppData& data) {
+    gopro_master_process_message(conn->ip, msg);
+    
     for (Server_connection& s : data.master.servers) {
         if (!s.vaild) continue;
         if (!s.connected) continue;
