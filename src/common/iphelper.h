@@ -5,8 +5,8 @@
  * See the LICENSE file in the project root for more information.
 */
 #pragma once
-#ifndef IPHELPER_H
-#define IPHELPER_H
+#ifndef GCG_IPHELPER_H
+#define GCG_IPHELPER_H
 #include <ctime>
 #include <chrono>
 #include <iomanip>

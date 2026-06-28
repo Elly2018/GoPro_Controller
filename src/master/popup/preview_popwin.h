@@ -5,6 +5,8 @@
  * See the LICENSE file in the project root for more information.
 */
 #pragma once
+#ifndef POPUP_PREVIEW_POPWIN_H
+#define POPUP_PREVIEW_POPWIN_H
 #include <queue>
 #include <mutex>
 #include <thread>
@@ -46,9 +48,9 @@
 
 struct Preview_popup;
 typedef void (*Preview_popup_render_func)(Preview_popup& win);
+typedef void (*Preview_popup_drawer_func)(Global_state& state, Gopro_master& master, const Camera_info& c);
 
 struct Preview_popup {
-
     constexpr uint64_t MAX_QUEUE_SIZE = 10UL;
     constexpr uint64_t MAX_REDECODE = 2UL;
     constexpr uint64_t MAX_ATTEMPT = 300UL;
@@ -57,18 +59,19 @@ struct Preview_popup {
 
     Preview_popup_render_func render;
 
-    std::function<void(std::shared_ptr<GlobalState>& state, std::shared_ptr<GoProMaster>& master, const CameraInfo& c)> setting_drawer;
-    std::function<void(std::shared_ptr<GlobalState>& state, std::shared_ptr<GoProMaster>& master, const CameraInfo& c)> protune_drawer;
+    Preview_popup_drawer_func setting_drawer;
+    Preview_popup_drawer_func protune_drawer;
+
     cv::VideoCapture cap;
     std::string pipeline;
     std::queue<cv::Mat> frame_queue;
     std::mutex queue_mutex;
     std::thread reader;
     
-    int32_t dir = 0;
-    
-    GLuint gl_texture = 0;
     SDL_Renderer* renderer = NULL;
+    GLuint gl_texture = 0;
+    
+    int32_t dir = 0;
     int32_t texture_width = 1920;
     int32_t texture_height = 1080;
 
@@ -79,78 +82,21 @@ struct Preview_popup {
     bool stream_open = false;
 };
 
-cv::Mat get_latest_frame();
-void ConvertTexture(cv::Mat& mat);
-void DirChange(bool increase);
+void preview_popup_render(Preview_popup& win);
+void preview_popup_update_decoder(Preview_popup& win);
 
-/**
- * Display camera feed from select camera
- */
-class PreviewPopup : public BasePopWindow {
-public:
-    PreviewPopup(
-        SDL_Renderer* _renderer,
-        std::shared_ptr<json> _setting, 
-        std::shared_ptr<GlobalState> _state, 
-        std::shared_ptr<GoProMaster> _master);
-    ~PreviewPopup();
+json preview_popup_get_window_data(Preview_popup& win);
+void preview_popup_set_window_data(Preview_popup& win, const json& data);
 
-    json get_window_data() override;
-    void set_window_data(json data) override;
+int32_t preview_popup_get_current_model(const json& target);
+void preview_popup_stop_thread(Preview_popup& win);
+void preview_popup_draw_rotation_button(Preview_popup& win);
+void preview_popup_draw_camera_selection(Preview_popup& win);
+void preview_popup_draw_bottom_button(Preview_popup& win);
+void preview_popup_draw_setting(Preview_popup& win);
 
-    void register_setting_drawer(std::function<void(std::shared_ptr<GlobalState>& state, std::shared_ptr<GoProMaster>& master, const CameraInfo& c)> caller);
-    void register_protune_drawer(std::function<void(std::shared_ptr<GlobalState>& state, std::shared_ptr<GoProMaster>& master, const CameraInfo& c)> caller);
+cv::Mat preview_popup_get_latest_frame(Preview_popup& win);
+void preview_popup_convert_texture(Preview_popup& win, cv::Mat& mat);
+void preview_popup_dir_change(Preview_popup& win, const bool increase);
 
-    virtual void trigger(bool value) override;
-    virtual void update_decoder();
-    virtual void update() override;
-    virtual void render() override;
-
-protected:
-    int32_t _get_current_model(json target);
-    void _stop_thread();
-    void _draw_rotation_button();
-    void _draw_camera_selection();
-    void _draw_bottom_button();
-    void _draw_setting();
-
-private:
-    std::function<void(std::shared_ptr<GlobalState>& state, std::shared_ptr<GoProMaster>& master, const CameraInfo& c)> setting_drawer;
-    std::function<void(std::shared_ptr<GlobalState>& state, std::shared_ptr<GoProMaster>& master, const CameraInfo& c)> protune_drawer;
-    cv::VideoCapture cap;
-    std::string pipeline;
-    std::queue<cv::Mat> frame_queue;
-    std::mutex queue_mutex;
-    std::thread reader;
-    const size_t MAX_QUEUE_SIZE = 10;
-    const size_t MAX_REDECODE = 2;
-    const size_t MAX_ATTEMPT = 300;
-
-    /**
-     * Is this the first time this window appear
-     * Shows the build info in console if it is
-     */
-    bool first = true;
-    bool applying_all_last;
-    /**
-     * The state of the decoing thread is trying to get video frame from camera
-     * If false, it means failed
-     */
-    bool trying = false;
-    /**
-     * Check if the rotating button is press
-     * The purpose of this is to print info in the next frame
-     */
-    bool remap = false;
-    /**
-     * Rotating flag
-     */
-    int32_t dir = 0;
-    bool stream_open = false;
-    GLuint gl_texture = 0;
-    SDL_Renderer* renderer = NULL;
-    int32_t texture_width = 1920;
-    int32_t texture_height = 1080;
-
-    
-};
+#endif

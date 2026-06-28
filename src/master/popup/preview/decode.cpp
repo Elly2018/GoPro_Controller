@@ -1,41 +1,50 @@
+/*
+ * Copyright (c) [2026] [Elly/Funique]
+ *
+ * This software is licensed under the [MIT License].
+ * See the LICENSE file in the project root for more information.
+*/
 #include "../preview_popwin.h"
 #include <format>
 #include <cstdlib>
+#include "../../gopro_master.h"
+#include "../../data/camera_info.h"
 
-void PreviewPopup::update_decoder(){
-    stream_open = false;
-    trying = true;
+void preview_popup_update_decoder(Preview_popup& win) {
+    Global_state& state = win.base.base.state;
+    Gopro_master& master = win.base.base.master;
+    AppData& appdata = state.appdata;
+    win.stream_open = false;
+    win.trying = true;
     int32_t s = -1;
     int32_t model;
 
-    if(first){
-        std::cout << "===== OpenCV Build Info =====" << std::endl;
-        std::cout << cv::getBuildInformation() << std::endl;
-        std::cout << "=============================" << std::endl;
-        first = false;
+    if(win.first){
+        std::cout << "===== OpenCV Build Info =====\n";
+        std::cout << cv::getBuildInformation() << "\n";
+        std::cout << "=============================\n";
+        win.first = false;
     }
 
-    {
-        s = master->findCamera(state->preview_server, state->preview_ip);
+    s = gopro_master_find_camera(appdata, state.preview_server, state.preview_ip);
 
-        if(s == -1){
-            std::cout << "[Preview Decoder] Cannot find camera: " << state->preview_ip << std::endl;
-            trying = false;
-            return;
-        }
-        const CameraInfo c = master->getCamera_Clone(s);
-        model = _get_current_model(c.hw);
-        json buffer_setting = json::object();
-        master->getSettingsFromCamera(c, buffer_setting);
+    if(s == -1){
+        std::cout << "[Preview Decoder] Cannot find camera: " << state.preview_ip << std::endl;
+        win.trying = false;
+        return;
     }
+
+    const Camera_info& c = master.cameras.at(s);
+    model = preview_popup_get_current_model(c.hw);
+    json buffer_setting = json::object();
+    gopro_master_get_settings_from_camera(appdata, c, buffer_setting);
 
     if(gl_texture != 0){
         glDeleteTextures(1, &gl_texture);
         gl_texture = 0;
     }
 
-    const std::shared_ptr<CameraInfo>& c = master->getCameras().at(s);
-    pipeline = 
+    win.pipeline = 
         "udpsrc port=8554 timeout=1000000000 "
         "! watchdog timeout=1000 "
         "! queue max-size-buffers=0 max-size-bytes=0 max-size-time=1000000000 "
@@ -54,12 +63,11 @@ void PreviewPopup::update_decoder(){
         // Output to application use sink
         "! appsink sync=false drop=true max-buffers=1";
     
-    for(int32_t j = 0; j < MAX_REDECODE; j++){
-        cap.open(pipeline, cv::CAP_GSTREAMER);
-        std::cout << "[Preview Decoder] Pipeline use:" << std::endl << pipeline << std::endl;
-        //g = true;
+    for(int32_t j = 0; j < Preview_popup::MAX_REDECODE; j++){
+        win.cap.open(win.pipeline, cv::CAP_GSTREAMER);
+        std::cout << "[Preview Decoder] Pipeline use:" << "\n" << pipeline << "\n";
 
-        if(cap.isOpened()){
+        if(win.cap.isOpened()){
             cv::Mat test;
             for(int i = 0; i < MAX_ATTEMPT; i++) {
                 std::cout << "[Preview Decoder] Try cap.grab" << std::endl;

@@ -1,7 +1,17 @@
+/*
+ * Copyright (c) [2026] [Elly/Funique]
+ *
+ * This software is licensed under the [MIT License].
+ * See the LICENSE file in the project root for more information.
+*/
 #include "../preview_popwin.h"
 #include "src/imgui_notify.h"
 
-void PreviewPopup::render(){
+void preview_popup_render(Preview_popup& win) {
+    Global_state& state = win.base.base.state;
+    Gopro_master& master = win.base.base.master;
+    AppData& appdata = state.appdata;
+    
     cv::Mat frame = get_latest_frame();
     ConvertTexture(frame);
 

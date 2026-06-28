@@ -1,6 +1,12 @@
+/*
+ * Copyright (c) [2026] [Elly/Funique]
+ *
+ * This software is licensed under the [MIT License].
+ * See the LICENSE file in the project root for more information.
+*/
 #pragma once
-#ifndef CAMERA_SETTING
-#define CAMERA_SETTING
+#ifndef GCG_CAMERA_SETTING
+#define GCG_CAMERA_SETTING
 #include <cinttypes>
 #include <array>
 #include "camera_model.h"

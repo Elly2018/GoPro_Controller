@@ -20,14 +20,12 @@ private:
     std::condition_variable cv;
 
 public:
-    // Add an item to the queue
     void push(T value) {
         std::lock_guard<std::mutex> lock(mtx);
         q.push(std::move(value));
-        cv.notify_one(); // Wake up one waiting thread
+        cv.notify_one(); 
     }
 
-    // Get and remove an item (blocks if empty)
     T pop() {
         std::unique_lock<std::mutex> lock(mtx);
         cv.wait(lock, [this] { return !q.empty(); });
@@ -37,7 +35,6 @@ public:
         return value;
     }
 
-    // Check if empty safely
     bool empty() {
         std::lock_guard<std::mutex> lock(mtx);
         return q.empty();

@@ -1,6 +1,12 @@
+/*
+ * Copyright (c) [2026] [Elly/Funique]
+ *
+ * This software is licensed under the [MIT License].
+ * See the LICENSE file in the project root for more information.
+*/
 #pragma once
-#ifndef CAMERAMODEL_GENERATED_H
-#define CAMERAMODEL_GENERATED_H
+#ifndef GCG_CAMERAMODEL_GENERATED_H
+#define GCG_CAMERAMODEL_GENERATED_H
 
 constexpr int32_t MODEL_9 = 1;
 constexpr int32_t MODEL_10 = 2;

@@ -1,6 +1,12 @@
+/*
+ * Copyright (c) [2026] [Elly/Funique]
+ *
+ * This software is licensed under the [MIT License].
+ * See the LICENSE file in the project root for more information.
+*/
 #pragma once
-#ifndef GPC_CONFIG_H
-#define GPC_CONFIG_H
+#ifndef GCG_CONFIG_H
+#define GCG_CONFIG_H
 
 /**
  * @brief When server received master, print out what header it got

@@ -1,8 +1,14 @@
+/*
+ * Copyright (c) [2026] [Elly/Funique]
+ *
+ * This software is licensed under the [MIT License].
+ * See the LICENSE file in the project root for more information.
+*/
 #include "../preview_popwin.h"
 #include <format>
 #include <cstdlib>
 
-void replaceAll(std::string& str, const std::string& from, const std::string& to) {
+static void replaceAll(std::string& str, const std::string& from, const std::string& to) {
     if(from.empty())
         return;
     size_t start_pos = 0;
@@ -12,39 +18,15 @@ void replaceAll(std::string& str, const std::string& from, const std::string& to
     }
 }
 
-PreviewPopup::PreviewPopup(
-    SDL_Renderer* _renderer,
-    std::shared_ptr<json> _setting, 
-    std::shared_ptr<GlobalState> _state, 
-    std::shared_ptr<GoProMaster> _master
-) 
-    : BasePopWindow(_setting, _state, _master) {
-    renderer = _renderer;
-    title = "Preview##Popup";
-
-// LOG all the GStreamer debug info out of console
-#ifdef _WIN32
-    _putenv("GST_DEBUG=2");  // Level 2 = warnings and errors
-    // Or for more detail:
-    // _putenv("GST_DEBUG=3");  // Level 3 = info + warnings + errors
-#else
-    setenv("GST_DEBUG", "2", 1);
-#endif
-}
-
-PreviewPopup::~PreviewPopup(){
-    trigger(false);
-}
-
-json PreviewPopup::get_window_data(){
+json preview_popup_get_window_data(Preview_popup& win) {
     json data = json::object();
-    data["dir"] = dir;
+    data["dir"] = win.dir;
     return data;
 }
 
-void PreviewPopup::set_window_data(json data){
+void preview_popup_set_window_data(Preview_popup& win, const json& data) {
     if(data["dir"].is_number_integer()){
-        dir = data["dir"].get<int32_t>();
+        win.dir = data["dir"].get<int32_t>();
     }
 }
 
@@ -69,11 +51,7 @@ void PreviewPopup::trigger(bool value){
     }
 }
 
-void PreviewPopup::update(){
-    
-}
-
-int32_t PreviewPopup::_get_current_model(json target){
+int32_t preview_popup_get_current_model(const json& target) {
     if(target["model_name"].is_string()){
         std::string model_name = target["model_name"].get<std::string>();
         if(model_name == "MAX 2") return MODEL_MAX2;
@@ -87,7 +65,7 @@ int32_t PreviewPopup::_get_current_model(json target){
     return 0;
 }
 
-void PreviewPopup::_stop_thread(){
+void preview_popup_stop_thread(Preview_popup& win) {
     stream_open = false;
     if (cap.isOpened()) {
         cap.release();
@@ -102,7 +80,7 @@ void PreviewPopup::_stop_thread(){
     while(frame_queue.size() > 0) frame_queue.pop();
 }
 
-void PreviewPopup::_draw_rotation_button(){
+void preview_popup_draw_rotation_button(Preview_popup& win) {
     if(ImGui::Button("<== Rotate##preview_button")){
         DirChange(true); remap = true;
     }
@@ -112,7 +90,7 @@ void PreviewPopup::_draw_rotation_button(){
     }
 }
 
-void PreviewPopup::_draw_camera_selection(){
+void preview_popup_draw_camera_selection(Preview_popup& win) {
     int32_t s = -1;
     std::lock_guard<std::mutex> lock(master->camera_mtx);
     s = master->findCamera(state->preview_server, state->preview_ip);
@@ -144,7 +122,7 @@ void PreviewPopup::_draw_camera_selection(){
     }
 }
 
-void PreviewPopup::_draw_bottom_button(){
+void preview_popup_draw_bottom_button(Preview_popup& win) {
     if(ImGui::Button("Cancel")){
         trigger(false);
     }
@@ -159,7 +137,7 @@ void PreviewPopup::_draw_bottom_button(){
     }
 }
 
-void PreviewPopup::_draw_setting(){
+void preview_popup_draw_setting(Preview_popup& win) {
     if(setting_drawer != NULL){
         int32_t s = -1;
         s = master->findCamera(state->preview_server, state->preview_ip);
@@ -184,39 +162,39 @@ void PreviewPopup::_draw_setting(){
     }
 }
 
-cv::Mat PreviewPopup::get_latest_frame(){
-    std::lock_guard<std::mutex> lock(queue_mutex);
+cv::Mat preview_popup_get_latest_frame(Preview_popup& win) {
+    std::lock_guard<std::mutex> lock(win.queue_mutex);
 
-    if (frame_queue.empty()) {
+    if (win.frame_queue.empty()) {
         return cv::Mat();
     }
     
-    cv::Mat frame = frame_queue.front();
-    frame_queue.pop();
+    cv::Mat frame = win.frame_queue.front();
+    win.frame_queue.pop();
     return frame;
 }
 
-void PreviewPopup::ConvertTexture(cv::Mat& mat){
+void preview_popup_convert_texture(Preview_popup& win, cv::Mat& mat) {
     if(mat.empty()) return;
 
-    if(texture_width != mat.cols || texture_height != mat.rows){
-        texture_width = mat.cols;
-        texture_height = mat.rows;
-        glDeleteTextures(1, &gl_texture);
-        gl_texture = 0;
+    if(win.texture_width != mat.cols || win.texture_height != mat.rows){
+        win.texture_width = mat.cols;
+        win.texture_height = mat.rows;
+        glDeleteTextures(1, &win.gl_texture);
+        win.gl_texture = 0;
     }
 
     cv::Mat rotated_frame;
-    if(dir == 0){
+    if(win.dir == 0){
         rotated_frame = mat;  // No rotation
     }
-    else if(dir == 1){
+    else if(win.dir == 1){
         cv::rotate(mat, rotated_frame, cv::ROTATE_90_CLOCKWISE);
     }
-    else if(dir == 2){
+    else if(win.dir == 2){
         cv::rotate(mat, rotated_frame, cv::ROTATE_180);
     }
-    else if(dir == 3){
+    else if(win.dir == 3){
         cv::rotate(mat, rotated_frame, cv::ROTATE_90_COUNTERCLOCKWISE);
     }
     else {
@@ -227,12 +205,12 @@ void PreviewPopup::ConvertTexture(cv::Mat& mat){
     int32_t target_w, target_h;
     if(dir == 0 || dir == 2){
         // 0° or 180° - width/height unchanged
-        target_w = texture_width;
-        target_h = texture_height;
+        target_w = win.texture_width;
+        target_h = win.texture_height;
     } else {
         // 90° or 270° - width/height swapped
-        target_w = texture_height;
-        target_h = texture_width;
+        target_w = win.texture_height;
+        target_h = win.texture_width;
     }
 
     if (rotated_frame.cols != target_w || rotated_frame.rows != target_h){
@@ -244,9 +222,9 @@ void PreviewPopup::ConvertTexture(cv::Mat& mat){
     cv::Mat rgb;
     cv::cvtColor(frame, rgb, cv::COLOR_BGR2RGB);
 
-    if(gl_texture == 0){
-        glGenTextures(1, &gl_texture);
-        glBindTexture(GL_TEXTURE_2D, gl_texture);
+    if(win.gl_texture == 0){
+        glGenTextures(1, &win.gl_texture);
+        glBindTexture(GL_TEXTURE_2D, win.gl_texture);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_LINEAR);
@@ -256,10 +234,10 @@ void PreviewPopup::ConvertTexture(cv::Mat& mat){
             target_w, target_h,
             0, GL_RGB, GL_UNSIGNED_BYTE, rgb.data);
         glBindTexture(GL_TEXTURE_2D, 0);
-        std::cout << "[Preview Decoder] Frame converted !" << std::endl;
+        std::cout << "[Preview Decoder] Frame converted !\n";
     } else {
         // ✅ Update texture data (fast path)
-        glBindTexture(GL_TEXTURE_2D, gl_texture);
+        glBindTexture(GL_TEXTURE_2D, win.gl_texture);
         glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0,
             target_w, target_h,
             GL_RGB, GL_UNSIGNED_BYTE, rgb.data);
@@ -267,15 +245,16 @@ void PreviewPopup::ConvertTexture(cv::Mat& mat){
     }
 }
 
-void PreviewPopup::DirChange(bool increase){
+void preview_popup_dir_change(Preview_popup& win, const bool increase) {
     if(increase){
-        dir++;
-        if(dir >= 4) dir = 0;
+        win.dir++;
+        if(win.dir >= 4) win.dir = 0;
     }else{
-        dir--;
-        if(dir <= -1) dir = 3;
+        win.dir--;
+        if(win.dir <= -1) win.dir = 3;
     }
-    glDeleteTextures(1, &gl_texture);
-    gl_texture = 0;
+    glDeleteTextures(1, &win.gl_texture);
+    win.gl_texture = 0;
+    win.base.
     state->update_server();
 }

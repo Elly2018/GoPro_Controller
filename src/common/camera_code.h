@@ -9,8 +9,8 @@
 * Source: gopro_settings.json
 */
 #pragma once
-#ifndef CAMERACODE_GENERATED_H
-#define CAMERACODE_GENERATED_H
+#ifndef GCG_CAMERACODE_GENERATED_H
+#define GCG_CAMERACODE_GENERATED_H
 #include <cinttypes>
 #include "camera_setting.h"
 #include "camera_status.h"
