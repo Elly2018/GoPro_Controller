@@ -7,12 +7,18 @@
 #include "../inspector.h"
 #include <iostream>
 #include <string>
+#include "../../data/camera_info.h"
+#include "../../data/state.h"
+#include "../../gopro_master.h"
 
-void InspectorWindow::draw_command_local(){
+void inspector_window_draw_command_local(Inspector_window& win) {
     ImGui::Text("Single Camera Control");
-
-    int32_t current_camera = master->findCamera(state->current_camera_server, state->current_camera_item);
-    bool should_disabled = state->current_camera_item.size() < 10 || current_camera == -1;
+    Global_state& state = win.base.state;
+    Gopro_master& master = win.base.master;
+    AppData& appdata = win.base.state.appdata;
+    
+    int32_t current_camera = gopro_master_find_camera(appdata, state.current_camera_server, state.current_camera_item);
+    bool should_disabled = strlen(state.current_camera_item) < 10 || current_camera == -1;
     ImGui::BeginDisabled(should_disabled);
 
     ImGuiStyle& style = ImGui::GetStyle();
@@ -22,7 +28,7 @@ void InspectorWindow::draw_command_local(){
     ImVec2 full_button_size = ImVec2(size.x - style.ItemSpacing.x, 0);
 
     if(current_camera != -1) {
-        CameraInfo info = master->getCamera_Clone(current_camera);
+        const Camera_info& info = master.cameras.at(current_camera);
 
         if(ImGui::Button("Record", button_2size)) master->command_only(info.server, "shutter_on", info.ip); ImGui::SameLine();
         if(ImGui::Button("Stop", button_2size)) master->command_only(info.server, "shutter_off", info.ip);
@@ -139,7 +145,7 @@ void InspectorWindow::draw_command_local(){
     ImGui::EndDisabled();
 }
 
-void InspectorWindow::draw_command_global(){
+void inspector_window_draw_command_global(Inspector_window& win) {
     ImGui::Text("Global Controls");
     ImGui::Text("Commands applied to all connected cameras");
 

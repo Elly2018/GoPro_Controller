@@ -43,47 +43,36 @@ struct Inspector_window {
 
 void inspector_window_render(Inspector_window& win);
 
-class InspectorWindow : public BaseWindow {
-public:
-    InspectorWindow(
-        std::shared_ptr<json> _setting, 
-        std::shared_ptr<GlobalState> _state, 
-        std::shared_ptr<GoProMaster> _master);
-    virtual ~InspectorWindow();
+json inspector_window_get_window_data(Inspector_window& win) override;
+void inspector_window_set_window_data(const json& data) override;
 
-    json get_window_data() override;
-    void set_window_data(json data) override;
-    virtual void render() override;
+void inspector_window_draw_header(Inspector_window& win);
+void inspector_window_draw_system(Inspector_window& win);
+void inspector_window_draw_setting(Inspector_window& win);
+void inspector_window_draw_protune(Inspector_window& win);
+void inspector_window_global_draw_setting(Inspector_window& win, Global_state& state, Gopro_master& master, const CameraInfo& c);
+void inspector_window_global_draw_protune(Inspector_window& win, Global_state& state, Gopro_master& master, const CameraInfo& c);
+void inspector_window_draw_status(Inspector_window& win);
+void inspector_window_draw_hardware(Inspector_window& win);
+void inspector_window_draw_network(Inspector_window& win);
+void inspector_window_draw_encode(Inspector_window& win);
+void inspector_window_draw_media_status(Inspector_window& win);
+void inspector_window_draw_media_global(Inspector_window& win);
+void inspector_window_draw_media_local(Inspector_window& win);
+void inspector_window_draw_command_local(Inspector_window& win);
+void inspector_window_draw_command_global(Inspector_window& win);
 
-    virtual void draw_header();
-    virtual void draw_system();
-    virtual void draw_setting();
-    virtual void draw_protune();
-    static void global_draw_setting(std::shared_ptr<GlobalState>& state, std::shared_ptr<GoProMaster>& master, const CameraInfo& c);
-    static void global_draw_protune(std::shared_ptr<GlobalState>& state, std::shared_ptr<GoProMaster>& master, const CameraInfo& c);
-    virtual void draw_status();
-    virtual void draw_hardware();
-    virtual void draw_network();
-    virtual void draw_encode();
-    virtual void draw_media_status();
-    virtual void draw_media_global();
-    virtual void draw_media_local();
-    virtual void draw_command_local();
-    virtual void draw_command_global();
+void inspector_window_reset_setting_order(Inspector_window& win);
+void inspector_window_reset_status_order(Inspector_window& win);
+int32_t inspector_window_get_current_model(Inspector_window& win, const json& hwinfo);
 
-    void reset_setting_order();
-    void reset_status_order();
-    static int32_t _get_current_model(json hwinfo);
-protected:
-    virtual void _draw_setting(std::vector<int32_t>& ordered);
-    virtual void _draw_status(std::vector<int32_t>& ordered);
-    static void _global_draw_setting(std::shared_ptr<GlobalState>& state, std::shared_ptr<GoProMaster>& master, const CameraInfo& c, std::vector<int32_t>& ordered);
-    static bool _global_draw_setting_item(int32_t i, std::shared_ptr<GlobalState>& state, std::shared_ptr<GoProMaster>& master, const CameraInfo& c, std::vector<int32_t>& ordered);
-    static bool conditional_filter(const std::shared_ptr<GlobalState>& state, int32_t mymodel, int32_t setting_id);
-    static bool conditional_filter_option(const std::shared_ptr<GlobalState>& state, int32_t mymodel, int32_t setting_id, int32_t value_index);
+void inspector_window_draw_setting(Inspector_window& win, std::vector<int32_t>& ordered);
+void inspector_window_draw_status(Inspector_window& win, std::vector<int32_t>& ordered);
+void inspector_window_open_dialog_for_folder_selection(Inspector_window& win);
 
-    void open_dialog_for_folder_selection();
-private:
-};
+void inspector_window_static_global_draw_setting(std::shared_ptr<GlobalState>& state, std::shared_ptr<GoProMaster>& master, const CameraInfo& c, std::vector<int32_t>& ordered);
+bool inspector_window_static_global_draw_setting_item(int32_t i, std::shared_ptr<GlobalState>& state, std::shared_ptr<GoProMaster>& master, const CameraInfo& c, std::vector<int32_t>& ordered);
+bool inspector_window_static_conditional_filter(const std::shared_ptr<GlobalState>& state, int32_t mymodel, int32_t setting_id);
+bool inspector_window_static_conditional_filter_option(const std::shared_ptr<GlobalState>& state, int32_t mymodel, int32_t setting_id, int32_t value_index);
 
 #endif

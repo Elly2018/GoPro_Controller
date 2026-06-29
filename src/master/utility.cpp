@@ -251,8 +251,8 @@ void init(AppData& data){
     data.pop_windows_array[5] = &data.preset_manager_popup_window_base;
     data.pop_windows_array[6] = &data.media_browser_popup_window_base;
     
-    data.preview_popup_window.register_setting_drawer(InspectorWindow::global_draw_setting);
-    data.preview_popup_window.register_protune_drawer(InspectorWindow::global_draw_protune);
+    data.preview_popup_window.setting_drawer =  .register_setting_drawer(InspectorWindow::global_draw_setting);
+    data.preview_popup_window.protune_drawer =  register_protune_drawer(InspectorWindow::global_draw_protune);
 
     data.master.feedback_camera_media_list = update_media_list;
     data.master.feedback_camera_setting = setting_getter_feedback;
