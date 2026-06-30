@@ -64,7 +64,6 @@ void inspector_window_draw_command_global(Inspector_window& win);
 
 void inspector_window_reset_setting_order(Inspector_window& win);
 void inspector_window_reset_status_order(Inspector_window& win);
-int32_t inspector_window_get_current_model(Inspector_window& win, const json& hwinfo);
 
 void inspector_window_draw_setting(Inspector_window& win, std::vector<int32_t>& ordered);
 void inspector_window_draw_status(Inspector_window& win, std::vector<int32_t>& ordered);

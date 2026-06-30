@@ -108,17 +108,17 @@ void gopro_master_get_media_list(AppData& data, const std::string server, const 
 void gopro_master_process_message(AppData& data, const std::string& ip, const std::string& msg);
 void gopro_master_send_2_all(AppData& data, const std::string& msg);
 
-void gopro_master_preset_switch(AppData& data, const std::string server, const std::string target, int32_t mode);
-void gopro_master_locate(AppData& data, const std::string server, const std::string target);
-void gopro_master_apply(AppData& data, const std::string& ip, const std::string& target, const int32_t id, const int32_t value);
-void gopro_master_apply(AppData& data, const std::string& ip, const json& res);
+void gopro_master_preset_switch(AppData& data, const char server[32], const char target[32], int32_t mode);
+void gopro_master_locate(AppData& data, const char server[32], const char target[32]);
+void gopro_master_apply(AppData& data, const char server[32], const char target[32], const int32_t id, const int32_t value);
+void gopro_master_apply(AppData& data, const char ip[32], const json& res);
 void gopro_master_quick_apply(AppData& data, const CameraInfo& target);
 void gopro_master_stop_apply(AppData& data, const CameraInfo& target);
-bool gopro_master_directory_exists(const std::string& path);
-int32_t gopro_master_add_preset(AppData& data, const std::string name, json data);
-bool gopro_master_get_preset(AppData& data, const std::string name, json& data);
-bool gopro_master_remove_preset(AppData& data, const std::string name);
-std::vector<std::string> gopro_master_get_preset_names(AppData& data);
+bool gopro_master_directory_exists(const char path[256]);
+int32_t gopro_master_add_preset(AppData& appdata, const char name[64], const json data);
+bool gopro_master_get_preset(AppData& appdata, const char name[64], json& data);
+bool gopro_master_remove_preset(AppData& data, const char name[64]);
+std::vector<char[64]> gopro_master_get_preset_names(AppData& data);
 
 bool gopro_master_get_settings_from_camera(AppData& data, const Camera_info& target, json& res);
 bool gopro_master_get_status_from_camera(AppData& data, const Camera_info& target, json& res);

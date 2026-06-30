@@ -30,17 +30,35 @@ void inspector_window_draw_command_local(Inspector_window& win) {
     if(current_camera != -1) {
         const Camera_info& info = master.cameras.at(current_camera);
 
-        if(ImGui::Button("Record", button_2size)) master->command_only(info.server, "shutter_on", info.ip); ImGui::SameLine();
-        if(ImGui::Button("Stop", button_2size)) master->command_only(info.server, "shutter_off", info.ip);
+        if(ImGui::Button("Record", button_2size)) {
+            gopro_master_command_only(appdata, info.server, "shutter_on", info.ip); 
+            ImGui::SameLine();
+        }
+        if(ImGui::Button("Stop", button_2size)) {
+            gopro_master_command_only(appdata, info.server, "shutter_off", info.ip);
+        }
 
-        if(ImGui::Button("Connect", button_4size)) master->command_only(info.server, "usb_on", info.ip); ImGui::SameLine();
-        if(ImGui::Button("Disconnect", button_4size)) master->command_only(info.server, "usb_off", info.ip); ImGui::SameLine();
-        if(ImGui::Button("Shutdown", button_4size)) master->command_only(info.server, "shutdown", info.ip); ImGui::SameLine();
-        int32_t lo = master->haslocate(info.server, info.ip);
-        if(lo == -1){
-            if(ImGui::Button("Locate", button_4size)) master->locate(info.server, info.ip);
+        if(ImGui::Button("Connect", button_4size)) {
+            gopro_master_command_only(appdata, info.server, "usb_on", info.ip); 
+            ImGui::SameLine();
+        }
+        if(ImGui::Button("Disconnect", button_4size)) {
+            gopro_master_command_only(appdata, info.server, "usb_off", info.ip); 
+            ImGui::SameLine();
+        }
+        if(ImGui::Button("Shutdown", button_4size)) {
+            gopro_master_command_only(appdata, info.server, "shutdown", info.ip); 
+            ImGui::SameLine();
+        }
+
+        if(strcmp(master.locates.server, info.server) == 0 && strcmp(master.locates.ip, info.ip) == 0){
+            if(ImGui::Button("UnLocate", button_4size)) {
+                master.locates.vaild = false;
+            }
         }else{
-            if(ImGui::Button("UnLocate", button_4size)) master->locate(info.server, info.ip);
+            if(ImGui::Button("Locate", button_4size)) {
+                gopro_master_locate(appdata, info.server, info.ip);
+            }
         }
 
         ImGui::Dummy(ImVec2(0, 20));
